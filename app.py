@@ -27,19 +27,25 @@ def index():
 def new_thread():
     # スレッド作成
     title = request.form["title"]
+    name = request.form["name"] or "名も無き者"
+    message = request.form["message"]
     conn = sqlite3.connect("bbs.db")
     c = conn.cursor()
-    c.execute("INSERT INTO threads (title, created_at) VALUES (?, ?)", (title, datetime.now().isoformat()))
+    c.execute("INSERT INTO threads (title, created_at) posts (thread_id, name, message, created_at) VALUES (?, ?)", (title, datetime.now().isoformat()))
     conn.commit()
+    c.execute("SELECT id, title FROM threads WHERE id=?", (thread_id,))
+    thread = c.fetchone()
+    c.execute("SELECT name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
+    posts = c.fetchall()
     conn.close()
-    return redirect("/")
+    return render_template("thread.html", thread=thread, posts=posts)
 
 @app.route("/thread/<int:thread_id>", methods=["GET", "POST"])
 def thread(thread_id):
     conn = sqlite3.connect("bbs.db")
     c = conn.cursor()
     if request.method == "POST":
-        name = request.form["name"] or "名無しさん"
+        name = request.form["name"] or "名も無き者"
         message = request.form["message"]
         c.execute("INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
                   (thread_id, name, message, datetime.now().isoformat()))
