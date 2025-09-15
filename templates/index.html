@@ -1,0 +1,14 @@
+<h1>掲示板</h1>
+
+<form method="post" action="/thread/new">
+  スレッドタイトル: <input type="text" name="title">
+  <button type="submit">新規作成</button>
+</form>
+
+<hr>
+
+<ul>
+  {% for id, title, created_at in threads %}
+    <li><a href="/thread/{{id}}">{{title}}</a> ({{created_at}})</li>
+  {% endfor %}
+</ul>
