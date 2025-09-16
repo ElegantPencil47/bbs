@@ -1,4 +1,6 @@
 from flask import Flask, request, redirect, render_template, url_for
+from flask import make_response
+
 import sqlite3
 from datetime import datetime
 
@@ -13,15 +15,25 @@ def init_db():
     conn.commit()
     conn.close()
 
+
+@app.route("/set_theme", methods=["POST"])
+def set_theme():
+    theme = request.form["theme"]
+    resp = make_response(redirect("/"))
+    resp.set_cookie("theme", theme)
+    return resp
+
+
 @app.route("/")
 def index():
-    # スレッド一覧
+    theme = request.cookies.get("theme", "default")
     conn = sqlite3.connect("bbs.db")
     c = conn.cursor()
     c.execute("SELECT id, title, created_at FROM threads ORDER BY id DESC")
     threads = c.fetchall()
     conn.close()
-    return render_template("index.html", threads=threads)
+    return render_template("index.html", threads=threads, theme=theme)
+
 
 @app.route("/thread/new", methods=["POST"])
 def new_thread():
@@ -76,8 +88,11 @@ def thread(thread_id):
     thread = c.fetchone()
     c.execute("SELECT name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
     posts = c.fetchall()
+
+    posts_with_numbers = [(i+1, p[0], p[1], p[2]) for i, p in enumerate(posts)]        
+
     conn.close()
-    return render_template("thread.html", thread=thread, posts=posts)
+    return render_template("thread.html", thread=thread, posts=posts_with_numbers)
 
 if __name__ == "__main__":
     init_db()

@@ -14,12 +14,16 @@
     <li><a href="/thread/{{id}}">{{title}}</a> ({{created_at}})</li>
   {% endfor %}
 </ul>
+
+<form method="post" action="/set_theme">
 <h3>テーマ</h3>
 <select name="example">
-<option value="デフォルト">デフォルト</option>
-<option value="Midnight Tokyo">Midnight Tokyo</option>
-<option value="2ちゃんねる風(あの頃のネットシリーズ)">2ちゃんねる風(あの頃のネットシリーズ)</option>
-<option value="東方風(あの頃のネットシリーズ)">東方風(あの頃のネットシリーズ)</option>
-<option value="淫夢風(あの頃のネットシリーズ)">淫夢風(あの頃のネットシリーズ)</option>
+<option value="d">デフォルト</option>
+<option value="m">Midnight Tokyo</option>
+<option value="2">2ちゃんねる風(あの頃のネットシリーズ)</option>
+<option value="t">東方風(あの頃のネットシリーズ)</option>
+<option value="i">淫夢風(あの頃のネットシリーズ)</option>
 
 </select>
+<button type="submit">変更</button>
+</form>
