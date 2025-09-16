@@ -2,8 +2,8 @@
 <h1>{{thread[1]}}</h1>
 
 
-{% for name,message,created_at in posts %}
-<p><b>{{name}}</b>:{{message}}<i>({{created_at}})</i></p>
+{% for num,name,message,created_at in posts %}
+<p><b>{{num}}:{{name}}</b>({{created_at}})<br>{{message|replace('\n','<br>')|safe}}</p>
 {% endfor %}
 
 <form method="post">
