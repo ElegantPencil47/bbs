@@ -1,16 +1,19 @@
+<a href="/">← スレッド一覧に戻る</a>
 <h1>{{thread[1]}}</h1>
+
+
+
+<ul>
+  {% for num, name, message, created_at in posts %}
+    <li>
+      <b>{{ num }} ： {{ name }}</b> ({{ created_at }})<br>
+      {{ message | safe | replace('\n', '<br>') }}
+    </li>
+  {% endfor %}
+</ul>
 
 <form method="post">
   名前: <input type="text" name="name"><br>
   本文: <textarea name="message"></textarea><br>
   <button type="submit">投稿</button>
 </form>
-
-<hr>
-
-{% for name, message, created_at in posts %}
-  <p><b>{{name}}</b>: {{message}} <i>({{created_at}})</i></p>
-{% endfor %}
-
-<hr>
-<a href="/">← スレッド一覧に戻る</a>

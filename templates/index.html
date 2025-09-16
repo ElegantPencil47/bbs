@@ -1,5 +1,5 @@
-<h1>掲示板</h1>
-
+<h1>Lunar Eclipse</h1><br>
+<h2>新規スレッド作成</h2>
 <form method="post" action="/thread/new">
   スレッドタイトル: <input type="text" name="title">
   名前: <input type="text" name="name"><br>
@@ -14,3 +14,12 @@
     <li><a href="/thread/{{id}}">{{title}}</a> ({{created_at}})</li>
   {% endfor %}
 </ul>
+<h3>テーマ</h3>
+<select name="example">
+<option value="デフォルト">デフォルト</option>
+<option value="Midnight Tokyo">Midnight Tokyo</option>
+<option value="2ちゃんねる風(あの頃のネットシリーズ)">2ちゃんねる風(あの頃のネットシリーズ)</option>
+<option value="東方風(あの頃のネットシリーズ)">東方風(あの頃のネットシリーズ)</option>
+<option value="淫夢風(あの頃のネットシリーズ)">淫夢風(あの頃のネットシリーズ)</option>
+
+</select>
