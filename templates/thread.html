@@ -2,11 +2,8 @@
 <h1>{{thread[1]}}</h1>
 
 
-{% for num, post in posts %}
-  <li>
-    <b>{{ num }} ： {{ post[0] }}</b> ({{ post[2] }})<br>
-    {{ post[1] | replace('\n', '<br>') | safe }}
-  </li>
+{% for name,message,created_at in posts %}
+<p><b>{{name}}</b>:{{message}}<i>({{created_at}})</i></p>
 {% endfor %}
 
 <form method="post">
