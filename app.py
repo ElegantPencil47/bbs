@@ -66,7 +66,7 @@ def new_thread():
 
 @app.template_filter("nl2br")
 def nl2br(s):
-return Markup("<br>".join(eescape(s).splitlines()))
+    return Markup("<br>".join(eescape(s).splitlines()))
 
 
 @app.route("/thread/<int:thread_id>", methods=["GET", "POST"])
