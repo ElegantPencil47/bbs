@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, render_template, url_for
 from flask import make_response
-
+from markupsafe import Markup,escape
 import sqlite3
 from datetime import datetime
 
@@ -63,6 +63,11 @@ def new_thread():
     
     # 3. 新しく作成したスレッドページへリダイレクト
     return redirect(url_for("thread", thread_id=new_thread_id))
+
+@app.template_filter("nl2br")
+def nl2br(s):
+return Markup("<br>".join(eescape(s).splitlines()))
+
 
 @app.route("/thread/<int:thread_id>", methods=["GET", "POST"])
 def thread(thread_id):

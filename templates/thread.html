@@ -3,7 +3,7 @@
 
 
 {% for num,name,message,created_at in posts %}
-<p><b>{{num}}:{{name}}</b>({{created_at}})<br>{{message|replace('\n','<br>')|safe}}</p>
+<p><b>{{num}}:{{name}}</b>({{created_at}})<br>{{message|replace('\n','<br>')|nl2br}}</p>
 {% endfor %}
 
 <form method="post">
