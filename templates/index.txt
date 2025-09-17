@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Lunar Eclipse</title>
+<style>
+
+body.theme-d{
+background:#ffffff;
+}
+
+
+body.theme-m{
+background:#1f3134;
+}
+
+body.theme-2 .sure{
+  padding: 1rem 2rem;
+  background: #00ff00;
+}
+
+
+body.theme-d .suretai{
+  color: #000000;
+}
+
+body.theme-2{
+  background-image: url("{{ url_for('static', filename='ki.png') }}");
+}
+
+
+body.theme-t{
+background:#f5deb3;
+}
+
+body.theme-i{
+background:#b8860b;
+}
+
+
+
+</style>
+</head>
+<body class="theme-{{theme}}">
+
+{% if theme == 'i' %}
+  <img src="{{ url_for('static', filename='i.png') }}" width="300" alt="">
+{% elif theme == 'm' %}
+  <img src="{{ url_for('static', filename='t.png') }}" width="300" alt="">
+{% elif theme == 't' %}
+  <img src="{{ url_for('static', filename='tu.png') }}" width="300" alt="">
+{% elif theme == 'd' %}
+  <img src="{{ url_for('static', filename='d.png') }}" width="300" alt="">
+{% endif %}
+
+
+<hr>
+
+<div class="sure">
+<ul>
+  {% for id, title, created_at in threads %}
+    <li><a href="/thread/{{id}}" class="suretai">{{title}}</a> ({{created_at}})</li>
+  {% endfor %}
+</ul>
+</div>
+
+
+
+<h2>新規スレッド作成</h2>
+<form method="post" action="/thread/new">
+  スレッドタイトル: <input type="text" name="title">
+  名前: <input type="text" name="name"><br>
+  本文: <textarea name="message"></textarea><br>
+  <button type="submit">新規作成</button>
+</form>
+
+
+<form method="post" action="/set_theme">
+<h3>テーマ</h3>
+<select name="theme">
+<option value="d">デフォルト</option>
+<option value="m">Midnight Tokyo</option>
+<option value="2">2ちゃんねる風(あの頃のネットシリーズ)</option>
+<option value="t">東方風(あの頃のネットシリーズ)</option>
+<option value="i">淫夢風(あの頃のネットシリーズ)</option>
+
+</select>
+<button type="submit">変更</button>
+</form>
+</body>
+</html>
