@@ -14,6 +14,10 @@ body.theme-m{
 background:#191970;
 }
 
+.sure.theme-2{
+  padding: 1rem 2rem;
+  background: #00ff00;
+}
 
 body.theme-2{
 background-image: url("ki.png");
@@ -35,6 +39,20 @@ background:#b8860b;
 <body class="theme-{{theme}}">
 
 <h1>Lunar Eclipse</h1><br>
+
+
+<hr>
+
+<div class="sure">
+<ul>
+  {% for id, title, created_at in threads %}
+    <li><a href="/thread/{{id}}">{{title}}</a> ({{created_at}})</li>
+  {% endfor %}
+</ul>
+</div>
+
+
+
 <h2>新規スレッド作成</h2>
 <form method="post" action="/thread/new">
   スレッドタイトル: <input type="text" name="title">
@@ -43,13 +61,6 @@ background:#b8860b;
   <button type="submit">新規作成</button>
 </form>
 
-<hr>
-
-<ul>
-  {% for id, title, created_at in threads %}
-    <li><a href="/thread/{{id}}">{{title}}</a> ({{created_at}})</li>
-  {% endfor %}
-</ul>
 
 <form method="post" action="/set_theme">
 <h3>テーマ</h3>
