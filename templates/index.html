@@ -19,6 +19,11 @@ body.theme-2 .sure{
   background: #00ff00;
 }
 
+
+body.theme-d .suretai{
+  color: #000000;
+}
+
 body.theme-2{
   background-image: url("{{ url_for('static', filename='ki.png') }}");
 }
@@ -38,7 +43,13 @@ background:#b8860b;
 </head>
 <body class="theme-{{theme}}">
 
-<h1>Lunar Eclipse</h1><br>
+{% if theme == 'i' %}
+  <img src="{{ url_for('static', filename='i.png') }}" alt="">
+{% elif theme == 'm' %}
+  <img src="{{ url_for('static', filename='t.png') }}" alt="">
+{% elif theme == 't' %}
+  <img src="{{ url_for('static', filename='tu.png') }}" alt="">
+{% endif %}
 
 
 <hr>
@@ -46,7 +57,7 @@ background:#b8860b;
 <div class="sure">
 <ul>
   {% for id, title, created_at in threads %}
-    <li><a href="/thread/{{id}}">{{title}}</a> ({{created_at}})</li>
+    <li><a href="/thread/{{id}}" class="suretai">{{title}}</a> ({{created_at}})</li>
   {% endfor %}
 </ul>
 </div>
