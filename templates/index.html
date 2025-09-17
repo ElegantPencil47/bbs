@@ -44,11 +44,13 @@ background:#b8860b;
 <body class="theme-{{theme}}">
 
 {% if theme == 'i' %}
-  <img src="{{ url_for('static', filename='i.png') }}" alt="">
+  <img src="{{ url_for('static', filename='i.png') }}" width="300" alt="">
 {% elif theme == 'm' %}
-  <img src="{{ url_for('static', filename='t.png') }}" alt="">
+  <img src="{{ url_for('static', filename='m.png') }}" width="300" alt="">
 {% elif theme == 't' %}
-  <img src="{{ url_for('static', filename='tu.png') }}" alt="">
+  <img src="{{ url_for('static', filename='tu.png') }}" width="300" alt="">
+{% elif theme == 'd' %}
+  <img src="{{ url_for('static', filename='d.png') }}" width="300" alt="">
 {% endif %}
 
 
