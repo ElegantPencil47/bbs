@@ -5,14 +5,56 @@
 <title>Lunar Eclipse</title>
 <style>
 
-body.theme-d{
+
+
+
+
+
+body.theme-d {
 background:#ffffff;
 }
 
 
-body.theme-m{
-background:#1f3134;
+/* Midnight Tokyo Theme */
+body.theme-m {
+  background: linear-gradient(180deg, #0d0d1a 0%, #1a1a2e 100%);
+  color: #cfd9ff;
+  font-family: "MS Gothic", "Share Tech Mono", monospace;
 }
+
+/* スレッドタイトル */
+h1, h2, h3.theme-m{
+  color: #ff00cc; /* ネオンピンク */
+  text-shadow: 0 0 6px #ff00cc, 0 0 12px #ff33cc;
+}
+
+/* リンク */
+a.theme-m {
+  color: #00eaff;
+  text-shadow: 0 0 6px #00eaff, 0 0 12px #00aaff;
+  text-decoration: none;
+}
+a:hover.theme-m {
+  color: #fff;
+  text-shadow: 0 0 12px #00ffff, 0 0 24px #00ffff;
+}
+
+/* ボタン */
+button.theme-m {
+  background: #111;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  text-shadow: 0 0 6px #00ffff;
+  transition: 0.2s;
+}
+button:hover.theme-m {
+  background: #00ffff;
+  color: #111;
+  box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
 
 body.theme-2 .sure{
   padding: 1rem 2rem;
