@@ -70,24 +70,18 @@
     {% elif theme == 'm' %}
     <img src="{{ url_for('static', filename='m.png') }}" width="300" alt="">
     {% elif theme == 't' %}
-    <h1 class="theme-t">赤</h1>
-    <h2>欠月掲示板</h2>
+    <h1 class="theme-t">赤</h1><h2>欠月掲示板</h2>
     {% elif theme == 'd' %}
     <img src="{{ url_for('static', filename='d.png') }}" width="300" alt="">
+    {% elif theme == '2' %}
+    <h1>ルナエクリプス</h1>
     {% endif %}
     <hr>
     <div class="sure">
         <ul>
             {% for id, title, created_at in threads %}
             <li>
-                <a href="/thread/{{id}}" class="suretai">
-                    {% if theme == 'i' %}
-                    <img src="{{ url_for('static', filename='yaju.png') }}" width="4" alt="">
-                    {% elif theme == 't' %}
-                    <p>☯</p>
-                    {% endif %}
-                    {{title}}
-                </a> ({{created_at}})
+                 {% if theme == 'i' %}<img src="{{ url_for('static', filename='yaju.png') }}" width="4" alt="">{% elif theme == 't' %}<p>☯</p>{% endif %}<a href="/thread/{{id}}" class="suretai">{{title}}</a> ({{created_at}})
             </li>
             {% endfor %}
         </ul>
