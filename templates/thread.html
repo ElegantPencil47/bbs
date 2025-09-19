@@ -2,9 +2,16 @@
 <h1>{{thread[1]}}</h1>
 
 
-{% for num,name,message,created_at in posts %}
-<p><b>{{num}}:{{name}}</b>({{created_at}})<br>{{message|replace('\n','<br>')|nl2br}}</p>
-{% endfor %}
+
+<ul>
+  {% for num, name, message, created_at in posts %}
+    <li>
+      <b>{{ num }} ： {{ name }}</b> ({{ created_at }})<br>
+      {{ message | nl2br }}
+    </li>
+  {% endfor %}
+</ul>
+
 
 <form method="post">
   名前: <input type="text" name="name"><br>
