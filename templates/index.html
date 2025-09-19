@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Lunar Eclipse</title>
     <style>
+
+        .sure {
+        float:left;
+        }
         body.theme-d {
             background:#ffffff;
         } /* Midnight Tokyo Theme */
@@ -81,7 +85,7 @@
         <ul>
             {% for id, title, created_at in threads %}
             <li>
-                 {% if theme == 'i' %}<img src="{{ url_for('static', filename='yaju.png') }}" width="4" alt="">{% elif theme == 't' %}<p>☯</p>{% endif %}<a href="/thread/{{id}}" class="suretai">{{title}}</a> ({{created_at}})
+                 {% if theme == 'i' %}<img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">{% elif theme == 't' %}<p>☯</p>{% endif %}<a href="/thread/{{id}}" class="suretai">{{title}}</a> ({{created_at}})
             </li>
             {% endfor %}
         </ul>
