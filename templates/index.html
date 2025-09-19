@@ -5,7 +5,7 @@
     <title>Lunar Eclipse</title>
     <style>
 
-        .sure {
+        .on {
         float:left;
         }
         body.theme-d {
@@ -74,7 +74,7 @@
     {% elif theme == 'm' %}
     <img src="{{ url_for('static', filename='m.png') }}" width="300" alt="">
     {% elif theme == 't' %}
-    <h1 class="theme-t">赤</h1><h2>欠月掲示板</h2>
+    <h1 class="on">赤</h1><h2>欠月掲示板</h2>
     {% elif theme == 'd' %}
     <img src="{{ url_for('static', filename='d.png') }}" width="300" alt="">
     {% elif theme == '2' %}
@@ -85,7 +85,7 @@
         <ul>
             {% for id, title, created_at in threads %}
             <li>
-                 {% if theme == 'i' %}<img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">{% elif theme == 't' %}<p>☯</p>{% endif %}<a href="/thread/{{id}}" class="suretai">{{title}}</a> ({{created_at}})
+                 {% if theme == 'i' %}<img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">{% elif theme == 't' %}<p class="on">☯</p>{% endif %}<a href="/thread/{{id}}" class="suretai">{{title}}</a> ({{created_at}})
             </li>
             {% endfor %}
         </ul>
