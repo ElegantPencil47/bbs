@@ -76,7 +76,8 @@ def new_thread():
 def nl2br(s):
     if s is None:
         return ""
-    return Markup(escape(s).replace('\n', '<br>'))
+    # エスケープした上で改行ごとに分割し、<br>で結合
+    return Markup("<br>").join(escape(s).splitlines())
 
 @app.route("/thread/<int:thread_id>", methods=["GET", "POST"])
 def thread(thread_id):
