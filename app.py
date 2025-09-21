@@ -126,7 +126,7 @@ def ensure_theme_cookie():
 def apply_theme_cookie(response):
     if getattr(g, "set_default_theme", False):
         response.set_cookie("theme", "d", max_age=60*60*24*30) # 30日保持
-return response
+    return response
 
 @app.route("/")
 def index():
