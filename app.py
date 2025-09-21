@@ -49,29 +49,7 @@ def set_theme():
     resp.set_cookie("theme", theme)
     return resp
 
-@app.route("/")
-def index():
-    theme = request.cookies.get("theme", "default")
-    db = get_db()
-    c = db.cursor()
-    c.execute("SELECT id, title, created_at FROM threads ORDER BY id DESC")
-    threads = c.fetchall()
-    return render_template("index.html", threads=threads, theme=theme)
 
-
-
-@app.route("/")
-def index():
-    db = get_db()
-    threads = db.execute("""
-        SELECT t.id, t.title, t.created_at, COUNT(p.id) as count
-        FROM threads t
-        LEFT JOIN posts p ON t.id = p.thread_id
-        GROUP BY t.id
-        ORDER BY t.created_at DESC
-    """).fetchall()
-    threads = cursor.fetchall()
-    return render_template("index.html", threads=threads)
 
 @app.route("/thread/new", methods=["POST"])
 def new_thread():
@@ -130,8 +108,16 @@ def apply_theme_cookie(response):
 
 @app.route("/")
 def index():
-    theme = request.cookies.get("theme", "d")
-    return render_template("index.html", theme=theme)
+    theme = request.cookies.get("theme", "d")  # テーマ取得
+    db = get_db()
+    threads = db.execute("""
+        SELECT t.id, t.title, t.created_at, COUNT(p.id) as count
+        FROM threads t
+        LEFT JOIN posts p ON t.id = p.thread_id
+        GROUP BY t.id
+        ORDER BY t.created_at DESC
+    """).fetchall()
+    return render_template("index.html", threads=threads, theme=theme)
 
 @app.route("/thread/<int:thread_id>", methods=["GET", "POST"])
 def thread(thread_id):
