@@ -83,11 +83,13 @@ def nl2br(s):
 
 @app.before_request
 def rate_limit():
-    ip = request.remote_addr
-    now = datetime.now()
-    if ip in last_posts and now - last_posts[ip] < timedelta(seconds=40):
-        abort(429)
-    last_posts[ip] = now
+    # POST /thread/new のときだけレート制限を適用
+    if request.endpoint == "new_thread" and request.method == "POST":
+        ip = request.remote_addr
+        now = datetime.now()
+        if ip in last_posts and now - last_posts[ip] < timedelta(seconds=40):
+            abort(429)
+        last_posts[ip] = now
 
 
 
