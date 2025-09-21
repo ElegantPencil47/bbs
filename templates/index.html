@@ -5,6 +5,10 @@
     <title>Lunar Eclipse</title>
     <style>
 
+        .suretate{
+        margin: 40px; 
+        }
+
         .on {
         display: inline;
   margin-right: 5px;
@@ -53,6 +57,12 @@
             padding: 1rem 2rem;
             background: #f5f5f5;
         }
+
+        body.theme-2 .stsure{
+            border: 2px solid #c0c0c0;
+            padding: 1rem 2rem;
+            background: #f5f5f5;
+        }
         body.theme-d .suretai{
             color: #000000;
         }
@@ -76,22 +86,30 @@
     {% elif theme == 'm' %}
     <img src="{{ url_for('static', filename='m.png') }}" width="300" alt="">
     {% elif theme == 't' %}
-    <h1 class="on">赤</h1><h2>欠月掲示板</h2>
+    <h2 class="on">赤欠月掲示板</h2>
     {% elif theme == 'd' %}
     <img src="{{ url_for('static', filename='d.png') }}" width="300" alt="">
     {% elif theme == '2' %}
     <h1>ルナエクリプス</h1>
     {% endif %}
     <hr>
-    <div class="sure">
-        <ul>
-            {% for id, title, created_at in threads %}
-            <li>
-                 {% if theme == 'i' %}<img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">{% elif theme == 't' %}<p class="on">☯</p>{% endif %}<a href="/thread/{{id}}" class="suretai">{{title}}</a> ({{created_at}})
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
+    <DIV class="stsure">
+<div class="sure">
+<ul>
+{% for id, title, created_at, count in threads %}
+<li>
+{% if theme == 'i' %}
+<img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">
+{% elif theme == 't' %}
+<p class="on">☯</p>
+{% endif %}
+<a href="/thread/{{id}}" class="suretai">{{title}}</a>
+({{count}}) <span class="date">{{created_at}}</span>
+</li>
+{% endfor %}
+</ul>
+</div>
+</DIV>
     <div class="suretate">
         <h2>新規スレッド作成</h2>
         <form method="post" action="/thread/new">

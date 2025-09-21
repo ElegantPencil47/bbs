@@ -1,10 +1,16 @@
 from flask import Flask, request, redirect, render_template, url_for, g
 from flask import make_response
+from flask import request,abort
+from flask import datetime,timedelta
 from markupsafe import Markup, escape
 import sqlite3
 from datetime import datetime
+from flask import Flask, request, render_template, g
+
 
 DATABASE = "bbs.db"
+last_posts = {}
+app = Flask(__name__)
 
 # Flaskアプリケーションの初期化
 app = Flask(__name__)
@@ -23,6 +29,9 @@ def close_connection(exception):
     db = getattr(g, "_database", None)
     if db is not None:
         db.close()
+
+
+
 
 # DB初期化
 def init_db():
@@ -48,6 +57,21 @@ def index():
     c.execute("SELECT id, title, created_at FROM threads ORDER BY id DESC")
     threads = c.fetchall()
     return render_template("index.html", threads=threads, theme=theme)
+
+
+
+@app.route("/")
+def index():
+    db = get_db()
+    threads = db.execute("""
+        SELECT t.id, t.title, t.created_at, COUNT(p.id) as count
+        FROM threads t
+        LEFT JOIN posts p ON t.id = p.thread_id
+        GROUP BY t.id
+        ORDER BY t.created_at DESC
+    """).fetchall()
+    threads = cursor.fetchall()
+    return render_template("index.html", threads=threads)
 
 @app.route("/thread/new", methods=["POST"])
 def new_thread():
@@ -78,6 +102,36 @@ def nl2br(s):
         return ""
     # エスケープした上で改行ごとに分割し、<br>で結合
     return Markup("<br>").join(escape(s).splitlines())
+
+@app.before_request
+def rate_limit():
+    ip = request.remote_addr
+    now = datetime.now()
+    if ip in last_posts and now - last_posts[ip] < timedelta(seconds=40):
+        abort(429)
+    last_posts[ip] = now
+
+
+
+@app.before_request
+def ensure_theme_cookie():
+    theme = request.cookies.get("theme")
+    if theme is None:
+# テーマ未設定なら "d" をセットするようフラグを残す
+        g.set_default_theme = True
+    else:
+        g.set_default_theme = False
+
+@app.after_request
+def apply_theme_cookie(response):
+    if getattr(g, "set_default_theme", False):
+        response.set_cookie("theme", "d", max_age=60*60*24*30) # 30日保持
+return response
+
+@app.route("/")
+def index():
+    theme = request.cookies.get("theme", "d")
+    return render_template("index.html", theme=theme)
 
 @app.route("/thread/<int:thread_id>", methods=["GET", "POST"])
 def thread(thread_id):
