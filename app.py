@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, render_template, url_for, g
 from flask import make_response
 from flask import request,abort
-from flask import datetime,timedelta
+from datetime import datetime,timedelta
 from markupsafe import Markup, escape
 import sqlite3
 from datetime import datetime
