@@ -65,6 +65,12 @@
         }
         body.theme-d .suretai{
             color: #000000;
+            padding: 1rem 2rem;
+        }
+
+        body.theme-2 .b{
+            color: #f5f5f5;
+            padding: 1rem 2rem;
         }
         body.theme-2{
             background-image: url("{{ url_for('static', filename='ki.png') }}");
@@ -80,6 +86,8 @@
         }
     </style>
 </head>
+
+
 <body class="theme-{{theme}}">
     {% if theme == 'i' %}
     <img src="{{ url_for('static', filename='i.png') }}" width="300" alt="">
@@ -90,9 +98,16 @@
     {% elif theme == 'd' %}
     <img src="{{ url_for('static', filename='d.png') }}" width="300" alt="">
     {% elif theme == '2' %}
-    <h1>ルナエクリプス</h1>
+    <h1 class="b">ルナエクリプス掲示板</h1>
     {% endif %}
     <hr>
+<h3>今日の月齢</h3>
+<a href="https://oac.d2.r-cms.jp/">
+<img border="0" src="http://phaku.net/astro/tool/moon/moon.php?lat=34.83.47&lon=135.43.57&alt=255&location=Satukidaira-
+Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
+</a>
+<h3>岡山アストロクラブ様より</h3>
+
     <DIV class="stsure">
 <div class="sure">
 <ul>
@@ -113,7 +128,7 @@
     <div class="suretate">
         <h2>新規スレッド作成</h2>
         <form method="post" action="/thread/new">
-            スレッドタイトル: <input type="text" name="title">
+            スレッドタイトル: <input type="text" name="title"><br>
             名前: <input type="text" name="name"><br>
             本文: <textarea name="message"></textarea><br>
             <button type="submit">新規作成</button>

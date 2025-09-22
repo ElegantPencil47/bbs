@@ -1,20 +1,38 @@
 <a href="/">← スレッド一覧に戻る</a>
-<h1>{{thread[1]}}</h1>
+<h1>{{ thread[1] }}</h1>
+<p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 
-
-
-<ul>
-  {% for num, name, message, created_at in posts %}
-    <li>
-      <b>{{ num }} ： {{ name }}</b> ({{ created_at }})<br>
-      {{ message | nl2br }}
-    </li>
-  {% endfor %}
-</ul>
-
+<ul id="posts"></ul>
 
 <form method="post">
-  名前: <input type="text" name="name"><br>
-  本文: <textarea name="message"></textarea><br>
-  <button type="submit">投稿</button>
+名前: <input type="text" name="name"><br>
+本文: <textarea name="message"></textarea><br>
+<button type="submit">投稿</button>
 </form>
+
+<script>
+const threadId = {{ thread.id }};
+async function fetchPosts() {
+const res = await fetch(`/thread/${threadId}/posts_json`);
+const data = await res.json();
+const postsDiv = document.getElementById("posts");
+postsDiv.innerHTML = data.posts.map((p, i) =>
+`<li><b>${i+1} ： ${p.name}</b> (${p.created_at})<br>${p.message}</li>`
+).join("");
+}
+// 5秒ごとに更新
+setInterval(fetchPosts, 5000);
+fetchPosts();
+</script>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+const socket = io();
+socket.emit("join_thread", { thread_id: threadId });
+socket.on("online_count", function(count) {
+document.getElementById("onlineCount").textContent = count;
+});
+window.addEventListener("beforeunload", () => {
+socket.emit("leave_thread", { thread_id: threadId });
+});
+</script>
