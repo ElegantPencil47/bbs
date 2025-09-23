@@ -204,21 +204,31 @@ def thread(thread_id):
     posts = c.fetchall()
     posts_with_numbers = [(i + 1, p['name'], p['message'], p['created_at']) for i, p in enumerate(posts)]
 
-    return render_template("thread.html", thread=thread_data, posts=posts_with_numbers)
+    return render_template(
+    "thread.html",
+    thread=thread_data,
+    posts=posts_with_numbers,
+    thread_id=thread_id
+)
+
 
 
 @app.route("/thread/<int:thread_id>/posts_json")
 def posts_json(thread_id):
     after = request.args.get("after",0,type=int)
+    db = get_db()
     posts = db.execute(
-        "SELECT id, message, FROM posts WHERE thread_id = ? AND id > ? ORDER BY id ASC",
+        "SELECT id, name, message, created_at FROM posts WHERE thread_id = ? AND id > ? ORDER BY id ASC",
         (thread_id, after)
     ).fetchall()
+
     return jsonify({
-        "posts": [{"name": p["name"], "message": p["message"], "created_at": p["created_at"]}
+        "posts": [
+            {"id": p["id"], "name": p["name"], "message": p["message"], "created_at": p["created_at"]}
             for p in posts
         ]
     })
+
 
 
 # -------------------------------
