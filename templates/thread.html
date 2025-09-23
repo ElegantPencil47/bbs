@@ -18,20 +18,27 @@ function fetchPosts() {
   fetch(`/thread/${threadId}/posts_json?after=${lastPostId}`)
     .then(response => response.json())
     .then(data => {
-      if (data.posts.length > 0) {
-        const postsUl = document.getElementById("posts");
-        data.posts.forEach(post => {
+      const postsUl = document.getElementById("posts");
+      data.posts.forEach(post => {
+        // 既に表示済みかどうかチェック
+        if (!document.getElementById(`post-${post.id}`)) {
           const li = document.createElement("li");
-          li.textContent = post.message;
+          li.id = `post-${post.id}`;
+          li.textContent = `${post.name}: ${post.message}`;
           postsUl.appendChild(li);
-          lastPostId = post.id;
-        });
+        }
+      });
+      // 最後の投稿IDを更新
+      if (data.posts.length > 0) {
+        lastPostId = data.posts[data.posts.length - 1].id;
       }
     })
     .catch(err => console.error(err));
 }
 
+// 初回取得
 fetchPosts();
+// 5秒ごとに取得
 setInterval(fetchPosts, 5000);
 </script>
 
