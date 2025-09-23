@@ -4,6 +4,10 @@ import sqlite3
 from datetime import datetime, timedelta
 from flask_socketio import SocketIO, join_room, leave_room
 
+from flask import jsonify
+
+
+
 # -------------------------------
 # Flask アプリ初期化
 # -------------------------------
@@ -201,6 +205,21 @@ def thread(thread_id):
     posts_with_numbers = [(i + 1, p['name'], p['message'], p['created_at']) for i, p in enumerate(posts)]
 
     return render_template("thread.html", thread=thread_data, posts=posts_with_numbers)
+
+
+@app.route("/thread/<int:thread_id>/posts_json")
+def posts_json(thread_id):
+    after = request.args.get("after",0,type=int)
+    posts = db.execute(
+        "SELECT id, message, FROM posts WHERE thread_id = ? AND id > ? ORDER BY id ASC",
+        (thread_id, after)
+    ).fetchall()
+    return jsonify({
+        "posts": [{"name": p["name"], "message": p["message"], "created_at": p["created_at"]}
+            for p in posts
+        ]
+    })
+
 
 # -------------------------------
 # アプリ起動
