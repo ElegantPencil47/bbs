@@ -4,6 +4,8 @@ import sqlite3
 from datetime import datetime, timedelta
 from flask_socketio import SocketIO, join_room, leave_room
 
+
+from flask import Flask, render_template, request, redirect, url_for
 from flask import jsonify
 
 
@@ -75,11 +77,19 @@ def set_theme():
 # -------------------------------
 # トップページ（スレッド一覧）
 # -------------------------------
+
+
+# 他の関数はそのまま
+
+# Flask アプリケーションコード全体...
+
 @app.route("/")
 def index():
     theme = request.cookies.get("theme", "d")
     db = get_db()
     c = db.cursor()
+    
+    # すべてのスレッドと書き込み数を取得
     c.execute("""
         SELECT t.id, t.title, t.created_at, COUNT(p.id) as count
         FROM threads t
@@ -88,7 +98,21 @@ def index():
         ORDER BY t.created_at DESC
     """)
     threads = c.fetchall()
-    return render_template("index.html", threads=threads, theme=theme)
+    
+    # 最も書き込みの多いスレッドを特定する
+    most_popular_thread = None
+    if threads:
+        # スレッドのリストを書き込み数（'count'列）でソートし、最初の要素を取得する
+        # sqlite3.Rowオブジェクトは辞書のようにキーでアクセスできる
+        most_popular_thread = sorted(threads, key=lambda t: t['count'], reverse=True)[0]
+    
+    # テンプレートに両方のデータを渡す
+    return render_template("index.html", threads=threads, theme=theme, most_popular_thread=most_popular_thread)
+
+
+
+
+
 
 # -------------------------------
 # 新規スレッド作成
@@ -237,8 +261,8 @@ def posts_json(thread_id):
 # アプリ起動
 # -------------------------------
 import os
-
 if __name__ == "__main__":
     init_db()
+    import os
     port = int(os.environ.get("PORT", 5000))
     socketio.run(app, host="0.0.0.0", port=port, debug=True)

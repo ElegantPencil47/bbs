@@ -51,6 +51,7 @@
         }
         body.theme-2 .suretate{
             padding: 1rem 2rem;
+            margin: 40px; 
             background: #9AFE2E;
         }
         body.theme-2 .sure{
@@ -62,6 +63,7 @@
         body.theme-2 .stsure{
             border: 2px solid #c0c0c0;
             padding: 1rem 2rem;
+            margin: 40px; 
             background: #f5f5f5;
         }
         body.theme-d .suretai{
@@ -109,6 +111,47 @@
 Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
 </a>
 </div>
+
+<DIV class="suretate">
+  <h3>本日のおすすめ</h3>
+  {% if most_popular_thread %}
+    <div class="sure">
+      <ul>
+        <li>
+          {% if theme == 'i' %}
+            <img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">
+          {% elif theme == 't' %}
+            <p class="on">☯</p>
+          {% endif %}
+          <a href="/thread/{{most_popular_thread.id}}" class="suretai">{{most_popular_thread.title}}</a> ({{most_popular_thread.count}})
+          <span class="date">{{most_popular_thread.created_at}}</span>
+        </li>
+      </ul>
+    </div>
+  {% else %}
+    <p>まだおすすめスレッドはありません。</p>
+  {% endif %}
+</DIV>
+
+<DIV class="stsure">
+    <div class="sure">
+        <ul>
+            {% for id, title, created_at, count in threads %}
+                <li>
+                    {% if theme == 'i' %}
+                        <img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">
+                    {% elif theme == 't' %}
+                        <p class="on">☯</p>
+                    {% endif %}
+                    <a href="/thread/{{id}}" class="suretai">{{title}}</a> ({{count}})
+                    <span class="date">{{created_at}}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</DIV>
+
+
     <DIV class="stsure">
 <div class="sure">
 <ul>
@@ -129,12 +172,13 @@ Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
     <div class="suretate">
         <h2>新規スレッド作成</h2>
         <form method="post" action="/thread/new">
-            スレッドタイトル: <input type="text" name="title"><br>
-            名前: <input type="text" name="name"><br>
-            本文: <textarea name="message"></textarea><br>
+            スレッドタイトル<br> <input type="text" name="title"><br>
+            名前<br> <input type="text" name="name"><br>
+            本文<br> <textarea name="message"></textarea><br>
             <button type="submit">新規作成</button>
         </form>
     </div>
+    <DIV class="suretate">
     <form method="post" action="/set_theme">
         <h3>テーマ</h3>
         <select name="theme">
@@ -146,5 +190,6 @@ Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
         </select>
         <button type="submit">変更</button>
     </form>
+    <DIV>
 </body>
 </html>
