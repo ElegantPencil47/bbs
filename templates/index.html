@@ -104,6 +104,7 @@
     <h1 class="b">ルナエクリプス掲示板</h1>
     {% endif %}
     <hr>
+<h2>「天文学」から「民俗学」までの学問を手広くカバーする匿名掲示板</h2>
 <div class="suretate">
 <h3>今日の月齢</h3>
 <a href="https://oac.d2.r-cms.jp/">
@@ -152,23 +153,7 @@ Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
 </DIV>
 
 
-    <DIV class="stsure">
-<div class="sure">
-<ul>
-{% for id, title, created_at, count in threads %}
-<li>
-{% if theme == 'i' %}
-<img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">
-{% elif theme == 't' %}
-<p class="on">☯</p>
-{% endif %}
-<a href="/thread/{{id}}" class="suretai">{{title}}</a>
-({{count}}) <span class="date">{{created_at}}</span>
-</li>
-{% endfor %}
-</ul>
-</div>
-</DIV>
+
     <div class="suretate">
         <h2>新規スレッド作成</h2>
         <form method="post" action="/thread/new">
