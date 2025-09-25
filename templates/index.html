@@ -58,21 +58,21 @@
 　　　　body.theme-d .suretate{
             border: 2px solid #000000;
         }　
-        body.theme-d .sure{
+        body.theme-d .stsure{
             border: 2px solid #000000;
         }
 
         body.theme-t .suretate{
             border: 2px solid #9a493f;
         }　
-        body.theme-t .sure{
+        body.theme-t .stsure{
             border: 2px solid #9a493f;
         }
 
         body.theme-i .suretate{
             border: 2px solid #f5f5f5;
         }　
-        body.theme-i .sure{
+        body.theme-i .stsure{
             border: 2px solid #f5f5f5;
         }　
 
@@ -99,7 +99,7 @@
             background-image: url("{{ url_for('static', filename='ki.png') }}");
         }
         body.theme-t{
-            background-image: url("{{ url_for('static', filename='th.jpg') }}");
+            background-image: url("{{ url_for('static', filename='th.jpeg') }}");
         }
         body.theme-i{
             background:#b8860b;
@@ -192,9 +192,10 @@ Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
     <p>まだおすすめスレッドはありません。</p>
   {% endif %}
 </DIV>
-<h3>スレッド一覧</h3>
+
 <DIV class="stsure">
     <div class="sure">
+    <h3>スレッド一覧</h3>
         <ul>
             {% for id, title, created_at, count in threads %}
                 <li>
