@@ -8,6 +8,9 @@
         .suretate{
         margin: 40px; 
         }
+        .stsure{
+        margin: 40px; 
+        }
 
         .on {
         display: inline;
@@ -55,29 +58,14 @@
 body.theme-d .suretate {
     border: 2px solid #000000;
 }
-body.theme-d .stsure {
-    border: 2px solid #000000;
-}
 body.theme-d .sure {
     border: 2px solid #000000;
 }
 
 
-body.theme-s .suretate {
-    border: 2px solid #000000;
-}
-body.theme-s .stsure {
-    border: 2px solid #000000;
-}
-body.theme-s .sure {
-    border: 2px solid #000000;
-}
 
 /* 東方テーマ */
 body.theme-t .suretate {
-    border: 2px solid #9a493f;
-}
-body.theme-t .stsure {
     border: 2px solid #9a493f;
 }
 body.theme-t .sure {
@@ -86,9 +74,6 @@ body.theme-t .sure {
 
 /* 淫夢テーマ */
 body.theme-i .suretate {
-    border: 2px solid #f5f5f5;
-}
-body.theme-i .stsure {
     border: 2px solid #f5f5f5;
 }
 body.theme-i .sure {
@@ -184,6 +169,8 @@ body.theme-s a {
     {% elif theme == 't' %}
     <h2 class="on">赤欠月掲示板</h2>
     {% elif theme == 'd' %}
+    <img src="{{ url_for('static', filename='d.png') }}" width="300" alt="">
+    {% elif theme == 's' %}
     <img src="{{ url_for('static', filename='d.png') }}" width="300" alt="">
     {% elif theme == '2' %}
     <h1 class="b">ルナエクリプス掲示板</h1>
