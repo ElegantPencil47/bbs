@@ -1,9 +1,5 @@
 <style>
 
-        .suretate{
-        margin: 40px; 
-        }
-
         .on {
         display: inline;
   margin-right: 5px;
@@ -54,9 +50,13 @@
             background-image: url("{{ url_for('static', filename='ki.png') }}");
             background-repeat: repeat-y;
         }
-        body.theme-t{
-            background-image: url("{{ url_for('static', filename='th.jpeg') }}");
-        }
+        body.theme-t {
+    background-image: url("{{ url_for('static', filename='th.jpeg') }}");
+    background-size: 100% auto;   /* 横幅いっぱいに拡大縮小 */
+    background-repeat: repeat-y;  /* 縦方向にループ */
+    background-position: top center; /* 中央寄せ */
+}
+
         body.theme-i{
             background:#b8860b;
         }
@@ -101,9 +101,20 @@
             background: #d7003a;
             color: #e0ebaf;
         }
+body.theme-s a {
+  font-weight: bold;
+  text-decoration: none;
+  background: white;
+  border: 2px solid #000000;
+  color:black;
+  padding:10px 20px;
+  border-radius: 2px;
+  margin: 20px;
+}
+
  
     </style>
-<body>
+<body class="theme-{{theme}}">
 <a href="/">← スレッド一覧に戻る</a>
 <h1>{{ thread[1] }}</h1>
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
