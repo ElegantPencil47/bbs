@@ -8,6 +8,11 @@ from flask_socketio import SocketIO, join_room, leave_room
 from flask import Flask, render_template, request, redirect, url_for
 from flask import jsonify
 
+from flask import request
+
+
+
+
 
 
 # -------------------------------
@@ -236,6 +241,24 @@ def thread(thread_id):
     posts=posts_with_numbers,
     thread_id=thread_id
 )
+
+@app.before_request
+def ensure_theme_cookie():
+    theme = request.cookies.get("theme")
+    user_agent = request.headers.get("User-Agent", "").lower()
+
+    # スマホっぽいUAなら theme-s をデフォルトに
+    if theme is None:
+        if "iphone" in user_agent or "android" in user_agent:
+            g.set_default_theme = "theme-s"
+        else:
+            g.set_default_theme = "d"
+
+@app.after_request
+def apply_theme_cookie(response):
+    if getattr(g, "set_default_theme", None):
+        response.set_cookie("theme", g.set_default_theme, max_age=60*60*24*30)
+    return response
 
 
 
