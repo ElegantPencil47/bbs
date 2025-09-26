@@ -49,52 +49,54 @@
             color: #111;
             box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
         }
-        body.theme-2 .suretate{
-            padding: 1rem 2rem;
-            margin: 40px; 
-            background: #9AFE2E;
-        }
 
-　　　　body.theme-d .suretate{
-            border: 2px solid #000000;
-        }　
-        body.theme-d .stsure{
-            border: 2px solid #000000;
-        }
-　　　　body.theme-d .sure{
-            border: 2px solid #000000;
-        }　
 
-        body.theme-t .suretate{
-            border: 2px solid #9a493f;
-        }　
-        body.theme-t .stsure{
-            border: 2px solid #9a493f;
-        }
-　　　　body.theme-t .sure{
-            border: 2px solid #9a493f;
-        }　
+        /* デフォルトテーマ */
+body.theme-d .suretate {
+    border: 2px solid #000000;
+}
+body.theme-d .stsure {
+    border: 2px solid #000000;
+}
+body.theme-d .sure {
+    border: 2px solid #000000;
+}
 
-        body.theme-i .suretate{
-            border: 2px solid #f5f5f5;
-        }　
-        body.theme-i .stsure{
-            border: 2px solid #f5f5f5;
-        }　
-　　　　body.theme-i .sure{
-            border: 2px solid #f5f5f5;
-        }　
 
-        body.theme-2 .sure{
-            margin: 40px;
-            background: #f5f5f5;
-        }
+body.theme-s .suretate {
+    border: 2px solid #000000;
+}
+body.theme-s .stsure {
+    border: 2px solid #000000;
+}
+body.theme-s .sure {
+    border: 2px solid #000000;
+}
 
-        body.theme-2 .stsure{
-            border: 2px solid #c0c0c0;
-            margin: 40px; 
-            background: #f5f5f5;
-        }
+/* 東方テーマ */
+body.theme-t .suretate {
+    border: 2px solid #9a493f;
+}
+body.theme-t .stsure {
+    border: 2px solid #9a493f;
+}
+body.theme-t .sure {
+    border: 2px solid #9a493f;
+}
+
+/* 淫夢テーマ */
+body.theme-i .suretate {
+    border: 2px solid #f5f5f5;
+}
+body.theme-i .stsure {
+    border: 2px solid #f5f5f5;
+}
+body.theme-i .sure {
+    border: 2px solid #f5f5f5;
+}
+
+
+        
         body.theme-d .suretai{
             color: #000000;
             padding: 1rem 2rem;
@@ -108,9 +110,13 @@
             background-image: url("{{ url_for('static', filename='ki.png') }}");
             background-repeat: repeat-y;
         }
-        body.theme-t{
-            background-image: url("{{ url_for('static', filename='th.jpeg') }}");
-        }
+        body.theme-t {
+    background-image: url("{{ url_for('static', filename='th.jpeg') }}");
+    background-size: 100% auto;   /* 横幅いっぱいに拡大縮小 */
+    background-repeat: repeat-y;  /* 縦方向にループ */
+    background-position: top center; /* 中央寄せ */
+}
+
         body.theme-i{
             background:#b8860b;
         }
@@ -159,6 +165,7 @@ body.theme-s a {
   font-weight: bold;
   text-decoration: none;
   background: white;
+  border: 2px solid #000000;
   color:black;
   padding:10px 20px;
   border-radius: 2px;
