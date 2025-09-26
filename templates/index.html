@@ -78,6 +78,10 @@ body.theme-t .stsure {
     border: 2px solid #9a493f;
 }
 
+body.theme-t .sured {
+margin: 20px;
+}
+
 
 body.theme-i .suretate {
     border: 2px solid #f5f5f5;
@@ -198,7 +202,7 @@ Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
   {% if most_popular_thread %}
     <div class="sure">
       <ul>
-        <li>
+        <li class="sured">
           {% if theme == 'i' %}
             <img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">
           {% elif theme == 't' %}

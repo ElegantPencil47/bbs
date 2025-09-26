@@ -114,7 +114,10 @@ def index():
     # テンプレートに両方のデータを渡す
     return render_template("index.html", threads=threads, theme=theme, most_popular_thread=most_popular_thread)
 
-
+@app.route("/thread/<int:thread_id>")
+def thread(thread_id):
+    theme = request.cookies.get("theme", "d")
+    return render_template("thread.html", theme=theme)
 
 
 
