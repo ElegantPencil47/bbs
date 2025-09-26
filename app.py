@@ -114,11 +114,6 @@ def index():
     # テンプレートに両方のデータを渡す
     return render_template("index.html", threads=threads, theme=theme, most_popular_thread=most_popular_thread)
 
-@app.route("/thread/<int:thread_id>")
-def thread(thread_id):
-    theme = request.cookies.get("theme", "d")
-    return render_template("thread.html", theme=theme)
-
 
 
 
@@ -216,7 +211,7 @@ def on_leave(data):
 def thread(thread_id):
     db = get_db()
     c = db.cursor()
-
+    theme = request.cookies.get("theme", "d")
     if request.method == "POST":
         name = request.form["name"] or "名も無き者"
         message = request.form["message"]
@@ -241,6 +236,7 @@ def thread(thread_id):
     return render_template(
     "thread.html",
     thread=thread_data,
+    theme=theme,
     posts=posts_with_numbers,
     thread_id=thread_id
 )
