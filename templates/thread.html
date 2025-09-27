@@ -7,6 +7,16 @@
   margin-right: 5px;
     
         }
+        body.theme-t a {
+            color: #000000;
+            text-decoration: none;
+            border-radius: 7px;
+            border: 2px solid #000000;  
+        }
+        body.theme-t a:hover {
+            color: #000000;
+        }
+
         body.theme-d {
             background:#ffffff;
         } /* Midnight Tokyo Theme */
@@ -18,6 +28,11 @@
         body.theme-m h1, body.theme-m h2, body.theme-m h3 {
             color: #ff00cc;
             text-shadow: 0 0 6px #ff00cc, 0 0 12px #ff33cc;
+        }
+
+        body.theme-m ul {
+            color: #00eaff;
+            text-shadow: 0 0 6px #ff00cc, 0 0 12px #00eaff;
         }
         body.theme-m a {
             color: #00eaff;
@@ -122,6 +137,25 @@ body.theme-s a {
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 
 <ul id="posts"></ul>
+
+{% if theme == 'i' %}  
+<p>※まず自動更新システムを使用してんだけど、まあ多少はね、更新されないこともあって。その際は再読み込みをセンセンシャル！！（迫真）</p>
+    {% elif theme == 'm' %}
+<p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
+    {% elif theme == 't' %}
+<p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みを願います</p>
+    {% elif theme == 'd' %}
+
+<p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
+    {% elif theme == 's' %}
+    
+<p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
+    {% elif theme == '2' %}
+
+<p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
+    {% endif %}
+
+
 
 <form method="post">
   名前: <input type="text" name="name"><br>

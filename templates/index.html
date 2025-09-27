@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Lunar Eclipse</title>
     <style>
-
+        a {
+        text-decoration: none;
+        } 
         .suretate{
         margin: 40px; 
         }
@@ -33,7 +35,20 @@
             color: #00eaff;
             text-shadow: 0 0 6px #00eaff, 0 0 12px #00aaff;
             text-decoration: none;
+            border-radius: 7px;
+            border: 2px solid #808080;  
         }
+
+        body.theme-t a {
+            color: #000000;
+            text-decoration: none;
+            border-radius: 7px;
+            border: 2px solid #000000;  
+        }
+        body.theme-t a:hover {
+            color: #000000;
+        }
+
         body.theme-m a:hover {
             color: #fff;
             text-shadow: 0 0 12px #00ffff, 0 0 24px #00ffff;
@@ -67,6 +82,11 @@ body.theme-m .suretate {
 body.theme-m .stsure {
     border: 2px solid #808080;
 }
+
+body.theme-s .pohn {
+    margin: 40px; 
+}
+
 
 
 
@@ -167,6 +187,11 @@ body.theme-s a {
   margin: 20px;
 }
 
+
+
+
+
+
  
     </style>
 </head>
@@ -178,7 +203,7 @@ body.theme-s a {
     {% elif theme == 'm' %}
     <img src="{{ url_for('static', filename='m.png') }}" width="300" alt="">
     {% elif theme == 't' %}
-    <h2 class="on">赤欠月掲示板</h2>
+    <h1 class="on">赤欠月掲示板</h1>
     {% elif theme == 'd' %}
     <img src="{{ url_for('static', filename='d.png') }}" width="300" alt="">
     {% elif theme == 's' %}
@@ -187,7 +212,26 @@ body.theme-s a {
     <h1 class="b">ルナエクリプス掲示板</h1>
     {% endif %}
     <hr>
+
+{% if theme == 'i' %}  
+<h2>「天文学」から「民俗学」までの学問をやりますねぇ、素晴らしい掲示板ってはっきりわかんだね</h2>
+    {% elif theme == 'm' %}
+
+<h2>「天文学」から「民俗学」までの学問を学びあう電脳会話空間</h2>
+    {% elif theme == 't' %}
+<h2>「天文学」から「民俗学」までの学問を討論しあう掲示板</h2>
+    {% elif theme == 'd' %}
+
 <h2>「天文学」から「民俗学」までの学問を手広くカバーする匿名掲示板</h2>
+    {% elif theme == 's' %}
+    
+<h2>「天文学」から「民俗学」までの学問を手広くカバーする匿名掲示板</h2>
+    {% elif theme == '2' %}
+
+<h2>「天文学」から「民俗学」までの学問を手広くカバーする匿名掲示板</h2>
+    {% endif %}
+
+
 <div class="suretate">
 <h3>今日の月齢</h3>
 <a href="https://oac.d2.r-cms.jp/">
@@ -223,7 +267,7 @@ Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
     <h3>スレッド一覧</h3>
         <ul>
             {% for id, title, created_at, count in threads %}
-                <li>
+                <li class = pohn>
                     {% if theme == 'i' %}
                         <img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">
                     {% elif theme == 't' %}
