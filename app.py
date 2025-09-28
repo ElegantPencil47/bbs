@@ -228,30 +228,30 @@ def thread(thread_id):
             return redirect(url_for("thread", thread_id=thread_id))
 
 # スレッド情報
-c.execute("SELECT id, title FROM threads WHERE id=?", (thread_id,))
-thread_data = c.fetchone()
+    c.execute("SELECT id, title FROM threads WHERE id=?", (thread_id,))
+    thread_data = c.fetchone()
 
 # 投稿一覧を取得してレス番号（num）を付ける
-c.execute("SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
-rows = c.fetchall()
-posts_with_numbers = []
-for i, p in enumerate(rows):
-    posts_with_numbers.append({
-        "num": i + 1,
-        "id": p["id"],
-        "name": p["name"],
-        "message": p["message"],
-        "created_at": p["created_at"]
-    })
+    c.execute("SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
+    rows = c.fetchall()
+    posts_with_numbers = []
+    for i, p in enumerate(rows):
+        posts_with_numbers.append({
+            "num": i + 1,
+            "id": p["id"],
+            "name": p["name"],
+            "message": p["message"],
+            "created_at": p["created_at"]
+        })
 
-theme = request.cookies.get("theme", "d")
-return render_template(
-    "thread.html",
-    thread=thread_data,
-    theme=theme,
-    posts=posts_with_numbers,
-    thread_id=thread_id
-)
+    theme = request.cookies.get("theme", "d")
+    return render_template(
+        "thread.html",
+        thread=thread_data,
+        theme=theme,
+        posts=posts_with_numbers,
+        thread_id=thread_id
+    )
 
 
 
