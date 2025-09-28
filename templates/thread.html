@@ -157,63 +157,59 @@ body.theme-s a {
 
 
 
-<form method="post">
+<form id="postForm">
   名前: <input type="text" name="name"><br>
   本文: <textarea name="message"></textarea><br>
   <button type="submit">投稿</button>
 </form>
 </body>
 
+<ul id="posts"></ul>
 
 
 
 
 <script>
-const threadId = {{ thread_id }};
- // 初期 lastPostId と lastNumber をテンプレートからセット
-{% if posts %}
-let lastPostId = {{ posts[-1].id }};
-let lastNumber = {{ posts|length }};
-{% else %}
-let lastPostId = 0;
-let lastNumber = 0;
-{% endif %}
-function escapeHtml(s) {
-  if (!s) return "";
-  return s.replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#39;");
-  }
+const threadId = {{ thread_id }};  // Flask側から渡す
 
-function nl2br(s) {
-  return escapeHtml(s).replace(/\r?\n/g, "<br>");
-}
+document.getElementById("postForm").addEventListener("submit", async (e) => {
+    e.preventDefault(); // ページリロードを止める
+    const form = e.target;
+    const formData = new FormData(form);
 
-function fetchPosts() {
-  fetch(`/thread/${threadId}/posts_json?after=${lastPostId}`)
-  .then(res => res.json())
-  .then(data => {
-    const postsUl = document.getElementById("posts");
-    data.posts.forEach(post => {
-      if (!document.getElementById(`post-${post.id}`)) {
-        lastNumber += 1;
-        const li = document.createElement("li");
-        li.id = `post-${post.id}`;
-        li.innerHTML = `<b>${lastNumber} ： ${escapeHtml(post.name)}</b> (${escapeHtml(post.created_at)})<br>${nl2br(post.message)}`;
-        postsUl.appendChild(li);
-      }
-      lastPostId = Math.max(lastPostId, post.id);
+    let res = await fetch(`/thread/${threadId}/add_post`, {
+        method: "POST",
+        body: formData
     });
-  })
-  .catch(err => console.error(err));
+
+    if (res.ok) {
+        let post = await res.json();
+        addPostToDOM(post);   // 画面に即追加
+        form.reset();         // フォームをクリア
+    } else {
+        alert("投稿に失敗しました");
+    }
+});
+
+function addPostToDOM(post) {
+    const li = document.createElement("li");
+    li.innerHTML = `<b>${post.name}</b>: ${post.message} <span>(${post.created_at})</span>`;
+    document.getElementById("posts").appendChild(li);
 }
+
+// 自動更新用（今あるfetchPostsを流用してOK）
+async function fetchPosts() {
+    let res = await fetch(`/thread/${threadId}/posts_json`);
+    if (res.ok) {
+        let posts = await res.json();
+        const ul = document.getElementById("posts");
+        ul.innerHTML = "";
+        posts.forEach(p => addPostToDOM(p));
+    }
+}
+setInterval(fetchPosts, 5000); // 5秒ごとに更新
 fetchPosts();
-setInterval(fetchPosts, 5000);
 </script>
-
-
 
 
 

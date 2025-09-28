@@ -294,6 +294,42 @@ def posts_json(thread_id):
 
 
 
+
+
+
+@app.route("/thread/<int:thread_id>/add_post", methods=["POST"])
+def add_post(thread_id):
+    name = request.form.get("name") or "名無しさん"
+    message = request.form.get("message", "").strip()
+    if not message:
+        return jsonify({"error": "empty"}), 400
+
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    db.execute("INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
+        (thread_id, name, message, now))
+    db.commit()
+    post_id = db.execute("SELECT last_insert_rowid()").fetchone()[0]
+
+    return jsonify({
+        "id": post_id,
+        "name": name,
+        "message": message,
+        "created_at": now
+    })
+
+
+
+
+@app.route("/thread/<int:thread_id>/posts_json")
+def posts_json(thread_id):
+    posts = db.execute(
+        "SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id",
+        (thread_id,)
+    ).fetchall()
+    return jsonify([dict(row) for row in posts])
+
+
+
 # -------------------------------
 # アプリ起動
 # -------------------------------
