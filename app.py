@@ -123,7 +123,7 @@ def index():
 @app.route("/thread/new", methods=["POST"])
 def new_thread():
     title = request.form["title"]
-    name = request.form["name"] or "名も無き者"
+    name = request.form["name"] or "書き人知らず"
     message = request.form["message"]
     db = get_db()
     c = db.cursor()
@@ -211,9 +211,9 @@ def on_leave(data):
 def thread(thread_id):
     db = get_db()
     c = db.cursor()
-    theme = request.cookies.get("theme", "d")
+
     if request.method == "POST":
-        name = request.form["name"] or "名も無き者"
+        name = request.form["name"] or "書き人知らず"
         message = request.form["message"]
         try:
             c.execute(
@@ -227,19 +227,34 @@ def thread(thread_id):
         finally:
             return redirect(url_for("thread", thread_id=thread_id))
 
-    c.execute("SELECT id, title FROM threads WHERE id=?", (thread_id,))
-    thread_data = c.fetchone()
-    c.execute("SELECT name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
-    posts = c.fetchall()
-    posts_with_numbers = [(i + 1, p['name'], p['message'], p['created_at']) for i, p in enumerate(posts)]
+# スレッド情報
+c.execute("SELECT id, title FROM threads WHERE id=?", (thread_id,))
+thread_data = c.fetchone()
 
-    return render_template(
+# 投稿一覧を取得してレス番号（num）を付ける
+c.execute("SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
+rows = c.fetchall()
+posts_with_numbers = []
+for i, p in enumerate(rows):
+    posts_with_numbers.append({
+        "num": i + 1,
+        "id": p["id"],
+        "name": p["name"],
+        "message": p["message"],
+        "created_at": p["created_at"]
+    })
+
+theme = request.cookies.get("theme", "d")
+return render_template(
     "thread.html",
     thread=thread_data,
     theme=theme,
     posts=posts_with_numbers,
     thread_id=thread_id
 )
+
+
+
 
 @app.before_request
 def ensure_theme_cookie():

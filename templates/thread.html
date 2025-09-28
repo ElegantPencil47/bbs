@@ -163,37 +163,61 @@ body.theme-s a {
   <button type="submit">投稿</button>
 </form>
 </body>
+
+
+
+
+
 <script>
 const threadId = {{ thread_id }};
+ // 初期 lastPostId と lastNumber をテンプレートからセット
+{% if posts %}
+let lastPostId = {{ posts[-1].id }};
+let lastNumber = {{ posts|length }};
+{% else %}
 let lastPostId = 0;
+let lastNumber = 0;
+{% endif %}
+function escapeHtml(s) {
+  if (!s) return "";
+  return s.replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
+  }
+
+function nl2br(s) {
+  return escapeHtml(s).replace(/\r?\n/g, "<br>");
+}
 
 function fetchPosts() {
   fetch(`/thread/${threadId}/posts_json?after=${lastPostId}`)
-    .then(response => response.json())
-    .then(data => {
-      const postsUl = document.getElementById("posts");
-      data.posts.forEach(post => {
-        // 既に表示済みかどうかチェック
-        if (!document.getElementById(`post-${post.id}`)) {
-          const li = document.createElement("li");
-          li.id = `post-${post.id}`;
-          li.textContent = `${post.name}: ${post.message}`;
-          postsUl.appendChild(li);
-        }
-      });
-      // 最後の投稿IDを更新
-      if (data.posts.length > 0) {
-        lastPostId = data.posts[data.posts.length - 1].id;
+  .then(res => res.json())
+  .then(data => {
+    const postsUl = document.getElementById("posts");
+    data.posts.forEach(post => {
+      if (!document.getElementById(`post-${post.id}`)) {
+        lastNumber += 1;
+        const li = document.createElement("li");
+        li.id = `post-${post.id}`;
+        li.innerHTML = `<b>${lastNumber} ： ${escapeHtml(post.name)}</b> (${escapeHtml(post.created_at)})<br>${nl2br(post.message)}`;
+        postsUl.appendChild(li);
       }
-    })
-    .catch(err => console.error(err));
+      lastPostId = Math.max(lastPostId, post.id);
+    });
+  })
+  .catch(err => console.error(err));
 }
-
-// 初回取得
 fetchPosts();
-// 5秒ごとに取得
 setInterval(fetchPosts, 5000);
 </script>
+
+
+
+
+
+
 
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 <script>
