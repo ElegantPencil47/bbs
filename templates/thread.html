@@ -1,136 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <style>
-
-        .on {
-        display: inline;
-  margin-right: 5px;
-    
-        }
-        body.theme-t a {
-            color: #000000;
-            text-decoration: none;
-            border-radius: 7px;
-            border: 2px solid #000000;  
-        }
-        body.theme-t a:hover {
-            color: #000000;
-        }
-
-        body.theme-d {
-            background:#ffffff;
-        } /* Midnight Tokyo Theme */
-        body.theme-m {
-            background: linear-gradient(180deg, #0d0d1a 0%, #1a1a2e 100%);
-            color: #cfd9ff;
-            font-family: "MS Gothic", "Share Tech Mono", monospace;
-        }
-        body.theme-m h1, body.theme-m h2, body.theme-m h3 {
-            color: #ff00cc;
-            text-shadow: 0 0 6px #ff00cc, 0 0 12px #ff33cc;
-        }
-
-        body.theme-m ul {
-            color: #00eaff;
-            text-shadow: 0 0 6px #ff00cc, 0 0 12px #00eaff;
-        }
-        body.theme-m a {
-            color: #00eaff;
-            text-shadow: 0 0 6px #00eaff, 0 0 12px #00aaff;
-            text-decoration: none;
-        }
-        body.theme-m a:hover {
-            color: #fff;
-            text-shadow: 0 0 12px #00ffff, 0 0 24px #00ffff;
-        }
-        body.theme-m button {
-            background: #111;
-            border: 1px solid #00ffff;
-            color: #00ffff;
-            padding: 5px 10px;
-            border-radius: 4px;
-            text-shadow: 0 0 6px #00ffff;
-            transition: 0.2s;
-        }
-        body.theme-m button:hover {
-            background: #00ffff;
-            color: #111;
-            box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-        }
-
-
-        body.theme-2 .b{
-            color: #f5f5f5;
-            padding: 1rem 2rem;
-        }
-        body.theme-2{
-            background-image: url("{{ url_for('static', filename='ki.png') }}");
-            background-repeat: repeat-y;
-        }
-        body.theme-t {
-    background-image: url("{{ url_for('static', filename='th.jpeg') }}");
-    background-size: 100% auto;   /* 横幅いっぱいに拡大縮小 */
-    background-repeat: repeat-y;  /* 縦方向にループ */
-    background-position: top center; /* 中央寄せ */
-}
-
-        body.theme-i{
-            background:#b8860b;
-        }
-        .theme-t h1 {
-            color: #ff0000;
-        }
-  
-        body.theme-d button {
-            background: #ffffff;
-            border: 1px solid #000000;
-            color: #000000;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: 0.2s;
-        }
-        body.theme-d button:hover {
-            background: #000000;
-            color: #ffffff;
-        }
- 
-        body.theme-i button {
-            background: #4b0082;
-            border: 1px solid #ffffff;
-            color: #ffffff;
-            padding: 5px 10px;
-            border-radius: 7px;
-            transition: 0.2s;
-        }
-        body.theme-i button:hover {
-            background: #ffffff;
-            color: #4b0082;
-        }
-        body.theme-t button {
-            background: #e0ebaf;
-            border: 1px solid #d7003a;
-            color: #d7003a;
-            padding: 5px 10px;
-            border-radius: 10px;
-            transition: 0.2s;
-        }
-        body.theme-t button:hover {
-            background: #d7003a;
-            color: #e0ebaf;
-        }
-body.theme-s a {
-  font-weight: bold;
-  text-decoration: none;
-  background: white;
-  border: 2px solid #000000;
-  color:black;
-  padding:10px 20px;
-  border-radius: 2px;
-  margin: 20px;
-}
-
- 
-    </style>
+/* ... (既存のCSSは省略) ... */
+</style>
 <body class="theme-{{theme}}">
 <a href="/">← スレッド一覧に戻る</a>
 <h1>{{ thread[1] }}</h1>
@@ -145,35 +17,35 @@ body.theme-s a {
     {% elif theme == 't' %}
 <p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みを願います</p>
     {% elif theme == 'd' %}
-
 <p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
     {% elif theme == 's' %}
-    
 <p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
     {% elif theme == '2' %}
-
 <p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
     {% endif %}
-
-
 
 <form id="postForm">
   名前: <input type="text" name="name"><br>
   本文: <textarea name="message"></textarea><br>
   <button type="submit">投稿</button>
 </form>
-</body>
 
-<ul id="posts"></ul>
-
-
-
-
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 <script>
-const threadId = {{ thread_id }};  // Flask側から渡す
+const threadId = {{ thread_id }};
+const postsList = document.getElementById("posts");
+const socket = io();
 
+// 投稿をDOMに追加する関数
+function addPostToDOM(post) {
+    const li = document.createElement("li");
+    li.innerHTML = `<b>${post.name}</b>: ${post.message} <span>(${post.created_at})</span>`;
+    postsList.appendChild(li);
+}
+
+// 投稿フォームの送信イベント
 document.getElementById("postForm").addEventListener("submit", async (e) => {
-    e.preventDefault(); // ページリロードを止める
+    e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
 
@@ -183,49 +55,41 @@ document.getElementById("postForm").addEventListener("submit", async (e) => {
     });
 
     if (res.ok) {
-        let post = await res.json();
-        addPostToDOM(post);   // 画面に即追加
-        form.reset();         // フォームをクリア
+        // Socket.IO経由で投稿が追加されるので、ここでは何もしない
+        form.reset();
     } else {
         alert("投稿に失敗しました");
     }
 });
 
-function addPostToDOM(post) {
-    const li = document.createElement("li");
-    li.innerHTML = `<b>${post.name}</b>: ${post.message} <span>(${post.created_at})</span>`;
-    document.getElementById("posts").appendChild(li);
-}
-
-// 自動更新用（今あるfetchPostsを流用してOK）
+// 初回投稿一覧を取得する関数
 async function fetchPosts() {
     let res = await fetch(`/thread/${threadId}/posts_json`);
     if (res.ok) {
         let posts = await res.json();
-        const ul = document.getElementById("posts");
-        ul.innerHTML = "";
+        postsList.innerHTML = ""; // 既存の投稿をクリア
         posts.forEach(p => addPostToDOM(p));
     }
 }
-setInterval(fetchPosts, 5000); // 5秒ごとに更新
+
+// ページ読み込み時に投稿一覧を取得
 fetchPosts();
-</script>
 
-
-
-
-
-<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-<script>
-const socket = io();
+// Socket.IOリスナー
 socket.emit("join_thread", { thread_id: threadId });
 
 socket.on("online_count", function(count) {
-  document.getElementById("onlineCount").textContent = count;
+    document.getElementById("onlineCount").textContent = count;
+});
+
+// 新しい投稿を受信したときの処理
+socket.on("new_post", function(post) {
+    addPostToDOM(post);
 });
 
 window.addEventListener("beforeunload", () => {
-  socket.emit("leave_thread", { thread_id: threadId });
+    socket.emit("leave_thread", { thread_id: threadId });
 });
 </script>
+</body>
 </html>

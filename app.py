@@ -276,10 +276,6 @@ def apply_theme_cookie(response):
 
 
 
-
-
-
-
 @app.route("/thread/<int:thread_id>/add_post", methods=["POST"])
 def add_post(thread_id):
     name = request.form.get("name") or "名無しさん"
@@ -288,28 +284,44 @@ def add_post(thread_id):
         return jsonify({"error": "empty"}), 400
 
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    db.execute("INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
-        (thread_id, name, message, now))
+    db = get_db()
+    c = db.cursor()
+    c.execute(
+        "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
+        (thread_id, name, message, now)
+    )
     db.commit()
-    post_id = db.execute("SELECT last_insert_rowid()").fetchone()[0]
 
-    return jsonify({
-        "id": post_id,
-        "name": name,
-        "message": message,
-        "created_at": now
-    })
+    # 投稿した最新の内容を取得
+    c.execute("SELECT name, message, created_at FROM posts WHERE thread_id=? ORDER BY id DESC LIMIT 1", (thread_id,))
+    last_post = c.fetchone()
 
+    if last_post:
+        # 投稿内容をJSONとして返す
+        # `last_post`はsqlite3.Rowオブジェクトなので、dictに変換する
+        post_data = dict(last_post)
+        
+        # Socket.IOでリアルタイム更新をブロードキャストする
+        socketio.emit("new_post", post_data, room=thread_id)
+        
+        return jsonify(post_data)
+    else:
+        # 投稿失敗時はエラーを返す
+        return jsonify({"error": "post not found"}), 500
 
-
-
+# 以下、`thread.html`に対応する、投稿内容をJSONで返すための新しいエンドポイント
 @app.route("/thread/<int:thread_id>/posts_json")
 def posts_json(thread_id):
-    posts = db.execute(
-        "SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id",
-        (thread_id,)
-    ).fetchall()
-    return jsonify([dict(row) for row in posts])
+    db = get_db()
+    c = db.cursor()
+    c.execute("SELECT name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
+    posts = c.fetchall()
+    
+    # 投稿のリストをJSONとして返す
+    posts_list = [dict(row) for row in posts]
+    return jsonify(posts_list)
+
+
 
 
 
