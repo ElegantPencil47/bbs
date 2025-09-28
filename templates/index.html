@@ -83,9 +83,7 @@ body.theme-m .stsure {
     border: 2px solid #808080;
 }
 
-body.theme-s .pohn {
-    margin: 2px; 
-}
+
 
 
 
@@ -271,7 +269,7 @@ Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
     <h3>スレッド一覧</h3>
         <ul>
             {% for id, title, created_at, count in threads %}
-                <li class = pohn>
+                <li>
                     {% if theme == 'i' %}
                         <img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">
                     {% elif theme == 't' %}
