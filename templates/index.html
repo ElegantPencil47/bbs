@@ -180,11 +180,14 @@ body.theme-s a {
   font-weight: bold;
   text-decoration: none;
   background: white;
-  border: 2px solid #000000;
   color:black;
   padding:10px 20px;
-  border-radius: 2px;
   margin: 20px;
+}
+
+body.theme-s .sumaho {
+  border: 2px solid #000000;
+border-radius: 2px;
 }
 
 
@@ -252,8 +255,8 @@ Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
           {% elif theme == 't' %}
             <p class="on">☯</p>
           {% endif %}
-          <a href="/thread/{{most_popular_thread.id}}" class="suretai">{{most_popular_thread.title}}</a> ({{most_popular_thread.count}})
-          <span class="date">{{most_popular_thread.created_at}}</span>
+          <div class = "sumaho"><a href="/thread/{{most_popular_thread.id}}" class="suretai">{{most_popular_thread.title}}</a> ({{most_popular_thread.count}})</div>
+        
         </li>
       </ul>
     </div>
@@ -273,7 +276,7 @@ Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
                     {% elif theme == 't' %}
                         <p class="on">☯</p>
                     {% endif %}
-                    <a href="/thread/{{id}}" class="suretai">{{title}}</a> ({{count}})
+                    <div class = "sumaho"><a href="/thread/{{id}}" class="suretai">{{title}}</a> ({{count}})</div>
                 </li>
             {% endfor %}
         </ul>
