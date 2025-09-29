@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <style>
-/* ... (既存のCSSは省略) ... */
+/* 必要ならCSSここに */
 </style>
 <body class="theme-{{theme}}">
 <a href="/">← スレッド一覧に戻る</a>
@@ -10,19 +10,9 @@
 
 <ul id="posts"></ul>
 
-{% if theme == 'i' %}  
-<p>※まず自動更新システムを使用してんだけど、まあ多少はね、更新されないこともあって。その際は再読み込みをセンセンシャル！！（迫真）</p>
-    {% elif theme == 'm' %}
+{% if theme in ['i','m','t','d','s','2'] %}
 <p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
-    {% elif theme == 't' %}
-<p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みを願います</p>
-    {% elif theme == 'd' %}
-<p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
-    {% elif theme == 's' %}
-<p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
-    {% elif theme == '2' %}
-<p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
-    {% endif %}
+{% endif %}
 
 <form id="postForm">
   名前: <input type="text" name="name"><br>
@@ -35,12 +25,25 @@
 const threadId = {{ thread_id }};
 const postsList = document.getElementById("posts");
 const socket = io();
+let postCounter = 0; // レス番号カウンタ
 
-// 投稿をDOMに追加する関数
+// 投稿をDOMに追加する関数（レス番付き）
 function addPostToDOM(post) {
+    postCounter++;
     const li = document.createElement("li");
-    li.innerHTML = `<b>${post.name}</b>: ${post.message} <span>(${post.created_at})</span>`;
+    li.innerHTML = `#${postCounter} <b>${post.name}</b>: ${post.message} <span>(${post.created_at})</span>`;
     postsList.appendChild(li);
+}
+
+// 初期ロードで投稿一覧を取得
+async function fetchPosts() {
+    let res = await fetch(`/thread/${threadId}/posts_json`);
+    if (res.ok) {
+        let posts = await res.json();
+        postsList.innerHTML = "";
+        postCounter = 0; // 番号リセット
+        posts.forEach(p => addPostToDOM(p));
+    }
 }
 
 // 投稿フォームの送信イベント
@@ -55,41 +58,32 @@ document.getElementById("postForm").addEventListener("submit", async (e) => {
     });
 
     if (res.ok) {
-        // Socket.IO経由で投稿が追加されるので、ここでは何もしない
-        form.reset();
+        form.reset(); // 自分の投稿はSocket.IO経由で反映される
     } else {
         alert("投稿に失敗しました");
     }
 });
 
-// 初回投稿一覧を取得する関数
-async function fetchPosts() {
-    let res = await fetch(`/thread/${threadId}/posts_json`);
-    if (res.ok) {
-        let posts = await res.json();
-        postsList.innerHTML = ""; // 既存の投稿をクリア
-        posts.forEach(p => addPostToDOM(p));
-    }
-}
-
-// ページ読み込み時に投稿一覧を取得
-fetchPosts();
-
-// Socket.IOリスナー
+// Socket.IO 接続処理
 socket.emit("join_thread", { thread_id: threadId });
 
-socket.on("online_count", function(count) {
-    document.getElementById("onlineCount").textContent = count;
-});
-
-// 新しい投稿を受信したときの処理
-socket.on("new_post", function(post) {
+// 新しい投稿が来たら追加
+socket.on("new_post", (post) => {
     addPostToDOM(post);
 });
 
+// 同接数を更新
+socket.on("online_count", (count) => {
+    document.getElementById("onlineCount").textContent = count;
+});
+
+// ページ離脱時に退室を通知
 window.addEventListener("beforeunload", () => {
     socket.emit("leave_thread", { thread_id: threadId });
 });
+
+// 初期ロード実行
+fetchPosts();
 </script>
 </body>
 </html>
