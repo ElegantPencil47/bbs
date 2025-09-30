@@ -275,6 +275,10 @@ def apply_theme_cookie(response):
     return response
 
 
+# -------------------------------
+# 書き込み一覧
+# -------------------------------
+
 
 @app.route("/thread/<int:thread_id>/add_post", methods=["POST"])
 def add_post(thread_id):
@@ -292,22 +296,27 @@ def add_post(thread_id):
     )
     db.commit()
 
-    # 投稿した最新の内容を取得
-    c.execute("SELECT name, message, created_at FROM posts WHERE thread_id=? ORDER BY id DESC LIMIT 1", (thread_id,))
-    last_post = c.fetchone()
+    # 投稿のIDを取得
+    post_id = c.lastrowid
 
-    if last_post:
-        # 投稿内容をJSONとして返す
-        # `last_post`はsqlite3.Rowオブジェクトなので、dictに変換する
-        post_data = dict(last_post)
-        
-        # Socket.IOでリアルタイム更新をブロードキャストする
-        socketio.emit("new_post", post_data, room=thread_id)
-        
-        return jsonify(post_data)
-    else:
-        # 投稿失敗時はエラーを返す
-        return jsonify({"error": "post not found"}), 500
+    # レス番号を計算
+    c.execute("SELECT COUNT(*) FROM posts WHERE thread_id=?", (thread_id,))
+    count = c.fetchone()[0]
+
+    post_data = {
+        "num": count,
+        "id": post_id,
+        "name": name,
+        "message": message,
+        "created_at": now
+    }
+
+    # Socket.IOでブロードキャスト
+    socketio.emit("new_post", post_data, room=thread_id)
+
+    return jsonify(post_data)
+
+
 
 # 以下、`thread.html`に対応する、投稿内容をJSONで返すための新しいエンドポイント
 @app.route("/thread/<int:thread_id>/posts_json")

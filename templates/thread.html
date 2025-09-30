@@ -21,17 +21,18 @@
 </form>
 
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+
+
 <script>
 const threadId = {{ thread_id }};
 const postsList = document.getElementById("posts");
 const socket = io();
-let postCounter = 0; // レス番号カウンタ
 
-// 投稿をDOMに追加する関数（レス番付き）
+// 投稿をDOMに追加
 function addPostToDOM(post) {
-    postCounter++;
     const li = document.createElement("li");
-    li.innerHTML = `#${postCounter} <b>${post.name}</b>: ${post.message} <span>(${post.created_at})</span>`;
+    li.innerHTML = `#${post.num} <b>${post.name}</b>: ${post.message} <span>(${post.created_at})</span>`;
     postsList.appendChild(li);
 }
 
@@ -41,16 +42,14 @@ async function fetchPosts() {
     if (res.ok) {
         let posts = await res.json();
         postsList.innerHTML = "";
-        postCounter = 0; // 番号リセット
         posts.forEach(p => addPostToDOM(p));
     }
 }
 
-// 投稿フォームの送信イベント
+// 投稿フォーム送信
 document.getElementById("postForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
+    const formData = new FormData(e.target);
 
     let res = await fetch(`/thread/${threadId}/add_post`, {
         method: "POST",
@@ -58,32 +57,31 @@ document.getElementById("postForm").addEventListener("submit", async (e) => {
     });
 
     if (res.ok) {
-        form.reset(); // 自分の投稿はSocket.IO経由で反映される
+        e.target.reset(); // 自分の投稿はSocket.IOで反映
     } else {
         alert("投稿に失敗しました");
     }
 });
 
-// Socket.IO 接続処理
-socket.emit("join_thread", { thread_id: threadId });
-
-// 新しい投稿が来たら追加
-socket.on("new_post", (post) => {
-    addPostToDOM(post);
+// Socket.IO
+socket.on("connect", () => {
+    console.log("connected:", socket.id);
+    socket.emit("join_thread", { thread_id: threadId });
 });
 
-// 同接数を更新
+socket.on("new_post", (post) => addPostToDOM(post));
 socket.on("online_count", (count) => {
     document.getElementById("onlineCount").textContent = count;
 });
 
-// ページ離脱時に退室を通知
+// ページ離脱時
 window.addEventListener("beforeunload", () => {
     socket.emit("leave_thread", { thread_id: threadId });
 });
 
-// 初期ロード実行
+// 初期ロード
 fetchPosts();
 </script>
+
 </body>
 </html>
