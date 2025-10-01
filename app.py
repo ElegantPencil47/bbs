@@ -318,19 +318,17 @@ def add_post(thread_id):
 
 
 
-# 以下、`thread.html`に対応する、投稿内容をJSONで返すための新しいエンドポイント
-@app.route("/thread/<int:thread_id>/posts_json")
+# 例: posts_json エンドポイント
 def posts_json(thread_id):
-    db = get_db()
-    c = db.cursor()
-    c.execute("SELECT name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
-    posts = c.fetchall()
-    
-    # 投稿のリストをJSONとして返す
-    posts_list = [dict(row) for row in posts]
-    return jsonify(posts_list)
-
-
+    posts = get_posts_from_db(thread_id)
+    return jsonify([
+        {
+            "num": i + 1,
+            "name": p["name"],
+            "message": p["message"],
+            "created_at": p["created_at"]
+        } for i, p in enumerate(posts)
+    ])
 
 
 
