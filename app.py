@@ -318,19 +318,24 @@ def add_post(thread_id):
 
 
 
-# 例: posts_json エンドポイント
+@app.route("/thread/<int:thread_id>/posts_json")
 def posts_json(thread_id):
-    posts = get_posts_from_db(thread_id)
+    db = get_db()
+    cur = db.execute(
+        "SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id",
+        (thread_id,)
+    )
+    posts = cur.fetchall()
+    
     return jsonify([
         {
-            "num": i + 1,
-            "name": p["name"],
+            "num": i+1,  # レス番号
+            "name": p["name"] if p["name"] else "名無しさん",
             "message": p["message"],
             "created_at": p["created_at"]
-        } for i, p in enumerate(posts)
+        }
+        for i, p in enumerate(posts)
     ])
-
-
 
 # -------------------------------
 # アプリ起動
