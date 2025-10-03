@@ -22,20 +22,41 @@
 
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
-
-
-
 <script>
-const threadId = {{ thread_id }}
+const threadId = {{ thread_id }};
 const postsList = document.getElementById("posts");
 const socket = io({
   transports:["websocket"]
 });
 
+// ユーザーが投稿したメッセージを安全にレンダリングする関数
+function safeNl2br(text) {
+    // 1. まずHTMLタグをエスケープ
+    const escapedText = document.createElement('div');
+    escapedText.textContent = text;
+
+    // 2. 次に改行文字を<br>タグに変換して安全なHTMLとして返す
+    return escapedText.innerHTML.replace(/\r?\n/g, '<br>');
+}
+
+// ImgurのURLを<img>タグに変換する関数
+function convertImgurUrls(text) {
+    // Imgur画像のURL（i.imgur.comで終わるもの）を検出
+    const imgurRegex = /(https?:\/\/(?:i\.)?imgur\.com\/\w+\.(?:jpg|jpeg|png|gif|bmp))/gi;
+    return text.replace(imgurRegex, (url) => {
+        // 見つかったURLを<img>タグに変換
+        return `<img src="${url}" alt="Imgur Image" style="max-width: 100%;">`;
+    });
+}
+
 // 投稿をDOMに追加
 function addPostToDOM(post) {
     const li = document.createElement("li");
-    li.innerHTML = `#${post.num} <b>${post.name}</b>: ${post.message} <span>(${post.created_at})</span>`;
+    const escapedAndNl2brMessage = safeNl2br(post.message);
+    const finalMessage = convertImgurUrls(escapedAndNl2brMessage);
+    
+    li.innerHTML = `#${post.num} <b>${post.name}</b>: ${finalMessage} <span>(${post.created_at})</span>`;
+    
     postsList.appendChild(li);
 }
 
@@ -70,7 +91,6 @@ document.getElementById("postForm").addEventListener("submit", async (e) => {
 socket.on("connect", () => {
     console.log("connected:", socket.id);
     socket.emit("join_thread",{thread_id:threadId});
-
 });
 
 socket.on("new_post", (post) => addPostToDOM(post));
@@ -85,6 +105,7 @@ window.addEventListener("beforeunload", () => {
 
 // 初期ロード
 fetchPosts();
+
 </script>
 
 </body>
