@@ -20,7 +20,8 @@ from flask import request
 # -------------------------------
 app = Flask(__name__)
 app.secret_key = 'your_super_secret_key_here'
-socketio = SocketIO(app, cors_allowed_origins="*",
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
+
 async_mode="threading")
 
 
