@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>AA・コピペ保管庫</title>
+</head>
+<body>
+  <h1>文章メモ</h1>
+
+  <!-- 文章入力欄 -->
+  <textarea id="inputText" rows="5" cols="50" placeholder="ここに文章を入力"></textarea><br>
+
+  <!-- 保存ボタン -->
+  <button id="saveBtn">保存</button>
+  <button id="copyBtn">コピー</button>
+
+  <!-- 保存した文章表示 -->
+  <h2>保存したAA・コピペ</h2>
+  <div id="savedText" style="white-space: pre-wrap; border: 1px solid #ccc; padding: 10px; width: 500px; min-height: 50px;"></div>
+
+  <script>
+    const input = document.getElementById('inputText');
+    const saveBtn = document.getElementById('saveBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const savedDiv = document.getElementById('savedText');
+
+    // ページ読み込み時に保存内容を表示
+    window.onload = () => {
+      const saved = localStorage.getItem('myText');
+      if (saved) {
+        savedDiv.textContent = saved;
+      }
+    };
+
+    // 保存ボタン
+    saveBtn.onclick = () => {
+      const text = input.value;
+      localStorage.setItem('myText', text); // 保存
+      savedDiv.textContent = text;          // 表示更新
+      input.value = '';                     // 入力欄クリア
+      alert('保存しました！');
+    };
+
+    // コピー用ボタン
+    copyBtn.onclick = () => {
+      const text = savedDiv.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('コピーしました！');
+      });
+    };
+  </script>
+</body>
+</html>
