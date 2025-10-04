@@ -101,6 +101,7 @@ margin: 20px;
 background: #000000;
 border-radius: 7px;
             border: 2px solid #ffffff; 
+float: left;
 }
 
 
@@ -205,6 +206,9 @@ margin: 20px;
 }
 
 
+body.theme-i .sured {
+float: left;
+}
 
  
     </style>
@@ -290,7 +294,7 @@ Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
     <h3>スレッド一覧</h3>
         <ul>
             {% for id, title, created_at, count in threads %}
-                <li>
+                <li class="sured">
                     {% if theme == 'i' %}
                         <img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">
                     {% elif theme == 't' %}
