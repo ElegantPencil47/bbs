@@ -157,6 +157,13 @@ def nl2br(s):
         return ""
     return Markup("<br>").join(escape(s).splitlines())
 
+
+
+@app.route('/aa')
+def aa():
+    return render_template('aa.html')
+
+
 # -------------------------------
 # 投稿制限（レート制限40秒）
 # -------------------------------
