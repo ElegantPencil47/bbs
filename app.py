@@ -169,7 +169,7 @@ def aa():
 
 @app.route('/shop')
 def aa():
-    return render_template("shop.html')
+    return render_template('shop.html')
 
 
 # -------------------------------
