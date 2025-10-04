@@ -164,11 +164,11 @@ def aa():
     return render_template('aa.html')
 
 @app.route('/news')
-def aa():
+def news():
     return render_template('news.html')
 
 @app.route('/shop')
-def aa():
+def shop():
     return render_template('shop.html')
 
 
