@@ -163,6 +163,14 @@ def nl2br(s):
 def aa():
     return render_template('aa.html')
 
+@app.route('/news')
+def aa():
+    return render_template('news.html')
+
+@app.route('/shop')
+def aa():
+    return render_template("shop.html')
+
 
 # -------------------------------
 # 投稿制限（レート制限40秒）
