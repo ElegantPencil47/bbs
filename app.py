@@ -125,7 +125,13 @@ def index():
 @app.route("/thread/new", methods=["POST"])
 def new_thread():
     title = request.form["title"]
-    name = request.form["name"] or "書き人知らず"
+    # 修正：nameが空欄の場合に "書き人知らず" を設定
+    name = request.form.get("name")
+    if not name:
+        name = "書き人知らず"
+    # 入力された名前に<br>を追加
+    name = name + "<br>"
+
     message = request.form["message"]
     db = get_db()
     c = db.cursor()
@@ -147,6 +153,7 @@ def new_thread():
         return redirect(url_for("index"))
 
     return redirect(url_for("thread", thread_id=new_thread_id))
+
 
 # -------------------------------
 # 改行を <br> に変換するフィルタ
@@ -230,8 +237,14 @@ def thread(thread_id):
     c = db.cursor()
 
     if request.method == "POST":
-        name = request.form["name"] or "書き人知らず"
-        message = request.form["message"]
+        # 修正：nameが空欄の場合に "書き人知らず" を設定
+        name = request.form.get("name")
+        if not name:
+            name = "書き人知らず"
+        # 入力された名前に<br>を追加
+        name = name + "<br>"
+
+        message = request.form.get("message")
         try:
             c.execute(
                 "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
@@ -272,7 +285,6 @@ def thread(thread_id):
 
 
 
-
 @app.before_request
 def ensure_theme_cookie():
     theme = request.cookies.get("theme")
@@ -299,7 +311,8 @@ def apply_theme_cookie(response):
 
 @app.route("/thread/<int:thread_id>/add_post", methods=["POST"])
 def add_post(thread_id):
-    name = request.form.get("name") or "名無しさん"
+    name = request.form.get("name") or "書き人知らず"
+    name = name + "<br>"
     message = request.form.get("message", "").strip()
     if not message:
         return jsonify({"error": "empty"}), 400
@@ -347,12 +360,14 @@ def posts_json(thread_id):
     return jsonify([
         {
             "num": i+1,  # レス番号
-            "name": p["name"] if p["name"] else "名無しさん",
+            # 名前を決定し、その結果に<br>を追加
+            "name": (p["name"] if p["name"] else "書き人知らず") + "<br>",
             "message": p["message"],
             "created_at": p["created_at"]
         }
         for i, p in enumerate(posts)
     ])
+
 
 # -------------------------------
 # アプリ起動

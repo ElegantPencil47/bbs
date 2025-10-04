@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ thread[1] }}</title>
+  <style>
+    /* CSSスタイル */
+  </style>
+</head>
 <style>
 a {
         text-decoration: none;
@@ -10,8 +18,11 @@ color: #000000;
 <a href="/">← スレッド一覧に戻る</a>
 <h1>{{ thread[1] }}</h1>
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
-
-<ul id="posts"></ul>
+<ul id="posts">
+  {% for post in posts %}
+    <li>#{{ post.num }} <b>{{ post.name | safe }}</b>: {{ post.message | safe }} <span>({{ post.created_at }})</span></li>
+  {% endfor %}
+</ul>
 
 {% if theme in ['i','m','t','d','s','2'] %}
 <p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
