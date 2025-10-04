@@ -31,6 +31,7 @@ color: #000000;
 <body>
 <a href="/">← ホームに戻る</a>
   <h1>保存したAA・コピペ</h1>
+<h3>最大十個まで保存でき、十個以降は押し出し式に自動で削除されます</h3>
 
 <!-- 文章入力欄 -->
 <textarea id="inputText" rows="5" cols="50" placeholder="ここに文章を入力"></textarea><br>
@@ -47,7 +48,7 @@ color: #000000;
   const saveBtn = document.getElementById('saveBtn');
   const savedDiv = document.getElementById('savedText');
 
-  const MAX_ITEMS = 5; // 保存する最大件数
+  const MAX_ITEMS = 10; // 保存する最大件数
 
   /**
    * localStorageからデータを読み込み、表示する
