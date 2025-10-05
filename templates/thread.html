@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<link rel="icon" href="favicon.ico">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ thread[1] }}</title>
@@ -20,7 +21,7 @@ color: #000000;
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 <ul id="posts">
   {% for post in posts %}
-    <li>#{{ post.num }} <b>{{ post.name | safe }}</b>: {{ post.message | safe }} <span>({{ post.created_at }})</span></li>
+    <li>#{{ post.num }} <b>{{ post.name | safe }}</b> {{ post.message | safe }} <span>({{ post.created_at }})</span></li>
   {% endfor %}
 </ul>
 
@@ -44,6 +45,12 @@ const socket = io({
   transports:["websocket"]
 });
 
+
+
+
+const safeName = safeNl2br(post.name);
+li.innerHTML = `#${post.num} <b>${safeName}</b>: ${finalMessage} <span>(${post.created_at})</span>`;
+
 // ユーザーが投稿したメッセージを安全にレンダリングする関数
 function safeNl2br(text) {
     // 1. まずHTMLタグをエスケープ
@@ -54,15 +61,23 @@ function safeNl2br(text) {
     return escapedText.innerHTML.replace(/\r?\n/g, '<br>');
 }
 
-// ImgurのURLを<img>タグに変換する関数
 function convertImgurUrls(text) {
-    // Imgur画像のURL（i.imgur.comで終わるもの）を検出
-    const imgurRegex = /(https?:\/\/(?:i\.)?imgur\.com\/\w+\.(?:jpg|jpeg|png|gif|bmp))/gi;
-    return text.replace(imgurRegex, (url) => {
-        // 見つかったURLを<img>タグに変換
+    // 拡張子ありのURL
+    const directRegex = /(https?:\/\/i\.imgur\.com\/\w+\.(?:jpg|jpeg|png|gif|bmp))/gi;
+    // 短縮URL（拡張子なし）
+    const shortRegex = /(https?:\/\/imgur\.com\/(\w+))(?!\.\w+)/gi;
+
+    let converted = text.replace(directRegex, (url) => {
         return `<img src="${url}" alt="Imgur Image" style="max-width: 100%;">`;
     });
+
+    converted = converted.replace(shortRegex, (match, fullUrl, id) => {
+        return `<img src="https://i.imgur.com/${id}.jpg" alt="Imgur Image" style="max-width: 100%;">`;
+    });
+
+    return converted;
 }
+
 
 // 投稿をDOMに追加
 function addPostToDOM(post) {

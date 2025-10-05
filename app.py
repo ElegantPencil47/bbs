@@ -130,7 +130,7 @@ def new_thread():
     if not name:
         name = "書き人知らず"
     # 入力された名前に<br>を追加
-    name = name + "<br>"
+    
 
     message = request.form["message"]
     db = get_db()
@@ -242,7 +242,7 @@ def thread(thread_id):
         if not name:
             name = "書き人知らず"
         # 入力された名前に<br>を追加
-        name = name + "<br>"
+        
 
         message = request.form.get("message")
         try:
@@ -312,7 +312,7 @@ def apply_theme_cookie(response):
 @app.route("/thread/<int:thread_id>/add_post", methods=["POST"])
 def add_post(thread_id):
     name = request.form.get("name") or "書き人知らず"
-    name = name + "<br>"
+    
     message = request.form.get("message", "").strip()
     if not message:
         return jsonify({"error": "empty"}), 400
@@ -361,7 +361,7 @@ def posts_json(thread_id):
         {
             "num": i+1,  # レス番号
             # 名前を決定し、その結果に<br>を追加
-            "name": (p["name"] if p["name"] else "書き人知らず") + "<br>",
+            "name": (p["name"] if p["name"] else "書き人知らず"),
             "message": p["message"],
             "created_at": p["created_at"]
         }
