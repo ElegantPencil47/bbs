@@ -185,12 +185,12 @@ padding:10px 20px;
   padding-left: 0;
 }
 
-.threads {
+.thread-item {
   padding-left: 25px; /* アイコンの幅に合わせて調整 */
   position: relative;
 }
 
-.threads::before {
+.thread-item::before {
   content: "";
   display: inline-block;
   width: 20px; /* アイコンの幅 */
@@ -202,13 +202,12 @@ padding:10px 20px;
   top: 50%;
   transform: translateY(-50%);
 }
-
-.theme-i::before {
-  background-image: url("/static/yaju.png"); 
+.theme-i .thread-item::before {
+  background-image: url("/static/yaju.png");
 }
 
-.theme-t::before {
-  background-image: url("/static/yaju.png"); 
+.theme-t .thread-item::before {
+  background-image: url("/static/toho.png");
 }
 
 
