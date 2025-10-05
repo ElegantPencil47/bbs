@@ -21,7 +21,7 @@ color: #000000;
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 <ul id="posts">
   {% for post in posts %}
-    <li>#{{ post.num }} <b>{{ post.name | safe }}</b> {{ post.message | safe }} <span>({{ post.created_at }})</span></li>
+    <li>{{ post.num }} <b>{{ post.name | safe }}</b><br> {{ post.message | safe }} <span>({{ post.created_at }})</span></li>
   {% endfor %}
 </ul>
 

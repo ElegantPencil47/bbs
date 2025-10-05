@@ -89,9 +89,6 @@ body.theme-t .stsure {
 
 body.theme-t .sured {
 margin: 20px;
-background: #000000;
-border-radius: 7px;
-border: 2px solid #ffffff; 
 }
 
 
@@ -183,6 +180,43 @@ padding:10px 20px;
 }
 
 
+#threads {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.threads {
+  padding-left: 25px; /* アイコンの幅に合わせて調整 */
+  position: relative;
+}
+
+.threads::before {
+  content: "";
+  display: inline-block;
+  width: 20px; /* アイコンの幅 */
+  height: 20px; /* アイコンの高さ */
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.theme-i::before {
+  background-image: url("/static/yaju.png"); 
+}
+
+.theme-t::before {
+  background-image: url("/static/yaju.png"); 
+}
+
+
+
+.theme-i::before {
+  background-image: url("/static/toho.png"); 
+}
+
 
 .yaju{
       justify-content: space-between;
@@ -253,44 +287,42 @@ margin: 20px;
 Observation deck&bgcolor=20.20.120&txtcolor=255.255.255" >
 </div>
 
-<DIV class="suretate">
+<div class="suretate">
   <h3>〈ヘッドライン〉本日のおすすめ</h3>
   {% if most_popular_thread %}
     <div class="sure">
-      <ul>
-        <li class="sured">
-          {% if theme == 'i' %}
-            <img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">
-          {% elif theme == 't' %}
-            <p class="on">☯</p>
-          {% endif %}
-          <div class = "sumaho"><a href="/thread/{{most_popular_thread.id}}" class="suretai">{{most_popular_thread.title}}</a> ({{most_popular_thread.count}})</div>
-        
+      <ul id="threads"> <!-- IDをわかりやすい名前に変更 -->
+        <li class="thread-item theme-{{ theme }}"> <!-- テーマクラスを追加 -->
+          <div class="sumaho">
+            <a href="/thread/{{most_popular_thread.id}}" class="suretai">
+              <span class="thread-title">{{most_popular_thread.title}}</span> 
+              <span class="thread-count">({{most_popular_thread.count}})</span>
+            </a>
+          </div>
         </li>
       </ul>
     </div>
   {% else %}
     <p>まだおすすめスレッドはありません。</p>
   {% endif %}
-</DIV>
+</div>
 
-<DIV class="stsure">
+<div class="stsure">
     <div class="sure">
     <h3>スレッド一覧</h3>
-        <ul>
+        <ul id="threads">  <!-- IDを posts ではなく threads に修正 -->
             {% for id, title, created_at, count in threads %}
-                <li class="sured">
-                    {% if theme == 'i' %}
-                        <img src="{{ url_for('static', filename='yaju.png') }}" width="40" alt="">
-                    {% elif theme == 't' %}
-                        <p class="on">☯</p>
-                    {% endif %}
-                    <div class = "sumaho"><a href="/thread/{{id}}" class="suretai">{{title}}</a> ({{count}})</div>
+                <li class="thread-item theme-{{ theme }}">
+                    <a href="/thread/{{id}}" class="suretai">
+                        <span class="thread-title">{{title}}</span>
+                        <span class="thread-count">({{count}})</span>
+                    </a>
                 </li>
             {% endfor %}
         </ul>
     </div>
-</DIV>
+</div>
+
 
 
 
