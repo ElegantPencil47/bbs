@@ -39,6 +39,13 @@ color: #000000;
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
 <script>
+// 修正: 必要な変数を定義
+const threadId = {{ thread_id }};
+const postsList = document.getElementById("posts");
+const socket = io({
+    transports:["websocket"]
+});
+
 // ユーザーが投稿したメッセージを安全にレンダリングする関数
 function safeNl2br(text) {
     const escapedText = document.createElement('div');
@@ -60,10 +67,57 @@ function addPostToDOM(post) {
     const safeName = safeNl2br(post.name);
     const escapedAndNl2brMessage = safeNl2br(post.message);
     const finalMessage = convertImageUrls(escapedAndNl2brMessage);
-    li.innerHTML = `#${post.num} <b>${safeName}</b>: ${finalMessage} <span>(${post.created_at})</span>`;
+    li.innerHTML = `#${post.num} <b>${safeName}</b> ${finalMessage} <span>(${post.created_at})</span>`;
     postsList.appendChild(li);
 }
+
+// 初期ロードで投稿一覧を取得
+async function fetchPosts() {
+    let res = await fetch(`/thread/${threadId}/posts_json`);
+    if (res.ok) {
+        let posts = await res.json();
+        postsList.innerHTML = "";
+        posts.forEach(p => addPostToDOM(p));
+    }
+}
+
+// 投稿フォーム送信
+document.getElementById("postForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    let res = await fetch(`/thread/${threadId}/add_post`, {
+        method: "POST",
+        body: formData
+    });
+
+    if (res.ok) {
+        e.target.reset(); // 自分の投稿はSocket.IOで反映
+    } else {
+        alert("投稿に失敗しました");
+    }
+});
+
+// Socket.IO
+socket.on("connect", () => {
+    console.log("connected:", socket.id);
+    socket.emit("join_thread",{thread_id:threadId});
+});
+
+socket.on("new_post", (post) => addPostToDOM(post));
+socket.on("online_count", (count) => {
+    document.getElementById("onlineCount").textContent = count;
+});
+
+// ページ離脱時
+window.addEventListener("beforeunload", () => {
+    socket.emit("leave_thread", { thread_id: threadId });
+});
+
+// 初期ロード
+fetchPosts();
 </script>
+
 
 
 </body>
