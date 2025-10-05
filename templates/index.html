@@ -228,6 +228,10 @@ padding:10px 20px;
   margin: 30px;
 }
 
+.theme-s .thread-item::before {
+  margin: 30px;
+}
+
 .theme-t .thread-item::before {
   background-image: url("/static/toho.png");
 }
@@ -261,13 +265,13 @@ margin: 20px;
     {% elif theme == 'm' %}
     <img src="{{ url_for('static', filename='m.png') }}" width="300" alt="">
     {% elif theme == 't' %}
-    <h1 class="on">☯赤欠月掲示板☯</h1>
+    <h1 class="on" style="text-align: center;">☯赤欠月掲示板☯</h1>
     {% elif theme == 'd' %}
     <img src="{{ url_for('static', filename='d.png') }}" width="300" alt="">
     {% elif theme == 's' %}
     <img src="{{ url_for('static', filename='d.png') }}" width="300" alt="">
     {% elif theme == '2' %}
-    <h1 class="b">ルナエクリプス掲示板</h1>
+    <h1 class="b" style="text-align: center;">ルナエクリプス掲示板</h1>
     {% endif %}
     <hr>
   <div class="yaju">
