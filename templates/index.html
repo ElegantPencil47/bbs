@@ -15,6 +15,8 @@
         margin: 40px; 
         }
 
+
+
         .on {
         display: inline;
   margin-right: 5px;
@@ -203,8 +205,10 @@ padding:10px 20px;
 }
 
 .thread-item {
-  padding-left: 25px; /* アイコンの幅に合わせて調整 */
+  padding-left: 20px; /* アイコンの幅に合わせて調整 */
   position: relative;
+  margin-bottom: 30px; /* スレッドの下に30pxの余白を追加 */
+background: #e0edff;
 }
 
 .thread-item::before {
@@ -218,6 +222,18 @@ padding:10px 20px;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
+}
+.thread-item::after{
+
+position: absolute;
+  content: '';
+  top: 100%;
+  left: 30px;
+  border: 15px solid transparent;
+  border-top: 15px solid #e0edff;
+  width: 0;
+  height: 0;
+z-index: 1; /* 他の要素より前面に表示 */
 }
 .theme-i .thread-item::before {
   background-image: url("/static/yaju.png");
