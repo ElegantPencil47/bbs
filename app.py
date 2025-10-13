@@ -343,8 +343,8 @@ def add_post(thread_id):
         "num": count,
         "id": post_id,
         "name": name,
-        "created_at": now
-        "message": message,
+        "created_at": now,
+        "message": message
         
     }
 
