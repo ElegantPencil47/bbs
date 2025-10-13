@@ -133,6 +133,8 @@ def new_thread():
     
 
     message = request.form["message"]
+    message = "\n" + message
+
     db = get_db()
     c = db.cursor()
 
@@ -143,7 +145,7 @@ def new_thread():
         )
         new_thread_id = c.lastrowid
         c.execute(
-            "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
+            "INSERT INTO posts (thread_id, name,created_at, message) VALUES (?, ?, ?, ?)",
             (new_thread_id, name, message, datetime.now().isoformat())
         )
         db.commit()
@@ -245,9 +247,11 @@ def thread(thread_id):
         
 
         message = request.form.get("message")
+message = "\n" + message
+
         try:
             c.execute(
-                "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
+                "INSERT INTO posts (thread_id, name, created_at, message) VALUES (?, ?, ?, ?)",
                 (thread_id, name, message, datetime.now().isoformat())
             )
             db.commit()
@@ -314,6 +318,8 @@ def add_post(thread_id):
     name = request.form.get("name") or "書き人知らず"
     
     message = request.form.get("message", "").strip()
+message = "\n" + message
+
     if not message:
         return jsonify({"error": "empty"}), 400
 
@@ -321,7 +327,7 @@ def add_post(thread_id):
     db = get_db()
     c = db.cursor()
     c.execute(
-        "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
+        "INSERT INTO posts (thread_id, name, created_at,message) VALUES (?, ?, ?, ?)",
         (thread_id, name, message, now)
     )
     db.commit()
