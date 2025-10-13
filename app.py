@@ -247,7 +247,7 @@ def thread(thread_id):
         
 
         message = request.form.get("message")
-message = "\n" + message
+        message = "\n" + message
 
         try:
             c.execute(
@@ -318,7 +318,7 @@ def add_post(thread_id):
     name = request.form.get("name") or "書き人知らず"
     
     message = request.form.get("message", "").strip()
-message = "\n" + message
+    message = "\n" + message
 
     if not message:
         return jsonify({"error": "empty"}), 400
