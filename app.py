@@ -145,7 +145,7 @@ def new_thread():
         )
         new_thread_id = c.lastrowid
         c.execute(
-            "INSERT INTO posts (thread_id, name,created_at, message) VALUES (?, ?, ?, ?)",
+            "INSERT INTO posts (thread_id, message, name,created_at) VALUES (?, ?, ?, ?)",
             (new_thread_id, name, message, datetime.now().isoformat())
         )
         db.commit()
@@ -251,7 +251,7 @@ def thread(thread_id):
 
         try:
             c.execute(
-                "INSERT INTO posts (thread_id, name, created_at, message) VALUES (?, ?, ?, ?)",
+                "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
                 (thread_id, name, message, datetime.now().isoformat())
             )
             db.commit()
@@ -327,7 +327,7 @@ def add_post(thread_id):
     db = get_db()
     c = db.cursor()
     c.execute(
-        "INSERT INTO posts (thread_id, name, created_at,message) VALUES (?, ?, ?, ?)",
+        "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
         (thread_id, name, message, now)
     )
     db.commit()
@@ -343,8 +343,9 @@ def add_post(thread_id):
         "num": count,
         "id": post_id,
         "name": name,
-        "message": message,
         "created_at": now
+        "message": message,
+        
     }
 
     # Socket.IOでブロードキャスト
