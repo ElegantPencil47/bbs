@@ -145,7 +145,7 @@ def new_thread():
         )
         new_thread_id = c.lastrowid
         c.execute(
-            "INSERT INTO posts (thread_id, message, name,created_at) VALUES (?, ?, ?, ?)",
+            "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
             (new_thread_id, name, message, datetime.now().isoformat())
         )
         db.commit()
