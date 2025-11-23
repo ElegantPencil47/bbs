@@ -362,45 +362,13 @@ from flask import jsonify, escape
 
 @app.route("/thread/<int:thread_id>/posts_json")
 def posts_json(thread_id):
-    db = get_db()
-    cur = db.execute(
-        "SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id",
-        (thread_id,)
-    )
-    posts_raw = cur.fetchall()
-    
-    posts_processed = []
-    # レス番号のリストを作成し、後で有効なリンク先か確認できるようにする
-    # この例では、取得した投稿のインデックス (i+1) がレス番号に対応します
-    # 実際のアプリケーションでは、投稿IDがレス番号と異なる場合があるので注意
-    valid_res_nums = {str(i + 1) for i in range(len(posts_raw))}
-
-    for i, p in enumerate(posts_raw):
-        # メッセージ本文を取得し、HTMLエスケープ処理を適用する
-        message = escape(p["message"])
-
-        # >>レス番号 の形式を検出し、<a>タグに変換する
-        # 正規表現を使用してマッチングを行う
-        def replace_reply_link(match):
-            res_num = match.group(1)
-            # 有効なレス番号のみリンクに変換する
-            if res_num in valid_res_nums:
-                return f'<a href="#res{res_num}" class="reply-link">>>{res_num}</a>'
-            else:
-                # 存在しないレス番号はそのまま表示
-                return f'>>{res_num}'
-                
-        # 改行を考慮して、メッセージ全体に対してリンク変換を適用する
-        message = re.sub(r'>>(\d+)', replace_reply_link, message)
-
-        posts_processed.append({
-            "num": i + 1,  # レス番号
-            "name": (p["name"] if p["name"] else "書き人知らず"),
-            "message": message,
-            "created_at": p["created_at"]
-        })
-    
-    return jsonify(posts_processed)
+    db = get_db() cur = db.execute( "SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id", (thread_id,) )
+    posts = cur.fetchall()
+    return jsonify([ { "num": i+1, # レス番号 # 名前を決定し、その結果に<br>を追加
+    "name": (p["name"] if p["name"] else "書き人知らず"),
+    "message": p["message"],
+    "created_at": p["created_at"] }
+    for i, p in enumerate(posts) ]) 
 
 
 # -------------------------------
