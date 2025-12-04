@@ -186,14 +186,14 @@ def uekirikarikiri():
 # -------------------------------
 # 投稿制限（レート制限40秒）
 # -------------------------------
-#@app.before_request
-#def rate_limit():
- #   if request.endpoint in ("new_thread", "thread") and request.method == "POST":
-  #      ip = request.remote_addr
-   #     now = datetime.now()
-    #    if ip in last_posts and now - last_posts[ip] < timedelta(seconds=40):
-     #        abort(429)
-      #  last_posts[ip] = now
+@app.before_request
+def rate_limit():
+    if request.endpoint in ("new_thread", "thread") and request.method == "POST":
+        ip = request.remote_addr
+        now = datetime.now()
+        if ip in last_posts and now - last_posts[ip] < timedelta(seconds=40):
+             abort(429)
+        last_posts[ip] = now
 
 # -------------------------------
 # デフォルトテーマ設定
@@ -365,7 +365,7 @@ def posts_json(thread_id):
     db = get_db()
     cur = db.execute( "SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id", (thread_id,) )
     posts = cur.fetchall()
-    return jsonify([ { "num": i+1, # レス番号 # 名前を決定し、その結果に<br>を追加
+    return jsonify([ { "num": i+1,
     "name": (p["name"] if p["name"] else "書き人知らず"),
     "message": p["message"],
     "created_at": p["created_at"] }
