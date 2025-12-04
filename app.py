@@ -1,3 +1,7 @@
+
+import eventlet
+eventlet.monkey_patch()
+
 from flask import Flask, request, redirect, render_template, url_for, g, make_response, abort
 from markupsafe import Markup, escape
 import sqlite3
