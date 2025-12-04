@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<link rel="icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ thread[1] }}</title>
+  <style>
+    /* CSSスタイル */
+  </style>
+</head>
+<style>
+a {
+        text-decoration: none;
+color: #000000;        
+} 
+
+
+button {
+  background: transparent;
+}
+</style>
+<body class="theme-{{theme}}">
+<a href="/">← スレッド一覧に戻る</a>
+<h1>{{ thread[1] }}</h1>
+<p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
+<ul id="posts">
+  {% for post in posts %}
+    <li>{{ post.num }} <b>{{ post.name | safe }}</b><br> {{ post.message | safe }} <span>({{ post.created_at }})</span></li>
+  {% endfor %}
+</ul>
+
+<p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
+
+<form id="postForm" action="/post-message" method="POST"> <!-- actionとmethodを追加 -->
+  名前: <input type="text" name="name"><br>
+  本文: <textarea name="message" id="messageArea"></textarea><br>
+  <!-- 通常の書き込みボタン -->
+  <button type="submit">
+    <img src="https://icooon-mono.com/i/icon_11449/icon_114490_256.jpg" height ="20" width="20" alt="投稿" />
+  </button>
+</form>
+
+<!-- 画像アップロードは別のフォームとして完全に分離 -->
+<form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="fileInput" name="imageFile" accept="image/*" required>
+    <!-- アップロード実行ボタン -->
+    <button type="submit">
+        <img src="https://sozai.cman.jp/img-icon/scene_mountain1.png" height ="20" width="20" alt="画像をアップロード" />
+    </button>
+</form>
+
+
+<script>
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // デフォルトのフォーム送信を停止
+
+    const fileInput = document.getElementById('fileInput');
+    const messageArea = document.getElementById('messageArea');
+    const file = fileInput.files[0];
+
+    if (file) {
+        const formData = new FormData();
+        formData.append('imageFile', file);
+
+        const uploadUrl = 'hei-bu-jing.onrender.com';
+ 
+
+        fetch(uploadUrl, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                // HTTPエラーが発生した場合にエラーを投げる
+                throw new Error('ネットワーク応答が不正です: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.url) {
+                // 画像をMarkdown形式で本文エリアに挿入
+                messageArea.value += `\n![画像](${data.url})\n`; 
+                console.log('アップロード成功:', data.url);
+                alert('画像のアップロードが完了しました。本文にURLが追加されました。');
+                fileInput.value = ''; // 選択したファイルをクリアする
+            } else {
+                console.error('URLがレスポンスに含まれていません。サーバーのレスポンス:', data);
+                alert('アップロード失敗: サーバーからのURLが不正です。');
+            }
+        })
+        .catch(error => {
+            console.error('アップロード中にエラーが発生しました:', error);
+            alert('ファイルのアップロード中にエラーが発生しました。CORS設定やエンドポイントURLを確認してください。');
+        });
+    } else {
+        alert('ファイルを選択してください。');
+    }
+});
+</script>
+
+
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+<script>
+// 修正: 必要な変数を定義
+const threadId = {{ thread_id }};
+const postsList = document.getElementById("posts");
+const socket = io({
+    transports:["websocket"]
+});
+
+// ユーザーが投稿したメッセージを安全にレンダリングする関数
+function safeNl2br(text) {
+    const escapedText = document.createElement('div');
+    escapedText.textContent = text;
+    return escapedText.innerHTML.replace(/\r?\n/g, '<br>');
+}
+
+// 画像URLを<img>に変換する関数（全サイト対応）
+function convertImageUrls(text) {
+    const imgRegex = /(https?:\/\/[^\s]+?\.(?:jpg|jpeg|png|gif|bmp|webp))/gi;
+    return text.replace(imgRegex, (url) => {
+        return `<img src="${url}" alt="Image" height ="120" width="120">`;
+    });
+}
+
+// 投稿をDOMに追加
+function addPostToDOM(post) {
+    const li = document.createElement("li");
+    const safeName = safeNl2br(post.name);
+    const escapedAndNl2brMessage = safeNl2br(post.message);
+    const finalMessage = convertImageUrls(escapedAndNl2brMessage);
+    li.innerHTML = `#${post.num} <b>${safeName}</b> ${finalMessage} <span>(${post.created_at})</span>`;
+    postsList.appendChild(li);
+}
+
+// 初期ロードで投稿一覧を取得
+async function fetchPosts() {
+    let res = await fetch(`/thread/${threadId}/posts_json`);
+    if (res.ok) {
+        let posts = await res.json();
+        postsList.innerHTML = "";
+        posts.forEach(p => addPostToDOM(p));
+    }
+}
+
+// 投稿フォーム送信
+document.getElementById("postForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    let res = await fetch(`/thread/${threadId}/add_post`, {
+        method: "POST",
+        body: formData
+    });
+
+    if (res.ok) {
+        e.target.reset(); // 自分の投稿はSocket.IOで反映
+    } else {
+        alert("投稿に失敗しました");
+    }
+});
+
+// Socket.IO
+socket.on("connect", () => {
+    console.log("connected:", socket.id);
+    socket.emit("join_thread",{thread_id:threadId});
+});
+
+socket.on("new_post", (post) => addPostToDOM(post));
+socket.on("online_count", (count) => {
+    document.getElementById("onlineCount").textContent = count;
+});
+
+// ページ離脱時
+window.addEventListener("beforeunload", () => {
+    socket.emit("leave_thread", { thread_id: threadId });
+});
+
+// 初期ロード
+fetchPosts();
+</script>
+
+
+
+</body>
+</html>

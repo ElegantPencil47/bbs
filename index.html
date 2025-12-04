@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<link rel="icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <title>Lunar Eclipse</title>
+    <style>
+        a {
+        text-decoration: none;
+        color: black;
+        } 
+        .suretate{
+        margin: 40px; 
+        }
+        .stsure{
+        margin: 40px; 
+        }
+
+body.theme-m {
+}
+
+        .on {
+        display: inline;
+  margin-right: 5px;
+font-weight: bold;
+text-align: center !important;
+    
+        }
+
+button {
+  background: transparent;
+}
+
+#threads {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+
+
+
+.yaju{
+      justify-content: space-between;
+display: flex;
+ background-color: #000000;
+padding:10px 20px;
+    }
+.mur{
+color: #ffffff;
+margin: 20px;
+}
+
+ 
+    </style>
+</head>
+
+<h1>ルナエクリプス掲示板～LunarEclipse～</h1>
+<a href="{{ url_for('aa') }}">AA・コピペ保管庫</a>
+
+
+
+
+<h2>「天文学」から「民俗学」までの学問を手広くカバーする匿名掲示板</h2>
+
+
+<h3>今日の月齢</h3>
+
+<div class="suretate">
+<div id="moon-age-result">計算中...</div>
+    <div id="moon-phase-message"></div> <!-- ここに条件に応じたメッセージを表示 -->
+
+    <script>
+        // 月齢を計算する関数 (変更なし)
+        function calculateMoonAge(date = new Date()) {
+            const knownNewMoon = new Date('1970-01-07T20:35:00Z');
+            const lunarCycle = 29.530588853;
+            const daysSinceKnownNewMoon = (date.getTime() - knownNewMoon.getTime()) / (1000 * 60 * 60 * 24);
+            let moonAge = daysSinceKnownNewMoon % lunarCycle;
+            if (moonAge < 0) {
+                moonAge += lunarCycle;
+            }
+            return moonAge; // toFixed(2)を外し、数値（小数点付き）として返すように変更
+        }
+
+        // 結果をウェブサイトに表示し、条件分岐を行う関数
+        function displayMoonAge() {
+            const currentMoonAgeValue = calculateMoonAge(); // 数値として取得
+            const currentMoonAgeFormatted = currentMoonAgeValue.toFixed(2); // 表示用に整形
+
+            document.getElementById('moon-age-result').textContent = `${currentMoonAgeFormatted} 日`;
+
+            // *** ここからがご質問の条件分岐です ***
+            const messageArea = document.getElementById('moon-phase-message');
+
+            if (currentMoonAgeValue > 0 && currentMoonAgeValue < 1) {
+                messageArea.textContent = "新月";
+            } else if (currentMoonAgeValue > 1 && currentMoonAgeValue < 2) {
+                messageArea.textContent = "二日月";
+            } else if (currentMoonAgeValue > 2 && currentMoonAgeValue < 3) {
+                messageArea.textContent = "三日月";
+            } else if (currentMoonAgeValue > 3 && currentMoonAgeValue < 4) {
+                messageArea.textContent = "四日月";
+            } else if (currentMoonAgeValue > 4 && currentMoonAgeValue < 5) {
+                messageArea.textContent = "五日月";
+            } else if (currentMoonAgeValue > 5 && currentMoonAgeValue < 6) {
+                messageArea.textContent = "六日月";
+            } else if (currentMoonAgeValue > 6 && currentMoonAgeValue < 7) {
+                messageArea.textContent = "上限の月";
+            } else if (currentMoonAgeValue > 7 && currentMoonAgeValue < 8) {
+                messageArea.textContent = "八日月";
+            } else if (currentMoonAgeValue > 8 && currentMoonAgeValue < 9) {
+                messageArea.textContent = "九日月";
+            } else if (currentMoonAgeValue > 9 && currentMoonAgeValue < 10) {
+                messageArea.textContent = "十日夜の月";
+            } else if (currentMoonAgeValue > 10 && currentMoonAgeValue < 11) {
+                messageArea.textContent = "十一日の月";
+            } else if (currentMoonAgeValue > 11 && currentMoonAgeValue < 12) {
+                messageArea.textContent = "十二日の月";
+            } else if (currentMoonAgeValue > 12 && currentMoonAgeValue < 13) {
+                messageArea.textContent = "十三夜";
+            } else if (currentMoonAgeValue > 13 && currentMoonAgeValue < 14) {
+                messageArea.textContent = "小望月";
+            } else if (currentMoonAgeValue > 14 && currentMoonAgeValue < 15) {
+                messageArea.textContent = "満月";
+            } else if (currentMoonAgeValue > 15 && currentMoonAgeValue < 16) {
+                messageArea.textContent = "十六夜";
+            } else if (currentMoonAgeValue > 16 && currentMoonAgeValue < 17) {
+                messageArea.textContent = "立待夜";
+            } else if (currentMoonAgeValue > 17 && currentMoonAgeValue < 18) {
+                messageArea.textContent = "居待月";
+            } else if (currentMoonAgeValue > 18 && currentMoonAgeValue < 19) {
+                messageArea.textContent = "臥待月";
+            } else if (currentMoonAgeValue > 19 && currentMoonAgeValue < 20) {
+                messageArea.textContent = "更待月";
+            } else if (currentMoonAgeValue > 20 && currentMoonAgeValue < 21) {
+                messageArea.textContent = "二十一夜";
+            } else if (currentMoonAgeValue > 21 && currentMoonAgeValue < 22) {
+                messageArea.textContent = "二十二夜";
+            } else if (currentMoonAgeValue > 22 && currentMoonAgeValue < 23) {
+                messageArea.textContent = "下弦の月";
+            } else if (currentMoonAgeValue > 23 && currentMoonAgeValue < 24) {
+                messageArea.textContent = "二十四夜";
+            } else if (currentMoonAgeValue > 24 && currentMoonAgeValue < 25) {
+                messageArea.textContent = "二十五夜";
+            } else if (currentMoonAgeValue > 25 && currentMoonAgeValue < 26) {
+                messageArea.textContent = "二十六夜";
+            } else if (currentMoonAgeValue > 26 && currentMoonAgeValue < 27) {
+                messageArea.textContent = "二十七夜";
+            } else if (currentMoonAgeValue > 27 && currentMoonAgeValue < 28) {
+                messageArea.textContent = "有明の月";
+            } else if (currentMoonAgeValue > 28 && currentMoonAgeValue < 29) {
+                messageArea.textContent = "二十九日月";
+            } else if (currentMoonAgeValue > 29 && currentMoonAgeValue < 30) {
+                messageArea.textContent = "三十日月";
+            }
+
+ 
+     
+        }
+
+        // ページ読み込み時に月齢を表示
+        displayMoonAge();
+    </script>
+
+
+
+
+<div class="suretate">
+  <h3>〈ヘッドライン〉本日のおすすめ</h3>
+  {% if most_popular_thread %}
+    <div class="sure">
+      <ul id="threads"> <!-- IDをわかりやすい名前に変更 -->
+        <li class="thread-item theme-{{ theme }}"> <!-- テーマクラスを追加 -->
+          <div class="sumaho">
+            <a href="/thread/{{most_popular_thread.id}}" class="suretai">
+              <span class="thread-title">{{most_popular_thread.title}}</span> 
+              <span class="thread-count">({{most_popular_thread.count}})</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  {% else %}
+    <p>まだおすすめスレッドはありません。</p>
+  {% endif %}
+</div>
+
+<div class="stsure">
+    <div class="sure">
+    <h3>スレッド一覧</h3>
+        <ul id="threads">  <!-- IDを posts ではなく threads に修正 -->
+            {% for id, title, created_at, count in threads %}
+                <li class="thread-item theme-{{ theme }}">
+<div class="sumaho">
+                    <a href="/thread/{{id}}" class="suretai">
+                        <span class="thread-title">{{title}}</span>
+                        <span class="thread-count">({{count}})</span>
+                    </a>
+</div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+
+
+    <div class="suretate">
+        <h2 id="1">新規スレッド作成</h2>
+        <form method="post" action="/thread/new">
+            スレッドタイトル<br> <input type="text" name="title"><br>
+            名前<br> <input type="text" name="name"><br>
+            本文<br> <textarea name="message"></textarea><br>
+            <button type="submit"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW6NQ-F5TTDCPdDXsGDAhndbaAtSTZcprBavF0TfPs76b9VdWni0Nod2sECuEgXMl9Dec&usqp=CAU" height ="20" width="20" /></button>
+        </form>
+    </div>
+    <DIV class="suretate">
+    <form method="post" action="/set_theme">
+        <h3>テーマ</h3>
+        <select name="theme">
+            <option value="d">デフォルト</option>
+            <option value="m">Midnight Tokyo</option>
+        </select>
+        <button type="submit">変更</button>
+    </form>
+    <DIV>
+</body>
+</html>

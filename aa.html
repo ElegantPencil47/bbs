@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<link rel="icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <title>AA・コピペ保管庫</title>
+
+<style>
+
+button {
+            background: #ffffff;
+            border: 1px solid #000000;
+            color: #000000;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+button:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+a {
+        text-decoration: none;
+color: #000000;        
+} 
+</style>
+
+
+
+</head>
+<body>
+<a href="/">← ホームに戻る</a>
+  <h1>保存したAA・コピペ</h1>
+<h3>最大十個まで保存でき、十個以降は押し出し式に自動で削除されます</h3>
+
+<!-- 文章入力欄 -->
+<textarea id="inputText" rows="5" cols="50" placeholder="ここに文章を入力"></textarea><br>
+
+<!-- 保存ボタン -->
+<button id="saveBtn">保存</button>
+
+<!-- 保存した文章表示 -->
+<h2>保存したAA・コピペ</h2>
+<div id="savedText"></div>
+
+<script>
+  const input = document.getElementById('inputText');
+  const saveBtn = document.getElementById('saveBtn');
+  const savedDiv = document.getElementById('savedText');
+
+  const MAX_ITEMS = 10; // 保存する最大件数
+
+  /**
+   * localStorageからデータを読み込み、表示する
+   */
+  const loadAndDisplay = () => {
+    // localStorageから文字列として保存された配列を取得
+    const saved = localStorage.getItem('myTexts');
+    const texts = saved ? JSON.parse(saved) : [];
+
+    // 表示エリアをクリア
+    savedDiv.innerHTML = '';
+
+    // 配列の各要素をリストアイテムとして表示
+    if (texts.length > 0) {
+      const ul = document.createElement('ul');
+      ul.style.listStyleType = 'none';
+      ul.style.paddingLeft = '0';
+
+      texts.forEach((text, index) => {
+        const li = document.createElement('li');
+        li.style.border = '1px solid #ccc';
+        li.style.padding = '10px';
+        li.style.marginBottom = '10px';
+        li.style.whiteSpace = 'pre-wrap';
+
+        // 文章を表示する要素
+        const textContent = document.createElement('div');
+        textContent.textContent = text;
+        li.appendChild(textContent);
+
+        // ボタンのコンテナ
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.marginTop = '10px';
+
+        // 個別のコピーボタンを作成
+        const copyBtn = document.createElement('button');
+        copyBtn.textContent = 'コピー';
+        copyBtn.onclick = () => {
+          navigator.clipboard.writeText(text).then(() => {
+            alert('コピーしました！');
+          }).catch(err => {
+            console.error('コピーに失敗しました:', err);
+          });
+        };
+        buttonContainer.appendChild(copyBtn);
+
+        // 個別の削除ボタンを作成
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '削除';
+        deleteBtn.style.marginLeft = '5px';
+        deleteBtn.onclick = () => {
+          // localStorageのデータを取得して配列に変換
+          const currentTexts = JSON.parse(localStorage.getItem('myTexts'));
+          // 該当のインデックスの要素を削除
+          currentTexts.splice(index, 1);
+          // 変更後の配列をlocalStorageに保存
+          localStorage.setItem('myTexts', JSON.stringify(currentTexts));
+          // 表示を更新
+          loadAndDisplay();
+          alert('文章を削除しました！');
+        };
+        buttonContainer.appendChild(deleteBtn);
+
+        li.appendChild(buttonContainer);
+        ul.appendChild(li);
+      });
+      savedDiv.appendChild(ul);
+    } else {
+      savedDiv.textContent = '保存された文章はありません。';
+    }
+  };
+
+  // ページ読み込み時に保存内容を表示
+  window.onload = loadAndDisplay;
+
+  // 保存ボタン
+  saveBtn.onclick = () => {
+    const newText = input.value;
+    if (newText.trim() === '') {
+      alert('文章を入力してください。');
+      return;
+    }
+
+    const saved = localStorage.getItem('myTexts');
+    const texts = saved ? JSON.parse(saved) : [];
+
+    texts.unshift(newText);
+
+    if (texts.length > MAX_ITEMS) {
+      texts.pop();
+    }
+
+    localStorage.setItem('myTexts', JSON.stringify(texts));
+    
+    loadAndDisplay();
+    
+    input.value = '';
+    alert('文章を保存しました！');
+  };
+</script>
+
+
+
+</body>
+</html>
