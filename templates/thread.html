@@ -62,14 +62,14 @@ function convertImageUrls(text) {
 }
 
 // 投稿をDOMに追加
-//function addPostToDOM(post) {
-//    const li = document.createElement("li");
-//    const safeName = safeNl2br(post.name);
-//    const escapedAndNl2brMessage = safeNl2br(post.message);
-//    const finalMessage = convertImageUrls(escapedAndNl2brMessage);
-//    li.innerHTML = `#${post.num} <b>${safeName}</b> ${finalMessage} <span>(${post.created_at})</span>`;
-//    postsList.appendChild(li);
-//}
+function addPostToDOM(post) {
+    const li = document.createElement("li");
+    const safeName = safeNl2br(post.name);
+    const escapedAndNl2brMessage = safeNl2br(post.message);
+    const finalMessage = convertImageUrls(escapedAndNl2brMessage);
+    li.innerHTML = `#${post.num} <b>${safeName}</b> ${finalMessage} <span>(${post.created_at})</span>`;
+    postsList.appendChild(li);
+}
 
 // 初期ロードで投稿一覧を取得
 async function fetchPosts() {

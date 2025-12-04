@@ -8,6 +8,9 @@ import re
 from flask import Flask, render_template, request, redirect, url_for
 from flask import jsonify
 
+
+
+from flask import jsonify, escape
 from flask import request
 
 
@@ -356,9 +359,6 @@ def add_post(thread_id):
     return jsonify(post_data)
 
 
-
-import re
-from flask import jsonify, escape
 
 @app.route("/thread/<int:thread_id>/posts_json")
 def posts_json(thread_id):
