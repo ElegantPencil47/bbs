@@ -372,6 +372,47 @@ def posts_json(thread_id):
     for i, p in enumerate(posts) ]) 
 
 
+
+
+
+
+#===============================================================================================--
+
+
+import os
+
+UPLOAD_FOLDER = 'uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+@app.route('/upload-endpoint', methods=['POST'])
+def upload_file():
+    if 'imageFile' not in request.files:
+        return jsonify({'error': 'ファイルがありません'}), 400
+    
+    file = request.files['imageFile']
+    if file.filename == '':
+        return jsonify({'error': 'ファイル名がありません'}), 400
+    
+    if file:
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+        
+        # 保存された画像のURLを生成してクライアントに返す
+        image_url = f'https://hei-bu-jing.onrender.com/{UPLOAD_FOLDER}/{filename}'
+        return jsonify({'message': 'アップロード成功', 'url': image_url}), 200
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+#=========================================================================================================
+
+
+
 # -------------------------------
 # アプリ起動
 # -------------------------------
