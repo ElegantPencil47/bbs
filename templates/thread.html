@@ -30,9 +30,8 @@ button {
   {% endfor %}
 </ul>
 
-{% if theme in ['i','m','t','d','s','2'] %}
 <p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
-{% endif %}
+
 <form id="postForm" action="/post-message" method="POST"> <!-- actionとmethodを追加 -->
   名前: <input type="text" name="name"><br>
   本文: <textarea name="message" id="messageArea"></textarea><br>
@@ -64,9 +63,8 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
         const formData = new FormData();
         formData.append('imageFile', file);
 
-        // サーバーの正しいエンドポイントURLを指定してください (例としてパスを追加)
-        // サーバー側でCORSの設定が必須です。
-        const uploadUrl = 'hei-bu-jing.onrender.com'; 
+        const uploadUrl = 'hei-bu-jing.onrender.com';
+ 
 
         fetch(uploadUrl, {
             method: 'POST',

@@ -378,11 +378,17 @@ def posts_json(thread_id):
 
 #===============================================================================================--
 
+from flask_cors import CORS # CORSをインポート
 
-import os
+app = Flask(__name__)
+# CORSを有効にして、どのオリジンからのリクエストも許可する
+CORS(app, resources={r"/*": {"origins": "*"}}) 
 
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# デバッグ目的ではなく、Renderのような本番環境では環境変数からポートを取得する
+PORT = int(os.environ.get("PORT", 5000))
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
@@ -402,13 +408,18 @@ def upload_file():
         file.save(filepath)
         
         # 保存された画像のURLを生成してクライアントに返す
+        # Renderのドメイン名に合わせて修正してください
         image_url = f'https://hei-bu-jing.onrender.com/{UPLOAD_FOLDER}/{filename}'
         return jsonify({'message': 'アップロード成功', 'url': image_url}), 200
 
+# 追加: アップロードされた画像ファイルにアクセスできるようにするためのエンドポイント
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 if __name__ == '__main__':
-    app.run(debug=True)
-
-
+    # debug=Trueは開発時のみ使用し、本番環境RenderではFalseまたは省略
+    app.run(host='0.0.0.0', port=PORT)
 #=========================================================================================================
 
 
