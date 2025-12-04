@@ -36,18 +36,20 @@ button {
 
 <form id="postForm">
   名前: <input type="text" name="name"><br>
-  本文: <textarea name="message"></textarea><br>
+  本文: <textarea name="message" id="messageArea"></textarea><br> <!-- id="messageArea" を追加 -->
   <button type="submit"><img src="https://icooon-mono.com/i/icon_11449/icon_114490_256.jpg" height ="20" width="20" /></button>
   <form id="uploadForm" enctype="multipart/form-data">
         <input type="file" id="fileInput" name="imageFile" accept="image/*" required>
-        <button type="submit"><img src="https://icooon-mono.com/i/icon_11449/icon_114490_256.jpg" height ="20" width="20" /></button>
+        <button type="submit"><img src="https://sozai.cman.jp/img-icon/scene_mountain1.png" height ="20" width="20" /></button>
     </form> 
 </form>
 
-<script>document.getElementById('uploadForm').addEventListener('submit', function(event) {
+<script>
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
     event.preventDefault(); // デフォルトのフォーム送信を停止
 
     const fileInput = document.getElementById('fileInput');
+    const messageArea = document.getElementById('messageArea'); // テキストエリアの要素を取得
     const file = fileInput.files[0];
 
     if (file) {
@@ -55,7 +57,8 @@ button {
         formData.append('imageFile', file); // サーバー側の期待するフィールド名に合わせる
 
         // サーバーのエンドポイントURLを指定
-        const uploadUrl = 'https://hei-bu-jing.onrender.com/'; 
+        // app.pyのコードと連携させるため、エンドポイントを '/upload-endpoint' に変更
+        const uploadUrl = 'hei-bu-jing.onrender.com'; 
 
         fetch(uploadUrl, {
             method: 'POST',
@@ -65,7 +68,9 @@ button {
         .then(data => {
             // サーバーからのレスポンスを処理
             if (data.url) {
-                document.getElementById('imageUrlDisplay').textContent = data.url;
+                // アップロードされた画像のURLを本文のテキストエリアに自動記述
+                // 画像をMarkdown形式で挿入したい場合は `![画像の説明](${data.url})` のようにします。
+                messageArea.value += `\n${data.url}\n`; 
                 console.log('アップロード成功:', data.url);
             } else {
                 console.error('URLがレスポンスに含まれていません。');
@@ -77,6 +82,7 @@ button {
     }
 });
 </script>
+
 
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
