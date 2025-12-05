@@ -355,25 +355,37 @@ def posts_json(thread_id):
 
 
 #===============================================================================================--
-
-# ---- ファイルアップロード ----
 @app.route("/upload", methods=["POST"])
 def upload():
-    file = request.files.get("file")
-    room = request.form.get("room")
+    # JavaScriptのキー名 'imageFile' に合わせる
+    file = request.files.get("imageFile")
+    # request.form.get("room") は現在のコードでは使われていないようです
 
     if not file:
-        return "400", 400
+        # デバッグのためにログを出力するか、エラーレスポンスを具体的にする
+        print("Error: No file part in the request or key mismatch.") 
+        return "400 Bad Request: Missing imageFile", 400
+
+    # uploadsディレクトリが存在しない場合は作成
+    if not os.path.exists("uploads"):
+        os.makedirs("uploads")
 
     filename = secure_filename(file.filename)
     save_path = os.path.join("uploads", filename)
     file.save(save_path)
 
-    # Room に通知
-    socketio.emit("new_file", {"filename": filename}, room=room)
-    return "OK"
+    # 保存した画像にアクセスするためのURLを生成して返す
+    # RenderのURLやドメインに合わせて適切なURLプレフィックスを設定してください
+    image_url = f"hei-bu-jing.onrender.com{filename}" 
+    
+    # JavaScript側がJSONレスポンスを期待しているので、JSON形式で返す
+    return jsonify({"url": image_url}), 200
 
-
+# 画像ファイルを提供するためのルートも必要です (まだない場合)
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    # send_from_directoryを使ってファイルを提供
+    return send_from_directory('uploads', filename)
 #=========================================================================================================
 
 
