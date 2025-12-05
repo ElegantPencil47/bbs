@@ -14,7 +14,22 @@ a {
         text-decoration: none;
 color: #000000;        
 } 
+li {
+  position: relative;
+  padding: 0.6em;
+  background: #e0edff;
+}
 
+li:after {
+  position: absolute;
+  content: '';
+  top: 100%;
+  left: 30px;
+  border: 15px solid transparent;
+  border-top: 15px solid #e0edff;
+  width: 0;
+  height: 0;
+}
 
 button {
   background: transparent;
@@ -37,7 +52,7 @@ button {
   本文: <textarea name="message" id="messageArea"></textarea><br>
   <!-- 通常の書き込みボタン -->
   <button type="submit">
-    <img src="https://icooon-mono.com/i/icon_11449/icon_114490_256.jpg" height ="20" width="20" alt="投稿" />
+    <img src="https://icooon-mono.com/i/icon_11449/icon_114490_256.jpg" height ="20" width="20" alt="投稿" />投稿する
   </button>
 </form>
 
