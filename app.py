@@ -1,24 +1,13 @@
-
-import eventlet
-eventlet.monkey_patch()
-
-from flask import Flask, request, redirect, render_template, url_for, g, make_response, abort
-from markupsafe import Markup, escape
-import sqlite3
-from datetime import datetime, timedelta
-from flask_socketio import SocketIO, join_room, leave_room
-import re
+from flask import Flask, request, redirect, render_template, url_for, make_response, abort, jsonify
+from flask_cors import CORS
+from flask_socketio import SocketIO, join_room
 import os
-from flask import Flask, render_template, request, redirect, url_for
-from flask import jsonify
-
-
-
-from flask import jsonify, escape
-from flask import request
-
-
-
+from datetime import datetime
+from werkzeug.utils import secure_filename
+from flask import g
+import sqlite3
+from datetime import timedelta
+from flask_socketio import SocketIO, join_room, leave_room
 
 
 
@@ -28,8 +17,9 @@ from flask import request
 app = Flask(__name__)
 app.secret_key = 'your_super_secret_key_here'
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
+CORS(app, resources={r"/*": {"origins": "*"}}) 
 
-async_mode="threading"
+
 
 
 
@@ -202,22 +192,6 @@ def rate_limit():
              abort(429)
         last_posts[ip] = now
 
-# -------------------------------
-# デフォルトテーマ設定
-# -------------------------------
-@app.before_request
-def ensure_theme_cookie():
-    theme = request.cookies.get("theme")
-    if theme is None:
-        g.set_default_theme = True
-    else:
-        g.set_default_theme = False
-
-@app.after_request
-def apply_theme_cookie(response):
-    if getattr(g, "set_default_theme", False):
-        response.set_cookie("theme", "d", max_age=60*60*24*30)
-    return response
 
 # -------------------------------
 # Socket.IO：同時接続人数カウント
@@ -382,48 +356,24 @@ def posts_json(thread_id):
 
 #===============================================================================================--
 
-from flask_cors import CORS # CORSをインポート
+# ---- ファイルアップロード ----
+@app.route("/upload", methods=["POST"])
+def upload():
+    file = request.files.get("file")
+    room = request.form.get("room")
 
-app = Flask(__name__)
-# CORSを有効にして、どのオリジンからのリクエストも許可する
-CORS(app, resources={r"/*": {"origins": "*"}}) 
+    if not file:
+        return "400", 400
 
-UPLOAD_FOLDER = 'uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    filename = secure_filename(file.filename)
+    save_path = os.path.join("uploads", filename)
+    file.save(save_path)
 
-# デバッグ目的ではなく、Renderのような本番環境では環境変数からポートを取得する
-PORT = int(os.environ.get("PORT", 5000))
+    # Room に通知
+    socketio.emit("new_file", {"filename": filename}, room=room)
+    return "OK"
 
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
 
-@app.route('/upload-endpoint', methods=['POST'])
-def upload_file():
-    if 'imageFile' not in request.files:
-        return jsonify({'error': 'ファイルがありません'}), 400
-    
-    file = request.files['imageFile']
-    if file.filename == '':
-        return jsonify({'error': 'ファイル名がありません'}), 400
-    
-    if file:
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
-        
-        # 保存された画像のURLを生成してクライアントに返す
-        # Renderのドメイン名に合わせて修正してください
-        image_url = f'https://hei-bu-jing.onrender.com/{UPLOAD_FOLDER}/{filename}'
-        return jsonify({'message': 'アップロード成功', 'url': image_url}), 200
-
-# 追加: アップロードされた画像ファイルにアクセスできるようにするためのエンドポイント
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
-if __name__ == '__main__':
-    # debug=Trueは開発時のみ使用し、本番環境RenderではFalseまたは省略
-    app.run(host='0.0.0.0', port=PORT)
 #=========================================================================================================
 
 
@@ -436,4 +386,5 @@ if __name__ == "__main__":
     init_db()
     import os
     port = int(os.environ.get("PORT", 5000))
-    socketio.run(app, host="0.0.0.0", port=port, debug=True)
+    socketio.run(app, host="0.0.0.0", port=port, debug=False)
+
