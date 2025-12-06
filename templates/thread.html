@@ -15,7 +15,6 @@ color: #000000;
 li {
   position: relative;
   padding: 0.6em;
-  background: #e0edff;
  margin: 30px;
 display: inline-block;
 }
@@ -26,7 +25,8 @@ li:after {
   top: 100%;
   left: 30px;
   border: 15px solid transparent;
-  border-top: 15px solid #e0edff;
+  /* ここをCSSカスタムプロパティに変更 */
+  border-top: 15px solid var(--after-color, #e0edff); 
   width: 0;
   height: 0;
 }
@@ -90,7 +90,10 @@ const colorBoxes = document.querySelectorAll('.color-box');
 
 // 各要素にランダムな色を適用する
 colorBoxes.forEach(box => {
-    box.style.backgroundColor = generatePastelColor();
+    const color = generatePastelColor();
+    box.style.backgroundColor = color;
+    // ここでCSSカスタムプロパティを設定する
+    box.style.setProperty('--after-color', color);
 });
 
 </script>
@@ -170,14 +173,21 @@ function convertImageUrls(text) {
     });
 }
 
-// 投稿をDOMに追加
+// 投稿をDOMに追加 (色付け機能を追加)
 function addPostToDOM(post) {
     const li = document.createElement("li");
+    li.classList.add('color-box'); // 新しく追加される投稿にもクラスを追加
+
     const safeName = safeNl2br(post.name);
     const escapedAndNl2brMessage = safeNl2br(post.message);
     const finalMessage = convertImageUrls(escapedAndNl2brMessage);
     li.innerHTML = `#${post.num} <b>${safeName}</b> ${finalMessage} <span>(${post.created_at})</span>`;
     postsList.appendChild(li);
+
+    // 新しい投稿要素に対して色を適用する
+    const color = generatePastelColor();
+    li.style.backgroundColor = color;
+    li.style.setProperty('--after-color', color);
 }
 
 // 初期ロードで投稿一覧を取得
@@ -186,9 +196,13 @@ async function fetchPosts() {
     if (res.ok) {
         let posts = await res.json();
         postsList.innerHTML = "";
-        posts.forEach(p => addPostToDOM(p));
+        // ここではすでにDjangoテンプレートエンジンによってレンダリングされた要素が存在する可能性があるため、
+        // 初期ロード時にDOMをクリアしてJSONから再構築するか、既存要素の色を変更する必要があります。
+        // 現在のコードは既存の要素は色付けされていますが、fetchPostsで再構築すると色がリセットされます。
+        // 初期ロード時のテンプレートレンダリングを削除し、fetchPosts()のみに依存させるのが一番簡単です。
     }
 }
+
 
 // 投稿フォーム送信
 document.getElementById("postForm").addEventListener("submit", async (e) => {
@@ -223,8 +237,12 @@ window.addEventListener("beforeunload", () => {
     socket.emit("leave_thread", { thread_id: threadId });
 });
 
-// 初期ロード
-fetchPosts();
+// 初期ロード時に、Djangoテンプレートで生成された既存の投稿要素（.color-boxクラスを持つもの）に色を適用する
+document.querySelectorAll('.color-box').forEach(box => {
+    const color = generatePastelColor();
+    box.style.backgroundColor = color;
+    box.style.setProperty('--after-color', color);
+});
 
 
 </script>
