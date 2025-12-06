@@ -27,14 +27,14 @@ border: 2px solid;
   display: inline-block;/*おまじない*/
 margin: 10px; 
   line-height: 1.3;/*行高*/
-  background: #dbebf8;/*背景色*/
+
   vertical-align: middle;
   border-radius: 25px 0px 0px 25px;/*左側の角を丸く*/
 }
 
 .suretai:before {
   content: '●';
-  color: white;
+  color: #fffacd;
   margin-right: 8px;
 }
         .suretate{
@@ -57,7 +57,7 @@ text-align: center !important;
         }
 
 button {
-  background: transparent;
+  background: white;
 }
 
 #threads {
@@ -71,6 +71,9 @@ background-color: #ffc0cb;
 }
 .suretate{
 background-color: #98fb98;
+ border: solid 3px #228b22;
+border-radius: 0.5em;
+
 }
 
 .yaju{
@@ -270,6 +273,39 @@ margin: 20px;
     </div>
 </div>
 
+<script>
+// ランダムなHEXカラーコードを生成する関数
+function generatePastelColor() {
+  // 色相 (Hue): 0から360の間でランダムな値。これにより色の種類（赤、青、緑など）が決まる。
+  const hue = Math.floor(Math.random() * 360);
+
+  // 彩度 (Saturation): 60%から100%の間でランダムな値。鮮やかさを指定。
+  // 淡い色を生成するためには彩度を完全に低くしすぎないことが重要です。
+  const saturation = Math.floor(Math.random() * 40) + 60; // 60% - 100%
+
+  // 明るさ (Lightness): 70%から90%の間でランダムな値。これが「淡さ」の鍵。
+  // 100%に近づくほど白に近くなります。
+  const lightness = Math.floor(Math.random() * 20) + 70; // 70% - 90%
+
+  // CSSで使用できるhsl形式の文字列を返す
+  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+}
+
+
+
+
+// すべての .color-box 要素を取得する
+const colorBoxes = document.querySelectorAll('.suretai');
+
+// 各要素にランダムな色を適用する
+colorBoxes.forEach(box => {
+    const color = generatePastelColor();
+    box.style.backgroundColor = color;
+    // ここでCSSカスタムプロパティを設定する
+    box.style.setProperty('--after-color', color);
+});
+
+</script>
 
 
 

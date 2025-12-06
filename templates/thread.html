@@ -47,7 +47,6 @@ button {
   <span>({{ post.created_at }})</span>
 </li>
 
-<br><span>({{ post.created_at }})</span></li>
   {% endfor %}
 </ul>
 
@@ -67,9 +66,10 @@ button {
     <input type="file" id="fileInput" name="imageFile" accept="image/*" required>
     <!-- アップロード実行ボタン -->
     <button type="submit">
-        <img src="https://sozai.cman.jp/img-icon/scene_mountain1.png" height ="20" width="20" alt="画像をアップロード" />
+        <img src="https://sozai.cman.jp/img-icon/scene_mountain1.png" height ="20" width="20" alt="画像をアップロード" />画像をアップロード
     </button>
 </form>
+<p>ファイルを選択後、アップロードボタンを押すと画像URLが取得されます</p>
 <script>
 // ランダムなHEXカラーコードを生成する関数
 function generatePastelColor() {
@@ -133,7 +133,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
         .then(data => {
             if (data.url) {
                 // 画像をMarkdown形式で本文エリアに挿入
-                messageArea.value += `\n![画像](${data.url})\n`; 
+                messageArea.value += `${data.url}`; 
                 console.log('アップロード成功:', data.url);
                 alert('画像のアップロードが完了しました。本文にURLが追加されました。');
                 fileInput.value = ''; // 選択したファイルをクリアする
