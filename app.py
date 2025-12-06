@@ -9,7 +9,8 @@ import sqlite3
 from datetime import timedelta
 from flask_socketio import SocketIO, join_room, leave_room
 from flask import send_from_directory
-
+import re
+from flask import Markup
 
 
 # -------------------------------
@@ -382,7 +383,14 @@ def uploaded_file(filename):
 
 #=========================================================================================================
 
+def convert_image_urls(text):
+    img_regex = r'(https?://[^\s]+?\.(?:jpg|jpeg|png|gif|bmp|webp))'
+    def repl(match):
+        url = match.group(1)
+        return f'<img src="{url}" height="120" alt="image">'
+    return Markup(re.sub(img_regex, repl, text))
 
+app.jinja_env.filters['imgify'] = convert_image_urls
 
 # -------------------------------
 # アプリ起動

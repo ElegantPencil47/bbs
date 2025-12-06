@@ -41,7 +41,13 @@ button {
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 <ul id="posts">
   {% for post in posts %}
-    <li  class="color-box">{{ post.num }} <b>{{ post.name | safe }}</b><br> {{ post.message | safe }} <span>({{ post.created_at }})</span></li>
+    <li class="color-box">
+  {{ post.num }} <b>{{ post.name | safe }}</b><br>
+  {{ post.message | imgify }}  <!-- ここを追加 --><br>
+  <span>({{ post.created_at }})</span>
+</li>
+
+<br><span>({{ post.created_at }})</span></li>
   {% endfor %}
 </ul>
 
