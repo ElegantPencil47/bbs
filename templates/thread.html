@@ -12,9 +12,14 @@ a {
         text-decoration: none;
 color: #000000;        
 } 
+
+
+
+
 li {
   position: relative;
-  padding: 0.6em;
+  padding: 0.4em;
+  border-radius: 0.5em;
  margin: 30px;
 display: inline-block;
 }
@@ -32,9 +37,34 @@ border-radius: 7px;
   height: 0;
 }
 
-button {
-  background: white;
+body{
+background-color: #fffacd;
 }
+button{
+  position: relative;
+  display: inline-block;
+background: white;
+  transition: .3s;
+}
+button: hover{
+background: #d3d3d3;
+}
+button::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 2px;
+  background-color: #31aae2;
+  transition: .3s;
+  transform: translateX(-50%);
+}
+
+button:hover::after{
+  width: 100%;
+}
+
 </style>
 <body class="theme-{{theme}}">
 <a href="/">← スレッド一覧に戻る</a>
