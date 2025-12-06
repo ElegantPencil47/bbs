@@ -13,8 +13,13 @@ a {
 color: #000000;        
 } 
 
-
-
+.kakiko{
+background-color: #d3d3d3;
+border: 3px solid #808080;
+}
+h1{
+background-color: #808080;
+}
 
 li {
   position: relative;
@@ -72,7 +77,7 @@ button:hover::after{
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 <ul id="posts">
   {% for post in posts %}
-    <li class="color-box">
+    <li class="color-box" id="{{ post.num }}">
   {{ post.num }} <b>{{ post.name | safe }}</b><br>
   {{ post.message | imgify }}  <!-- ここを追加 --><br>
   <span>({{ post.created_at }})</span>
@@ -82,7 +87,7 @@ button:hover::after{
 </ul>
 
 <p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
-
+<div class="kakiko">
 <form id="postForm" action="/post-message" method="POST"> <!-- actionとmethodを追加 -->
   名前: <input type="text" name="name"><br>
   本文: <textarea name="message" id="messageArea"></textarea><br>
@@ -101,6 +106,7 @@ button:hover::after{
     </button>
 </form>
 <p>ファイルを選択後、アップロードボタンを押すと画像URLが取得されます</p>
+</div>
 <script>
 // ランダムなHEXカラーコードを生成する関数
 function generatePastelColor() {
