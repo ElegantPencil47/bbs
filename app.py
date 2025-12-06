@@ -8,6 +8,7 @@ from flask import g
 import sqlite3
 from datetime import timedelta
 from flask_socketio import SocketIO, join_room, leave_room
+from flask import send_from_directory
 
 
 
@@ -18,7 +19,11 @@ app = Flask(__name__)
 app.secret_key = 'your_super_secret_key_here'
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
 CORS(app, resources={r"/*": {"origins": "*"}}) 
+UPLOAD_FOLDER = "uploads"
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
+# フォルダが存在しない時は作成
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
 
@@ -355,37 +360,26 @@ def posts_json(thread_id):
 
 
 #===============================================================================================--
-@app.route("/upload", methods=["POST"])
-def upload():
-    # JavaScriptのキー名 'imageFile' に合わせる
-    file = request.files.get("imageFile")
-    # request.form.get("room") は現在のコードでは使われていないようです
+@app.route('/upload', methods=['POST'])
+def upload_image():
+    if 'imageFile' not in request.files:
+        return jsonify({"error": "No file"}), 400
 
-    if not file:
-        # デバッグのためにログを出力するか、エラーレスポンスを具体的にする
-        print("Error: No file part in the request or key mismatch.") 
-        return "400 Bad Request: Missing imageFile", 400
+    file = request.files['imageFile']
+    filename = file.filename
 
-    # uploadsディレクトリが存在しない場合は作成
-    if not os.path.exists("uploads"):
-        os.makedirs("uploads")
-
-    filename = secure_filename(file.filename)
-    save_path = os.path.join("uploads", filename)
+    # フルパス
+    save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     file.save(save_path)
 
-    # 保存した画像にアクセスするためのURLを生成して返す
-    # RenderのURLやドメインに合わせて適切なURLプレフィックスを設定してください
-    image_url = f"hei-bu-jing.onrender.com{filename}" 
-    
-    # JavaScript側がJSONレスポンスを期待しているので、JSON形式で返す
-    return jsonify({"url": image_url}), 200
+    # 正しい URL を返す
+    file_url = url_for('uploaded_file', filename=filename, _external=True)
 
-# 画像ファイルを提供するためのルートも必要です (まだない場合)
+    return jsonify({"url": file_url})
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    # send_from_directoryを使ってファイルを提供
-    return send_from_directory('uploads', filename)
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 #=========================================================================================================
 
 
