@@ -41,7 +41,7 @@ button {
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 <ul id="posts">
   {% for post in posts %}
-    <li>{{ post.num }} <b>{{ post.name | safe }}</b><br> {{ post.message | safe }} <span>({{ post.created_at }})</span></li>
+    <li  class="color-box">{{ post.num }} <b>{{ post.name | safe }}</b><br> {{ post.message | safe }} <span>({{ post.created_at }})</span></li>
   {% endfor %}
 </ul>
 
@@ -64,7 +64,24 @@ button {
         <img src="https://sozai.cman.jp/img-icon/scene_mountain1.png" height ="20" width="20" alt="画像をアップロード" />
     </button>
 </form>
+<script>
+// ランダムなHEXカラーコードを生成する関数
+function getRandomColor() {
+    // 0から16777215 (FFFFFF) までのランダムな整数を生成し、16進数文字列に変換する
+    let color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    // 6桁になるようにゼロ埋めする (Math.random()の性質により、稀に5桁以下になる場合があるため)
+    return color.padStart(7, '#');
+}
 
+// すべての .color-box 要素を取得する
+const colorBoxes = document.querySelectorAll('.color-box');
+
+// 各要素にランダムな色を適用する
+colorBoxes.forEach(box => {
+    box.style.backgroundColor = getRandomColor();
+});
+
+</script>
 
 <script>
 document.getElementById('uploadForm').addEventListener('submit', function(event) {
@@ -196,6 +213,8 @@ window.addEventListener("beforeunload", () => {
 
 // 初期ロード
 fetchPosts();
+
+
 </script>
 
 
