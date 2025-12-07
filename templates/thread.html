@@ -194,10 +194,6 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
 
 <script>
 // 修正: 必要な変数を定義
-const escapedText = document.createElement('div');
-    escapedText.textContent = text;
-    return escapedText.innerHTML.replace(/\r?\n/g, '<br>');
-//================================================================================================
 const threadId = {{ thread_id }};
 const postsList = document.getElementById("posts");
 const socket = io({
