@@ -18,7 +18,9 @@ background-color: #d3d3d3;
 display: inline-block;
 border: 3px solid #808080;
 }
-
+.htn{
+white-space: pre-wrap;
+}
 
 li {
   position: relative;
@@ -78,7 +80,8 @@ button:hover::after{
   {% for post in posts %}
     <li class="color-box" id="{{ post.num }}">
   {{ post.num }} <b>{{ post.name | safe }}</b><br>
-  {{ post.message | imgify }}  <!-- ここを追加 --><br>
+<div class="htn">
+  {{ post.message | imgify }} </div> <!-- ここを追加 --><br>
   <span>({{ post.created_at }})</span>
 </li>
 
