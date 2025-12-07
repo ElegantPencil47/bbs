@@ -77,8 +77,8 @@ button:hover::after{
 <ul id="posts">
   {% for post in posts %}
     <li class="color-box" id="{{ post.num }}">
-  {{ post.num }} <b>{{ post.name | safe }}</b><br><div id="originalArea">
-  {{ post.message | imgify }} </div> <!-- ここを追加 --><br>
+  {{ post.num }} <b>{{ post.name | safe }}</b><br>
+  {{ post.message | imgify }}  <!-- ここを追加 --><br>
   <span>({{ post.created_at }})</span>
 </li>
 
@@ -188,20 +188,16 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
 });
 </script>
 
-<script>
-const originalArea = document.getElementById('originalArea');
 
-const originalText = originalArea.textContent;
-const convertedHtml = originalText.replace(/\n/g, '<br>');
-
-originalArea.innerHTML = convertedHtml;
-
-</script>
 
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
 <script>
 // 修正: 必要な変数を定義
+const escapedText = document.createElement('div');
+    escapedText.textContent = text;
+    return escapedText.innerHTML.replace(/\r?\n/g, '<br>');
+//================================================================================================
 const threadId = {{ thread_id }};
 const postsList = document.getElementById("posts");
 const socket = io({
