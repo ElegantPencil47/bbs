@@ -13,6 +13,39 @@ a {
 color: #000000;        
 } 
 
+
+nktidksg {
+  position: relative;
+  background: #ffd98a;
+  padding: 2px 5px 2px 25px;
+  font-size: 20px;
+  color: #474747;
+  border-radius: 0 10px 10px 0;
+}
+
+.nktidksg:before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f135";
+  display: inline-block;
+  line-height: 40px;
+  position: absolute;
+  padding: 0em;
+  color: white;
+  background: #ffa337;
+  font-weight: 900;
+  width: 40px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  left: -1.35em;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border: solid 3px white; 
+  border-radius: 50%;
+}
+
+
 .kakiko{
 background-color: #d3d3d3;
 display: inline-block;
@@ -223,7 +256,7 @@ function addPostToDOM(post) {
     const safeName = safeNl2br(post.name);
     const escapedAndNl2brMessage = safeNl2br(post.message);
     const finalMessage = convertImageUrls(escapedAndNl2brMessage);
-    li.innerHTML = `#${post.num} <b>${safeName}</b> ${finalMessage}<br><span>(${post.created_at})</span>`;
+    li.innerHTML = `#${post.num} <b>${safeName}</b> <br>${finalMessage}<br><span>(${post.created_at})</span>`;
     postsList.appendChild(li);
 
     // 新しい投稿要素に対して色を適用する
