@@ -79,9 +79,7 @@ button:hover::after{
 <ul id="posts">
   {% for post in posts %}
     <li class="color-box" id="{{ post.num }}">
-  {{ post.num }} <b>{{ post.name | safe }}</b>
-<div class="htn">
-  {{ post.message | imgify }} </div> <!-- ここを追加 -->
+  {{ post.num }} <b>{{ post.name | safe }}</b><div class="htn">{{ post.message | imgify }} </div> <!-- ここを追加 -->
   <span>({{ post.created_at }})</span>
 </li>
 
