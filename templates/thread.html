@@ -77,8 +77,8 @@ button:hover::after{
 <ul id="posts">
   {% for post in posts %}
     <li class="color-box" id="{{ post.num }}">
-  {{ post.num }} <b>{{ post.name | safe }}</b><br>
-  {{ post.message | imgify }}  <!-- ここを追加 --><br>
+  {{ post.num }} <b>{{ post.name | safe }}</b><br><div id="originalArea">
+  {{ post.message | imgify }} </div> <!-- ここを追加 --><br>
   <span>({{ post.created_at }})</span>
 </li>
 
@@ -188,7 +188,15 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
 });
 </script>
 
+<script>
+const originalArea = document.getElementById('originalArea');
 
+const originalText = originalArea.textContent;
+const convertedHtml = originalText.replace(/\n/g, '<br>');
+
+originalArea.innerHTML = convertedHtml;
+
+</script>
 
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
@@ -223,7 +231,7 @@ function addPostToDOM(post) {
     const safeName = safeNl2br(post.name);
     const escapedAndNl2brMessage = safeNl2br(post.message);
     const finalMessage = convertImageUrls(escapedAndNl2brMessage);
-    li.innerHTML = `#${post.num} <b>${safeName}</b> ${finalMessage} <span>(${post.created_at})</span>`;
+    li.innerHTML = `#${post.num} <b>${safeName}</b> ${finalMessage}<br> <span>(${post.created_at})</span>`;
     postsList.appendChild(li);
 
     // 新しい投稿要素に対して色を適用する
