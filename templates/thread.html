@@ -121,24 +121,19 @@ button:hover::after{
 
 <p>※自動更新システムを使用していますが、稀に更新されない場合がございます。その際は再読み込みをお願いします</p>
 <div class="kakiko">
-<form id="postForm" action="/post-message" method="POST"> <!-- actionとmethodを追加 -->
+<form id="postForm" enctype="multipart/form-data">
   名前: <input type="text" name="name"><br>
+
   本文: <textarea name="message" id="messageArea"></textarea><br>
-  <!-- 通常の書き込みボタン -->
+
+  画像: <input type="file" id="imageFiles" name="imageFiles" accept="image/*" multiple><br>
+
   <button type="submit">
-    <img src="https://icooon-mono.com/i/icon_11449/icon_114490_256.jpg" height ="20" width="20" alt="投稿" />投稿する
+    <img src="https://icooon-mono.com/i/icon_11449/icon_114490_256.jpg" height ="20" width="20">投稿する
   </button>
 </form>
 
-<!-- 画像アップロードは別のフォームとして完全に分離 -->
-<form id="uploadForm" enctype="multipart/form-data">
-    <input type="file" id="fileInput" name="imageFile" accept="image/*" required>
-    <!-- アップロード実行ボタン -->
-    <button type="submit">
-        <img src="https://sozai.cman.jp/img-icon/scene_mountain1.png" height ="20" width="20" alt="画像をアップロード" />画像をアップロード
-    </button>
-</form>
-<p>ファイルを選択後、アップロードボタンを押すと画像URLが取得されます</p>
+
 </div>
 <script>
 // ランダムなHEXカラーコードを生成する関数
@@ -175,51 +170,56 @@ colorBoxes.forEach(box => {
 </script>
 
 <script>
-document.getElementById('uploadForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // デフォルトのフォーム送信を停止
+document.getElementById("postForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    const fileInput = document.getElementById('fileInput');
-    const messageArea = document.getElementById('messageArea');
-    const file = fileInput.files[0];
+    const name = e.target.name.value;
+    let message = e.target.message.value;
+    const files = document.getElementById("imageFiles").files;
 
-    if (file) {
-        const formData = new FormData();
-        formData.append('imageFile', file);
+    // --- ① 画像があれば先にアップロード ---
+    let uploadedUrls = [];
 
-        const uploadUrl = '/upload';
- 
+    if (files.length > 0) {
+        for (let file of files) {
+            const formData = new FormData();
+            formData.append("imageFile", file);
 
-        fetch(uploadUrl, {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (!response.ok) {
-                // HTTPエラーが発生した場合にエラーを投げる
-                throw new Error('ネットワーク応答が不正です: ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
+            const res = await fetch("/upload", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await res.json();
             if (data.url) {
-                // 画像をMarkdown形式で本文エリアに挿入
-                messageArea.value += `${data.url}`; 
-                console.log('アップロード成功:', data.url);
-                alert('画像のアップロードが完了しました。本文にURLが追加されました。');
-                fileInput.value = ''; // 選択したファイルをクリアする
-            } else {
-                console.error('URLがレスポンスに含まれていません。サーバーのレスポンス:', data);
-                alert('アップロード失敗: サーバーからのURLが不正です。');
+                uploadedUrls.push(data.url);
             }
-        })
-        .catch(error => {
-            console.error('アップロード中にエラーが発生しました:', error);
-            alert('ファイルのアップロード中にエラーが発生しました。CORS設定やエンドポイントURLを確認してください。');
-        });
+        }
+    }
+
+    // --- ② 本文に画像URLを追加 ---
+    uploadedUrls.forEach(url => {
+        message += "\n" + url;
+    });
+
+    // --- ③ 投稿データを送信 ---
+    const postData = new FormData();
+    postData.append("name", name);
+    postData.append("message", message);
+
+    const res = await fetch(`/thread/${threadId}/add_post`, {
+        method: "POST",
+        body: postData
+    });
+
+    if (res.ok) {
+        e.target.reset(); // リセット
+        alert("投稿しました！");
     } else {
-        alert('ファイルを選択してください。');
+        alert("投稿に失敗しました");
     }
 });
+
 </script>
 
 
