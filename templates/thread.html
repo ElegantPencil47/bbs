@@ -130,7 +130,18 @@ button:hover::after{
 <div id="result"></div>
 
 <input type="hidden" name="image_url" id="uploadedImageUrl">  
-<div id="result"></div>
+
+    
+<div>
+        <select id="mySelect">
+            <option value="">AAを選択</option>
+            <option value="option1">モナー</option>
+            <option value="option2">不快なスレを立てるなですぅ</option>
+            <option value="option3">変態だ！</option>
+        </select>
+    </div>
+<button onclick="checkValues()">判定実行</button>
+
 
 
   <button type="submit">
@@ -324,7 +335,59 @@ document.querySelectorAll('.color-box').forEach(box => {
 
 </script>
 
+<script>
+function checkValues() {
+    // selectタグから選択された値を取得
+    const selectElement = document.getElementById("mySelect");
+    const selectedValue = selectElement.value;
+    if (selectedValue === "option1") {
+        const textarea = document.getElementById("messageArea");
+        textarea.value += "\n" + "　 ∧＿∧　　／￣￣￣￣￣
+　（ ´∀｀）＜　オマエモナー
+　（　　 　 ）＼＿＿＿＿＿
+　│  │ │
+　（＿_）___）
+";
+    } else if (inputValue === "option2") {
+        const textarea = document.getElementById("messageArea");
+        textarea.value += "\n" + "
+　 　　 　 　 /':.:.:.:.:.:.:.:.:.:.:|.:.:.:.:.:.:.:＼　ヽ:　/_／
+　　　　 　 /.:.:.:.:.:/:.:.:.:,:.:.:|:.:.:ヽ.:.:.:.:.:.',　} /:.:.|
+　　　　　 l{:.:.:.:|:.l:.:.:.:/l/'ハ:､.:.:ヽ.:.:.:.:} .{::.:.:.:.:l
+　　　　　 ﾊ:.:.:.|:|:.／/ ノ ‐ヾ＼_|l.:.:.:i　}::.:.:.:.:.',
+　　　　　　 ヽ:.:.{. ,:=､　　 =＝､ ﾉ.;./ /::.::.::.:.:.:.',
+　　　　　　　　ヽゝ　 ､　　　　　ｿ!※}::.::.::.::.:.:.
+　　　　　　　　　{ ｀ヽ、ヽﾌ　／ｲ　 /‐､_:.:.:.:.:.:.
+　　f＾)＾)＾)＾)＾)＾)＾)＾)＾)＾)「-､_,{※}　ｒ′ヽ:.:.:.:.
+　ｒ''⊇、　 　 　 　 　 　 　ｌ|ヽ_/　 } t′　　',:.:.:.
+　{　=='､ 　　　　　 　　　　ｌ|!;r'!※{ ｔ′　　　',:.:.:
+　ﾊ,,_う´不快なスレを　　l;;l}.　 {,ｺ 　 　　　!:.
+_{'V|ｌ 　　　　　　　　　　　 ｌ;;;{※.},ｺ　　　　　 !、
+ゞ　|l 　立てるなですぅ　 ｌ|.l;;{　　},ｺ　　　　　　}
+＼,,|ｌ　　　　　　　　　　　 l| L{.※{,ｺ　　　　　 /|
+　　|ｌ＿＿＿＿＿＿＿＿l|,rn}　 },ｺ＼　　 ／　〉
+";
+    } else if (inputValue === "option3") {
+        const textarea = document.getElementById("messageArea");
+        textarea.value += "\n" + "
+　＿__l＿__　 /　／/
+　 ﾉ l　Jヽ　〔／　/ 　　　　　　 .,　-――-　､ _ _／ヽ
+　　ノﾇ　　　　　 / 　　　　　　／: : : : : : : : : : : : : : : : !-.-.‐.‐.‐. ｧ
+　 ／ ヽ､_　　　/ 　,ｨ＿＿∧': ／　　　. . . : : : : : /: :/: : : :｀: :＜
+　ム　ヒ　　 　7_／/::::::::::::::::〉: : : : : : :.／: : : :,:イ: :∧: :ｉ: : . .＼:｀ヽ　　　○
+　月　ヒ　　　 　　/／:::::::::::/: : : : : : :/ : : : ／ /: /　 ',: |: : ﾊ: : ヽ 　＼
+　ノ l ヽヽノ　　　//:::::::::::::/: /: : : : :/: :-∠＿/_:/　　 |: |: : :∧: : :ﾍ､ 　',　　　　　　　　　○
+　　　￣￣ 　　./〈:::::::::::::/: /: : : : :/: :.Ｘ　 　/／ 　 ＼!∧: : : :',: : : ﾊ＼j
+　__|＿ ヽヽ　 ｛ /＼:::::/: /|: : : : /i／ 　＼　　　　　 /｀ｰ∨: : :ｌ: : : :.!　 　　　　　　o
+　　| ー　　　　 ￣フ　:./´ !: : : / ￣￣￣ 　 　 　 ＿＿＿∨: :ｉ:. : : :!
+　　| ヽｰ　 　　 .／ ./ｲ!　 |: : /　　　　　　__　　　 ＼　 　 /!: ;ｲ::. : :.i〉
+　　　|　　　　　 > : : .::|:.ヽ_j: /　　　　　／:::::｀:.､　　　＼ /､|:/:.|:::. : ,'
+　　　|　　　 　　＼: : .:!:.:/ |/ ＼　 　 /::::::::::::::::::〉　　 　 !　}':.:.:|∨:/　　　　　o
+　　　|　　　　　ﾄーゝ.:|:/　　　　＞ ､ｊ::::::::::::::::::/　　　, ｲ-<:.:.;ｲ:.Ⅳ
+　　　|　　　　　|: : : : .:|'　　　／　　 |｀ ｰrｰ-イ--‐ ' 　|:.:.:.∨:.!: |
+　　　|　　　 　 i : : : : : !　　　〉 　 　 | 　/ヽ 　ヽ　　o　ｊ:.:.:.:.:. : !:...";
 
+</script>
 
 </body>
 </html>
