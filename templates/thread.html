@@ -126,7 +126,12 @@ button:hover::after{
 
   本文: <textarea name="message" id="messageArea"></textarea><br>
 
-  画像: <input type="file" id="imageFiles" name="imageFiles" accept="image/*" multiple><br>
+  <input type="file" id="fileInput" accept="image/*">
+<div id="result"></div>
+
+<input type="hidden" name="image_url" id="uploadedImageUrl">  
+<div id="result"></div>
+
 
   <button type="submit">
     <img src="https://icooon-mono.com/i/icon_11449/icon_114490_256.jpg" height ="20" width="20">投稿する
@@ -169,58 +174,55 @@ colorBoxes.forEach(box => {
 
 </script>
 
+
 <script>
-document.getElementById("postForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+// 自動アップロード（fileInputを選択した瞬間に走る）
+document.getElementById("fileInput").addEventListener("change", async function () {
+    const file = this.files[0];
+    if (!file) return;
 
-    const name = e.target.name.value;
-    let message = e.target.message.value;
-    const files = document.getElementById("imageFiles").files;
+    const formData = new FormData();
+    formData.append("imageFile", file);  // ← Flask の upload が受け取るキーは imageFile
 
-    // --- ① 画像があれば先にアップロード ---
-    let uploadedUrls = [];
+    try {
+        const res = await fetch("/upload", {
+            method: "POST",
+            body: formData
+        });
 
-    if (files.length > 0) {
-        for (let file of files) {
-            const formData = new FormData();
-            formData.append("imageFile", file);
+        const data = await res.json();
 
-            const res = await fetch("/upload", {
-                method: "POST",
-                body: formData
-            });
-
-            const data = await res.json();
-            if (data.url) {
-                uploadedUrls.push(data.url);
-            }
+        if (!data.url) {
+            alert("アップロードに失敗しました");
+            return;
         }
-    }
 
-    // --- ② 本文に画像URLを追加 ---
-    uploadedUrls.forEach(url => {
-        message += "\n" + url;
-    });
+        // 自動で textarea に追加
+        const textarea = document.getElementById("messageArea");
+        textarea.value += "\n" + data.url;
 
-    // --- ③ 投稿データを送信 ---
-    const postData = new FormData();
-    postData.append("name", name);
-    postData.append("message", message);
+        // 表示
+        const fullURL = data.url;
+        document.getElementById("result").innerHTML =
+            `<p>画像URL:</p>
+             <a href="${fullURL}" target="_blank">${fullURL}</a><br>
+             <img src="${fullURL}" style="max-width:200px;">`;
 
-    const res = await fetch(`/thread/${threadId}/add_post`, {
-        method: "POST",
-        body: postData
-    });
+        console.log("Uploaded:", fullURL);
 
-    if (res.ok) {
-        e.target.reset(); // リセット
-        alert("投稿しました！");
-    } else {
-        alert("投稿に失敗しました");
+    } catch (err) {
+        console.error(err);
+        alert("通信エラーが発生しました");
     }
 });
-
 </script>
+
+
+
+
+
+
+
 
 
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
