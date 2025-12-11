@@ -137,7 +137,7 @@ def new_thread():
 
     message = request.form["message"]
     #message = "\n" + message
-    name = "name " + "@エクリプス"
+    name = name + "@エクリプス"
 
     db = get_db()
     c = db.cursor()
@@ -235,7 +235,7 @@ def thread(thread_id):
             name = "書き人知らず"
         # 入力された名前に<br>を追加
         
-        name = "name" + "@エクリプス"
+        name = name + "@エクリプス"
         message = request.form.get("message")
         #message = "\n" + message
 
@@ -306,7 +306,7 @@ def apply_theme_cookie(response):
 @app.route("/thread/<int:thread_id>/add_post", methods=["POST"])
 def add_post(thread_id):
     name = request.form.get("name") or "書き人知らず"
-    name = "name" + "@エクリプス"
+    name = name + "@エクリプス"
     
     message = request.form.get("message", "").strip()
     #message = "\n" + message
