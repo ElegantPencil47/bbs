@@ -279,7 +279,7 @@ function addPostToDOM(post) {
     const safeName = safeNl2br(post.name);
     const escapedAndNl2brMessage = safeNl2br(post.message);
     const finalMessage = convertImageUrls(escapedAndNl2brMessage);
-    li.innerHTML = `#${post.num} <b>${safeName}</b> <br>${finalMessage}<br><span>(${post.created_at})</span>`;
+    li.innerHTML = `#${post.num} <b>${safeName}</b> <br><div class="htn">${finalMessage}</div><br><span>(${post.created_at})</span>`;
     postsList.appendChild(li);
 
     // 新しい投稿要素に対して色を適用する
