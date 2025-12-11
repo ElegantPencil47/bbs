@@ -52,10 +52,12 @@ display: inline-block;
 border: 3px solid #808080;
 }
 .htn{
-white-space: pre-wrap;
-  line-height: 19px;
-letter-spacing : 0em;
 
+    /* 等幅フォントを指定 */
+    font-family: 'Monotype', 'MS UI Gothic', monospace;
+    /* ホワイトスペースの扱いの設定（preタグなら不要な場合が多いですが、念のため） */
+    white-space: pre;
+  
 
 }
 
@@ -130,13 +132,13 @@ button:hover::after{
 
   本文: <textarea name="message" id="messageArea"></textarea><br>
 
-  <input type="file" id="fileInput" accept="image/*">
+  画像の投稿:<input type="file" id="fileInput" accept="image/*">
 <div id="result"></div>
 
 <input type="hidden" name="image_url" id="uploadedImageUrl">  
 
     
-<div>
+AAの投稿<div>
         <select id="mySelect">
             <option value="">AAを選択</option>
             <option value="option1">モナー</option>
@@ -144,7 +146,7 @@ button:hover::after{
             <option value="option3">変態だ！</option>
         </select>
     </div>
-<button type="button" onclick="checkValues()">判定実行</button>
+<button type="button" onclick="checkValues()">AAを決定</button>
 
 
 
