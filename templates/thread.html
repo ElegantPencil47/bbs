@@ -278,8 +278,14 @@ function addPostToDOM(post) {
 
     const safeName = safeNl2br(post.name);
     const escapedAndNl2brMessage = safeNl2br(post.message);
-    const finalMessage = convertImageUrls(escapedAndNl2brMessage);
-    li.innerHTML = `#${post.num} <b>${safeName}</b> <br><div class="htn">${finalMessage}</div><br><span>(${post.created_at})</span>`;
+let msg = escapedAndNl2brMessage;
+msg = convertImageUrls(msg);
+msg = convertAnchors(msg);  // ←追加
+
+const finalMessage = msg;
+
+
+    li.innerHTML = `${post.num} <b>${safeName}</b> <br><div class="htn">${finalMessage}</div><br><span>(${post.created_at})</span>`;
     postsList.appendChild(li);
 
     // 新しい投稿要素に対して色を適用する
@@ -345,6 +351,27 @@ document.querySelectorAll('.color-box').forEach(box => {
 
 </script>
 <script>
+
+// 安価クリックのポップアップ処理
+document.addEventListener("click", function (e) {
+    const anchor = e.target.closest(".anchor");
+    if (!anchor) return;
+
+    const targetNum = anchor.dataset.target;
+    const targetPost = document.getElementById(targetNum);
+
+    if (!targetPost) return;
+
+    showPopup(targetPost, e.pageX, e.pageY);
+});
+
+// >>数字 を <span class="anchor" data-target="3">>>3</span> に変換
+function convertAnchors(text) {
+    return text.replace(/&gt;&gt;(\d+)/g, (match, num) => {
+        return `<span class="anchor" data-target="${num}">&gt;&gt;${num}</span>`;
+    });
+}
+
 function checkValues() {
     
     // selectタグから選択された値を取得
@@ -363,6 +390,45 @@ function checkValues() {
         alert("アスキーアートを選択してください");
 }
 }
+
+function showPopup(postElement, x, y) {
+    // 既存のポップアップを消す
+    const oldPopup = document.getElementById("anchorPopup");
+    if (oldPopup) oldPopup.remove();
+
+    // 新しいポップアップ生成
+    const popup = document.createElement("div");
+    popup.id = "anchorPopup";
+    popup.style.position = "absolute";
+    popup.style.left = x + "px";
+    popup.style.top = y + "px";
+    popup.style.maxWidth = "300px";
+    popup.style.padding = "10px";
+    popup.style.background = "#ffffe0";
+    popup.style.border = "1px solid #aaa";
+    popup.style.borderRadius = "6px";
+    popup.style.zIndex = 9999;
+    popup.style.fontSize = "14px";
+
+    popup.innerHTML = postElement.innerHTML;
+
+    document.body.appendChild(popup);
+
+    // 画面外に出ないように調整
+    if (popup.getBoundingClientRect().right > window.innerWidth) {
+        popup.style.left = (x - popup.offsetWidth - 10) + "px";
+    }
+}
+document.addEventListener("click", function (e) {
+    const popup = document.getElementById("anchorPopup");
+    if (!popup) return;
+
+    if (!e.target.closest("#anchorPopup") &&
+        !e.target.closest(".anchor")) {
+        popup.remove();
+    }
+});
+
 
 </script>
 
