@@ -367,21 +367,11 @@ colorBoxes.forEach(box => {
         <form method="post" action="/thread/new">
             スレッドタイトル<br> <input type="text" name="title"><br>
             名前<br> <input type="text" name="name"><br>
-            本文<br> <textarea name="message"></textarea><br>
-            画像<input type="file" id="fileInput" accept="image/*">
+            本文<br> <textarea name="message" id="messageArea"></textarea><br>
+            画像<input type="file" id="fileInput" accept="image/*"><br>
             <button type="submit"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW6NQ-F5TTDCPdDXsGDAhndbaAtSTZcprBavF0TfPs76b9VdWni0Nod2sECuEgXMl9Dec&usqp=CAU" height ="20" width="20" />スレッドを立てる</button>
         </form>
     </div>
-    <DIV class="suretate">
-    <form method="post" action="/set_theme">
-        <h3>テーマ</h3>
-        <select name="theme">
-            <option value="d">デフォルト</option>
-            <option value="m">Midnight Tokyo</option>
-        </select>
-        <button type="submit">変更</button>
-    </form>
-    </DIV>
 <script>
 // 自動アップロード（fileInputを選択した瞬間に走る）
 document.getElementById("fileInput").addEventListener("change", async function () {
