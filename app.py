@@ -178,13 +178,16 @@ def nl2br(s):
 def aa():
     return render_template('aa.html')
 
-@app.route('/news')
-def news():
-    return render_template('news.html')
+
 
 @app.route('/uekirikarikiri')
 def uekirikarikiri():
     return render_template('uekirikarikiri.html')
+
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
 
 
 # -------------------------------

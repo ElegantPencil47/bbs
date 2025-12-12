@@ -11,6 +11,16 @@ body{
 background-color: #fffacd;
 }
 
+.htn{
+
+    /* 等幅フォントを指定 */
+    font-family: 'Monotype', 'MS UI Gothic', monospace;
+    /* ホワイトスペースの扱いの設定（preタグなら不要な場合が多いですが、念のため） */
+    white-space: pre;
+  
+
+}
+
 button {
             background: #ffffff;
             border: 1px solid #000000;
@@ -46,7 +56,7 @@ color: #000000;
 
 <!-- 保存した文章表示 -->
 <h2>保存したAA・コピペ</h2>
-<div id="savedText"></div>
+<div id="savedText" class="htn"></div>
 
 <script>
   const input = document.getElementById('inputText');
