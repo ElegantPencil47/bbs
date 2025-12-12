@@ -8,11 +8,52 @@
 
 </head>
 <style>
+
+
+a.btn--orange {
+  color: black;
+padding: 12px;
+  background-color: white;
+  border-bottom: 5px solid #696969;
+}
+a.btn--orange:hover {
+  margin-top: 3px;
+  color: black;
+  background: white;
+  border-bottom: 2px solid #696969;
+}
+a.btn--shadow {
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+}
 a {
         text-decoration: none;
 color: #000000;        
 } 
+button{
+  position: relative;
+  display: inline-block;
+background: white;
+  transition: .3s;
+}
+button: hover{
+background: #d3d3d3;
+}
+button::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 2px;
+  background-color: #31aae2;
+  transition: .3s;
+  transform: translateX(-50%);
+}
 
+button:hover::after{
+  width: 100%;
+}
 
 nktidksg {
   position: relative;
@@ -444,6 +485,6 @@ document.addEventListener("click", function (e) {
 
 
 </script>
-
+<a href="{{ url_for('help') }}" style="font-size:20px;" class="btn btn--orange btn--cubic btn--shadow"><img src="https://www.silhouette-illust.com/wp-content/uploads/2016/05/1327-600x600.jpg" width="40">ヘルプ・ご案内  ></a>
 </body>
 </html>
