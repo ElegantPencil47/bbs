@@ -131,7 +131,7 @@ def new_thread():
     # 修正：nameが空欄の場合に "書き人知らず" を設定
     name = request.form.get("name")
     if not name:
-        name = "書き人知らず@エクリプス"
+        name = "書き人知らず"
     # 入力された名前に<br>を追加
     
 
