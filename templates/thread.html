@@ -76,11 +76,17 @@ nktidksg {
 #fixed {
   position: fixed;
   /*基準を画面の左上に*/
-  bottom: 0;
-  right: 0;
+  bottom: 10px;
+  right: 10px;
   /*余白が入らないように*/
   margin: 0;
   /*以下装飾*/
+}
+
+#fixed:hover {
+  position: fixed;
+  /*基準を画面の左上に*/
+  bottom: 15px;
 }
 
 .nktidksg:before {
@@ -173,7 +179,7 @@ button:hover::after{
 </style>
 <body class="theme-{{theme}}">
 <a href="/">← スレッド一覧に戻る</a>
-<h1>{{ thread[1] }}</h1>
+<h1 id="top">{{ thread[1] }}</h1>
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 <ul id="posts">
   {% for post in posts %}
@@ -219,9 +225,9 @@ AAの投稿<div>
 
 
 </div>
-
+<a href="#top">
 <img src="/static/pagetop.png" height ="80" id="fixed">
-
+</a>
 
 <script>
 // ランダムなHEXカラーコードを生成する関数
