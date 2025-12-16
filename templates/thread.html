@@ -393,97 +393,154 @@ document.querySelectorAll('.color-box').forEach(box => {
 
 
 </script>
+
 <script>
-
-// 安価クリックのポップアップ処理
-document.addEventListener("click", function (e) {
-    const anchor = e.target.closest(".anchor");
-    if (!anchor) return;
-
-    const targetNum = anchor.dataset.target;
-    const targetPost = document.getElementById(targetNum);
-
-    if (!targetPost) return;
-
-    showPopup(targetPost, e.pageX, e.pageY);
-});
-
-// >>数字 を <span class="anchor" data-target="3">>>3</span> に変換
-function convertAnchors(text) {
-    return text.replace(/&gt;&gt;(\d+)/g, (match, num) => {
-        return `<span class="anchor" data-target="${num}">&gt;&gt;${num}</span>`;
-    });
+// --- ユーティリティ ---
+// HTML を安全にエスケープする（XSS対策）
+function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
 }
 
-function checkValues() {
-    
-
-
-
-    const selectElement = document.getElementById("mySelect");
-    const selectedValue = selectElement.value;
-    if (selectedValue === "option1") {
-        const textarea = document.getElementById("messageArea");
-        textarea.value += "\n" + "." + "　　　　　　　 |:;:;:;:;:;:;:;:;:;:;:;:;:;:i;:;:;:;:;:;:;:;:;:;:;:;:;|" + "\n" + "　 　 　 　 　 |;:;:_:;:_:;:_:;:_;:;_:;:l:;_;:_:;:_:;:_:;:_;:_;|" + "\n" + "　　　　　　　|＿＿＿＿＿_|＿＿＿＿＿|" + "\n" + "　　　　　　　|　三|　　＿ 　 　 ＿　　 |三 !" + "\n" + "　　　　　　　|　三|　 三ｼ　　　ヾ三　 |三 |" + "\n" + "　　　　　　　|　三′　 .._　　　　 _,,..　 i三 |" + "\n" + "　　　　　　　ト､ﾆ|　<でiﾝヽ　 ;'iｨでiﾝ |三.|" + "\n" + "　　　　　　　', iヽ!　 ､　‐' /　 !､　ーシ |ｼ,ｲ" + "\n" + "　　　　　　　 i,ヽﾘ　　　　,' :　 !.　　　　 |ｆ ﾉ" + "\n" + "　　　　　　　　ヾ!　　　　i ,､　,..､ヽ　　　lノ" + "\n" + "　　　　　　　　　|　　　　　 _　_　　　 ｲ l 　　　　　　画像も張らずにスレ立てとな？" + "\n" + "　　　　　　 　 　 l　　　 ,ｨﾁ‐-‐ヽ　　i /、" + "\n" + "　　　　　 　 　 　 ﾞi､　　 ゝ､二ﾌ′ ﾉ/'＼" + "\n" + "　　　　 　 　 　 　 | ＼　　ｰ一 ／ /　　 _,ﾝ'ﾞ＼" + "\n" + "　　　　　　　　　,ィ|､　 ＼　　　　 /_,､-' _,.-''´ ｀丶､＿_" + "\n" + "　　　　　 ＿, イ　 | ヽ＿ 二＝''　_,. -''´　　''''''´´　 ｀`ｰ";
-    } else if (selectedValue === "option2") {
-        const textarea = document.getElementById("messageArea");
-        textarea.value += "\n" + "." + "　　　　　　　/':.:.:.:.:.:.:.:.:.:.:|.:.:.:.:.:.:.:＼　ヽ:　/_／" + "\n" + "　　　　 　 /.:.:.:.:.:/:.:.:.:,:.:.:|:.:.:ヽ.:.:.:.:.:.',　} /:.:.|" + "\n" + "　　　　　 l{:.:.:.:|:.l:.:.:.:/l/'ハ:､.:.:ヽ.:.:.:.:} .{::.:.:.:.:l" + "\n" + "　　　　　 ﾊ:.:.:.|:|:.／/ ノ ‐ヾ＼_|l.:.:.:i　}::.:.:.:.:.'," + "\n" + "　　　　　　 ヽ:.:.{. ,:=､　　 =＝､ ﾉ.;./ /::.::.::.:.:.:.'," + "\n" + "　　　　　　　　ヽゝ　 ､　　　　　ｿ!※}::.::.::.::.:.:." + "\n" + "　　　　　　　　　{ ｀ヽ、ヽﾌ　／ｲ　 /‐､_:.:.:.:.:.:." + "\n" + "　　f＾)＾)＾)＾)＾)＾)＾)＾)＾)＾)「-､_,{※}　ｒ′ヽ:.:.:.:." + "\n" + "ｒ''⊇、　 　 　 　 　 　 　ｌ|ヽ_/　 } t′　　',:.:.:." + "\n" + " 　{=='､　　　　　 　　　ｌ|!;r'!※{ ｔ′　　　',:.:.:" + "\n" + "ﾊ,,_う´不快なスレを　 　l;;l}.　 {,ｺ 　 　　　!:." + "\n" + "_{'V|ｌ　　　　　　　　　　 ｌ;;;{※.},ｺ　　　　　 !、" + "\n" + "ゞ　|l 　立てるなですぅ  ｌ|.l;;{　　},ｺ　　　　　　}" + "\n" + "＼,,|ｌ　 　　　　　　　　　 l| L{.※{,ｺ　　　　　 /|" + "\n" + "　 |ｌ＿＿＿＿＿＿＿＿l|,rn}　 },ｺ＼　　 ／　〉 ";
-    } else if (selectedValue === "option3") {
-        const textarea = document.getElementById("messageArea");
-        textarea.value += "\n" + "." + "　＿__l＿__　 /　／/" + "\n" + "　 ﾉ l　Jヽ　〔／　/ 　　　　　　 .,　-――-　､ _ _／ヽ" + "\n" + "　　ノﾇ　　　　　 / 　　　　　　／: : : : : : : : : : : : : : : : !-.-.‐.‐.‐. ｧ" + "\n" + "　 ／ ヽ､_　　　/ 　,ｨ＿＿∧': ／　　　. . . : : : : : /: :/: : : :｀: :＜" + "\n" + "　ム　ヒ　　 　7_／/::::::::::::::::〉: : : : : : :.／: : : :,:イ: :∧: :ｉ: : . .＼:｀ヽ　　　○" + "\n" + "　月　ヒ　　　 　　/／:::::::::::/: : : : : : :/ : : : ／ /: /　 ',: |: : ﾊ: : ヽ 　＼" + "\n" + "　ノ l ヽヽノ　　　//:::::::::::::/: /: : : : :/: :-∠＿/_:/　　 |: |: : :∧: : :ﾍ､ 　'," + "\n" + "　　　￣￣ 　　./〈:::::::::::::/: /: : : : :/: :.Ｘ　 　/／ 　 ＼!∧: : : :',: : : ﾊ＼j" + "\n" + "　__|＿ ヽヽ　 ｛ /＼:::::/: /|: : : : /i／ 　＼　　　　　 /｀ｰ∨: : :ｌ: : : :.!　 　　　　　　o" + "\n" + "　　| ー　　　　 ￣フ　:./´ !: : : / ￣￣￣ 　 　 　 ＿＿＿∨: :ｉ:. : : :!" + "\n" + "　　| ヽｰ　 　　 .／ ./ｲ!　 |: : /　　　　　　__　　　 ＼　 　 /!: ;ｲ::. : :.i〉" + "\n" + "　　　|　　　　　 > : : .::|:.ヽ_j: /　　　　　／:::::｀:.､　　　＼ /､|:/:.|:::. : ,'" + "\n" + "　　　|　　　 　　＼: : .:!:.:/ |/ ＼　 　 /::::::::::::::::::〉　　 　 !　}':.:.:|∨:/　　　　　o" + "\n" + "　　　|　　　　　ﾄーゝ.:|:/　　　　＞ ､ｊ:::::::::::::::::/  　　　, ｲ-<:.:.;ｲ:.Ⅳ" + "\n" + "　　　|　　　　　|: : : : .:|'　　　／　　 |｀ ｰrｰ-イ--‐ ' 　|:.:.:.∨:.!: |" + "\n" + "　　　|　　　 　 i : : : : : !　　　〉 　 　 | 　/ヽ 　ヽ　　o　ｊ:.:.:.:.:. : !:...";
-   
-    } else if (selectedValue === "option4") {
-        const textarea = document.getElementById("messageArea");
-      textarea.value += "\n" + "." + "　　　　 　 、　　　　　　　　　 　 八" + "\n" + "　　 　 　 / ＼　　　　　　 　 　 /　∨" + "\n" + "　　 　　 ｲ´＼＼、　　 ＿_ 　 /　│∨" + "\n" + "　　　 　 i|　 x≧､＼'~￣｀¨`く､､ |　 ∨" + "\n" + "　　　 　 |　／´ /′〈 　 、　 　 ＼ﾄ、　〉" + "\n" + "　　　 　 |　　　/　,／ﾍ　乂＿＿, ヽ｀¨｀ヽ" + "\n" + "　　　 ／　 　 /彡l l | {　〔Ll＼＿__　∨ 　ﾞ ､" + "\n" + "　　 / ,,　　　/__zx==|:l＼ ﾏﾞ气￣｀ア ∨　　ゝ" + "\n" + "　 ./ ,ｲ 　j!　ﾄﾞ´ (　):| |:l ﾄ､ゝ‐′, ‐､　 ∨　　 ＼＿," + "\n" + "　/／{ 　 /r‐ﾐｚ彡イ| l l | |ﾞ≧￣`ｰ'∨丿'、 丶「￣" + "\n" + ". ″　|　 / ｀T′　　厂⌒~ i>､　∪ノ_乂　 ＼ }ﾉ" + "\n" + "　　　‘ｘ/　|　＼ u　ゝ　　 　丿 ／／⌒＼　}丿" + "\n" + "　 　 　 ｀'ﾍﾄ＼ｘ≧ｰz--===彡く / ∩/iぃ}ノ" + "\n" + "　　　　　 r《ﾞ「∩＼,ｼ＾{~~,不￣ﾉ r┘′ ﾉ､" + "\n" + "　　 　 　 ﾞY´　r'ﾌ'´　　V´ |　＼　`ｰ-ｫ_　_)," + "\n" + "　　　　 　 ｀ｧ　iく､_　 /⌒ヽ　 　 　　 ＼￣/　　 ,,...-‐──､、" + "\n" + "　　　　 　 /　 |　 ／7　　　》-=--　　ノ￣ ,. ‐'　　　　　 　 ＼" + "\n" + "　　 　 　 ｛ 　 }／　/　 　 /／￣`＼_｀)／´　　　　　　　　　　　＼" + "\n" + "　　　　 　 ｀¨´　　/ 　　 / :{　　 ヽ,　//く　　　　　　　 　 　 　 ｀ﾐ　＼" + "\n" + "　　　　　　 　 　 /　　.／ 　|　　　 ∨/ 　 ﾄ､　　　　　　 　 　 　　}`ヽ,}" + "\n" + "　　　　　　　　 /　　 /　 　 ∨　　　〈　　　}　｀`～､,,＿＿＿＿　 |　′" + "\n" + "　　　　　　 　 /　　 /　 　 　 ＼　 　 }　 ／　　　　　　 　 　 　 }　|" + "\n" + "　　　　 　 　 i′　 〈ｰ‐'⌒ｰ-ｧ'⌒ヽ､∨　　　　　　　　　　 　 　∨" + "\n" + "　　　　　 　 (＿＿__〉　　 　 (＿＿＿_}";
-    } else if (selectedValue === "option5") {
-        const textarea = document.getElementById("messageArea");
-      textarea.value += "\n" + "." + "　　　　　　　　　　　　　 　 　 　 　 　 　 　 Y´　　｀." + "\n" + "　 ｨ　‥ ‐　､　　　　　　　　　　　　　　　　 |　　　　'," + "\n" + "　{　　　　 　　 丶､　　　　　　　　　　　　　 |　　　　 ',　　　　　　　　　　　　　　　　　 ＿" + "\n" + ".八　　　　　　　　　丶､　　　　　　　　　　　|　　　　　}　　　　　　　　　　　　　,. ｨ＜: : : : : ｀ー―-､" + "\n" + "　　｀丶､　　　　　　　　＼　　 　 　 　 　 　 !　　　　　!　　　　　　 　　　　 ／: : : : : : : : : : : : : : : : ::." + "\n" + "　　　　　丶､　　 , '　　　　丶　　　　　　　　|　　　　 /　　　　　　　　　　 ,': : : : : : : : : : : : : : : : : : : ::!" + "\n" + "　　　　　 　　　､　　　　, ' 　 ､　　　　　　　/　　　 /　　　 　 　 　 　 _,.‥──────────-- .._" + "\n" + "　　　　　　　　　＼,　 '　　　　j丶､　　　　/ 　　　/|　　　　　　　　／: : : : : : : : : : : : : : : : : : : : : : : : : :: : : ｀丶" + "\n" + "　　　 　 　 　 　 　 ＼　　　 ノ　　 ヽ＿__j　　　　　} 　 　 　 　 　 {: : : : : : : : : : : : ／: : ￣ノ: : : : :7!--､: : :: : ::〉" + "\n" + "　　　　　　　　　　__ノ_　　　　　　　　／　　¨¨ 　　j　　　　　　　　､: : :r 7: : ､: :,イ: : : : ／彡:: ／＿',: : |: : : : /" + "\n" + "　　　　　　　 　,'´　　　¨─--..__　　　　　　　　　　|　　　　　　　　､＼ﾉﾉ､: ':ゝ彡':厂Kﾋﾃ,::::ノ i'rｯ ､.ﾉ: ::!: :.／" + "\n" + "　　 　 　 　 　 !　　　　　　　　　　 丶､　　 　 　 　 !　　　　　　　 ゝ､三彡': : : : ノ 　　　　,　　:|´¨　{: : |¨´" + "\n" + "　　　　　　　　 ヽ_　　　　　　　 　　　　 丶､　　　　|　　　　　　　ミゝ : : : ／!´　 　　　　 ｨ _　..j　　八ゝ､_" + "\n" + "　　　　　　　 ,.．'　　丶 ､　　　　　　　　　　　 丶 ､j　　　　　　　　ゝ: : : ﾉ､　､　　　 　　　,._｀¨　　/ゝ=＜彡" + "\n" + "　　　　　　　{　　　　　　　､￣丶､　　 　　　　　　　丶､　　　　　,..　イ､:　: ＼ヽ　　　　ｰr=='ヽ , '　｀丶_)" + "\n" + "　　　　　　　}ゝ　　　　　　　丶､ 　 丶､　　　　　　r---ヽ_,.　≦二ヽ､　＼:　:丶＼　　　｀ー‐'ｲ　＜さぁお前の罪を数えろ" + "\n" + "　　　　　　 ﾉ　　　､　　　　　　　丶､　 　丶､　　　l　　　　}!:　:　:　ヽ:丶　 ､:　:　ヽ｀ー,､＿／" + "\n" + "　　　　　　{　　　　　､　　　　　　　　　｀¨丶､ ﾌ｀丶＼　ノ ':　:　:　:　:　:.',　 ', ､:　: ヽ /" + "\n" + "　　　　　　＼　　　　7,､､.._　　　　　　　　　　　ﾆﾆ=､: ¨:　:　:　:　:　:　:　}　　',: ､:　: ､j､" + "\n" + "　　　　　　　 ＼　　/Z=// 丶､　　　　　　　　/　　 } !:　:　:　:　:　:　:　: ! i!.　',:　､: :/:::}" + "\n" + "　　　　　　　　　丶||r='{,'　　　　　　｀¨　──===ｧイ:　:　:　:　:　:　:　: / !|: 　|:　:v7/:7" + "\n" + "　　　　　　　　　／:＞､_!_＿＿＿＿＿＿　,. イ´　:　:　:　:　:　:　:　:　/ //　　l:　:|::::::ﾉ!" + "\n" + "　　　　　　　　　|:　:　:　:　:　:　:　:　:　:　／　: |:　:　:　:　:　:　:　:　:　/ //　　　|:　:}:://" + "\n" + "　　　　　　　　　',:　:　:　:　:　:　:　:　:　/:　: /:. !:　:　:　:　＼:　:　: ／ //　　　　!:　|//!" + "\n" + "　　　　　　　　　 ',:　:　:　:　:　:　:　:　/:　／丶:!:　:　:　:　:　7- イ　／'　　　　　|:　|/:::|";  
-  
-    } else {
-        alert("アスキーアートを選択してください");
-
-}
+// >>n と &gt;&gt;n の両方に対応してアンカーに変換
+function convertAnchorsHtml(escapedHtml) {
+    // escapedHtml はすでにエスケープ済み (& -> &amp; など)
+    // なので &gt;&gt;123 と >>123 の両方を扱う
+    return escapedHtml
+      .replace(/&gt;&gt;(\d+)/g, (m, n) => `<span class="anchor" data-target="${n}">&gt;&gt;${n}</span>`)
+      .replace(/>>(\d+)/g, (m, n) => `<span class="anchor" data-target="${n}">&gt;&gt;${n}</span>`);
 }
 
-function showPopup(postElement, x, y) {
-    // 既存のポップアップを消す
-    const oldPopup = document.getElementById("anchorPopup");
-    if (oldPopup) oldPopup.remove();
+// 画像URL を <img> に置換（既にエスケープされた中身に対して使う）
+function convertImageUrlsHtml(html) {
+    // URL 正規表現（簡易）
+    const re = /(https?:\/\/[^\s"']+\.(?:jpg|jpeg|png|gif|bmp|webp))/gi;
+    return html.replace(re, (url) => `<img src="${url}" alt="image" style="max-height:120px;">`);
+}
 
-    // 新しいポップアップ生成
-    const popup = document.createElement("div");
-    popup.id = "anchorPopup";
-    popup.style.position = "absolute";
-    popup.style.left = x + "px";
-    popup.style.top = y + "px";
-    popup.style.maxWidth = "300px";
-    popup.style.padding = "10px";
-    popup.style.background = "#ffffe0";
-    popup.style.border = "1px solid #aaa";
-    popup.style.borderRadius = "6px";
-    popup.style.zIndex = 9999;
-    popup.style.fontSize = "14px";
+// メッセージを表示用 HTML に変換：エスケープ→改行→アンカー→画像
+function messageToHtml(rawMessage) {
+    if (!rawMessage) return "";
+    // 1) エスケープ
+    let h = escapeHtml(rawMessage);
+    // 2) 改行を <br>
+    h = h.replace(/\r?\n/g, '<br>');
+    // 3) アンカー変換
+    h = convertAnchorsHtml(h);
+    // 4) 画像URL変換（最後に）
+    h = convertImageUrlsHtml(h);
+    return h;
+}
 
-    popup.innerHTML = postElement.innerHTML;
+// --- DOM に投稿を追加する ---
+const postsList = document.getElementById("posts");
+function addPostToDOM(post) {
+    const li = document.createElement('li');
+    li.className = 'color-box';
+    // idを post.num として付ける（アンカーポップアップで参照）
+    li.id = String(post.num);
 
-    document.body.appendChild(popup);
+    // post のフィールドはサーバーから来る raw text（安全のため messageToHtml を使う）
+    const nameHtml = escapeHtml(post.name || "名無しさん");
+    const msgHtml = messageToHtml(post.message || "");
 
-    // 画面外に出ないように調整
-    if (popup.getBoundingClientRect().right > window.innerWidth) {
-        popup.style.left = (x - popup.offsetWidth - 10) + "px";
+    li.innerHTML = `#${post.num} <b>${nameHtml}</b><br><div class="htn">${msgHtml}</div><br><span>(${escapeHtml(post.created_at || "")})</span>`;
+    postsList.appendChild(li);
+
+    // 着色（任意）
+    const color = generatePastelColor();
+    li.style.backgroundColor = color;
+    li.style.setProperty('--after-color', color);
+}
+
+// --- 初期ロード: JSON を取って描画する ---
+// 既にテンプレートでレンダリングしているなら、その要素は空にするか無視すること
+async function fetchAndRenderPosts() {
+    try {
+        const res = await fetch(`/thread/${threadId}/posts_json`);
+        if (!res.ok) {
+            console.error('posts_json error', res.status);
+            return;
+        }
+        const posts = await res.json();
+        postsList.innerHTML = '';
+        posts.forEach(p => addPostToDOM(p));
+    } catch (err) {
+        console.error('fetch posts error', err);
     }
 }
-document.addEventListener("click", function (e) {
-    const popup = document.getElementById("anchorPopup");
-    if (!popup) return;
 
-    if (!e.target.closest("#anchorPopup") &&
-        !e.target.closest(".anchor")) {
+// --- Socket.IO の新着を受け取った時の処理 ---
+// 既にある addPostToDOM を利用する（post は JSON）
+socket.on('new_post', post => {
+    // 新着は num 等を持っているはず
+    addPostToDOM(post);
+});
+
+// --- イベント委譲: アンカークリックでポップアップ表示 ---
+document.addEventListener('click', function(e) {
+    const anchor = e.target.closest('.anchor');
+    if (!anchor) return;
+    const targetNum = anchor.dataset.target;
+    if (!targetNum) return;
+
+    const targetEl = document.getElementById(String(targetNum));
+    if (!targetEl) {
+        // 該当レスがまだ読み込まれてない、もしくは存在しない
+        alert('該当レスは見つかりませんでした: ' + targetNum);
+        return;
+    }
+    // 座標はマウス位置（ページ座標）
+    showPopup(targetEl, e.pageX, e.pageY);
+});
+
+// ポップアップの表示（渡すのは DOM 要素）
+function showPopup(postElement, pageX, pageY) {
+    const old = document.getElementById('anchorPopup');
+    if (old) old.remove();
+
+    const popup = document.createElement('div');
+    popup.id = 'anchorPopup';
+    popup.style.position = 'absolute';
+    popup.style.left = pageX + 'px';
+    popup.style.top = pageY + 'px';
+    popup.style.maxWidth = '360px';
+    popup.style.padding = '8px';
+    popup.style.background = '#ffffe0';
+    popup.style.border = '1px solid #aaa';
+    popup.style.borderRadius = '6px';
+    popup.style.zIndex = 99999;
+    popup.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
+    popup.style.fontSize = '13px';
+    // 中身は target のメッセージ表示部だけにする（余計なボタンなどは含めない）
+    const content = postElement.querySelector('.htn')?.innerHTML || postElement.innerHTML;
+    popup.innerHTML = content;
+    document.body.appendChild(popup);
+
+    // 右端はみ出し防止
+    const rect = popup.getBoundingClientRect();
+    if (rect.right > window.innerWidth) {
+        popup.style.left = (pageX - rect.width - 20) + 'px';
+    }
+    if (rect.bottom > window.innerHeight) {
+        popup.style.top = (pageY - rect.height - 20) + 'px';
+    }
+}
+
+// ポップアップ外をクリックしたら消す
+document.addEventListener('click', function(e) {
+    const popup = document.getElementById('anchorPopup');
+    if (!popup) return;
+    if (!e.target.closest('#anchorPopup') && !e.target.closest('.anchor')) {
         popup.remove();
     }
 });
 
+// --- 初回レンダリングを実行 ---
+fetchAndRenderPosts();
 
+// （必要なら）一定間隔で再フェッチする場合はここで setInterval(fetchAndRenderPosts, 5000);
 </script>
 <br>
 <a href="{{ url_for('help') }}" style="font-size:20px;" class="btn btn--orange btn--cubic btn--shadow"><img src="https://www.silhouette-illust.com/wp-content/uploads/2016/05/1327-600x600.jpg" width="40">ヘルプ・ご案内  ></a>
