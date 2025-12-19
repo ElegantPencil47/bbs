@@ -111,13 +111,7 @@ nktidksg {
   border: solid 3px white; 
   border-radius: 50%;
 }
-.modoru{
-background-color: black;
-  position: fixed;
-  /*基準を画面の左上に*/
-  top: 10px;
 
-}
 .am{
   background-image: linear-gradient(0deg, #ffffff, #999999 0%, #525252);
 color: white;
@@ -195,10 +189,11 @@ button:hover::after{
 
 </style>
 <body class="theme-{{theme}}">
+
 <br>
 <br>
 <br>
-<div class=modoru><a href="/" class="am">← スレッド一覧に戻る</a></div>
+<a href="/" class="am">← スレッド一覧に戻る</a>
 <h1 id="top">{{ thread[1] }}</h1>
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 <ul id="posts">
@@ -359,40 +354,34 @@ function convertImageUrls(text) {
     });
 }
 
-// 投稿をDOMに追加 (色付け機能を追加)
+function convertAnchors(text) {
+    return text.replace(/&gt;&gt;(\d+)/g, (match, num) => {
+        return `<span class="anchor" data-target="${num}">&gt;&gt;${num}</span>`;
+    });
+}
+
+
 function addPostToDOM(post) {
     const li = document.createElement("li");
-    li.classList.add('color-box'); // 新しく追加される投稿にもクラスを追加
+    li.classList.add("color-box");
+    li.id = post.num;
 
     const safeName = safeNl2br(post.name);
-    const escapedAndNl2brMessage = safeNl2br(post.message);
-let msg = escapedAndNl2brMessage;
-msg = convertImageUrls(msg);
-msg = convertAnchors(msg);  // ←追加
+    let msg = safeNl2br(post.message);
+    msg = convertImageUrls(msg);
+    msg = convertAnchors(msg);
 
-const finalMessage = msg;
+    li.innerHTML = `
+      ${post.num} <b>${safeName}</b>
+      <div class="htn">${msg}</div>
+      <span>(${post.created_at})</span>
+    `;
 
-
-    li.innerHTML = `${post.num} <b>${safeName}</b> <br><div class="htn">${finalMessage}</div><span>(${post.created_at})</span>`;
     postsList.appendChild(li);
 
-    // 新しい投稿要素に対して色を適用する
     const color = generatePastelColor();
     li.style.backgroundColor = color;
     li.style.setProperty('--after-color', color);
-}
-
-// 初期ロードで投稿一覧を取得
-async function fetchPosts() {
-    let res = await fetch(`/thread/${threadId}/posts_json`);
-    if (res.ok) {
-        let posts = await res.json();
-        postsList.innerHTML = "";
-        // ここではすでにDjangoテンプレートエンジンによってレンダリングされた要素が存在する可能性があるため、
-        // 初期ロード時にDOMをクリアしてJSONから再構築するか、既存要素の色を変更する必要があります。
-        // 現在のコードは既存の要素は色付けされていますが、fetchPostsで再構築すると色がリセットされます。
-        // 初期ロード時のテンプレートレンダリングを削除し、fetchPosts()のみに依存させるのが一番簡単です。
-    }
 }
 
 
@@ -439,6 +428,8 @@ document.querySelectorAll('.color-box').forEach(box => {
 
 </script>
 <script>
+
+
 
 // 安価クリックのポップアップ処理
 document.addEventListener("click", function (e) {
@@ -519,7 +510,7 @@ function showPopup(postElement, x, y) {
     }
 }
 document.addEventListener("click", function (e) {
-    const popup = document.getElementById("anchorPopup");
+    const anchor = e.target.closest(".anchor");
     if (!popup) return;
 
     if (!e.target.closest("#anchorPopup") &&
