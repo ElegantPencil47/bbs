@@ -29,22 +29,7 @@ margin: 30px;
 
 }
 
-.anim-box.slidein.is-animated {
-  animation: slideIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
- 
-@keyframes slideIn {
-  0% {
-    transform: translateX(180px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-  }
-  40%,100% {
-    opacity: 1;
-  }
-}
+
  
 
 .tuki{
@@ -170,7 +155,8 @@ margin: 20px;
 <br>
 <br>
 <br>
-<div class="header" class="anim-box>
+<div class="header">
+
 <img src="/static/eclipse.png" height="60">
 
 <a href="{{ url_for('aa') }}" style="font-size:12px;" class="btn btn--orange btn--cubic btn--shadow"><img src="https://tshop.r10s.jp/msproject/cabinet/jdm/imgrc0092897601.jpg?fitin=720%3A720" width="30">AA・コピペ保管庫  ></a>
