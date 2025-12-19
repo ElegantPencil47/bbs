@@ -29,6 +29,24 @@ margin: 30px;
 
 }
 
+.anim-box.slidein.is-animated {
+  animation: slideIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+ 
+@keyframes slideIn {
+  0% {
+    transform: translateX(180px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+  }
+  40%,100% {
+    opacity: 1;
+  }
+}
+ 
+
 .tuki{
 border: 10px ridge #008000;
 background-color: black;
@@ -147,12 +165,12 @@ margin: 20px;
  
     </style>
 </head>
-<img src="/static/jupiter.JPG" class="yoko">
+<img src="/static/jupiter.png" class="yoko">
 <br>
 <br>
 <br>
 <br>
-<div class="header">
+<div class="header" class="anim-box>
 <img src="/static/eclipse.png" height="60">
 
 <a href="{{ url_for('aa') }}" style="font-size:12px;" class="btn btn--orange btn--cubic btn--shadow"><img src="https://tshop.r10s.jp/msproject/cabinet/jdm/imgrc0092897601.jpg?fitin=720%3A720" width="30">AA・コピペ保管庫  ></a>
@@ -160,9 +178,6 @@ margin: 20px;
 <a href="#sure" style="font-size:12px;" class="btn btn--orange btn--cubic btn--shadow"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW6NQ-F5TTDCPdDXsGDAhndbaAtSTZcprBavF0TfPs76b9VdWni0Nod2sECuEgXMl9Dec&usqp=CAU" width="30">新規スレッド作成  ></a>
 </div>
 
-
-
-<h2>「天文学」から「民俗学」までの学問を手広くカバーする匿名掲示板</h2>
 
 <div class="tuki">
 <h3>今日の月齢</h3>
