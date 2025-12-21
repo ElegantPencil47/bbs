@@ -1,4 +1,4 @@
-
+on
 
 
 <!DOCTYPE html>
@@ -509,6 +509,13 @@ function showPopup(postElement, x, y) {
         popup.style.left = (x - popup.offsetWidth - 10) + "px";
     }
 }
+
+// ポップアップ内に「閉じるボタン」を追加
+popup.innerHTML = `<div><button id="closePopup">閉じる</button></div>` + postContent;
+document.getElementById("closePopup").addEventListener("click", () => {
+    popup.remove();
+});
+
 document.addEventListener("click", function (e) {
     const anchor = e.target.closest(".anchor");
     if (!popup) return;
@@ -518,6 +525,15 @@ document.addEventListener("click", function (e) {
         popup.remove();
     }
 });
+function onAnchorTap(e) {
+    const anchor = e.target.closest(".anchor");
+    if (!anchor) return;
+
+    showPopup(anchor, e.changedTouches ? e.changedTouches[0].clientX : e.clientX, 
+                      e.changedTouches ? e.changedTouches[0].clientY : e.clientY);
+}
+document.addEventListener("click", onAnchorTap);
+document.addEventListener("touchend", onAnchorTap);
 
 
 </script>
