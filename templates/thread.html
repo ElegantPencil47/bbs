@@ -17,11 +17,19 @@
 /* AAHubからSaitamaarフォントを読み込む設定 */
 @font-face {
   font-family: "Saitamaar";
-  src: url("fonts.aahub.org") format("woff2"),
-       url("fonts.aahub.org") format("woff"),
-       url("fonts.aahub.org") format("truetype");
+  /* GitHubのrawリンクを使用して直接読み込む例 */
+  src: url("cdn.jsdelivr.net") format("woff2"),
+       url("cdn.jsdelivr.net") format("woff");
   font-display: swap;
 }
+
+.aa {
+  font-family: "Saitamaar", "MS PGothic", "ＭＳ Ｐゴシック", sans-serif !important;
+  white-space: pre;
+  font-size: 16px;
+  line-height: 1.1;
+}
+
 
 
 h1 {
