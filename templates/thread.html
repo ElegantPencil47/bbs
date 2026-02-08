@@ -356,14 +356,25 @@ function safeNl2br(text) {
     escapedText.textContent = text;
     return escapedText.innerHTML.replace(/\r?\n/g, '<br>');
 }
-
-// 画像URLを<img>に変換する関数（全サイト対応）
 function convertImageUrls(text) {
+    // 1. まず、画像URL（jpg, png, gifなど）を<img>タグに置換
     const imgRegex = /(https?:\/\/[^\s]+?\.(?:jpg|jpeg|png|gif|bmp|webp))/gi;
-    return text.replace(imgRegex, (url) => {
-        return `<img src="${url}" alt="Image" height ="120">`;
+    
+    // 2. 次に、画像以外のURLを<a>タグに置換（すでに<img>のsrc属性になったものは除外する工夫が必要）
+    // 一番簡単な方法は、まずURL全体を識別し、拡張子で条件分岐することです。
+    const urlRegex = /(https?:\/\/[^\s]+)/gi;
+
+    return text.replace(urlRegex, (url) => {
+        // 末尾が画像拡張子かどうか判定
+        if (url.match(/\.(?:jpg|jpeg|png|gif|bmp|webp)$/i)) {
+            return `<br><a href="${url}" target="_blank"><img src="${url}" alt="Image" style="max-height:120px; display:block;"></a>`;
+        } else {
+            // 画像以外は普通のリンクにする
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+        }
     });
 }
+
 
 function convertAnchors(text) {
     return text.replace(/&gt;&gt;(\d+)/g, (match, num) => {
