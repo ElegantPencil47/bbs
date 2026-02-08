@@ -370,7 +370,7 @@ function convertImageUrls(text) {
             return `<br><a href="${url}" target="_blank"><img src="${url}" alt="Image" style="max-height:120px; display:block;"></a>`;
         } else {
             // 画像以外は普通のリンクにする
-            return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #0000FF;">${url}</a>`;
         }
     });
 }
