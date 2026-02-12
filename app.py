@@ -367,7 +367,7 @@ from flask import send_file
 
 @app.route("/download-db")
 def download_db():
-    return send_file("app.db", as_attachment=True)
+    return send_file("bbs.db", as_attachment=True)
 
 #===============================================================================================--
 @app.route('/upload', methods=['POST'])
