@@ -31,13 +31,25 @@ margin: 30px;
 
 }
 
-/* thread-item かつ zero-class の時に適用 */
-.thread-item.zero-class {
+.thread-item.kaso-class {
+    background-color: #a9a9a9 !important;
+}
+
+.thread-item.gomi-class {
     background-color: #696969 !important;
 }
 
-.thread-item.hot-class {
-    background-color: #dc143c !important;
+.thread-item.hutu-class {
+    background-color: #f8e58c !important;
+}
+.thread-item.sugo-class {
+    background-color: #ffea00 !important;
+}
+.thread-item.yoi-class {
+    background-color: #ec6800 !important;
+}
+.thread-item.kami-class {
+    background-color: #ea5506 !important;
 }
 
 .tuki{
@@ -350,7 +362,8 @@ margin: 20px;
   {% if most_popular_thread %}
     <div class="sure">
       <ul id="threads"> <!-- IDをわかりやすい名前に変更 -->
-        <li class="thread-item theme-{{ theme }}"> <!-- テーマクラスを追加 -->
+<li class="thread-item theme-{{ theme }} {% if count >= 0 %}kaso-class{% elif count >= 10 %}gomi-class{% elif count >= 40 %}hutu-class{% elif count >= 60 %}sugo-class{% elif count >= 100 %}yoi-class{% elif count >= 150 %}kami-class{% endif %}">
+
           <div class="sumaho">
             <a href="/thread/{{most_popular_thread.id}}" class="suretai">
               <span class="thread-title">{{most_popular_thread.title}}</span> 
@@ -370,7 +383,7 @@ margin: 20px;
     <h3>スレッド一覧</h3>
         <ul id="threads">  <!-- IDを posts ではなく threads に修正 -->
             {% for id, title, created_at, count in threads %}
-<li class="thread-item theme-{{ theme }} {% if count == 0 %}zero-class{% elif count >= 10 %}hot-class{% endif %}">
+<li class="thread-item theme-{{ theme }} {% if count >= 0 %}kaso-class{% elif count >= 10 %}gomi-class{% elif count >= 40 %}hutu-class{% elif count >= 60 %}sugo-class{% elif count >= 100 %}yoi-class{% elif count >= 150 %}kami-class{% endif %}">
 <div class="sumaho">
 
  
