@@ -41,6 +41,7 @@ def get_db():
     if db is None:
         db = g._database = sqlite3.connect(DATABASE)
         db.row_factory = sqlite3.Row
+        db.execute("PRAGMA journal_mode=WAL;") 
     return db
 
 @app.teardown_appcontext
@@ -231,35 +232,13 @@ def thread(thread_id):
     db = get_db()
     c = db.cursor()
 
-    if request.method == "POST":
-        # 修正：nameが空欄の場合に "書き人知らず" を設定
-        name = request.form.get("name")
-        if not name:
-            name = "書き人知らず"
-        # 入力された名前に<br>を追加
-        
-        name = name + "@エクリプス"
-        message = request.form.get("message")
-        #message = "\n" + message
 
-        try:
-            c.execute(
-                "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
-                (thread_id, name, message, datetime.now().isoformat())
-            )
-            db.commit()
-        except sqlite3.Error as e:
-            db.rollback()
-            print(f"Database error: {e}")
-        finally:
-            return redirect(url_for("thread", thread_id=thread_id))
 
 # スレッド情報
     c.execute("SELECT id, title FROM threads WHERE id=?", (thread_id,))
     thread_data = c.fetchone()
 
-# 投稿一覧を取得してレス番号（num）を付ける
-    c.execute("SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
+    c.execute("SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id DESC LIMIT 50", (thread_id,))
     rows = c.fetchall()
     posts_with_numbers = []
     for i, p in enumerate(rows):
@@ -286,14 +265,6 @@ def thread(thread_id):
 def ensure_theme_cookie():
     theme = request.cookies.get("theme")
     user_agent = request.headers.get("User-Agent", "").lower()
-
-    # スマホっぽいUAなら theme-s をデフォルトに
-    if theme is None:
-        if "iphone" in user_agent or "android" in user_agent:
-            g.set_default_theme = "theme-s"
-        else:
-            g.set_default_theme = "d"
-
 @app.after_request
 def apply_theme_cookie(response):
     if getattr(g, "set_default_theme", None):

@@ -13,10 +13,8 @@
 <style>
 
 
-/* AAHubからSaitamaarフォントを読み込む設定 */
 @font-face {
   font-family: "Saitamaar";
-  /* GitHubのrawリンクを使用して直接読み込む例 */
   src: url("https://hei-bu-jing.onrender.com/uploads/Saitamaar.woff2") format("woff2");
   font-display: swap;
 }
@@ -244,9 +242,10 @@ AAの投稿<div>
 
 
 
-  <button type="submit">
-    <img src="https://icooon-mono.com/i/icon_11449/icon_114490_256.jpg" height ="20" width="20">投稿する
-  </button>
+<button type="button" onclick="submitPost()">
+  <img src="https://icooon-mono.com/i/icon_11449/icon_114490_256.jpg" height="20" width="20">投稿する
+</button>
+
 </form>
 
 
@@ -256,34 +255,17 @@ AAの投稿<div>
 </a>
 
 <script>
-// ランダムなHEXカラーコードを生成する関数
+
 function generatePastelColor() {
-  // 色相 (Hue): 0から360の間でランダムな値。これにより色の種類（赤、青、緑など）が決まる。
   const hue = Math.floor(Math.random() * 360);
-
-  // 彩度 (Saturation): 60%から100%の間でランダムな値。鮮やかさを指定。
-  // 淡い色を生成するためには彩度を完全に低くしすぎないことが重要です。
   const saturation = Math.floor(Math.random() * 40) + 60; // 60% - 100%
-
-  // 明るさ (Lightness): 70%から90%の間でランダムな値。これが「淡さ」の鍵。
-  // 100%に近づくほど白に近くなります。
   const lightness = Math.floor(Math.random() * 20) + 70; // 70% - 90%
-
-  // CSSで使用できるhsl形式の文字列を返す
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
-
-
-
-
-// すべての .color-box 要素を取得する
 const colorBoxes = document.querySelectorAll('.color-box');
-
-// 各要素にランダムな色を適用する
 colorBoxes.forEach(box => {
     const color = generatePastelColor();
     box.style.backgroundColor = color;
-    // ここでCSSカスタムプロパティを設定する
     box.style.setProperty('--after-color', color);
 });
 
@@ -291,14 +273,12 @@ colorBoxes.forEach(box => {
 
 
 <script>
-// 自動アップロード（fileInputを選択した瞬間に走る）
 document.getElementById("fileInput").addEventListener("change", async function () {
     const file = this.files[0];
     if (!file) return;
 
     const formData = new FormData();
-    formData.append("imageFile", file);  // ← Flask の upload が受け取るキーは imageFile
-
+    formData.append("imageFile", file);  
     try {
         const res = await fetch("/upload", {
             method: "POST",
@@ -312,11 +292,9 @@ document.getElementById("fileInput").addEventListener("change", async function (
             return;
         }
 
-        // 自動で textarea に追加
         const textarea = document.getElementById("messageArea");
         textarea.value += "\n" + data.url;
 
-        // 表示
         const fullURL = data.url;
         document.getElementById("result").innerHTML =
             `<p>画像URL:</p>
