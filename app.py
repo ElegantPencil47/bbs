@@ -294,8 +294,7 @@ def add_post(thread_id):
     db = get_db()
     c = db.cursor()
 
-    db = get_db()
-    c = db.cursor()
+
     
     # 1. データの挿入
     c.execute(
@@ -330,7 +329,7 @@ def add_post(thread_id):
 @app.route("/thread/<int:thread_id>/posts_json")
 def posts_json(thread_id):
     db = get_db()
-    cur = db.execute( "SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id", (thread_id,) )
+    cur = db.execute( "SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,) )
     posts = cur.fetchall()
     return jsonify([ { "num": i+1,
     "name": (p["name"] if p["name"] else "書き人知らず"),
