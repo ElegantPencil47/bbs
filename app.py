@@ -37,12 +37,14 @@ online_users = {}  # {thread_id: set of sid}
 # データベース接続
 # -------------------------------
 def get_db():
-    db = getattr(g, "_database", None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-        db.row_factory = sqlite3.Row
-        db.execute("PRAGMA journal_mode=WAL;") 
-    return db
+    if 'db' not in g:
+        # timeoutを長くして「Database is locked」エラーを防ぐ
+        g.db = sqlite3.connect(DATABASE, timeout=20) 
+        g.db.row_factory = sqlite3.Row
+        # Renderのディスク性能を補うための設定
+        g.db.execute("PRAGMA journal_mode=WAL;")
+        g.db.execute("PRAGMA synchronous=OFF;") # 書き込み完了を待たずにレスポンスを返す
+    return g.db
 
 @app.teardown_appcontext
 def close_connection(exception):
@@ -313,7 +315,9 @@ def add_post(thread_id):
         
     }
 
-    # Socket.IOでブロードキャスト
+    db.commit() # まず確実にコミット
+
+# emitの前に少しだけ待機を入れるか、非同期で送るように変更
     socketio.emit("new_post", post_data, room=thread_id)
 
     return jsonify(post_data)
