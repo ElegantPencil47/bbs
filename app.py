@@ -18,7 +18,8 @@ from flask import Markup
 # -------------------------------
 app = Flask(__name__)
 app.secret_key = 'your_super_secret_key_here'
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
+socketio = SocketIO(app, async_mode='eventlet', cors_allowed_origins="*")
+
 CORS(app, resources={r"/*": {"origins": "*"}}) 
 UPLOAD_FOLDER = "uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -38,12 +39,11 @@ online_users = {}  # {thread_id: set of sid}
 # -------------------------------
 def get_db():
     if 'db' not in g:
-        # timeoutを長くして「Database is locked」エラーを防ぐ
-        g.db = sqlite3.connect(DATABASE, timeout=20) 
+        g.db = sqlite3.connect(DATABASE, timeout=30)
         g.db.row_factory = sqlite3.Row
-        # Renderのディスク性能を補うための設定
         g.db.execute("PRAGMA journal_mode=WAL;")
-        g.db.execute("PRAGMA synchronous=OFF;") # 書き込み完了を待たずにレスポンスを返す
+        # RenderではこれをOFFにしないと書き込み時にフリーズします
+        g.db.execute("PRAGMA synchronous=OFF;") 
     return g.db
 
 @app.teardown_appcontext
