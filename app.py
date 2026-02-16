@@ -78,16 +78,6 @@ def init_db():
         db.commit()
 
 # -------------------------------
-# テーマ変更
-# -------------------------------
-@app.route("/set_theme", methods=["POST"])
-def set_theme():
-    theme = request.form["theme"]
-    resp = make_response(redirect("/"))
-    resp.set_cookie("theme", theme)
-    return resp
-
-# -------------------------------
 # トップページ（スレッド一覧）
 # -------------------------------
 
@@ -240,7 +230,7 @@ def thread(thread_id):
     c.execute("SELECT id, title FROM threads WHERE id=?", (thread_id,))
     thread_data = c.fetchone()
 
-    c.execute("SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id DESC LIMIT 50", (thread_id,))
+    c.execute("SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC LIMIT 50", (thread_id,))
     rows = c.fetchall()
     posts_with_numbers = []
     for i, p in enumerate(rows):
@@ -329,7 +319,9 @@ def add_post(thread_id):
 @app.route("/thread/<int:thread_id>/posts_json")
 def posts_json(thread_id):
     db = get_db()
-    cur = db.execute( "SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,) )
+# app.py の posts_json 関数内
+    cur = db.execute("SELECT ... FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
+
     posts = cur.fetchall()
     return jsonify([ { "num": i+1,
     "name": (p["name"] if p["name"] else "書き人知らず"),
