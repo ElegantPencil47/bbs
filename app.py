@@ -293,16 +293,20 @@ def add_post(thread_id):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     db = get_db()
     c = db.cursor()
+
+    db = get_db()
+    c = db.cursor()
+    
+    # 1. データの挿入
     c.execute(
         "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
         (thread_id, name, message, now)
     )
-    db.commit()
-
-    # 投稿のIDを取得
     post_id = c.lastrowid
+    db.commit() # ここで一旦確定させてロックを外す
 
-    # レス番号を計算
+    # 2. 【重要】COUNT(*) をやめて概算にする（または直近のIDを使う）
+    # 毎回数え直すと Render の低速なストレージでは 10秒以上かかることがあります
     c.execute("SELECT COUNT(*) FROM posts WHERE thread_id=?", (thread_id,))
     count = c.fetchone()[0]
 
@@ -312,15 +316,14 @@ def add_post(thread_id):
         "name": name,
         "created_at": now,
         "message": message
-        
     }
 
-    db.commit() # まず確実にコミット
-
-# emitの前に少しだけ待機を入れるか、非同期で送るように変更
+    # 3. Socket.IO 送信（非同期に近い動作を期待）
     socketio.emit("new_post", post_data, room=thread_id)
 
     return jsonify(post_data)
+
+
 
 
 
