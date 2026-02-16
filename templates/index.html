@@ -362,7 +362,7 @@ margin: 20px;
   {% if most_popular_thread %}
     <div class="sure">
       <ul id="threads"> <!-- IDをわかりやすい名前に変更 -->
-<li class="thread-item theme-{{ theme }} {% if count >= 150 %}kami-class{% elif count >= 100 %}yoi-class{% elif count >= 60 %}sugo-class{% elif count >= 40 %}hutu-class{% elif count >= 10 %}gomi-class{% elif count >= 0 %}kaso-class{% endif %}">
+<li class="thread-item theme-{{ theme }} {% if thread.count >= 150 %}kami-class{% elif thread.count >= 100 %}yoi-class{% elif thread.count >= 60 %}sugo-class{% elif thread.count >= 40 %}hutu-class{% elif thread.count >= 10 %}gomi-class{% elif thread.count >= 0 %}kaso-class{% endif %}">
 
           <div class="sumaho">
             <a href="/thread/{{most_popular_thread.id}}" class="suretai">
@@ -383,14 +383,16 @@ margin: 20px;
     <h3>スレッド一覧</h3>
         <ul id="threads">  <!-- IDを posts ではなく threads に修正 -->
             {% for id, title, created_at, count in threads %}
-<li class="thread-item theme-{{ theme }} {% if count >= 150 %}kami-class{% elif count >= 100 %}yoi-class{% elif count >= 60 %}sugo-class{% elif count >= 40 %}hutu-class{% elif count >= 10 %}gomi-class{% elif count >= 0 %}kaso-class{% endif %}">
+<!-- thread. を付けて、ループ内の各スレッドのデータを参照するようにします -->
+<li class="thread-item theme-{{ theme }} {% if thread.count >= 150 %}kami-class{% elif thread.count >= 100 %}yoi-class{% elif thread.count >= 60 %}sugo-class{% elif thread.count >= 40 %}hutu-class{% elif thread.count >= 10 %}gomi-class{% elif thread.count >= 0 %}kaso-class{% endif %}">
     <div class="sumaho">
-        <a href="/thread/{{id}}" class="suretai">
-            <span class="thread-title">{{title}}</span>
-            <span class="thread-count">({{count}})</span>
+        <a href="/thread/{{ thread.id }}" class="suretai">
+            <span class="thread-title">{{ thread.title }}</span>
+            <span class="thread-count">({{ thread.count }})</span>
         </a>
     </div>
 </li>
+
 
             {% endfor %}
         </ul>
