@@ -17,20 +17,26 @@ margin: 20px;
 background-color: #afeeee;
 padding: 24px;
   position: fixed;
-  /*基準を画面の左上に*/
+
   top: 10px;
  border: solid 3px #00bfff;
-border-radius: 0.5em;/*角の丸み*/
+border-radius: 0.5em;
 }
-
+.thread-title{
+color: white;
+}
 
 h2{
 margin: 30px;
 
 }
 
-
- 
+.zero-class{
+background-color: #696969;
+}
+.hot-class{
+background-color: #dc143c;
+} 
 
 .tuki{
 border: 10px ridge #008000;
@@ -362,12 +368,17 @@ margin: 20px;
     <h3>スレッド一覧</h3>
         <ul id="threads">  <!-- IDを posts ではなく threads に修正 -->
             {% for id, title, created_at, count in threads %}
-                <li class="thread-item theme-{{ theme }}">
+<li class="thread-item theme-{{ theme }} {% if count == 0 %}zero-class{% elif count >= 10 %}hot-class{% endif %}">
 <div class="sumaho">
+
+ 
                     <a href="/thread/{{id}}" class="suretai">
                         <span class="thread-title">{{title}}</span>
                         <span class="thread-count">({{count}})</span>
+
+
                     </a>
+
 </div>
                 </li>
             {% endfor %}
@@ -375,39 +386,7 @@ margin: 20px;
     </div>
 </div>
 
-<script>
-// ランダムなHEXカラーコードを生成する関数
-function generatePastelColor() {
-  // 色相 (Hue): 0から360の間でランダムな値。これにより色の種類（赤、青、緑など）が決まる。
-  const hue = Math.floor(Math.random() * 360);
 
-  // 彩度 (Saturation): 60%から100%の間でランダムな値。鮮やかさを指定。
-  // 淡い色を生成するためには彩度を完全に低くしすぎないことが重要です。
-  const saturation = Math.floor(Math.random() * 40) + 60; // 60% - 100%
-
-  // 明るさ (Lightness): 70%から90%の間でランダムな値。これが「淡さ」の鍵。
-  // 100%に近づくほど白に近くなります。
-  const lightness = Math.floor(Math.random() * 20) + 70; // 70% - 90%
-
-  // CSSで使用できるhsl形式の文字列を返す
-  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-}
-
-
-
-
-// すべての .color-box 要素を取得する
-const colorBoxes = document.querySelectorAll('.suretai');
-
-// 各要素にランダムな色を適用する
-colorBoxes.forEach(box => {
-    const color = generatePastelColor();
-    box.style.backgroundColor = color;
-    // ここでCSSカスタムプロパティを設定する
-    box.style.setProperty('--after-color', color);
-});
-
-</script>
 
 
 
