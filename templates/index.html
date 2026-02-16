@@ -362,7 +362,7 @@ margin: 20px;
   {% if most_popular_thread %}
     <div class="sure">
       <ul id="threads"> <!-- IDをわかりやすい名前に変更 -->
-<li class="thread-item theme-{{ theme }} {% if count >= 0 %}kaso-class{% elif count >= 10 %}gomi-class{% elif count >= 40 %}hutu-class{% elif count >= 60 %}sugo-class{% elif count >= 100 %}yoi-class{% elif count >= 150 %}kami-class{% endif %}">
+<li class="thread-item theme-{{ theme }} {% if count >= 150 %}kami-class{% elif count >= 100 %}yoi-class{% elif count >= 60 %}sugo-class{% elif count >= 40 %}hutu-class{% elif count >= 10 %}gomi-class{% elif count >= 0 %}kaso-class{% endif %}">
 
           <div class="sumaho">
             <a href="/thread/{{most_popular_thread.id}}" class="suretai">
@@ -383,19 +383,15 @@ margin: 20px;
     <h3>スレッド一覧</h3>
         <ul id="threads">  <!-- IDを posts ではなく threads に修正 -->
             {% for id, title, created_at, count in threads %}
-<li class="thread-item theme-{{ theme }} {% if count >= 0 %}kaso-class{% elif count >= 10 %}gomi-class{% elif count >= 40 %}hutu-class{% elif count >= 60 %}sugo-class{% elif count >= 100 %}yoi-class{% elif count >= 150 %}kami-class{% endif %}">
-<div class="sumaho">
+<li class="thread-item theme-{{ theme }} {% if count >= 150 %}kami-class{% elif count >= 100 %}yoi-class{% elif count >= 60 %}sugo-class{% elif count >= 40 %}hutu-class{% elif count >= 10 %}gomi-class{% elif count >= 0 %}kaso-class{% endif %}">
+    <div class="sumaho">
+        <a href="/thread/{{id}}" class="suretai">
+            <span class="thread-title">{{title}}</span>
+            <span class="thread-count">({{count}})</span>
+        </a>
+    </div>
+</li>
 
- 
-                    <a href="/thread/{{id}}" class="suretai">
-                        <span class="thread-title">{{title}}</span>
-                        <span class="thread-count">({{count}})</span>
-
-
-                    </a>
-
-</div>
-                </li>
             {% endfor %}
         </ul>
     </div>
