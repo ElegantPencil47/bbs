@@ -356,18 +356,16 @@ margin: 20px;
 </div>
 
 
-
 <div class="stsure">
   <h3>〈ヘッドライン〉本日のおすすめ</h3>
   {% if most_popular_thread %}
     <div class="sure">
-      <ul id="threads"> <!-- IDをわかりやすい名前に変更 -->
-<li class="thread-item theme-{{ theme }} {% if thread.count >= 150 %}kami-class{% elif thread.count >= 100 %}yoi-class{% elif thread.count >= 60 %}sugo-class{% elif thread.count >= 40 %}hutu-class{% elif thread.count >= 10 %}gomi-class{% elif thread.count >= 0 %}kaso-class{% endif %}">
-
+      <ul class="thread-list"> <!-- IDの重複を避けるためclassに変更 -->
+        <li class="thread-item theme-{{ theme }} {% if most_popular_thread.count >= 150 %}kami-class{% elif most_popular_thread.count >= 100 %}yoi-class{% elif most_popular_thread.count >= 60 %}sugo-class{% elif most_popular_thread.count >= 40 %}hutu-class{% elif most_popular_thread.count >= 10 %}gomi-class{% else %}kaso-class{% endif %}">
           <div class="sumaho">
-            <a href="/thread/{{most_popular_thread.id}}" class="suretai">
-              <span class="thread-title">{{most_popular_thread.title}}</span> 
-              <span class="thread-count">({{most_popular_thread.count}})</span>
+            <a href="/thread/{{ most_popular_thread.id }}" class="suretai">
+              <span class="thread-title">{{ most_popular_thread.title }}</span> 
+              <span class="thread-count">({{ most_popular_thread.count }})</span>
             </a>
           </div>
         </li>
@@ -379,25 +377,23 @@ margin: 20px;
 </div>
 
 <div class="stsure">
-    <div class="sure">
+  <div class="sure">
     <h3>スレッド一覧</h3>
-        <ul id="threads">  <!-- IDを posts ではなく threads に修正 -->
-            {% for id, title, created_at, count in threads %}
-<!-- thread. を付けて、ループ内の各スレッドのデータを参照するようにします -->
-<li class="thread-item theme-{{ theme }} {% if thread.count >= 150 %}kami-class{% elif thread.count >= 100 %}yoi-class{% elif thread.count >= 60 %}sugo-class{% elif thread.count >= 40 %}hutu-class{% elif thread.count >= 10 %}gomi-class{% elif thread.count >= 0 %}kaso-class{% endif %}">
-    <div class="sumaho">
-        <a href="/thread/{{ thread.id }}" class="suretai">
-            <span class="thread-title">{{ thread.title }}</span>
-            <span class="thread-count">({{ thread.count }})</span>
-        </a>
-    </div>
-</li>
-
-
-            {% endfor %}
-        </ul>
-    </div>
+    <ul class="thread-list">
+      {% for thread in threads %} <!-- オブジェクトとして回すのが一般的 -->
+        <li class="thread-item theme-{{ theme }} {% if thread.count >= 150 %}kami-class{% elif thread.count >= 100 %}yoi-class{% elif thread.count >= 60 %}sugo-class{% elif thread.count >= 40 %}hutu-class{% elif thread.count >= 10 %}gomi-class{% else %}kaso-class{% endif %}">
+          <div class="sumaho">
+            <a href="/thread/{{ thread.id }}" class="suretai">
+              <span class="thread-title">{{ thread.title }}</span>
+              <span class="thread-count">({{ thread.count }})</span>
+            </a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
+
 
 
 
