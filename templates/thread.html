@@ -14,6 +14,11 @@
 img {
   pointer-events: none; /* マウス操作を無効化 */
   -webkit-touch-callout: none; /* iOSでの長押しメニューを禁止 */
+margin: 0px 0px 0px 50px;
+}
+
+.nktidgsg{
+float:left;
 }
 
 @font-face {
@@ -210,12 +215,14 @@ button:hover::after{
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 <ul id="posts">
   {% for post in posts %}
+<DIV class="nktidksg">
     <li class="color-box" id="{{ post.num }}">
   {{ post.num }} <b>{{ post.name | safe }}</b><div class="htn">{{ post.message | imgify }} </div> <!-- ここを追加 -->
   <span>({{ post.created_at }})</span>
 
 </li>
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQda_mJ3vQmoiW3jREJfBPwIlUFUBkVQ2la2g&s" style="max-height:50px; display:block;">
+</DIV>
   {% endfor %}
 </ul>
 
