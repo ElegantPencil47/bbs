@@ -213,9 +213,9 @@ button:hover::after{
     <li class="color-box" id="{{ post.num }}">
   {{ post.num }} <b>{{ post.name | safe }}</b><div class="htn">{{ post.message | imgify }} </div> <!-- ここを追加 -->
   <span>({{ post.created_at }})</span>
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQda_mJ3vQmoiW3jREJfBPwIlUFUBkVQ2la2g&s" style="max-height:120px; display:block;">
-</li>
 
+</li>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQda_mJ3vQmoiW3jREJfBPwIlUFUBkVQ2la2g&s" style="max-height:50px; display:block;">
   {% endfor %}
 </ul>
 
