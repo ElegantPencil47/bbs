@@ -25,7 +25,9 @@ border-radius: 0.5em;
 .thread-title{
 color: white;
 }
-
+thread-count{
+color: white;
+}
 h2{
 margin: 30px;
 
@@ -381,7 +383,7 @@ margin: 20px;
     <h3>スレッド一覧</h3>
     <ul class="thread-list">
       {% for thread in threads %} <!-- オブジェクトとして回すのが一般的 -->
-        <li class="thread-item theme-{{ theme }} {% if thread.count >= 150 %}kami-class{% elif thread.count >= 100 %}yoi-class{% elif thread.count >= 60 %}sugo-class{% elif thread.count >= 40 %}hutu-class{% elif thread.count >= 10 %}gomi-class{% else %}kaso-class{% endif %}">
+        <li class="suretai" class="thread-item theme-{{ theme }} {% if thread.count >= 150 %}kami-class{% elif thread.count >= 100 %}yoi-class{% elif thread.count >= 60 %}sugo-class{% elif thread.count >= 40 %}hutu-class{% elif thread.count >= 10 %}gomi-class{% else %}kaso-class{% endif %}">
           <div class="sumaho">
             <a href="/thread/{{ thread.id }}" class="suretai">
               <span class="thread-title">{{ thread.title }}</span>
