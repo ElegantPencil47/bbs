@@ -213,7 +213,7 @@ button:hover::after{
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 <ul id="posts">
   {% for post in posts %}
-<DIV class="nktidksg">
+<DIV style="float:left;">
     <li class="color-box" id="{{ post.num }}">
   {{ post.num }} <b>{{ post.name | safe }}</b><div class="htn">{{ post.message | imgify }} </div> <!-- ここを追加 -->
   <span>({{ post.created_at }})</span>
