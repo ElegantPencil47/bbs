@@ -35,23 +35,65 @@ margin: 30px;
 
 .thread-item.kaso-class {
     background-color: #a9a9a9 !important;
+  padding: 0.5em;
+  display: inline-block;
+margin: 10px; 
+  line-height: 1.3;
+
+  vertical-align: middle;
+  border-radius: 25px 0px 0px 25px;
 }
 
 .thread-item.gomi-class {
     background-color: #696969 !important;
+  padding: 0.5em;
+  display: inline-block;
+margin: 10px; 
+  line-height: 1.3;
+
+  vertical-align: middle;
+  border-radius: 25px 0px 0px 25px;
 }
 
 .thread-item.hutu-class {
     background-color: #f8e58c !important;
+  padding: 0.5em;
+  display: inline-block;
+margin: 10px; 
+  line-height: 1.3;
+
+  vertical-align: middle;
+  border-radius: 25px 0px 0px 25px;
 }
 .thread-item.sugo-class {
     background-color: #ffea00 !important;
+  padding: 0.5em;
+  display: inline-block;
+margin: 10px; 
+  line-height: 1.3;
+
+  vertical-align: middle;
+  border-radius: 25px 0px 0px 25px;
 }
 .thread-item.yoi-class {
     background-color: #ec6800 !important;
+  padding: 0.5em;
+  display: inline-block;
+margin: 10px; 
+  line-height: 1.3;
+
+  vertical-align: middle;
+  border-radius: 25px 0px 0px 25px;
 }
 .thread-item.kami-class {
     background-color: #ea5506 !important;
+  padding: 0.5em;
+  display: inline-block;
+margin: 10px; 
+  line-height: 1.3;
+
+  vertical-align: middle;
+  border-radius: 25px 0px 0px 25px;
 }
 
 .tuki{
@@ -79,16 +121,7 @@ a.btn--shadow {
   -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
   box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
 }
-.suretai {
-  color: #505050;/*文字色*/
-  padding: 0.5em;/*文字周りの余白*/
-  display: inline-block;/*おまじない*/
-margin: 10px; 
-  line-height: 1.3;/*行高*/
 
-  vertical-align: middle;
-  border-radius: 25px 0px 0px 25px;/*左側の角を丸く*/
-}
 
 .suretai:before {
   content: '●';
@@ -383,7 +416,7 @@ margin: 20px;
     <h3>スレッド一覧</h3>
     <ul class="thread-list">
       {% for thread in threads %} <!-- オブジェクトとして回すのが一般的 -->
-        <li class="suretai" class="thread-item theme-{{ theme }} {% if thread.count >= 150 %}kami-class{% elif thread.count >= 100 %}yoi-class{% elif thread.count >= 60 %}sugo-class{% elif thread.count >= 40 %}hutu-class{% elif thread.count >= 10 %}gomi-class{% else %}kaso-class{% endif %}">
+        <li class="thread-item theme-{{ theme }} {% if thread.count >= 80 %}kami-class{% elif thread.count >= 70 %}yoi-class{% elif thread.count >= 50 %}sugo-class{% elif thread.count >= 20 %}hutu-class{% elif thread.count >= 3 %}gomi-class{% else %}kaso-class{% endif %}">
           <div class="sumaho">
             <a href="/thread/{{ thread.id }}" class="suretai">
               <span class="thread-title">{{ thread.title }}</span>
