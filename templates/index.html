@@ -396,7 +396,7 @@ margin: 20px;
   {% if most_popular_thread %}
     <div class="sure">
       <ul class="thread-list"> <!-- IDの重複を避けるためclassに変更 -->
-<li class="thread-item theme-{{ theme }} {% if thread.count >= 80 %}kami-class{% elif thread.count >= 70 %}yoi-class{% elif thread.count >= 50 %}sugo-class{% elif thread.count >= 20 %}hutu-class{% elif thread.count >= 3 %}gomi-class{% else %}kaso-class{% endif %}">
+<li class="thread-item theme-{{ theme }} {% if most_popular_thread.count >= 80 %}kami-class{% elif most_popular_thread.count >= 70 %}yoi-class{% elif most_popular_thread.count >= 50 %}sugo-class{% elif most_popular_thread.count >= 20 %}hutu-class{% elif most_popular_thread.count >= 3 %}gomi-class{% else %}kaso-class{% endif %}">
          <div class="sumaho">
             <a href="/thread/{{ most_popular_thread.id }}" class="suretai">
               <span class="thread-title">{{ most_popular_thread.title }}</span> 
