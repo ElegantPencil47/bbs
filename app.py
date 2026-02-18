@@ -232,20 +232,16 @@ def thread(thread_id):
     c = db.cursor()
 
     if request.method == "POST":
-        # 修正：nameが空欄の場合に "書き人知らず" を設定
-        name = request.form.get("name")
-        if not name:
-            name = "書き人知らず"
-        # 入力された名前に<br>を追加
-        
+        name = request.form.get("name") or "書き人知らず"
+        icon_url = request.form.get('icon_url') # HTMLから送られてくるURL
         name = name + "@エクリプス"
         message = request.form.get("message")
-        #message = "\n" + message
 
         try:
+            # icon_url を含めて保存 (カンマを追加)
             c.execute(
-                "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
-                (thread_id, name, message, datetime.now().isoformat())
+                "INSERT INTO posts (thread_id, icon_url, name, message, created_at) VALUES (?, ?, ?, ?, ?)",
+                (thread_id, icon_url, name, message, datetime.now().isoformat())
             )
             db.commit()
         except sqlite3.Error as e:
@@ -254,13 +250,14 @@ def thread(thread_id):
         finally:
             return redirect(url_for("thread", thread_id=thread_id))
 
-# スレッド情報
+    # スレッド情報
     c.execute("SELECT id, title FROM threads WHERE id=?", (thread_id,))
     thread_data = c.fetchone()
 
-# 投稿一覧を取得してレス番号（num）を付ける
-    c.execute("SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
+    # 投稿一覧を取得 (icon_urlを追加)
+    c.execute("SELECT id, icon_url, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
     rows = c.fetchall()
+    
     posts_with_numbers = []
     for i, p in enumerate(rows):
         posts_with_numbers.append({
@@ -268,7 +265,8 @@ def thread(thread_id):
             "id": p["id"],
             "name": p["name"],
             "message": p["message"],
-            "created_at": p["created_at"]
+            "created_at": p["created_at"],
+            "icon_url": p["icon_url"] # DBから取得したアイコンURL
         })
 
     theme = request.cookies.get("theme", "d")
@@ -308,11 +306,12 @@ def apply_theme_cookie(response):
 
 @app.route("/thread/<int:thread_id>/add_post", methods=["POST"])
 def add_post(thread_id):
+    # フォームからアイコンURLを取得
+    icon_url = request.form.get('icon_url') 
     name = request.form.get("name") or "書き人知らず"
     name = name + "@エクリプス"
     
     message = request.form.get("message", "").strip()
-    #message = "\n" + message
 
     if not message:
         return jsonify({"error": "empty"}), 400
@@ -320,11 +319,17 @@ def add_post(thread_id):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     db = get_db()
     c = db.cursor()
-    c.execute(
-        "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
-        (thread_id, name, message, now)
-    )
-    db.commit()
+    
+    try:
+        # 修正：カラム名と値の間にカンマを追加、プレースホルダ(?)を5つに
+        c.execute(
+            "INSERT INTO posts (thread_id, icon_url, name, message, created_at) VALUES (?, ?, ?, ?, ?)",
+            (thread_id, icon_url, name, message, now)
+        )
+        db.commit()
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        return jsonify({"error": "db_error"}), 500
 
     # 投稿のIDを取得
     post_id = c.lastrowid
@@ -333,35 +338,42 @@ def add_post(thread_id):
     c.execute("SELECT COUNT(*) FROM posts WHERE thread_id=?", (thread_id,))
     count = c.fetchone()[0]
 
+    # 修正：辞書の要素間にカンマを追加
     post_data = {
         "num": count,
         "id": post_id,
         "name": name,
         "created_at": now,
-        "message": message
-        
+        "message": message, # カンマ追加
+        "icon_url": icon_url # アイコンURLをセット
     }
 
     # Socket.IOでブロードキャスト
+    # ※ room=thread_id が数値の場合、クライアント側の join と一致しているか確認してください
     socketio.emit("new_post", post_data, room=thread_id)
 
     return jsonify(post_data)
 
-
+#=======================================================================================================================
 
 @app.route("/thread/<int:thread_id>/posts_json")
 def posts_json(thread_id):
     db = get_db()
-    cur = db.execute( "SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id", (thread_id,) )
+    # 1. SQLに icon_url を追加
+    cur = db.execute( 
+        "SELECT id, icon_url, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id", 
+        (thread_id,) 
+    )
     posts = cur.fetchall()
-    return jsonify([ { "num": i+1,
-    "name": (p["name"] if p["name"] else "書き人知らず"),
-    "message": p["message"],
-    "created_at": p["created_at"] }
-    for i, p in enumerate(posts) ]) 
-
-
-
+    
+    # 2. リスト内包表記の辞書に icon_url を追加
+    return jsonify([ { 
+        "num": i+1, 
+        "name": (p["name"] if p["name"] else "書き人知らず"),
+        "message": p["message"],
+        "created_at": p["created_at"],
+        "icon_url": p["icon_url"] # ← ここを追加
+    } for i, p in enumerate(posts) ])
 
 from flask import send_file
 
