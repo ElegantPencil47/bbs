@@ -211,33 +211,34 @@ button:hover::after{
 <a href="/" class="am" id="top">← スレッド一覧に戻る</a>
 <h1>{{ thread[1] }}</h1>
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
+
+
+
 <ul id="posts">
   {% for post in posts %}
-<DIV style="float:left;">
-    <li class="color-box" id="{{ post.num }}">
-  {{ post.num }} <b>{{ post.name | safe }}</b><div class="htn">{{ post.message | imgify }} </div> <!-- ここを追加 -->
-  <span>({{ post.created_at }})</span>
+  <li class="post-container" style="display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 20px;">
+    <div class="color-box" id="{{ post.num }}" style="padding: 10px; border-radius: 15px; position: relative; max-width: 80%;">
+      {{ post.num }} <b>{{ post.name | safe }}</b>
+      <div class="htn">{{ post.message | imgify }}</div>
+      <span>({{ post.created_at }})</span> <!-- ここを修正 -->
+    </div>
+    <!-- アイコンを表示 -->
 
-</li>
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQda_mJ3vQmoiW3jREJfBPwIlUFUBkVQ2la2g&s" style="max-height:50px; display:block;">
-</DIV>
+  </li>
+
+    <img src="{{ post.icon_url if post.icon_url else 'https://encrypted-tbn0.gstatic.com' }}" 
+         style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; margin-top: -10px; margin-left: 10px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+
   {% endfor %}
 </ul>
 
+
+
 <div class="kakiko">
 <form id="postForm" enctype="multipart/form-data">
+ <input type="hidden" name="icon_url" id="uploadedIconUrl" value="">
   名前: <input type="text" name="name"><br>
-    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-      <div id="iconPreview" style="width: 50px; height: 50px; border-radius: 50%; background: #eee; overflow: hidden; margin-right: 10px;">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQda_mJ3vQmoiW3jREJfBPwIlUFUBkVQ2la2g&s" id="currentIcon" style="width: 100%; height: 100%; object-fit: cover;">
-      </div>
-      <div>
-        <label style="font-size: 12px; display: block;">アイコン設定:</label>
-        <input type="file" id="iconInput" accept="image/*">
-        <!-- アイコンURLを保持する隠しフィールド -->
-        <input type="hidden" name="icon_url" id="iconUrlField" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQda_mJ3vQmoiW3jREJfBPwIlUFUBkVQ2la2g&s">
-      </div>
-    </div>
+アイコン設定:<input type="file" id="iconInput" accept="image/*">
 
   本文: <textarea name="message" id="messageArea"></textarea><br>
 
@@ -412,23 +413,51 @@ socket.on("new_post", (post) => {
 
 function addPostToDOM(post) {
     const li = document.createElement("li");
+    li.className = "post-container";
     li.style.display = "flex";
     li.style.flexDirection = "column";
+    li.style.alignItems = "flex-start";
+    li.style.marginBottom = "20px";
 
-    // Python側からicon_urlが送られてこない場合の予備画像
-    const icon = post.icon_url || "https://encrypted-tbn0.gstatic.com";
+    const iconSrc = post.icon_url || "https://encrypted-tbn0.gstatic.com";
 
     li.innerHTML = `
-      <div class="color-box" id="${post.num}">
+      <div class="color-box" id="${post.num}" style="padding: 10px; border-radius: 15px; max-width: 80%;">
         ${post.num} <b>${safeNl2br(post.name)}</b>
         <div class="htn">${convertAnchors(convertImageUrls(safeNl2br(post.message)))}</div>
         <span>(${post.created_at})</span>
       </div>
-      <img src="${icon}" style="width:40px; height:40px; border-radius:50%; margin-top:-10px; margin-left:10px; border:2px solid white;">
+      <img src="${iconSrc}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; margin-top: -10px; margin-left: 10px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
     `;
 
     postsList.appendChild(li);
+
+    // 色の適用
+    const color = generatePastelColor();
+    const box = li.querySelector('.color-box');
+    box.style.backgroundColor = color;
+    box.style.setProperty('--after-color', color);
 }
+
+// アイコンアップロード時の処理を追加
+document.getElementById("iconInput").addEventListener("change", async function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("imageFile", file);
+    
+    try {
+        const res = await fetch("/upload", { method: "POST", body: formData });
+        const data = await res.json();
+        if (data.url) {
+            document.getElementById("uploadedIconUrl").value = data.url;
+            alert("アイコンをアップロードしました！");
+        }
+    } catch (err) {
+        console.error(err);
+    }
+});
 
 
 
