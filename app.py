@@ -18,8 +18,7 @@ from flask import Markup
 # -------------------------------
 app = Flask(__name__)
 app.secret_key = 'your_super_secret_key_here'
-socketio = SocketIO(app, async_mode='eventlet', cors_allowed_origins="*")
-
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
 CORS(app, resources={r"/*": {"origins": "*"}}) 
 UPLOAD_FOLDER = "uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -38,13 +37,11 @@ online_users = {}  # {thread_id: set of sid}
 # データベース接続
 # -------------------------------
 def get_db():
-    if 'db' not in g:
-        g.db = sqlite3.connect(DATABASE, timeout=30)
-        g.db.row_factory = sqlite3.Row
-        g.db.execute("PRAGMA journal_mode=WAL;")
-        # RenderではこれをOFFにしないと書き込み時にフリーズします
-        g.db.execute("PRAGMA synchronous=OFF;") 
-    return g.db
+    db = getattr(g, "_database", None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+        db.row_factory = sqlite3.Row
+    return db
 
 @app.teardown_appcontext
 def close_connection(exception):
@@ -76,6 +73,16 @@ def init_db():
             )
         """)
         db.commit()
+
+# -------------------------------
+# テーマ変更
+# -------------------------------
+@app.route("/set_theme", methods=["POST"])
+def set_theme():
+    theme = request.form["theme"]
+    resp = make_response(redirect("/"))
+    resp.set_cookie("theme", theme)
+    return resp
 
 # -------------------------------
 # トップページ（スレッド一覧）
@@ -224,13 +231,35 @@ def thread(thread_id):
     db = get_db()
     c = db.cursor()
 
+    if request.method == "POST":
+        # 修正：nameが空欄の場合に "書き人知らず" を設定
+        name = request.form.get("name")
+        if not name:
+            name = "書き人知らず"
+        # 入力された名前に<br>を追加
+        
+        name = name + "@エクリプス"
+        message = request.form.get("message")
+        #message = "\n" + message
 
+        try:
+            c.execute(
+                "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
+                (thread_id, name, message, datetime.now().isoformat())
+            )
+            db.commit()
+        except sqlite3.Error as e:
+            db.rollback()
+            print(f"Database error: {e}")
+        finally:
+            return redirect(url_for("thread", thread_id=thread_id))
 
 # スレッド情報
     c.execute("SELECT id, title FROM threads WHERE id=?", (thread_id,))
     thread_data = c.fetchone()
 
-    c.execute("SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC LIMIT 50", (thread_id,))
+# 投稿一覧を取得してレス番号（num）を付ける
+    c.execute("SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
     rows = c.fetchall()
     posts_with_numbers = []
     for i, p in enumerate(rows):
@@ -257,6 +286,14 @@ def thread(thread_id):
 def ensure_theme_cookie():
     theme = request.cookies.get("theme")
     user_agent = request.headers.get("User-Agent", "").lower()
+
+    # スマホっぽいUAなら theme-s をデフォルトに
+    if theme is None:
+        if "iphone" in user_agent or "android" in user_agent:
+            g.set_default_theme = "theme-s"
+        else:
+            g.set_default_theme = "d"
+
 @app.after_request
 def apply_theme_cookie(response):
     if getattr(g, "set_default_theme", None):
@@ -283,19 +320,16 @@ def add_post(thread_id):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     db = get_db()
     c = db.cursor()
-
-
-    
-    # 1. データの挿入
     c.execute(
         "INSERT INTO posts (thread_id, name, message, created_at) VALUES (?, ?, ?, ?)",
         (thread_id, name, message, now)
     )
-    post_id = c.lastrowid
-    db.commit() # ここで一旦確定させてロックを外す
+    db.commit()
 
-    # 2. 【重要】COUNT(*) をやめて概算にする（または直近のIDを使う）
-    # 毎回数え直すと Render の低速なストレージでは 10秒以上かかることがあります
+    # 投稿のIDを取得
+    post_id = c.lastrowid
+
+    # レス番号を計算
     c.execute("SELECT COUNT(*) FROM posts WHERE thread_id=?", (thread_id,))
     count = c.fetchone()[0]
 
@@ -305,23 +339,20 @@ def add_post(thread_id):
         "name": name,
         "created_at": now,
         "message": message
+        
     }
 
-    # 3. Socket.IO 送信（非同期に近い動作を期待）
+    # Socket.IOでブロードキャスト
     socketio.emit("new_post", post_data, room=thread_id)
 
     return jsonify(post_data)
 
 
 
-
-
 @app.route("/thread/<int:thread_id>/posts_json")
 def posts_json(thread_id):
     db = get_db()
-# app.py の posts_json 関数内
-    cur = db.execute("SELECT ... FROM posts WHERE thread_id=? ORDER BY id ASC", (thread_id,))
-
+    cur = db.execute( "SELECT id, name, message, created_at FROM posts WHERE thread_id=? ORDER BY id", (thread_id,) )
     posts = cur.fetchall()
     return jsonify([ { "num": i+1,
     "name": (p["name"] if p["name"] else "書き人知らず"),
@@ -360,6 +391,19 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 #=========================================================================================================
+
+@app.route("/delete_thread/<int:thread_id>", methods=["POST"])
+def delete_thread(thread_id):
+    thread = Thread.query.get_or_404(thread_id)
+
+    # 関連レスも削除
+    Post.query.filter_by(thread_id=thread_id).delete()
+
+    db.session.delete(thread)
+    db.session.commit()
+
+    return redirect("/")
+
 
 def convert_image_urls(text):
     img_regex = r'(https?://[^\s]+?\.(?:jpg|jpeg|png|gif|bmp|webp))'

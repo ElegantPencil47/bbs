@@ -881,5 +881,9 @@ document.addEventListener("touchend", onAnchorTap);
 <br>
 <br>
 <br>
+<form action="/delete_thread/{{ thread.id }}" method="POST" 
+      onsubmit="return confirm('本当に削除しますか？');">
+    <button type="submit">削除</button>
+</form>
 </body>
 </html>
