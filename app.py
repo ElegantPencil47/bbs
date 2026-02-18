@@ -1,5 +1,6 @@
 import eventlet
-eventlet.monkey_patch()
+eventlet.monkey_patch(all=True) # (all=True) を明示
+
 
 from flask import Flask, request, redirect, render_template, url_for, make_response, abort, jsonify
 from flask_cors import CORS
@@ -35,6 +36,44 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 DATABASE = "bbs.db"
 last_posts = {}
 online_users = {}  # {thread_id: set of sid}
+
+def init_db():
+    with app.app_context():
+        # DATABASE 変数を使う
+        db = sqlite3.connect(DATABASE)
+        c = db.cursor()
+        
+        # threadsテーブル（省略していた部分も確実に）
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS threads (
+                id INTEGER PRIMARY KEY,
+                title TEXT,
+                created_at TEXT
+            )
+        """)
+
+        # postsテーブル
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS posts (
+                id INTEGER PRIMARY KEY,
+                thread_id INTEGER,
+                name TEXT,
+                message TEXT,
+                icon_url TEXT,
+                created_at TEXT
+            )
+        """)
+
+        # 【重要】既存のDBにicon_urlがない場合の救済措置
+        try:
+            c.execute("ALTER TABLE posts ADD COLUMN icon_url TEXT")
+        except sqlite3.OperationalError:
+            pass # すでにある場合は何もしない
+
+        db.commit()
+        db.close()
+
+init_db()
 
 # -------------------------------
 # データベース接続
