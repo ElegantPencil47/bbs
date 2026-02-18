@@ -1,958 +1,183 @@
-
-
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<link rel="icon" href="/static/favicon.ico">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ thread[1] }}</title>
-
+    <meta charset="UTF-8">
+    <title>{{ thread[1] }}</title>
+    <style>
+        /* LINE風のレイアウト用CSS */
+        #posts { list-style: none; padding: 0; }
+        .post-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .color-box {
+            padding: 10px;
+            border-radius: 15px;
+            position: relative;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .user-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: -10px;
+            margin-left: 10px;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #fixed { position: fixed; bottom: 20px; right: 20px; }
+    </style>
 </head>
-<style>
-img {
-  pointer-events: none; /* マウス操作を無効化 */
-  -webkit-touch-callout: none; /* iOSでの長押しメニューを禁止 */
-margin: 0px 0px 0px 50px;
-}
+<body>
 
-
-@font-face {
-  font-family: "Saitamaar";
-  src: url("https://hei-bu-jing.onrender.com/uploads/Saitamaar.woff2") format("woff2");
-  font-display: swap;
-}
-
-.htn {
-  font-family: "Saitamaar", "MS PGothic", "ＭＳ Ｐゴシック", sans-serif !important;
-  white-space: pre;
-  font-size: 16px;
-  line-height: 1.1;
-}
-
-
-
-h1 {
-  padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
-  color: #494949;/*文字色*/
-  background: #f4f4f4;/*背景色*/
-  border-left: solid 5px #7db4e6;/*左線*/
-  border-bottom: solid 3px #d7d7d7;/*下線*/
-}
-
-a.btn--orange {
-  color: black;
-padding: 12px;
-  background-color: white;
-  border-bottom: 5px solid #696969;
-}
-a.btn--orange:hover {
-  margin-top: 3px;
-  color: black;
-  background: white;
-  border-bottom: 2px solid #696969;
-}
-a.btn--shadow {
-  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-  box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-}
-a {
-        text-decoration: none;
-color: #000000;        
-} 
-button{
-  position: relative;
-  display: inline-block;
-background: white;
-  transition: .3s;
-}
-button: hover{
-background: #d3d3d3;
-}
-button::after {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  content: '';
-  width: 0;
-  height: 2px;
-  background-color: #31aae2;
-  transition: .3s;
-  transform: translateX(-50%);
-}
-
-button:hover::after{
-  width: 100%;
-
-}
-
-nktidksg {
-float:left;
-  position: relative;
-  background: #ffd98a;
-  padding: 2px 5px 2px 25px;
-  font-size: 20px;
-  color: #474747;
-  border-radius: 0 10px 10px 0;
-}
-
-#fixed {
-  position: fixed;
-  /*基準を画面の左上に*/
-  bottom: 10px;
-  right: 10px;
-  /*余白が入らないように*/
-  margin: 0;
-  /*以下装飾*/
-}
-
-#fixed:hover {
-  position: fixed;
-  /*基準を画面の左上に*/
-  bottom: 15px;
-}
-
-.nktidksg:before {
-  font-family: "Font Awesome 5 Free";
-  content: "\f135";
-  display: inline-block;
-  line-height: 40px;
-  position: absolute;
-  padding: 0em;
-  color: white;
-  background: #ffa337;
-  font-weight: 900;
-  width: 40px;
-  text-align: center;
-  height: 40px;
-  line-height: 40px;
-  left: -1.35em;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
-  border: solid 3px white; 
-  border-radius: 50%;
-}
-
-.am{
-  background-image: linear-gradient(0deg, #ffffff, #999999 0%, #525252);
-color: white;
-border-radius: 10px;/*角の丸み*/
-}
-.kakiko{
-background-color: #d3d3d3;
-display: inline-block;
-border: 3px solid #808080;
-  position: fixed;
-  /*基準を画面の左上に*/
-  bottom: 10px;
-  left: 10px;
-  /*余白が入らないように*/
-  margin: 0;
-}
-
-
-li {
-  position: relative;
-  padding: 0.4em;
-  border-radius: 0.5em;
- margin: 30px;
-display: inline-block;
-}
-
-li:after {
-  position: absolute;
-  content: '';
-  top: 100%;
-  left: 30px;
-  border: 15px solid transparent;
-  /* ここをCSSカスタムプロパティに変更 */
-  border-top: 15px solid var(--after-color, #e0edff); 
-  width: 0;
-border-radius: 7px;
-  height: 0;
-}
-
-body{
-background-color: #fffacd;
-}
-button{
-  position: relative;
-  display: inline-block;
-background: white;
-  transition: .3s;
-}
-button: hover{
-background: #d3d3d3;
-}
-button::after {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  content: '';
-  width: 0;
-  height: 2px;
-  background-color: #31aae2;
-  transition: .3s;
-  transform: translateX(-50%);
-}
-
-button:hover::after{
-  width: 100%;
-}
-
-</style>
-<body class="theme-{{theme}}">
-
-<br>
-<br>
-<br>
-<a href="/" class="am" id="top">← スレッド一覧に戻る</a>
 <h1>{{ thread[1] }}</h1>
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 
-
-
 <ul id="posts">
   {% for post in posts %}
-  <li class="post-container" style="display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 20px;">
-    <div class="color-box" id="{{ post.num }}" style="padding: 10px; border-radius: 15px; position: relative; max-width: 80%;">
+  <li class="post-container">
+    <div class="color-box" id="{{ post.num }}">
       {{ post.num }} <b>{{ post.name | safe }}</b>
       <div class="htn">{{ post.message | imgify }}</div>
-      <span>({{ post.created_at }})</span> <!-- ここを修正 -->
+      <span>({{ post.created_at }})</span>
     </div>
-    <!-- アイコンを表示 -->
-
+    <img src="{{ post.icon_url if post.icon_url else 'https://encrypted-tbn0.gstatic.com' }}" class="user-icon">
   </li>
-
-    <img src="{{ post.icon_url if post.icon_url else 'https://encrypted-tbn0.gstatic.com' }}" 
-         style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; margin-top: -10px; margin-left: 10px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-
   {% endfor %}
 </ul>
 
-
-
 <div class="kakiko">
-<form id="postForm" enctype="multipart/form-data">
- <input type="hidden" name="icon_url" id="uploadedIconUrl" value="">
-  名前: <input type="text" name="name"><br>
-アイコン設定:<input type="file" id="iconInput" accept="image/*">
-
-  本文: <textarea name="message" id="messageArea"></textarea><br>
-
-  画像の投稿:<input type="file" id="fileInput" accept="image/*">
-<div id="result"></div>
-
-<input type="hidden" name="image_url" id="uploadedImageUrl">  
-
+  <form id="postForm" enctype="multipart/form-data">
+    名前: <input type="text" name="name"><br>
     
-AAの投稿<div>
+    <!-- アイコン設定 -->
+    アイコン設定: <input type="file" id="iconInput" accept="image/*">
+    <input type="hidden" name="icon_url" id="uploadedIconUrl" value="">
+    <br>
+
+    本文: <textarea name="message" id="messageArea"></textarea><br>
+
+    画像の投稿: <input type="file" id="fileInput" accept="image/*">
+    <div id="result"></div>
+
+    AAの投稿
+    <div>
         <select id="mySelect">
             <option value="">AAを選択</option>
             <option value="option1">画像も貼らずにスレ立てとな？</option>
             <option value="option2">不快なスレを立てるなですぅ</option>
             <option value="option3">変態だ！</option>
-            <option value="option4">(怯える)</option>
-            <option value="option5">さぁお前の罪を数えろ</option>
         </select>
     </div>
-<button type="button" onclick="checkValues()">AAを決定</button>
-
-
-
-<button type="submit">
-  <img src="https://icooon-mono.com/i/icon_11449/icon_114491_64.png" height="20" width="20">投稿する
-</button>
-</form>
-
-
+    <button type="submit">投稿する</button>
+  </form>
 </div>
-<a href="#top">
-<img src="/static/pagetop.png" height ="80" id="fixed">
-</a>
 
+<a href="#top"><img src="/static/pagetop.png" height="80" id="fixed"></a>
+
+<script src="https://cdn.socket.io"></script>
 <script>
+const threadId = {{ thread_id }};
+const postsList = document.getElementById("posts");
+const socket = io({ transports: ["websocket"] });
 
 function generatePastelColor() {
   const hue = Math.floor(Math.random() * 360);
-  const saturation = Math.floor(Math.random() * 40) + 60; // 60% - 100%
-  const lightness = Math.floor(Math.random() * 20) + 70; // 70% - 90%
-  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+  return `hsl(${hue}, 80%, 85%)`;
 }
-const colorBoxes = document.querySelectorAll('.color-box');
-colorBoxes.forEach(box => {
-    const color = generatePastelColor();
-    box.style.backgroundColor = color;
-    box.style.setProperty('--after-color', color);
-});
 
-</script>
-
-
-<script>
-
-
-// アイコンアップロード専用の処理
-document.getElementById("iconInput").addEventListener("change", async function () {
-    const file = this.files[0];
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append("imageFile", file); // 既存の /upload エンドポイントを利用
-    
-    try {
-        const res = await fetch("/upload", { method: "POST", body: formData });
-        const data = await res.json();
-
-        if (data.url) {
-            // プレビュー画像を更新
-            document.getElementById("currentIcon").src = data.url;
-            // フォーム送信用の隠しフィールドにURLをセット
-            document.getElementById("iconUrlField").value = data.url;
-        }
-    } catch (err) {
-        console.error("Icon upload error:", err);
-    }
-});
-
-document.getElementById("fileInput").addEventListener("change", async function () {
-    const file = this.files[0];
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append("imageFile", file);  
-    try {
-        const res = await fetch("/upload", {
-            method: "POST",
-            body: formData
-        });
-
-        const data = await res.json();
-
-        if (!data.url) {
-            alert("アップロードに失敗しました");
-            return;
-        }
-
-        const textarea = document.getElementById("messageArea");
-        textarea.value += "\n" + data.url;
-
-        const fullURL = data.url;
-        document.getElementById("result").innerHTML =
-            `<p>画像URL:</p>
-             <a href="${fullURL}" target="_blank">${fullURL}</a><br>
-             <img src="${fullURL}" style="max-width:200px;">`;
-
-        console.log("Uploaded:", fullURL);
-
-    } catch (err) {
-        console.error(err);
-        alert("通信エラーが発生しました");
-    }
-});
-</script>
-
-
-
-
-
-
-
-
-
-<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-
-<script>
-// 修正: 必要な変数を定義
-const threadId = {{ thread_id }};
-const postsList = document.getElementById("posts");
-const socket = io({
-    transports:["websocket"]
-});
-
-// ユーザーが投稿したメッセージを安全にレンダリングする関数
 function safeNl2br(text) {
-    const escapedText = document.createElement('div');
-    escapedText.textContent = text;
-    return escapedText.innerHTML.replace(/\r?\n/g, '<br>');
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML.replace(/\n/g, '<br>');
 }
-function convertImageUrls(text) {
-    // 1. まず、画像URL（jpg, png, gifなど）を<img>タグに置換
-    const imgRegex = /(https?:\/\/[^\s]+?\.(?:jpg|jpeg|png|gif|bmp|webp))/gi;
-    
-    // 2. 次に、画像以外のURLを<a>タグに置換（すでに<img>のsrc属性になったものは除外する工夫が必要）
-    // 一番簡単な方法は、まずURL全体を識別し、拡張子で条件分岐することです。
-    const urlRegex = /(https?:\/\/[^\s]+)/gi;
 
+function convertImageUrls(text) {
+    const urlRegex = /(https?:\/\/[^\s]+)/gi;
     return text.replace(urlRegex, (url) => {
-        // 末尾が画像拡張子かどうか判定
-        if (url.match(/\.(?:jpg|jpeg|png|gif|bmp|webp)$/i)) {
-            return `<br><a href="${url}" target="_blank"><img src="${url}" alt="Image" style="max-height:120px; display:block;"></a>`;
-        } else {
-            // 画像以外は普通のリンクにする
-            return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #0000FF;">${url}</a>`;
+        if (url.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+            return `<br><a href="${url}" target="_blank"><img src="${url}" style="max-height:120px; display:block;"></a>`;
         }
+        return `<a href="${url}" target="_blank">${url}</a>`;
     });
 }
-
 
 function convertAnchors(text) {
-    return text.replace(/&gt;&gt;(\d+)/g, (match, num) => {
-        return `<span class="anchor" data-target="${num}">&gt;&gt;${num}</span>`;
-    });
+    return text.replace(/&gt;&gt;(\d+)/g, '<span class="anchor" data-target="$1">&gt;&gt;$1</span>');
 }
 
-
-// JS側のSocket受け取り部分
-socket.on("new_post", (post) => {
-    // Pythonから送られてきた post.icon_url を使う
-    addPostToDOM(post); 
-});
-
+// 新しい投稿を画面に追加する関数
 function addPostToDOM(post) {
     const li = document.createElement("li");
     li.className = "post-container";
-    li.style.display = "flex";
-    li.style.flexDirection = "column";
-    li.style.alignItems = "flex-start";
-    li.style.marginBottom = "20px";
 
     const iconSrc = post.icon_url || "https://encrypted-tbn0.gstatic.com";
+    let msg = safeNl2br(post.message);
+    msg = convertImageUrls(msg);
+    msg = convertAnchors(msg);
 
     li.innerHTML = `
-      <div class="color-box" id="${post.num}" style="padding: 10px; border-radius: 15px; max-width: 80%;">
-        ${post.num} <b>${safeNl2br(post.name)}</b>
-        <div class="htn">${convertAnchors(convertImageUrls(safeNl2br(post.message)))}</div>
+      <div class="color-box" id="${post.num}">
+        ${post.num} <b>${post.name}</b>
+        <div class="htn">${msg}</div>
         <span>(${post.created_at})</span>
       </div>
-      <img src="${iconSrc}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; margin-top: -10px; margin-left: 10px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+      <img src="${iconSrc}" class="user-icon">
     `;
 
     postsList.appendChild(li);
-
-    // 色の適用
     const color = generatePastelColor();
     const box = li.querySelector('.color-box');
     box.style.backgroundColor = color;
-    box.style.setProperty('--after-color', color);
 }
 
-// アイコンアップロード時の処理を追加
-document.getElementById("iconInput").addEventListener("change", async function () {
+// アイコンアップロード
+document.getElementById("iconInput").addEventListener("change", async function() {
     const file = this.files[0];
     if (!file) return;
-
     const formData = new FormData();
     formData.append("imageFile", file);
-    
-    try {
-        const res = await fetch("/upload", { method: "POST", body: formData });
-        const data = await res.json();
-        if (data.url) {
-            document.getElementById("uploadedIconUrl").value = data.url;
-            alert("アイコンをアップロードしました！");
-        }
-    } catch (err) {
-        console.error(err);
+    const res = await fetch("/upload", { method: "POST", body: formData });
+    const data = await res.json();
+    if (data.url) {
+        document.getElementById("uploadedIconUrl").value = data.url;
+        alert("アイコンをセットしました");
     }
 });
 
-
+// 本文用画像アップロード
+document.getElementById("fileInput").addEventListener("change", async function() {
+    const file = this.files[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append("imageFile", file);
+    const res = await fetch("/upload", { method: "POST", body: formData });
+    const data = await res.json();
+    if (data.url) {
+        document.getElementById("messageArea").value += "\n" + data.url;
+    }
+});
 
 // 投稿フォーム送信
 document.getElementById("postForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-
-    let res = await fetch(`/thread/${threadId}/add_post`, {
-        method: "POST",
-        body: formData
-    });
-
-    if (res.ok) {
-        e.target.reset(); // 自分の投稿はSocket.IOで反映
-    } else {
-        alert("投稿に失敗しました");
-    }
+    const res = await fetch(`/thread/${threadId}/add_post`, { method: "POST", body: formData });
+    if (res.ok) { e.target.reset(); document.getElementById("uploadedIconUrl").value = ""; }
 });
 
-// Socket.IO
-socket.on("connect", () => {
-    console.log("connected:", socket.id);
-    socket.emit("join_thread",{thread_id:threadId});
-});
-
+socket.on("connect", () => socket.emit("join_thread", { thread_id: threadId }));
 socket.on("new_post", (post) => addPostToDOM(post));
-socket.on("online_count", (count) => {
-    document.getElementById("onlineCount").textContent = count;
-});
+socket.on("online_count", (count) => document.getElementById("onlineCount").textContent = count);
 
-// ページ離脱時
-window.addEventListener("beforeunload", () => {
-    socket.emit("leave_thread", { thread_id: threadId });
-});
-
-// 初期ロード時に、Djangoテンプレートで生成された既存の投稿要素（.color-boxクラスを持つもの）に色を適用する
+// 初期表示の色付け
 document.querySelectorAll('.color-box').forEach(box => {
-    const color = generatePastelColor();
-    box.style.backgroundColor = color;
-    box.style.setProperty('--after-color', color);
+    box.style.backgroundColor = generatePastelColor();
 });
-
-
 </script>
-<script>
-
-
-
-// 安価クリックのポップアップ処理
-document.addEventListener("click", function (e) {
-    const anchor = e.target.closest(".anchor");
-    if (!anchor) return;
-
-    const targetNum = anchor.dataset.target;
-    const targetPost = document.getElementById(targetNum);
-
-    if (!targetPost) return;
-
-    showPopup(targetPost, e.pageX, e.pageY);
-});
-
-// >>数字 を <span class="anchor" data-target="3">>>3</span> に変換
-function convertAnchors(text) {
-    return text.replace(/&gt;&gt;(\d+)/g, (match, num) => {
-        return `<span class="anchor" data-target="${num}">&gt;&gt;${num}</span>`;
-    });
-}
-
-function checkValues() {
-    
-
-
-
-    const selectElement = document.getElementById("mySelect");
-    const selectedValue = selectElement.value;
-    if (selectedValue === "option1") {
-        const textarea = document.getElementById("messageArea");
-        textarea.value += "\n" + "." + "　　　　　　　 |:;:;:;:;:;:;:;:;:;:;:;:;:;:i;:;:;:;:;:;:;:;:;:;:;:;:;|" + "\n" + "　 　 　 　 　 |;:;:_:;:_:;:_:;:_;:;_:;:l:;_;:_:;:_:;:_:;:_;:_;|" + "\n" + "　　　　　　　|＿＿＿＿＿_|＿＿＿＿＿|" + "\n" + "　　　　　　　|　三|　　＿ 　 　 ＿　　 |三 !" + "\n" + "　　　　　　　|　三|　 三ｼ　　　ヾ三　 |三 |" + "\n" + "　　　　　　　|　三′　 .._　　　　 _,,..　 i三 |" + "\n" + "　　　　　　　ト､ﾆ|　<でiﾝヽ　 ;'iｨでiﾝ |三.|" + "\n" + "　　　　　　　', iヽ!　 ､　‐' /　 !､　ーシ |ｼ,ｲ" + "\n" + "　　　　　　　 i,ヽﾘ　　　　,' :　 !.　　　　 |ｆ ﾉ" + "\n" + "　　　　　　　　ヾ!　　　　i ,､　,..､ヽ　　　lノ" + "\n" + "　　　　　　　　　|　　　　　 _　_　　　 ｲ l 　　　　　　画像も張らずにスレ立てとな？" + "\n" + "　　　　　　 　 　 l　　　 ,ｨﾁ‐-‐ヽ　　i /、" + "\n" + "　　　　　 　 　 　 ﾞi､　　 ゝ､二ﾌ′ ﾉ/'＼" + "\n" + "　　　　 　 　 　 　 | ＼　　ｰ一 ／ /　　 _,ﾝ'ﾞ＼" + "\n" + "　　　　　　　　　,ィ|､　 ＼　　　　 /_,､-' _,.-''´ ｀丶､＿_" + "\n" + "　　　　　 ＿, イ　 | ヽ＿ 二＝''　_,. -''´　　''''''´´　 ｀`ｰ";
-    } else if (selectedValue === "option2") {
-        const textarea = document.getElementById("messageArea");
-        textarea.value += "\n" + "." + "　　　　　　　/':.:.:.:.:.:.:.:.:.:.:|.:.:.:.:.:.:.:＼　ヽ:　/_／" + "\n" + "　　　　 　 /.:.:.:.:.:/:.:.:.:,:.:.:|:.:.:ヽ.:.:.:.:.:.',　} /:.:.|" + "\n" + "　　　　　 l{:.:.:.:|:.l:.:.:.:/l/'ハ:､.:.:ヽ.:.:.:.:} .{::.:.:.:.:l" + "\n" + "　　　　　 ﾊ:.:.:.|:|:.／/ ノ ‐ヾ＼_|l.:.:.:i　}::.:.:.:.:.'," + "\n" + "　　　　　　 ヽ:.:.{. ,:=､　　 =＝､ ﾉ.;./ /::.::.::.:.:.:.'," + "\n" + "　　　　　　　　ヽゝ　 ､　　　　　ｿ!※}::.::.::.::.:.:." + "\n" + "　　　　　　　　　{ ｀ヽ、ヽﾌ　／ｲ　 /‐､_:.:.:.:.:.:." + "\n" + "　　f＾)＾)＾)＾)＾)＾)＾)＾)＾)＾)「-､_,{※}　ｒ′ヽ:.:.:.:." + "\n" + "ｒ''⊇、　 　 　 　 　 　 　ｌ|ヽ_/　 } t′　　',:.:.:." + "\n" + " 　{=='､　　　　　 　　　ｌ|!;r'!※{ ｔ′　　　',:.:.:" + "\n" + "ﾊ,,_う´不快なスレを　 　l;;l}.　 {,ｺ 　 　　　!:." + "\n" + "_{'V|ｌ　　　　　　　　　　 ｌ;;;{※.},ｺ　　　　　 !、" + "\n" + "ゞ　|l 　立てるなですぅ  ｌ|.l;;{　　},ｺ　　　　　　}" + "\n" + "＼,,|ｌ　 　　　　　　　　　 l| L{.※{,ｺ　　　　　 /|" + "\n" + "　 |ｌ＿＿＿＿＿＿＿＿l|,rn}　 },ｺ＼　　 ／　〉 ";
-    } else if (selectedValue === "option3") {
-        const textarea = document.getElementById("messageArea");
-        textarea.value += "\n" + "." + "　＿__l＿__　 /　／/" + "\n" + "　 ﾉ l　Jヽ　〔／　/ 　　　　　　 .,　-――-　､ _ _／ヽ" + "\n" + "　　ノﾇ　　　　　 / 　　　　　　／: : : : : : : : : : : : : : : : !-.-.‐.‐.‐. ｧ" + "\n" + "　 ／ ヽ､_　　　/ 　,ｨ＿＿∧': ／　　　. . . : : : : : /: :/: : : :｀: :＜" + "\n" + "　ム　ヒ　　 　7_／/::::::::::::::::〉: : : : : : :.／: : : :,:イ: :∧: :ｉ: : . .＼:｀ヽ　　　○" + "\n" + "　月　ヒ　　　 　　/／:::::::::::/: : : : : : :/ : : : ／ /: /　 ',: |: : ﾊ: : ヽ 　＼" + "\n" + "　ノ l ヽヽノ　　　//:::::::::::::/: /: : : : :/: :-∠＿/_:/　　 |: |: : :∧: : :ﾍ､ 　'," + "\n" + "　　　￣￣ 　　./〈:::::::::::::/: /: : : : :/: :.Ｘ　 　/／ 　 ＼!∧: : : :',: : : ﾊ＼j" + "\n" + "　__|＿ ヽヽ　 ｛ /＼:::::/: /|: : : : /i／ 　＼　　　　　 /｀ｰ∨: : :ｌ: : : :.!　 　　　　　　o" + "\n" + "　　| ー　　　　 ￣フ　:./´ !: : : / ￣￣￣ 　 　 　 ＿＿＿∨: :ｉ:. : : :!" + "\n" + "　　| ヽｰ　 　　 .／ ./ｲ!　 |: : /　　　　　　__　　　 ＼　 　 /!: ;ｲ::. : :.i〉" + "\n" + "　　　|　　　　　 > : : .::|:.ヽ_j: /　　　　　／:::::｀:.､　　　＼ /､|:/:.|:::. : ,'" + "\n" + "　　　|　　　 　　＼: : .:!:.:/ |/ ＼　 　 /::::::::::::::::::〉　　 　 !　}':.:.:|∨:/　　　　　o" + "\n" + "　　　|　　　　　ﾄーゝ.:|:/　　　　＞ ､ｊ:::::::::::::::::/  　　　, ｲ-<:.:.;ｲ:.Ⅳ" + "\n" + "　　　|　　　　　|: : : : .:|'　　　／　　 |｀ ｰrｰ-イ--‐ ' 　|:.:.:.∨:.!: |" + "\n" + "　　　|　　　 　 i : : : : : !　　　〉 　 　 | 　/ヽ 　ヽ　　o　ｊ:.:.:.:.:. : !:...";
-   
-    } else if (selectedValue === "option4") {
-        const textarea = document.getElementById("messageArea");
-      textarea.value += "\n" + "." + "　　　　 　 、　　　　　　　　　 　 八" + "\n" + "　　 　 　 / ＼　　　　　　 　 　 /　∨" + "\n" + "　　 　　 ｲ´＼＼、　　 ＿_ 　 /　│∨" + "\n" + "　　　 　 i|　 x≧､＼'~￣｀¨`く､､ |　 ∨" + "\n" + "　　　 　 |　／´ /′〈 　 、　 　 ＼ﾄ、　〉" + "\n" + "　　　 　 |　　　/　,／ﾍ　乂＿＿, ヽ｀¨｀ヽ" + "\n" + "　　　 ／　 　 /彡l l | {　〔Ll＼＿__　∨ 　ﾞ ､" + "\n" + "　　 / ,,　　　/__zx==|:l＼ ﾏﾞ气￣｀ア ∨　　ゝ" + "\n" + "　 ./ ,ｲ 　j!　ﾄﾞ´ (　):| |:l ﾄ､ゝ‐′, ‐､　 ∨　　 ＼＿," + "\n" + "　/／{ 　 /r‐ﾐｚ彡イ| l l | |ﾞ≧￣`ｰ'∨丿'、 丶「￣" + "\n" + ". ″　|　 / ｀T′　　厂⌒~ i>､　∪ノ_乂　 ＼ }ﾉ" + "\n" + "　　　‘ｘ/　|　＼ u　ゝ　　 　丿 ／／⌒＼　}丿" + "\n" + "　 　 　 ｀'ﾍﾄ＼ｘ≧ｰz--===彡く / ∩/iぃ}ノ" + "\n" + "　　　　　 r《ﾞ「∩＼,ｼ＾{~~,不￣ﾉ r┘′ ﾉ､" + "\n" + "　　 　 　 ﾞY´　r'ﾌ'´　　V´ |　＼　`ｰ-ｫ_　_)," + "\n" + "　　　　 　 ｀ｧ　iく､_　 /⌒ヽ　 　 　　 ＼￣/　　 ,,...-‐──､、" + "\n" + "　　　　 　 /　 |　 ／7　　　》-=--　　ノ￣ ,. ‐'　　　　　 　 ＼" + "\n" + "　　 　 　 ｛ 　 }／　/　 　 /／￣`＼_｀)／´　　　　　　　　　　　＼" + "\n" + "　　　　 　 ｀¨´　　/ 　　 / :{　　 ヽ,　//く　　　　　　　 　 　 　 ｀ﾐ　＼" + "\n" + "　　　　　　 　 　 /　　.／ 　|　　　 ∨/ 　 ﾄ､　　　　　　 　 　 　　}`ヽ,}" + "\n" + "　　　　　　　　 /　　 /　 　 ∨　　　〈　　　}　｀`～､,,＿＿＿＿　 |　′" + "\n" + "　　　　　　 　 /　　 /　 　 　 ＼　 　 }　 ／　　　　　　 　 　 　 }　|" + "\n" + "　　　　 　 　 i′　 〈ｰ‐'⌒ｰ-ｧ'⌒ヽ､∨　　　　　　　　　　 　 　∨" + "\n" + "　　　　　 　 (＿＿__〉　　 　 (＿＿＿_}";
-    } else if (selectedValue === "option5") {
-        const textarea = document.getElementById("messageArea");
-      textarea.value += "\n" + "." + "　　　　　　　　　　　　　 　 　 　 　 　 　 　 Y´　　｀." + "\n" + "　 ｨ　‥ ‐　､　　　　　　　　　　　　　　　　 |　　　　'," + "\n" + "　{　　　　 　　 丶､　　　　　　　　　　　　　 |　　　　 ',　　　　　　　　　　　　　　　　　 ＿" + "\n" + ".八　　　　　　　　　丶､　　　　　　　　　　　|　　　　　}　　　　　　　　　　　　　,. ｨ＜: : : : : ｀ー―-､" + "\n" + "　　｀丶､　　　　　　　　＼　　 　 　 　 　 　 !　　　　　!　　　　　　 　　　　 ／: : : : : : : : : : : : : : : : ::." + "\n" + "　　　　　丶､　　 , '　　　　丶　　　　　　　　|　　　　 /　　　　　　　　　　 ,': : : : : : : : : : : : : : : : : : : ::!" + "\n" + "　　　　　 　　　､　　　　, ' 　 ､　　　　　　　/　　　 /　　　 　 　 　 　 _,.‥──────────-- .._" + "\n" + "　　　　　　　　　＼,　 '　　　　j丶､　　　　/ 　　　/|　　　　　　　　／: : : : : : : : : : : : : : : : : : : : : : : : : :: : : ｀丶" + "\n" + "　　　 　 　 　 　 　 ＼　　　 ノ　　 ヽ＿__j　　　　　} 　 　 　 　 　 {: : : : : : : : : : : : ／: : ￣ノ: : : : :7!--､: : :: : ::〉" + "\n" + "　　　　　　　　　　__ノ_　　　　　　　　／　　¨¨ 　　j　　　　　　　　､: : :r 7: : ､: :,イ: : : : ／彡:: ／＿',: : |: : : : /" + "\n" + "　　　　　　　 　,'´　　　¨─--..__　　　　　　　　　　|　　　　　　　　､＼ﾉﾉ､: ':ゝ彡':厂Kﾋﾃ,::::ノ i'rｯ ､.ﾉ: ::!: :.／" + "\n" + "　　 　 　 　 　 !　　　　　　　　　　 丶､　　 　 　 　 !　　　　　　　 ゝ､三彡': : : : ノ 　　　　,　　:|´¨　{: : |¨´" + "\n" + "　　　　　　　　 ヽ_　　　　　　　 　　　　 丶､　　　　|　　　　　　　ミゝ : : : ／!´　 　　　　 ｨ _　..j　　八ゝ､_" + "\n" + "　　　　　　　 ,.．'　　丶 ､　　　　　　　　　　　 丶 ､j　　　　　　　　ゝ: : : ﾉ､　､　　　 　　　,._｀¨　　/ゝ=＜彡" + "\n" + "　　　　　　　{　　　　　　　､￣丶､　　 　　　　　　　丶､　　　　　,..　イ､:　: ＼ヽ　　　　ｰr=='ヽ , '　｀丶_)" + "\n" + "　　　　　　　}ゝ　　　　　　　丶､ 　 丶､　　　　　　r---ヽ_,.　≦二ヽ､　＼:　:丶＼　　　｀ー‐'ｲ　＜さぁお前の罪を数えろ" + "\n" + "　　　　　　 ﾉ　　　､　　　　　　　丶､　 　丶､　　　l　　　　}!:　:　:　ヽ:丶　 ､:　:　ヽ｀ー,､＿／" + "\n" + "　　　　　　{　　　　　､　　　　　　　　　｀¨丶､ ﾌ｀丶＼　ノ ':　:　:　:　:　:.',　 ', ､:　: ヽ /" + "\n" + "　　　　　　＼　　　　7,､､.._　　　　　　　　　　　ﾆﾆ=､: ¨:　:　:　:　:　:　:　}　　',: ､:　: ､j､" + "\n" + "　　　　　　　 ＼　　/Z=// 丶､　　　　　　　　/　　 } !:　:　:　:　:　:　:　: ! i!.　',:　､: :/:::}" + "\n" + "　　　　　　　　　丶||r='{,'　　　　　　｀¨　──===ｧイ:　:　:　:　:　:　:　: / !|: 　|:　:v7/:7" + "\n" + "　　　　　　　　　／:＞､_!_＿＿＿＿＿＿　,. イ´　:　:　:　:　:　:　:　:　/ //　　l:　:|::::::ﾉ!" + "\n" + "　　　　　　　　　|:　:　:　:　:　:　:　:　:　:　／　: |:　:　:　:　:　:　:　:　:　/ //　　　|:　:}:://" + "\n" + "　　　　　　　　　',:　:　:　:　:　:　:　:　:　/:　: /:. !:　:　:　:　＼:　:　: ／ //　　　　!:　|//!" + "\n" + "　　　　　　　　　 ',:　:　:　:　:　:　:　:　/:　／丶:!:　:　:　:　:　7- イ　／'　　　　　|:　|/:::|";  
-  
-    } else {
-        alert("アスキーアートを選択してください");
-
-}
-}
-
-function showPopup(postElement, x, y) {
-    // 既存のポップアップを消す
-    const oldPopup = document.getElementById("anchorPopup");
-    if (oldPopup) oldPopup.remove();
-
-    // 新しいポップアップ生成
-    const popup = document.createElement("div");
-    popup.id = "anchorPopup";
-    popup.style.position = "absolute";
-    popup.style.left = x + "px";
-    popup.style.top = y + "px";
-    popup.style.maxWidth = "300px";
-    popup.style.padding = "10px";
-    popup.style.background = "#ffffe0";
-    popup.style.border = "1px solid #aaa";
-    popup.style.borderRadius = "6px";
-    popup.style.zIndex = 9999;
-    popup.style.fontSize = "14px";
-
-    popup.innerHTML = postElement.innerHTML;
-
-    document.body.appendChild(popup);
-
-    // 画面外に出ないように調整
-    if (popup.getBoundingClientRect().right > window.innerWidth) {
-        popup.style.left = (x - popup.offsetWidth - 10) + "px";
-    }
-}
-
-// ポップアップ内に「閉じるボタン」を追加
-popup.innerHTML = `<div><button id="closePopup">閉じる</button></div>` + postContent;
-document.getElementById("closePopup").addEventListener("click", () => {
-    popup.remove();
-});
-
-document.addEventListener("click", function (e) {
-    const anchor = e.target.closest(".anchor");
-    if (!popup) return;
-
-    if (!e.target.closest("#anchorPopup") &&
-        !e.target.closest(".anchor")) {
-        popup.remove();
-    }
-});
-function onAnchorTap(e) {
-    const anchor = e.target.closest(".anchor");
-    if (!anchor) return;
-
-    showPopup(anchor, e.changedTouches ? e.changedTouches[0].clientX : e.clientX, 
-                      e.changedTouches ? e.changedTouches[0].clientY : e.clientY);
-}
-document.addEventListener("click", onAnchorTap);
-document.addEventListener("touchend", onAnchorTap);
-
-
-</script>
-<br>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<form action="/delete_thread/{{ thread.id }}" method="POST" 
-      onsubmit="return confirm('本当に削除しますか？');">
-    <button type="submit">削除</button>
-</form>
 </body>
 </html>
