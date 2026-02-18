@@ -30,6 +30,197 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         #fixed { position: fixed; bottom: 20px; right: 20px; }
+
+img {
+  pointer-events: none; /* マウス操作を無効化 */
+  -webkit-touch-callout: none; /* iOSでの長押しメニューを禁止 */
+margin: 0px 0px 0px 50px;
+}
+
+
+@font-face {
+  font-family: "Saitamaar";
+  src: url("https://hei-bu-jing.onrender.com/uploads/Saitamaar.woff2") format("woff2");
+  font-display: swap;
+}
+
+.htn {
+  font-family: "Saitamaar", "MS PGothic", "ＭＳ Ｐゴシック", sans-serif !important;
+  white-space: pre;
+  font-size: 16px;
+  line-height: 1.1;
+}
+
+
+
+h1 {
+  padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+  color: #494949;/*文字色*/
+  background: #f4f4f4;/*背景色*/
+  border-left: solid 5px #7db4e6;/*左線*/
+  border-bottom: solid 3px #d7d7d7;/*下線*/
+}
+
+a.btn--orange {
+  color: black;
+padding: 12px;
+  background-color: white;
+  border-bottom: 5px solid #696969;
+}
+a.btn--orange:hover {
+  margin-top: 3px;
+  color: black;
+  background: white;
+  border-bottom: 2px solid #696969;
+}
+a.btn--shadow {
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+}
+a {
+        text-decoration: none;
+color: #000000;        
+} 
+button{
+  position: relative;
+  display: inline-block;
+background: white;
+  transition: .3s;
+}
+button: hover{
+background: #d3d3d3;
+}
+button::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 2px;
+  background-color: #31aae2;
+  transition: .3s;
+  transform: translateX(-50%);
+}
+
+button:hover::after{
+  width: 100%;
+
+}
+
+nktidksg {
+float:left;
+  position: relative;
+  background: #ffd98a;
+  padding: 2px 5px 2px 25px;
+  font-size: 20px;
+  color: #474747;
+  border-radius: 0 10px 10px 0;
+}
+
+#fixed {
+  position: fixed;
+  /*基準を画面の左上に*/
+  bottom: 10px;
+  right: 10px;
+  /*余白が入らないように*/
+  margin: 0;
+  /*以下装飾*/
+}
+
+#fixed:hover {
+  position: fixed;
+  /*基準を画面の左上に*/
+  bottom: 15px;
+}
+
+.nktidksg:before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f135";
+  display: inline-block;
+  line-height: 40px;
+  position: absolute;
+  padding: 0em;
+  color: white;
+  background: #ffa337;
+  font-weight: 900;
+  width: 40px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  left: -1.35em;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border: solid 3px white; 
+  border-radius: 50%;
+}
+
+.am{
+  background-image: linear-gradient(0deg, #ffffff, #999999 0%, #525252);
+color: white;
+border-radius: 10px;/*角の丸み*/
+}
+.kakiko{
+background-color: #d3d3d3;
+display: inline-block;
+border: 3px solid #808080;
+  position: fixed;
+  /*基準を画面の左上に*/
+  bottom: 10px;
+  left: 10px;
+  /*余白が入らないように*/
+  margin: 0;
+}
+
+
+li {
+  position: relative;
+  padding: 0.4em;
+  border-radius: 0.5em;
+ margin: 30px;
+display: inline-block;
+}
+
+li:after {
+  position: absolute;
+  content: '';
+  top: 100%;
+  left: 30px;
+  border: 15px solid transparent;
+  /* ここをCSSカスタムプロパティに変更 */
+  border-top: 15px solid var(--after-color, #e0edff); 
+  width: 0;
+border-radius: 7px;
+  height: 0;
+}
+
+body{
+background-color: #fffacd;
+}
+button{
+  position: relative;
+  display: inline-block;
+background: white;
+  transition: .3s;
+}
+button: hover{
+background: #d3d3d3;
+}
+button::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 2px;
+  background-color: #31aae2;
+  transition: .3s;
+  transform: translateX(-50%);
+}
+
+button:hover::after{
+  width: 100%;
+}
     </style>
 </head>
 <body>
