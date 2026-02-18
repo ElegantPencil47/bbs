@@ -36,26 +36,16 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 DATABASE = "bbs.db"
 last_posts = {}
 online_users = {}  # {thread_id: set of sid}
-
 def init_db():
     with app.app_context():
-        # DATABASE 変数を使う
-        db = sqlite3.connect(DATABASE)
-        c = db.cursor()
+        # DATABASE 変数 ("bbs.db") を確実に使う
+        conn = sqlite3.connect(DATABASE)
+        c = conn.cursor()
         
-        # threadsテーブル（省略していた部分も確実に）
-        c.execute("""
-            CREATE TABLE IF NOT EXISTS threads (
-                id INTEGER PRIMARY KEY,
-                title TEXT,
-                created_at TEXT
-            )
-        """)
-
-        # postsテーブル
+        # 1. postsテーブルがなければ作る
         c.execute("""
             CREATE TABLE IF NOT EXISTS posts (
-                id INTEGER PRIMARY KEY,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 thread_id INTEGER,
                 name TEXT,
                 message TEXT,
@@ -64,16 +54,20 @@ def init_db():
             )
         """)
 
-        # 【重要】既存のDBにicon_urlがない場合の救済措置
+        # 2. 【最重要】既存のDBに強制的にカラムをねじ込む
+        # すでにカラムがある場合はエラーになるので try-except で囲む
         try:
             c.execute("ALTER TABLE posts ADD COLUMN icon_url TEXT")
-        except sqlite3.OperationalError:
-            pass # すでにある場合は何もしない
+            print("Successfully added icon_url column.")
+        except sqlite3.OperationalError as e:
+            print(f"Notice: {e}") # すでにある場合はここを通る
 
-        db.commit()
-        db.close()
+        conn.commit()
+        conn.close()
 
+# 必ず init_db() を呼び出していることを確認
 init_db()
+
 
 # -------------------------------
 # データベース接続
