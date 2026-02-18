@@ -72,10 +72,19 @@ def init_db():
                 thread_id INTEGER,
                 name TEXT,
                 message TEXT,
+                icon_url TEXT,     -- ★ここに追加
                 created_at TEXT
             )
         """)
+        
+        # 既存のテーブルにカラムがない場合の救済措置（Renderでのエラー回避用）
+        try:
+            c.execute("ALTER TABLE posts ADD COLUMN icon_url TEXT")
+        except:
+            pass # すでにカラムがある場合は何もしない
+            
         db.commit()
+
 
 # -------------------------------
 # テーマ変更
@@ -90,6 +99,7 @@ def set_theme():
 # -------------------------------
 # トップページ（スレッド一覧）
 # -------------------------------
+
 
 
 # 他の関数はそのまま
