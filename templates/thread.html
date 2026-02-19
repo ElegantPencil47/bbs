@@ -147,7 +147,7 @@ border: 3px solid #808080;
   margin: 0;
 }
 .color-box {
-width: 150px;
+width: 200px;
     position: relative;
     /* JSから渡される色を使う。未設定時は薄い青 (#e0edff) */
     background-color: var(--box-color, #e0edff);
@@ -161,7 +161,7 @@ float:left;
     position: absolute;
     top: 100%;
     left: 50%;
-    margin-left: -15px;
+    margin-left: -25px;
     border: 15px solid transparent;
     /* ここがポイント：しっぽの色を本体と同じ変数にする */
     border-top: 15px solid var(--box-color, #e0edff);
@@ -209,7 +209,7 @@ button:hover::after{
 </head>
 <body>
 
-<a href="lunareclipse.onrender.com">ホームに戻る</a>
+<a href="/" class="am" id="top">← スレッド一覧に戻る</a>
 <h1>{{ thread[1] }}</h1>
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 
