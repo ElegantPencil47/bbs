@@ -213,10 +213,7 @@ button:hover::after{
       <div class="htn">{{ post.message | imgify }}</div>
       <span>({{ post.created_at }})</span> <!-- ここを修正 -->
     </div>
-      {{ post.num }} <b>{{ post.name | safe }}</b>
-      <div class="htn">{{ post.message | imgify }}</div>
-      <span>({{ post.created_at }})</span>
-    </div>
+
 
   </li>
 
@@ -259,10 +256,10 @@ button:hover::after{
 const threadId = {{ thread_id }};
 const postsList = document.getElementById("posts");
 
-
+// --- 1. 関数定義 ---
 function generatePastelColor() {
-  const hue = Math.floor(Math.random() * 360);
-  return `hsl(${hue}, 80%, 85%)`;
+    const hue = Math.floor(Math.random() * 360);
+    return `hsl(${hue}, 80%, 85%)`;
 }
 
 function safeNl2br(text) {
@@ -285,15 +282,11 @@ function convertAnchors(text) {
     return text.replace(/&gt;&gt;(\d+)/g, '<span class="anchor" data-target="$1">&gt;&gt;$1</span>');
 }
 
-// 新しい投稿を画面に追加する関数
 function addPostToDOM(post) {
     const li = document.createElement("li");
     li.className = "post-container";
-
     const iconSrc = post.icon_url || "https://encrypted-tbn0.gstatic.com";
-    let msg = safeNl2br(post.message);
-    msg = convertImageUrls(msg);
-    msg = convertAnchors(msg);
+    let msg = convertAnchors(convertImageUrls(safeNl2br(post.message)));
 
     li.innerHTML = `
       <div class="color-box" id="${post.num}">
@@ -303,12 +296,20 @@ function addPostToDOM(post) {
       </div>
       <img src="${iconSrc}" class="user-icon">
     `;
-
     postsList.appendChild(li);
-    const color = generatePastelColor();
+    
+    // 新規投稿に色を適用
     const box = li.querySelector('.color-box');
-    box.style.backgroundColor = color;
+    if (box) box.style.backgroundColor = generatePastelColor();
 }
+
+// --- 2. 実行処理 (読み込み時に色を塗る) ---
+// スクリプトの最後ではなく、ここで確実に実行させます
+document.querySelectorAll('.color-box').forEach(box => {
+    box.style.backgroundColor = generatePastelColor();
+});
+
+// --- 3. イベントリスナー定義 ---
 
 // アイコンアップロード
 document.getElementById("iconInput").addEventListener("change", async function() {
@@ -336,6 +337,7 @@ document.getElementById("fileInput").addEventListener("change", async function()
         document.getElementById("messageArea").value += "\n" + data.url;
     }
 });
+
 
 // 投稿フォーム送信
 document.getElementById("postForm").addEventListener("submit", async (e) => {
