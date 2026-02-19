@@ -146,6 +146,22 @@ border: 3px solid #808080;
   /*余白が入らないように*/
   margin: 0;
 }
+.color-box {
+    position: relative;
+    /* JSから渡される色を使う。未設定時は薄い青 (#e0edff) */
+    background-color: var(--box-color, #e0edff);
+}
+
+.color-box:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -15px;
+    border: 15px solid transparent;
+    /* ここがポイント：しっぽの色を本体と同じ変数にする */
+    border-top: 15px solid var(--box-color, #e0edff);
+}
 
 
 li {
@@ -156,18 +172,7 @@ li {
 display: inline-block;
 }
 
-li:after {
-  position: absolute;
-  content: '';
-  top: 100%;
-  left: 30px;
-  border: 15px solid transparent;
-  /* ここをCSSカスタムプロパティに変更 */
-  border-top: 15px solid var(--after-color, #e0edff); 
-  width: 0;
-border-radius: 7px;
-  height: 0;
-}
+
 
 body{
 background-color: #fffacd;
@@ -206,7 +211,7 @@ button:hover::after{
 
 <ul id="posts">
   {% for post in posts %}
-
+<div>
   <li class="post-container">
 <div class="color-box" id="{{ post.num }}" style="padding: 10px; border-radius: 15px; position: relative; max-width: 80%; background-color: rgb(218, 140, 232); --after-color: hsl(291, 67%, 73%);">
       {{ post.num }} <b>{{ post.name | safe }}</b>
@@ -216,9 +221,9 @@ button:hover::after{
 
 
   </li>
-
+<br>
 <img src="{{ post.icon_url if post.icon_url else '/static/default_icon.png' }}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; margin-top: -10px; margin-left: 10px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-
+</div>
   {% endfor %}
 </ul>
 
@@ -251,12 +256,17 @@ button:hover::after{
 
 <a href="#top"><img src="/static/pagetop.png" height="80" id="fixed"></a>
 
+<!-- 1. 外部ライブラリを先に読み込む -->
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 
+<!-- 2. メインのロジック -->
 <script>
+// socketの定義を一番上に持ってくる
 const threadId = {{ thread_id }};
 const postsList = document.getElementById("posts");
+const socket = io({ transports: ["websocket"] });
 
-// --- 1. 関数定義 ---
+// --- 関数定義 ---
 function generatePastelColor() {
     const hue = Math.floor(Math.random() * 360);
     return `hsl(${hue}, 80%, 85%)`;
@@ -282,6 +292,14 @@ function convertAnchors(text) {
     return text.replace(/&gt;&gt;(\d+)/g, '<span class="anchor" data-target="$1">&gt;&gt;$1</span>');
 }
 
+function applyRandomColor(element) {
+    const newColor = generatePastelColor();
+    // 背景色としっぽ(before)の両方に適用されるようCSS変数を使う
+    element.style.setProperty('--box-color', newColor);
+    // 念のため直接の背景色もセットしておく
+    element.style.backgroundColor = newColor;
+}
+
 function addPostToDOM(post) {
     const li = document.createElement("li");
     li.className = "post-container";
@@ -298,18 +316,17 @@ function addPostToDOM(post) {
     `;
     postsList.appendChild(li);
     
-    // 新規投稿に色を適用
     const box = li.querySelector('.color-box');
-    if (box) box.style.backgroundColor = generatePastelColor();
+    if (box) applyRandomColor(box);
 }
 
-// --- 2. 実行処理 (読み込み時に色を塗る) ---
-// スクリプトの最後ではなく、ここで確実に実行させます
+// --- 初期実行 ---
+// 既存の投稿すべてに色を塗る
 document.querySelectorAll('.color-box').forEach(box => {
-    box.style.backgroundColor = generatePastelColor();
+    applyRandomColor(box);
 });
 
-// --- 3. イベントリスナー定義 ---
+// --- イベントリスナー ---
 
 // アイコンアップロード
 document.getElementById("iconInput").addEventListener("change", async function() {
@@ -338,31 +355,26 @@ document.getElementById("fileInput").addEventListener("change", async function()
     }
 });
 
-
 // 投稿フォーム送信
 document.getElementById("postForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const res = await fetch(`/thread/${threadId}/add_post`, { method: "POST", body: formData });
-    if (res.ok) { e.target.reset(); document.getElementById("uploadedIconUrl").value = ""; }
+    if (res.ok) { 
+        e.target.reset(); 
+        document.getElementById("uploadedIconUrl").value = ""; 
+    }
 });
 
+// Socket.io 通信
 socket.on("connect", () => socket.emit("join_thread", { thread_id: threadId }));
 socket.on("new_post", (post) => addPostToDOM(post));
-socket.on("online_count", (count) => document.getElementById("onlineCount").textContent = count);
-
-// 初期表示の色付け
-document.querySelectorAll('.color-box').forEach(box => {
-    box.style.backgroundColor = generatePastelColor();
+socket.on("online_count", (count) => {
+    const el = document.getElementById("onlineCount");
+    if (el) el.textContent = count;
 });
 </script>
-<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 
-<script>
-const threadId = {{ thread_id }};
-const postsList = document.getElementById("posts");
-const socket = io({ transports: ["websocket"] });
-</script>
 <br>
 <br>
 <br>
