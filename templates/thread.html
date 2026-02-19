@@ -11,9 +11,7 @@ img {
   -webkit-touch-callout: none; /* iOSでの長押しメニューを禁止 */
 margin: 0px 0px 0px 50px;
 }
-.color-box{
-background: #474747;
-}
+
 
 @font-face {
   font-family: "Saitamaar";
@@ -208,17 +206,22 @@ button:hover::after{
 
 <ul id="posts">
   {% for post in posts %}
-<DIV class="nktidksg">
+
   <li class="post-container">
-    <div class="color-box" id="{{ post.num }}">
+<div class="color-box" id="{{ post.num }}" style="padding: 10px; border-radius: 15px; position: relative; max-width: 80%; background-color: rgb(218, 140, 232); --after-color: hsl(291, 67%, 73%);">
+      {{ post.num }} <b>{{ post.name | safe }}</b>
+      <div class="htn">{{ post.message | imgify }}</div>
+      <span>({{ post.created_at }})</span> <!-- ここを修正 -->
+    </div>
       {{ post.num }} <b>{{ post.name | safe }}</b>
       <div class="htn">{{ post.message | imgify }}</div>
       <span>({{ post.created_at }})</span>
     </div>
 
   </li>
-<img src="{{ post.icon_url if post.icon_url else '/static/default_icon.png' }}" class="user-icon">
-</DIV>
+
+<img src="{{ post.icon_url if post.icon_url else '/static/default_icon.png' }}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; margin-top: -10px; margin-left: 10px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+
   {% endfor %}
 </ul>
 
