@@ -147,13 +147,13 @@ border: 3px solid #808080;
   margin: 0;
 }
 .color-box {
-width: 200px;
+width: 250px;
     position: relative;
     /* JSから渡される色を使う。未設定時は薄い青 (#e0edff) */
     background-color: var(--box-color, #e0edff);
 }
 .akys{
-width: 240px;
+width: 360px;
 float:left;
 }
 .color-box:before {
@@ -286,7 +286,7 @@ function convertImageUrls(text) {
     const urlRegex = /(https?:\/\/[^\s]+)/gi;
     return text.replace(urlRegex, (url) => {
         if (url.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
-            return `<br><a href="${url}" target="_blank"><img src="${url}" style="max-height:120px; display:block;"></a>`;
+            return `<br><a href="${url}" target="_blank"><img src="${url}" style="max-width:180px; display:block;"></a>`;
         }
         return `<a href="${url}" target="_blank">${url}</a>`;
     });
