@@ -157,7 +157,7 @@ border: 3px solid #808080;
   margin: 0;
 }
 .color-box {
-width: 250px;
+min-width: 250px;
     position: relative;
     /* JSから渡される色を使う。未設定時は薄い青 (#e0edff) */
     background-color: var(--box-color, #e0edff);
@@ -171,7 +171,7 @@ max-width: 80%;
 
 }
 .akys{
-width: 360px;
+min-width: 360px;
 float:left;
 }
 .color-box:before {
@@ -244,7 +244,7 @@ button:hover::after{
 
   </li>
 <br>
-<img src="{{ post.icon_url if post.icon_url else '/static/default_icon.png' }}" class="user-icon" style="margin-top: -24px;">
+<img src="{{ post.icon_url if post.icon_url else '/static/default_icon.png' }}" class="user-icon" style="margin-top: -30px; margin-left: 10px;">
 </div>
   {% endfor %}
 </ul>
