@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<link rel="icon" href="/static/favicon.ico">
     <meta charset="UTF-8">
     <title>{{ thread[1] }}</title>
     <style>
@@ -14,12 +15,11 @@ width: 45px;
 height: 45px;
 border-radius: 50%;
 object-fit: cover;
-margin-left: 25px;
 border: 2px solid white;
 box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   pointer-events: none; /* マウス操作を無効化 */
   -webkit-touch-callout: none; /* iOSでの長押しメニューを禁止 */
-margin-top: -10px;
+margin-top: -5px;
 margin-left: 25px;
 }
 
@@ -244,7 +244,7 @@ button:hover::after{
 
   </li>
 <br>
-<img src="{{ post.icon_url if post.icon_url else '/static/default_icon.png' }}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; margin-top: -10px; margin-left: 25px; border: 2px solid white;   pointer-events: none;  -webkit-touch-callout: none; /* iOSでの長押しメニューを禁止 */box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+<img src="{{ post.icon_url if post.icon_url else '/static/default_icon.png' }}" class="user-icon">
 </div>
   {% endfor %}
 </ul>
