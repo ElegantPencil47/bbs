@@ -147,11 +147,15 @@ border: 3px solid #808080;
   margin: 0;
 }
 .color-box {
+width: 150px;
     position: relative;
     /* JSから渡される色を使う。未設定時は薄い青 (#e0edff) */
     background-color: var(--box-color, #e0edff);
 }
-
+.akys{
+width: 240px;
+float:left;
+}
 .color-box:before {
     content: "";
     position: absolute;
@@ -211,7 +215,7 @@ button:hover::after{
 
 <ul id="posts">
   {% for post in posts %}
-<div>
+<div class="akys">
   <li class="post-container">
 <div class="color-box" id="{{ post.num }}" style="padding: 10px; border-radius: 15px; position: relative; max-width: 80%; background-color: rgb(218, 140, 232); --after-color: hsl(291, 67%, 73%);">
       {{ post.num }} <b>{{ post.name | safe }}</b>
