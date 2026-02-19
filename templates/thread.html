@@ -19,7 +19,7 @@ border: 2px solid white;
 box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   pointer-events: none; /* マウス操作を無効化 */
   -webkit-touch-callout: none; /* iOSでの長押しメニューを禁止 */
-margin-top: -5px;
+margin-top: 6px;
 margin-left: 25px;
 }
 
@@ -244,7 +244,7 @@ button:hover::after{
 
   </li>
 <br>
-<img src="{{ post.icon_url if post.icon_url else '/static/default_icon.png' }}" class="user-icon">
+<img src="{{ post.icon_url if post.icon_url else '/static/default_icon.png' }}" class="user-icon" style="margin-top: -3px;">
 </div>
   {% endfor %}
 </ul>
