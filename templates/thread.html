@@ -11,7 +11,9 @@ img {
   -webkit-touch-callout: none; /* iOSでの長押しメニューを禁止 */
 margin: 0px 0px 0px 50px;
 }
-
+.color-box{
+background: #474747;
+}
 
 @font-face {
   font-family: "Saitamaar";
@@ -82,7 +84,7 @@ button:hover::after{
 
 }
 
-nktidksg {
+.nktidksg {
 float:left;
   position: relative;
   background: #ffd98a;
@@ -206,6 +208,7 @@ button:hover::after{
 
 <ul id="posts">
   {% for post in posts %}
+<DIV class="nktidksg">
   <li class="post-container">
     <div class="color-box" id="{{ post.num }}">
       {{ post.num }} <b>{{ post.name | safe }}</b>
@@ -215,7 +218,7 @@ button:hover::after{
 
   </li>
 <img src="{{ post.icon_url if post.icon_url else '/static/default_icon.png' }}" class="user-icon">
-
+</DIV>
   {% endfor %}
 </ul>
 
