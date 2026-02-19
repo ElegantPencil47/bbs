@@ -40,7 +40,7 @@ margin: 0px 0px 0px 50px;
 
 @font-face {
   font-family: "Saitamaar";
-  src: url("https://hei-bu-jing.onrender.com/uploads/Saitamaar.woff2") format("woff2");
+  src: url("https://lunareclipse.onrender.com/uploads/Saitamaar.woff2") format("woff2");
   font-display: swap;
 }
 
@@ -225,6 +225,7 @@ button:hover::after{
 </head>
 <body>
 
+
 <h1>{{ thread[1] }}</h1>
 <p>現在の接続人数: <span id="onlineCount">0</span> 人</p>
 
@@ -236,8 +237,10 @@ button:hover::after{
       <div class="htn">{{ post.message | imgify }}</div>
       <span>({{ post.created_at }})</span>
     </div>
-    <img src="{{ post.icon_url if post.icon_url else 'https://encrypted-tbn0.gstatic.com' }}" class="user-icon">
+
   </li>
+<img src="{{ post.icon_url if post.icon_url else '/static/default_icon.png' }}" class="user-icon">
+
   {% endfor %}
 </ul>
 
@@ -270,11 +273,11 @@ button:hover::after{
 
 <a href="#top"><img src="/static/pagetop.png" height="80" id="fixed"></a>
 
-<script src="https://cdn.socket.io"></script>
+
 <script>
 const threadId = {{ thread_id }};
 const postsList = document.getElementById("posts");
-const socket = io({ transports: ["websocket"] });
+
 
 function generatePastelColor() {
   const hue = Math.floor(Math.random() * 360);
@@ -370,5 +373,12 @@ document.querySelectorAll('.color-box').forEach(box => {
     box.style.backgroundColor = generatePastelColor();
 });
 </script>
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+<script>
+const threadId = {{ thread_id }};
+const postsList = document.getElementById("posts");
+const socket = io({ transports: ["websocket"] });
+
 </body>
 </html>
