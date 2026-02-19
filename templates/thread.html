@@ -7,11 +7,21 @@
 
 
 img {
+
+}
+.user-icon{
+width: 45px;
+height: 45px;
+border-radius: 50%;
+object-fit: cover;
+margin-top: -10px;
+margin-left: 10px;
+border: 2px solid white;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   pointer-events: none; /* マウス操作を無効化 */
   -webkit-touch-callout: none; /* iOSでの長押しメニューを禁止 */
 margin: 0px 0px 0px 50px;
 }
-
 
 @font-face {
   font-family: "Saitamaar";
@@ -151,6 +161,14 @@ width: 250px;
     position: relative;
     /* JSから渡される色を使う。未設定時は薄い青 (#e0edff) */
     background-color: var(--box-color, #e0edff);
+
+padding: 10px;
+border-radius: 15px;
+position: relative;
+max-width: 80%;
+--after-color: hsl(291, 67%, 73%);
+
+
 }
 .akys{
 width: 360px;
@@ -217,7 +235,7 @@ button:hover::after{
   {% for post in posts %}
 <div class="akys">
   <li class="post-container">
-<div class="color-box" id="{{ post.num }}" style="padding: 10px; border-radius: 15px; position: relative; max-width: 80%; background-color: rgb(218, 140, 232); --after-color: hsl(291, 67%, 73%);">
+<div class="color-box" id="{{ post.num }}">
       {{ post.num }} <b>{{ post.name | safe }}</b>
       <div class="htn">{{ post.message | imgify }}</div>
       <span>({{ post.created_at }})</span> <!-- ここを修正 -->
@@ -286,7 +304,7 @@ function convertImageUrls(text) {
     const urlRegex = /(https?:\/\/[^\s]+)/gi;
     return text.replace(urlRegex, (url) => {
         if (url.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
-            return `<br><a href="${url}" target="_blank"><img src="${url}" style="max-width:180px; display:block;"></a>`;
+            return `<br><a href="${url}" target="_blank"><img src="${url}" style="max-width:100px; display:block;"></a>`;
         }
         return `<a href="${url}" target="_blank">${url}</a>`;
     });
