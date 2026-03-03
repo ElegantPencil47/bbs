@@ -226,9 +226,14 @@ def aa():
 
 
 
-@app.route('/uekirikarikiri')
-def uekirikarikiri():
-    return render_template('uekirikarikiri.html')
+@app.route('/yomi')
+def yomi():
+    return render_template('yomi.html')
+
+@app.route('/kaki')
+def kaki():
+    return render_template('kaki.html')
+
 
 
 @app.route('/help')

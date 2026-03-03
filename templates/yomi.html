@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>暗号の解析</title>
+</head>
+<style>
+/* 基本的なスタイル例 */
+input[type="text"] {
+  width: 60%;             /* 幅を指定 */
+  padding: 10px;           /* 内側の余白 */
+  border: 1px solid #ccc;  /* 枠線の色と太さ */
+  border-radius: 60px;      /* 角の丸み */
+  box-sizing: border-box;  /* パディングを含めた幅計算 */
+  text-align:center 
+}
+
+/* フォーカス時のスタイル */
+input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;           /* デフォルトの青枠を消す */
+  box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+button {
+padding: 5px;
+margin: 5px;
+color: white;
+border: none;
+   background-color: black;
+ border-radius: 100px;
+}
+
+
+</style>
+<body>
+
+
+<DIV>
+    <div style="text-align:center">
+        <input type="text" id="myInput" placeholder="暗号を入力"><button onclick="checkValues()">✓</button>
+    </div>
+
+</DIV>
+    <p style="text-align:center">結果: <strong id="output"></strong></p>
+
+    <script>
+function checkValues() {
+    const inputElement = document.getElementById("myInput");
+    const outputElement = document.getElementById("output");
+    let inputValue = inputElement.value.replace(/\s+/g, ""); // スペースを除去
+    
+    // 1. 定義をオブジェクトにまとめる（追加・修正が簡単！）
+    const dictionary = {
+        "0000": "O", "0001": "E", "0010": "D", "0011": "I",
+        "0100": "A", "0101": "K", "0110": "W", "0111": "T",
+        "1000": "Y", "1001": "R", "1010": "M", "1011": "N",
+        "1100": "H", "1101": "S", "1110": "U", "1111": "G"
+    };
+
+    let result = "";
+
+    // 2. 4文字ずつループで回して変換
+    for (let i = 0; i < inputValue.length; i += 4) {
+        let bitChunk = inputValue.substring(i, i + 4); // 4文字切り出し
+        if (dictionary[bitChunk]) {
+            result += dictionary[bitChunk];
+        } else if (bitChunk.length === 4) {
+            result += "?"; // 定義にないコードの場合
+        }
+    }
+
+    // 3. まとめて出力
+    outputElement.textContent = result;
+}
+
+</script>
+</body>
+</html>

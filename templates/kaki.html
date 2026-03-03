@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>暗号の解析</title>
+</head>
+<style>
+/* 基本的なスタイル例 */
+input[type="text"] {
+  width: 60%;             /* 幅を指定 */
+  padding: 10px;           /* 内側の余白 */
+  border: 1px solid #ccc;  /* 枠線の色と太さ */
+  border-radius: 60px;      /* 角の丸み */
+  box-sizing: border-box;  /* パディングを含めた幅計算 */
+  text-align:center 
+}
+
+/* フォーカス時のスタイル */
+input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;           /* デフォルトの青枠を消す */
+  box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+button {
+padding: 5px;
+margin: 5px;
+color: white;
+border: none;
+   background-color: black;
+ border-radius: 100px;
+}
+
+
+</style>
+<body>
+
+
+<DIV>
+    <div style="text-align:center">
+        <input type="text" id="myInput" placeholder="アルファベットで文字列を記入"><button onclick="checkValues()">✓</button>
+    </div>
+
+</DIV>
+    <p style="text-align:center">結果: <strong id="output"></strong></p>
+
+
+    <script>
+function checkValues() {
+    const inputElement = document.getElementById("myInput");
+    const outputElement = document.getElementById("output");
+    
+    // 入力をすべて大文字に変換し、前後の不要な空白を消す
+    let inputValue = inputElement.value.toUpperCase().trim();
+    
+    const dictionary = {
+        "O": "0000", "E": "0001", "D": "0010", "I": "0011",
+        "A": "0100", "K": "0101", "W": "0110", "T": "0111",
+        "Y": "1000", "R": "1001", "M": "1010", "N": "1011",
+        "H": "1100", "S": "1101", "U": "1110", "G": "1111"
+    };
+
+    let result = "";
+
+    for (let i = 0; i < inputValue.length; i++) {
+        let char = inputValue.charAt(i); // 1文字ずつ取り出す
+        
+        if (dictionary[char]) {
+            // 変換後のバイナリに見やすさのためのスペースを追加
+            result += dictionary[char] + " "; 
+        } else if (char === " ") {
+            // 入力がスペースなら、そのまま少し広めの空白を入れる
+            result += "  "; 
+        } else {
+            result += "?"; 
+        }
+    }
+
+    outputElement.textContent = result.trim();
+}
+
+
+</script>
+</body>
+</html>
