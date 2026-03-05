@@ -36,7 +36,10 @@ margin-left: 25px;
   line-height: 1.1;
 }
 
+.URL{
+color: blue;
 
+}
 
 h1 {
   padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
@@ -143,7 +146,8 @@ float:left;
 .am{
   background-image: linear-gradient(0deg, #ffffff, #999999 0%, #525252);
 color: white;
-border-radius: 10px;/*角の丸み*/
+margin: 10px;
+border-radius: 6px;/*角の丸み*/
 }
 .kakiko{
 background-color: #d3d3d3;
@@ -173,6 +177,17 @@ max-width: 80%;
 
 
 }
+
+.head{
+
+  position: fixed;
+  top: 0px;
+background-color: black;
+margin: 10px;
+height: 40px;
+z-index: 9999;
+}
+
 .akys{
 min-width: 360px;
 max-width: 100%;
@@ -231,7 +246,11 @@ button:hover::after{
 </head>
 <body>
 
-<a href="/" class="am" id="top">← スレッド一覧に戻る</a>
+<div class="head">
+
+<a href="/" class="am" id="top">← スレッド一覧に戻る</a><a href="/aa" class="am" id="top">AA・コピペ保存</a><a href="/kaki" class="am" id="top">暗号作成サイト</a><a href="/yomi" class="am" id="top">暗号解読サイト</a><a href="/help" class="am" id="top">ヘルプ・ご案内</a>
+</div>
+<br><br>
 <h1>{{ thread[1] }}</h1>
 <p>累計の表示回数: <span id="onlineCount">0</span> 回</p>
 
@@ -317,7 +336,7 @@ function convertImageUrls(text) {
         if (url.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
             return `<br><a href="${url}" target="_blank"><img src="${url}" style="max-width:200px; display:block;"></a>`;
         }
-        return `<a href="${url}" target="_blank">${url}</a>`;
+        return `<a href="${url}" target="_blank" class="URL">${url}</a>`;
     });
 }
 
