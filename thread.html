@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<link rel="icon" href="/static/favicon.ico">
+    <meta charset="UTF-8">
+    <title>{{ thread[1] }}</title>
+    <style>
+
+
+img {
+
+}
+.user-icon{
+width: 45px;
+height: 45px;
+border-radius: 50%;
+object-fit: cover;
+border: 2px solid white;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  pointer-events: none; /* マウス操作を無効化 */
+  -webkit-touch-callout: none; /* iOSでの長押しメニューを禁止 */
+margin-top: 6px;
+margin-left: 25px;
+}
+
+@font-face {
+  font-family: "Saitamaar";
+  src: url("https://lunareclipse.onrender.com/uploads/Saitamaar.woff2") format("woff2");
+  font-display: swap;
+}
+
+.htn {
+  font-family: "Saitamaar", "MS PGothic", "ＭＳ Ｐゴシック", sans-serif !important;
+  white-space: pre;
+  font-size: 16px;
+  line-height: 1.1;
+}
+
+.URL{
+color: blue;
+
+}
+
+h1 {
+  padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+  color: #494949;/*文字色*/
+  background: #f4f4f4;/*背景色*/
+  border-left: solid 5px #7db4e6;/*左線*/
+  border-bottom: solid 3px #d7d7d7;/*下線*/
+}
+
+a.btn--orange {
+  color: black;
+padding: 12px;
+  background-color: white;
+  border-bottom: 5px solid #696969;
+}
+a.btn--orange:hover {
+  margin-top: 3px;
+  color: black;
+  background: white;
+  border-bottom: 2px solid #696969;
+}
+a.btn--shadow {
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+}
+a {
+        text-decoration: none;
+color: #000000;        
+} 
+button{
+  position: relative;
+  display: inline-block;
+background: white;
+  transition: .3s;
+}
+button: hover{
+background: #d3d3d3;
+}
+button::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 2px;
+  background-color: #31aae2;
+  transition: .3s;
+  transform: translateX(-50%);
+}
+
+button:hover::after{
+  width: 100%;
+
+}
+
+.nktidksg {
+float:left;
+  position: relative;
+  background: #ffd98a;
+  padding: 2px 5px 2px 25px;
+  font-size: 20px;
+  color: #474747;
+  border-radius: 0 10px 10px 0;
+}
+
+#fixed {
+  position: fixed;
+  /*基準を画面の左上に*/
+  bottom: 10px;
+  right: 10px;
+  /*余白が入らないように*/
+  margin: 0;
+  /*以下装飾*/
+}
+
+#fixed:hover {
+  position: fixed;
+  /*基準を画面の左上に*/
+  bottom: 15px;
+}
+
+.nktidksg:before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f135";
+  display: inline-block;
+  line-height: 40px;
+  position: absolute;
+  padding: 0em;
+  color: white;
+  background: #ffa337;
+  font-weight: 900;
+  width: 40px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  left: -1.35em;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border: solid 3px white; 
+  border-radius: 50%;
+}
+
+.am{
+  background-image: linear-gradient(0deg, #ffffff, #999999 0%, #525252);
+color: white;
+border-radius: 2px;/*角の丸み*/
+}
+.kakiko{
+background-color: #d3d3d3;
+display: inline-block;
+border: 3px solid #808080;
+  position: fixed;
+  /*基準を画面の左上に*/
+  bottom: 10px;
+  left: 10px;
+  /*余白が入らないように*/
+  margin: 0;
+}
+.color-box {
+min-width: 280px;
+max-width: 100%;
+    position: relative;
+    /* JSから渡される色を使う。未設定時は薄い青 (#e0edff) */
+    background-color: var(--box-color, #e0edff);
+
+padding: 10px;
+border-radius: 15px;
+position: relative;
+max-width: 80%;
+--after-color: hsl(291, 67%, 73%);
+
+
+
+
+}
+
+.head{
+  position: fixed;
+  top: 10px;
+}
+
+.akys{
+min-width: 360px;
+max-width: 100%;
+float:left;
+}
+.color-box:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -25px;
+    border: 15px solid transparent;
+    /* ここがポイント：しっぽの色を本体と同じ変数にする */
+    border-top: 15px solid var(--box-color, #e0edff);
+}
+
+
+li {
+  position: relative;
+  padding: 0.4em;
+  border-radius: 0.5em;
+ margin: 30px;
+display: inline-block;
+}
+
+
+
+body{
+background-color: #fffacd;
+}
+button{
+  position: relative;
+  display: inline-block;
+background: white;
+  transition: .3s;
+}
+button: hover{
+background: #d3d3d3;
+}
+button::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 2px;
+  background-color: #31aae2;
+  transition: .3s;
+  transform: translateX(-50%);
+}
+
+button:hover::after{
+  width: 100%;
+}
+    </style>
+</head>
+<body>
+<div class="head">
+<a href="/" class="am" id="top">← スレッド一覧に戻る</a><a href="/aa" class="am" id="top">AA・コピペ保存</a><a href="/kaki" class="am" id="top">暗号作成サイト</a><a href="/yomi" class="am" id="top">暗号解読サイト</a><a href="/help" class="am" id="top">ヘルプ・ご案内</a>
+</div>
+<h1>{{ thread[1] }}</h1>
+<p>累計の表示回数: <span id="onlineCount">0</span> 回</p>
+
+<ul id="posts">
+  {% for post in posts %}
+<div class="akys">
+  <li class="post-container">
+<div class="color-box" id="{{ post.num }}">
+      {{ post.num }} <b>{{ post.name | safe }}</b>
+      <div class="htn">{{ post.message | imgify }}</div>
+      <span>({{ post.created_at }})</span> <!-- ここを修正 -->
+    </div>
+
+
+  </li>
+<br>
+<img src="{{ post.icon_url if post.icon_url else '/static/default_icon.png' }}" class="user-icon" style="margin-top: -30px; margin-left: 50px;">
+</div>
+  {% endfor %}
+</ul>
+
+<div class="kakiko">
+  <form id="postForm" enctype="multipart/form-data">
+    名前: <input type="text" name="name"><br>
+    
+    <!-- アイコン設定 -->
+    アイコン設定: <input type="file" id="iconInput" accept="image/*">
+    <input type="hidden" name="icon_url" id="uploadedIconUrl" value="">
+    <br>
+
+    本文: <textarea name="message" id="messageArea"></textarea><br>
+
+    画像の投稿: <input type="file" id="fileInput" accept="image/*">
+    <div id="result"></div>
+
+    AAの投稿
+    <div>
+        <select id="mySelect">
+            <option value="">AAを選択</option>
+            <option value="option1">画像も貼らずにスレ立てとな？</option>
+            <option value="option2">不快なスレを立てるなですぅ</option>
+            <option value="option3">変態だ！</option>
+            <option value="option4">(怯える)</option>
+            <option value="option5">さぁお前の罪を数えろ</option>
+        </select>
+    </div>
+        <button type="button" onclick="checkValues()">AAを決定</button>
+    <button type="submit">投稿する</button>
+  </form>
+</div>
+
+<a href="#top"><img src="/static/pagetop.png" height="80" id="fixed"></a>
+
+<!-- 1. 外部ライブラリを先に読み込む -->
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+<!-- 2. メインのロジック -->
+<script>
+
+
+
+
+// socketの定義を一番上に持ってくる
+const threadId = {{ thread_id }};
+const postsList = document.getElementById("posts");
+const socket = io({ transports: ["websocket"] });
+
+// --- 関数定義 ---
+function generatePastelColor() {
+    const hue = Math.floor(Math.random() * 360);
+    return `hsl(${hue}, 80%, 85%)`;
+}
+
+function safeNl2br(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML.replace(/\n/g, '<br>');
+}
+
+function convertImageUrls(text) {
+    const urlRegex = /(https?:\/\/[^\s]+)/gi;
+    return text.replace(urlRegex, (url) => {
+        if (url.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+            return `<br><a href="${url}" target="_blank"><img src="${url}" style="max-width:200px; display:block;"></a>`;
+        }
+        return `<a href="${url}" target="_blank" class="URL">${url}</a>`;
+    });
+}
+
+function convertAnchors(text) {
+    return text.replace(/&gt;&gt;(\d+)/g, '<span class="anchor" data-target="$1">&gt;&gt;$1</span>');
+}
+
+function applyRandomColor(element) {
+    const newColor = generatePastelColor();
+    // 背景色としっぽ(before)の両方に適用されるようCSS変数を使う
+    element.style.setProperty('--box-color', newColor);
+    // 念のため直接の背景色もセットしておく
+    element.style.backgroundColor = newColor;
+}
+
+function addPostToDOM(post) {
+    const li = document.createElement("li");
+    li.className = "post-container";
+    const iconSrc = post.icon_url || "/static/default_icon.png";
+    let msg = convertAnchors(convertImageUrls(safeNl2br(post.message)));
+
+    li.innerHTML = `
+      <div class="color-box" id="${post.num}">
+        ${post.num} <b>${post.name}</b>
+        <div class="htn">${msg}</div>
+        <span>(${post.created_at})</span>
+      </div>
+      <img src="${iconSrc}" class="user-icon">
+    `;
+    postsList.appendChild(li);
+    
+    const box = li.querySelector('.color-box');
+    if (box) applyRandomColor(box);
+}
+
+// --- 初期実行 ---
+// 既存の投稿すべてに色を塗る
+document.querySelectorAll('.color-box').forEach(box => {
+    applyRandomColor(box);
+});
+
+// --- イベントリスナー ---
+
+// アイコンアップロード
+document.getElementById("iconInput").addEventListener("change", async function() {
+    const file = this.files[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append("imageFile", file);
+    const res = await fetch("/upload", { method: "POST", body: formData });
+    const data = await res.json();
+    if (data.url) {
+        document.getElementById("uploadedIconUrl").value = data.url;
+        alert("アイコンをセットしました");
+    }
+});
+
+// 本文用画像アップロード
+document.getElementById("fileInput").addEventListener("change", async function() {
+    const file = this.files[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append("imageFile", file);
+    const res = await fetch("/upload", { method: "POST", body: formData });
+    const data = await res.json();
+    if (data.url) {
+        document.getElementById("messageArea").value += "\n" + data.url;
+    }
+});
+
+// 投稿フォーム送信
+document.getElementById("postForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const res = await fetch(`/thread/${threadId}/add_post`, { method: "POST", body: formData });
+    if (res.ok) { 
+        e.target.reset(); 
+        document.getElementById("uploadedIconUrl").value = ""; 
+    }
+});
+
+// Socket.io 通信
+socket.on("connect", () => socket.emit("join_thread", { thread_id: threadId }));
+socket.on("new_post", (post) => addPostToDOM(post));
+socket.on("online_count", (count) => {
+    const el = document.getElementById("onlineCount");
+    if (el) el.textContent = count;
+});
+
+
+
+
+
+
+
+
+
+
+
+
+function checkValues() {
+    
+
+
+
+    const selectElement = document.getElementById("mySelect");
+    const selectedValue = selectElement.value;
+    if (selectedValue === "option1") {
+        const textarea = document.getElementById("messageArea");
+        textarea.value += "\n" + "." + "　　　　　　　 |:;:;:;:;:;:;:;:;:;:;:;:;:;:i;:;:;:;:;:;:;:;:;:;:;:;:;|" + "\n" + "　 　 　 　 　 |;:;:_:;:_:;:_:;:_;:;_:;:l:;_;:_:;:_:;:_:;:_;:_;|" + "\n" + "　　　　　　　|＿＿＿＿＿_|＿＿＿＿＿|" + "\n" + "　　　　　　　|　三|　　＿ 　 　 ＿　　 |三 !" + "\n" + "　　　　　　　|　三|　 三ｼ　　　ヾ三　 |三 |" + "\n" + "　　　　　　　|　三′　 .._　　　　 _,,..　 i三 |" + "\n" + "　　　　　　　ト､ﾆ|　<でiﾝヽ　 ;'iｨでiﾝ |三.|" + "\n" + "　　　　　　　', iヽ!　 ､　‐' /　 !､　ーシ |ｼ,ｲ" + "\n" + "　　　　　　　 i,ヽﾘ　　　　,' :　 !.　　　　 |ｆ ﾉ" + "\n" + "　　　　　　　　ヾ!　　　　i ,､　,..､ヽ　　　lノ" + "\n" + "　　　　　　　　　|　　　　　 _　_　　　 ｲ l 　　　　　　画像も張らずにスレ立てとな？" + "\n" + "　　　　　　 　 　 l　　　 ,ｨﾁ‐-‐ヽ　　i /、" + "\n" + "　　　　　 　 　 　 ﾞi､　　 ゝ､二ﾌ′ ﾉ/'＼" + "\n" + "　　　　 　 　 　 　 | ＼　　ｰ一 ／ /　　 _,ﾝ'ﾞ＼" + "\n" + "　　　　　　　　　,ィ|､　 ＼　　　　 /_,､-' _,.-''´ ｀丶､＿_" + "\n" + "　　　　　 ＿, イ　 | ヽ＿ 二＝''　_,. -''´　　''''''´´　 ｀`ｰ";
+    } else if (selectedValue === "option2") {
+        const textarea = document.getElementById("messageArea");
+        textarea.value += "\n" + "." + "　　　　　　　/':.:.:.:.:.:.:.:.:.:.:|.:.:.:.:.:.:.:＼　ヽ:　/_／" + "\n" + "　　　　 　 /.:.:.:.:.:/:.:.:.:,:.:.:|:.:.:ヽ.:.:.:.:.:.',　} /:.:.|" + "\n" + "　　　　　 l{:.:.:.:|:.l:.:.:.:/l/'ハ:､.:.:ヽ.:.:.:.:} .{::.:.:.:.:l" + "\n" + "　　　　　 ﾊ:.:.:.|:|:.／/ ノ ‐ヾ＼_|l.:.:.:i　}::.:.:.:.:.'," + "\n" + "　　　　　　 ヽ:.:.{. ,:=､　　 =＝､ ﾉ.;./ /::.::.::.:.:.:.'," + "\n" + "　　　　　　　　ヽゝ　 ､　　　　　ｿ!※}::.::.::.::.:.:." + "\n" + "　　　　　　　　　{ ｀ヽ、ヽﾌ　／ｲ　 /‐､_:.:.:.:.:.:." + "\n" + "　　f＾)＾)＾)＾)＾)＾)＾)＾)＾)＾)「-､_,{※}　ｒ′ヽ:.:.:.:." + "\n" + "ｒ''⊇、　 　 　 　 　 　 　ｌ|ヽ_/　 } t′　　',:.:.:." + "\n" + " 　{=='､　　　　　 　　　ｌ|!;r'!※{ ｔ′　　　',:.:.:" + "\n" + "ﾊ,,_う´不快なスレを　 　l;;l}.　 {,ｺ 　 　　　!:." + "\n" + "_{'V|ｌ　　　　　　　　　　 ｌ;;;{※.},ｺ　　　　　 !、" + "\n" + "ゞ　|l 　立てるなですぅ  ｌ|.l;;{　　},ｺ　　　　　　}" + "\n" + "＼,,|ｌ　 　　　　　　　　　 l| L{.※{,ｺ　　　　　 /|" + "\n" + "　 |ｌ＿＿＿＿＿＿＿＿l|,rn}　 },ｺ＼　　 ／　〉 ";
+    } else if (selectedValue === "option3") {
+        const textarea = document.getElementById("messageArea");
+        textarea.value += "\n" + "." + "　＿__l＿__　 /　／/" + "\n" + "　 ﾉ l　Jヽ　〔／　/ 　　　　　　 .,　-――-　､ _ _／ヽ" + "\n" + "　　ノﾇ　　　　　 / 　　　　　　／: : : : : : : : : : : : : : : : !-.-.‐.‐.‐. ｧ" + "\n" + "　 ／ ヽ､_　　　/ 　,ｨ＿＿∧': ／　　　. . . : : : : : /: :/: : : :｀: :＜" + "\n" + "　ム　ヒ　　 　7_／/::::::::::::::::〉: : : : : : :.／: : : :,:イ: :∧: :ｉ: : . .＼:｀ヽ　　　○" + "\n" + "　月　ヒ　　　 　　/／:::::::::::/: : : : : : :/ : : : ／ /: /　 ',: |: : ﾊ: : ヽ 　＼" + "\n" + "　ノ l ヽヽノ　　　//:::::::::::::/: /: : : : :/: :-∠＿/_:/　　 |: |: : :∧: : :ﾍ､ 　'," + "\n" + "　　　￣￣ 　　./〈:::::::::::::/: /: : : : :/: :.Ｘ　 　/／ 　 ＼!∧: : : :',: : : ﾊ＼j" + "\n" + "　__|＿ ヽヽ　 ｛ /＼:::::/: /|: : : : /i／ 　＼　　　　　 /｀ｰ∨: : :ｌ: : : :.!　 　　　　　　o" + "\n" + "　　| ー　　　　 ￣フ　:./´ !: : : / ￣￣￣ 　 　 　 ＿＿＿∨: :ｉ:. : : :!" + "\n" + "　　| ヽｰ　 　　 .／ ./ｲ!　 |: : /　　　　　　__　　　 ＼　 　 /!: ;ｲ::. : :.i〉" + "\n" + "　　　|　　　　　 > : : .::|:.ヽ_j: /　　　　　／:::::｀:.､　　　＼ /､|:/:.|:::. : ,'" + "\n" + "　　　|　　　 　　＼: : .:!:.:/ |/ ＼　 　 /::::::::::::::::::〉　　 　 !　}':.:.:|∨:/　　　　　o" + "\n" + "　　　|　　　　　ﾄーゝ.:|:/　　　　＞ ､ｊ:::::::::::::::::/  　　　, ｲ-<:.:.;ｲ:.Ⅳ" + "\n" + "　　　|　　　　　|: : : : .:|'　　　／　　 |｀ ｰrｰ-イ--‐ ' 　|:.:.:.∨:.!: |" + "\n" + "　　　|　　　 　 i : : : : : !　　　〉 　 　 | 　/ヽ 　ヽ　　o　ｊ:.:.:.:.:. : !:...";
+   
+    } else if (selectedValue === "option4") {
+        const textarea = document.getElementById("messageArea");
+      textarea.value += "\n" + "." + "　　　　 　 、　　　　　　　　　 　 八" + "\n" + "　　 　 　 / ＼　　　　　　 　 　 /　∨" + "\n" + "　　 　　 ｲ´＼＼、　　 ＿_ 　 /　│∨" + "\n" + "　　　 　 i|　 x≧､＼'~￣｀¨`く､､ |　 ∨" + "\n" + "　　　 　 |　／´ /′〈 　 、　 　 ＼ﾄ、　〉" + "\n" + "　　　 　 |　　　/　,／ﾍ　乂＿＿, ヽ｀¨｀ヽ" + "\n" + "　　　 ／　 　 /彡l l | {　〔Ll＼＿__　∨ 　ﾞ ､" + "\n" + "　　 / ,,　　　/__zx==|:l＼ ﾏﾞ气￣｀ア ∨　　ゝ" + "\n" + "　 ./ ,ｲ 　j!　ﾄﾞ´ (　):| |:l ﾄ､ゝ‐′, ‐､　 ∨　　 ＼＿," + "\n" + "　/／{ 　 /r‐ﾐｚ彡イ| l l | |ﾞ≧￣`ｰ'∨丿'、 丶「￣" + "\n" + ". ″　|　 / ｀T′　　厂⌒~ i>､　∪ノ_乂　 ＼ }ﾉ" + "\n" + "　　　‘ｘ/　|　＼ u　ゝ　　 　丿 ／／⌒＼　}丿" + "\n" + "　 　 　 ｀'ﾍﾄ＼ｘ≧ｰz--===彡く / ∩/iぃ}ノ" + "\n" + "　　　　　 r《ﾞ「∩＼,ｼ＾{~~,不￣ﾉ r┘′ ﾉ､" + "\n" + "　　 　 　 ﾞY´　r'ﾌ'´　　V´ |　＼　`ｰ-ｫ_　_)," + "\n" + "　　　　 　 ｀ｧ　iく､_　 /⌒ヽ　 　 　　 ＼￣/　　 ,,...-‐──､、" + "\n" + "　　　　 　 /　 |　 ／7　　　》-=--　　ノ￣ ,. ‐'　　　　　 　 ＼" + "\n" + "　　 　 　 ｛ 　 }／　/　 　 /／￣`＼_｀)／´　　　　　　　　　　　＼" + "\n" + "　　　　 　 ｀¨´　　/ 　　 / :{　　 ヽ,　//く　　　　　　　 　 　 　 ｀ﾐ　＼" + "\n" + "　　　　　　 　 　 /　　.／ 　|　　　 ∨/ 　 ﾄ､　　　　　　 　 　 　　}`ヽ,}" + "\n" + "　　　　　　　　 /　　 /　 　 ∨　　　〈　　　}　｀`～､,,＿＿＿＿　 |　′" + "\n" + "　　　　　　 　 /　　 /　 　 　 ＼　 　 }　 ／　　　　　　 　 　 　 }　|" + "\n" + "　　　　 　 　 i′　 〈ｰ‐'⌒ｰ-ｧ'⌒ヽ､∨　　　　　　　　　　 　 　∨" + "\n" + "　　　　　 　 (＿＿__〉　　 　 (＿＿＿_}";
+    } else if (selectedValue === "option5") {
+        const textarea = document.getElementById("messageArea");
+      textarea.value += "\n" + "." + "　　　　　　　　　　　　　 　 　 　 　 　 　 　 Y´　　｀." + "\n" + "　 ｨ　‥ ‐　､　　　　　　　　　　　　　　　　 |　　　　'," + "\n" + "　{　　　　 　　 丶､　　　　　　　　　　　　　 |　　　　 ',　　　　　　　　　　　　　　　　　 ＿" + "\n" + ".八　　　　　　　　　丶､　　　　　　　　　　　|　　　　　}　　　　　　　　　　　　　,. ｨ＜: : : : : ｀ー―-､" + "\n" + "　　｀丶､　　　　　　　　＼　　 　 　 　 　 　 !　　　　　!　　　　　　 　　　　 ／: : : : : : : : : : : : : : : : ::." + "\n" + "　　　　　丶､　　 , '　　　　丶　　　　　　　　|　　　　 /　　　　　　　　　　 ,': : : : : : : : : : : : : : : : : : : ::!" + "\n" + "　　　　　 　　　､　　　　, ' 　 ､　　　　　　　/　　　 /　　　 　 　 　 　 _,.‥──────────-- .._" + "\n" + "　　　　　　　　　＼,　 '　　　　j丶､　　　　/ 　　　/|　　　　　　　　／: : : : : : : : : : : : : : : : : : : : : : : : : :: : : ｀丶" + "\n" + "　　　 　 　 　 　 　 ＼　　　 ノ　　 ヽ＿__j　　　　　} 　 　 　 　 　 {: : : : : : : : : : : : ／: : ￣ノ: : : : :7!--､: : :: : ::〉" + "\n" + "　　　　　　　　　　__ノ_　　　　　　　　／　　¨¨ 　　j　　　　　　　　､: : :r 7: : ､: :,イ: : : : ／彡:: ／＿',: : |: : : : /" + "\n" + "　　　　　　　 　,'´　　　¨─--..__　　　　　　　　　　|　　　　　　　　､＼ﾉﾉ､: ':ゝ彡':厂Kﾋﾃ,::::ノ i'rｯ ､.ﾉ: ::!: :.／" + "\n" + "　　 　 　 　 　 !　　　　　　　　　　 丶､　　 　 　 　 !　　　　　　　 ゝ､三彡': : : : ノ 　　　　,　　:|´¨　{: : |¨´" + "\n" + "　　　　　　　　 ヽ_　　　　　　　 　　　　 丶､　　　　|　　　　　　　ミゝ : : : ／!´　 　　　　 ｨ _　..j　　八ゝ､_" + "\n" + "　　　　　　　 ,.．'　　丶 ､　　　　　　　　　　　 丶 ､j　　　　　　　　ゝ: : : ﾉ､　､　　　 　　　,._｀¨　　/ゝ=＜彡" + "\n" + "　　　　　　　{　　　　　　　､￣丶､　　 　　　　　　　丶､　　　　　,..　イ､:　: ＼ヽ　　　　ｰr=='ヽ , '　｀丶_)" + "\n" + "　　　　　　　}ゝ　　　　　　　丶､ 　 丶､　　　　　　r---ヽ_,.　≦二ヽ､　＼:　:丶＼　　　｀ー‐'ｲ　＜さぁお前の罪を数えろ" + "\n" + "　　　　　　 ﾉ　　　､　　　　　　　丶､　 　丶､　　　l　　　　}!:　:　:　ヽ:丶　 ､:　:　ヽ｀ー,､＿／" + "\n" + "　　　　　　{　　　　　､　　　　　　　　　｀¨丶､ ﾌ｀丶＼　ノ ':　:　:　:　:　:.',　 ', ､:　: ヽ /" + "\n" + "　　　　　　＼　　　　7,､､.._　　　　　　　　　　　ﾆﾆ=､: ¨:　:　:　:　:　:　:　}　　',: ､:　: ､j､" + "\n" + "　　　　　　　 ＼　　/Z=// 丶､　　　　　　　　/　　 } !:　:　:　:　:　:　:　: ! i!.　',:　､: :/:::}" + "\n" + "　　　　　　　　　丶||r='{,'　　　　　　｀¨　──===ｧイ:　:　:　:　:　:　:　: / !|: 　|:　:v7/:7" + "\n" + "　　　　　　　　　／:＞､_!_＿＿＿＿＿＿　,. イ´　:　:　:　:　:　:　:　:　/ //　　l:　:|::::::ﾉ!" + "\n" + "　　　　　　　　　|:　:　:　:　:　:　:　:　:　:　／　: |:　:　:　:　:　:　:　:　:　/ //　　　|:　:}:://" + "\n" + "　　　　　　　　　',:　:　:　:　:　:　:　:　:　/:　: /:. !:　:　:　:　＼:　:　: ／ //　　　　!:　|//!" + "\n" + "　　　　　　　　　 ',:　:　:　:　:　:　:　:　/:　／丶:!:　:　:　:　:　7- イ　／'　　　　　|:　|/:::|";  
+  
+    } else {
+        alert("アスキーアートを選択してください");
+
+}
+}
+
+
+
+
+</script>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>
