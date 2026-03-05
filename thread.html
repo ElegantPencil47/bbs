@@ -146,7 +146,8 @@ float:left;
 .am{
   background-image: linear-gradient(0deg, #ffffff, #999999 0%, #525252);
 color: white;
-border-radius: 2px;/*角の丸み*/
+margin: 10px;
+border-radius: 6px;/*角の丸み*/
 }
 .kakiko{
 background-color: #d3d3d3;
@@ -178,8 +179,13 @@ max-width: 80%;
 }
 
 .head{
+
   position: fixed;
-  top: 10px;
+  top: 0px;
+background-color: black;
+margin: 10px;
+height: 40px;
+z-index: 9999;
 }
 
 .akys{
@@ -239,9 +245,12 @@ button:hover::after{
     </style>
 </head>
 <body>
+
 <div class="head">
+
 <a href="/" class="am" id="top">← スレッド一覧に戻る</a><a href="/aa" class="am" id="top">AA・コピペ保存</a><a href="/kaki" class="am" id="top">暗号作成サイト</a><a href="/yomi" class="am" id="top">暗号解読サイト</a><a href="/help" class="am" id="top">ヘルプ・ご案内</a>
 </div>
+<br><br>
 <h1>{{ thread[1] }}</h1>
 <p>累計の表示回数: <span id="onlineCount">0</span> 回</p>
 
