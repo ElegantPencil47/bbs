@@ -15,6 +15,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8">
   <title>掲示板</title>
 </head>
+    <style>
+
+        body {
+          background-color: #000033;;
+        }
+        .neon{
+          color: #fff;
+          text-shadow:
+            0 0 10px #ff5bff,
+            0 0 20px #ff5bff,
+            0 0 40px #ff5bff,
+            0 0 80px #ff5bff,
+            0 0 100px #ff5bff;
+        }
+              .neon_blue{
+          color: #fff;
+          text-shadow:
+            0 0 10px #00ffff,
+            0 0 20px #00ffff,
+            0 0 40px #00ffff,
+            0 0 80px #00ffff,
+            0 0 100px #00ffff;
+        }
+                    .green_neon{
+          color: #fff;
+          text-shadow:
+            0 0 10px #05ff05,
+            0 0 20px #05ff05,
+            0 0 40px #05ff05,
+            0 0 80px #05ff05,
+            0 0 100px #05ff05;
+        }
+
+
+    </style>
 <body>
 <form action="" method="post">
   <label for="name">名前:</label>
@@ -29,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $posts = file_get_contents('posts.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
-<div id="posts">
+<div id="posts" class="green_neon">
   <?= $posts ?>
 </div>
 </body>
