@@ -55,10 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 <body>
 <form action="" method="post">
-  <label for="name">名前:</label>
+  <label for="name" class="neon">名前:</label>
   <input type="text" name="name" id="name">
   <br>
-  <label for="comment">コメント:</label>
+  <label for="comment" class="neon_blue">コメント:</label>
   <textarea name="comment" id="comment"></textarea>
   <br>
   <input type="submit" value="投稿">
