@@ -16,6 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>掲示板</title>
 </head>
     <style>
+        body {
+          background-color: #000033;;
+        }
 
         body {
           background-color: #000033;;
