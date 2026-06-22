@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </style>
 <body>
+<h1 class="green_neon">LunarEclipse掲示板</h1>
 <form action="" method="post">
   <label for="name" class="neon">名前:</label>
   <input type="text" name="name" id="name">
