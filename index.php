@@ -19,8 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>掲示板</title>
 </head>
     <style>
-        body {
-          background-color: #000033;;
+         
+        a {
+          color: #fff;;
         }
 
         body {
@@ -72,7 +73,7 @@ $posts = file_get_contents('posts.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
 <div id="posts" class="green_neon">
-<a href="?= $title ?"><?= $comment ?></a><br>
+<a href="<?= $title ?"><?= $comment ?></a><br>
 </div>
 </body>
 </html>
