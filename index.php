@@ -72,7 +72,7 @@ $posts = file_get_contents('posts.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
 <div id="posts" class="green_neon">
-  <?= $posts ?>
+<a href="?= $title ?"><?= $comment ?></a><br>
 </div>
 </body>
 </html>
