@@ -3,7 +3,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
-  $post = 'TEST<a href="' . $comment . '.php"' . '>' . $comment . '</a>' ."\n";
+  $post = 'TEST<a href="' . $comment . '.php"' . '>' . $comment . 'TEST</a>' ."\n";
 
   file_put_contents('posts.txt', $post, FILE_APPEND);
   $title = $_POST['comment'] . '.php';
