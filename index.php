@@ -3,7 +3,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
-  $post = $time . ' - ' . $name . ': ' . $comment . "\n";
+  $post = '<a href="' . $comment . '.php"' . '>' . $comment . '</a>' ."\n";
   file_put_contents('posts.txt', $post, FILE_APPEND);
   $title = $_POST['comment'] . '.php';
   copy('eclipse.php', $title); 
@@ -73,7 +73,7 @@ $posts = file_get_contents('posts.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
 <div id="posts" class="green_neon">
-<a href="<?= $title ?>">test</a><br>
+  <?= $posts ?>
 </div>
 </body>
 </html>
