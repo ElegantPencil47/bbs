@@ -2,9 +2,11 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
   $comment = $_POST['comment'];
+  $file = $_SERVER['SCRIPT_FILENAME'];
+  $file = str_replace(".php;","",$file);
   $time = date('Y-m-d H:i:s');
   $post = $time . ' - ' . $name . ': ' . $comment . "\n";
-  file_put_contents($test . '.txt', $post, FILE_APPEND);
+  file_put_contents($file . '.txt', $post, FILE_APPEND);
   header('Location: ' . $_SERVER['REQUEST_URI']); 
   exit;
 }
