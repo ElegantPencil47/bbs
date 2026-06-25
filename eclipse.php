@@ -1,8 +1,9 @@
 <?php
+  $file = $_SERVER['SCRIPT_FILENAME'];
+  $file = str_replace(".php","",$file);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
   $comment = $_POST['comment'];
-
   $time = date('Y-m-d H:i:s');
   $post = $time . ' - ' . $name . ': ' . $comment . "\n";
   file_put_contents($file . '.txt', $post, FILE_APPEND);
@@ -66,8 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <input type="submit" value="投稿">
 </form>
 <?php
-  $file = $_SERVER['SCRIPT_FILENAME'];
-  $file = str_replace(".php;","",$file);
+
 $posts = file_get_contents($file . '.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
