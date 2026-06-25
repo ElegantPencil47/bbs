@@ -1,6 +1,8 @@
 <?php
   $file = $_SERVER['SCRIPT_FILENAME'];
   $file = str_replace(".php","",$file);
+  $one = $file;
+  $one = str_replace("/var/www/html/","",$one);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
   if(empty($name)){
@@ -9,8 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
   $post = $time . ' - ' . $name . ': ' . $comment . "\n";
-  $one = $file;
-  $one = str_replace("/var/www/html/","",$one);
+
   file_put_contents($file . '.txt', $post, FILE_APPEND);
   header('Location: ' . $_SERVER['REQUEST_URI']); 
   exit;
@@ -84,7 +85,7 @@ $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
   <input type="submit" value="投稿">
 </form>
 <div id="posts" class="green_neon">
-  <?= $one ?>
+  <?= $posts ?>
 </div>
 </body>
 </html>
