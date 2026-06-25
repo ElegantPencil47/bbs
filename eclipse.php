@@ -24,7 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         body {
           background-color: #000033;;
         }
-
+        a{
+          color: #fff;
+        }
         body {
           background-color: #000033;;
         }
@@ -59,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </style>
 <body class="neon_blue">
-<a href = "lunareclipse.onrender.com">ホームに戻る</a>
+<a href = "/">ホームに戻る</a>
 <h1 class="neon">投稿1</h1>
 <form action="" method="post">
   <label for="name" class="neon">名前:</label>
