@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </style>
 <body>
-<h1 class="green_neon">LunarEclipse掲示板</h1>
+<h1 class="green_neon">LunarEclipse</h1>
 <form action="" method="post">
   <label for="name" class="neon">名前:</label>
   <input type="text" name="name" id="name">
@@ -78,7 +78,7 @@ $posts = str_replace("TEST&lt;h2","<h2",$posts);
 $posts = str_replace("TEST&lt;/h2","</h2",$posts);
 $posts = str_replace("&gt;",">",$posts);
 $posts = str_replace("&quot;","\"",$posts);
-$posts = "<hr style="border: 2px solid white;">" . <br> . $posts;
+$posts = '<hr style="border: 2px solid white;"><br>' . $posts;
 ?>
 
 <div id="posts" class="green_neon">
