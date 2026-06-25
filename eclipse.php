@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
   $post = $time . ' - ' . $name . ': ' . $comment . "\n";
-  if(is_null($name)){
+  if(empty($name)){
   $name = "名無し";
   }
   file_put_contents($file . '.txt', $post, FILE_APPEND);
