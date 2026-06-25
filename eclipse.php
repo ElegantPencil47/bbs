@@ -6,6 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
   $post = $time . ' - ' . $name . ': ' . $comment . "\n";
+  if(is_null($name)){
+  $name = "名無し"
+  }
   file_put_contents($file . '.txt', $post, FILE_APPEND);
   header('Location: ' . $_SERVER['REQUEST_URI']); 
   exit;
@@ -55,7 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     </style>
-<body>
+<body class="neon_blue">
+<a href = "lunareclipse.onrender.com"></a>
 <h1 class="neon">投稿1</h1>
 <form action="" method="post">
   <label for="name" class="neon">名前:</label>
