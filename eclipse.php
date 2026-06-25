@@ -3,12 +3,13 @@
   $file = str_replace(".php","",$file);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
-  $comment = $_POST['comment'];
-  $time = date('Y-m-d H:i:s');
-  $post = $time . ' - ' . $name . ': ' . $comment . "\n";
   if(empty($name)){
   $name = "名無し";
   }
+  $comment = $_POST['comment'];
+  $time = date('Y-m-d H:i:s');
+  $post = $time . ' - ' . $name . ': ' . $comment . "\n";
+
   file_put_contents($file . '.txt', $post, FILE_APPEND);
   header('Location: ' . $_SERVER['REQUEST_URI']); 
   exit;
