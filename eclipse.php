@@ -78,6 +78,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $posts = file_get_contents($file . '.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
+<div class="neon">
+<?= $file ?>
+</div>
 <div id="posts" class="green_neon">
   <?= $posts ?>
 </div>
