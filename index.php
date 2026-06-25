@@ -78,7 +78,7 @@ $posts = str_replace("TEST&lt;h2","<h2",$posts);
 $posts = str_replace("TEST&lt;/h2","</h2",$posts);
 $posts = str_replace("&gt;",">",$posts);
 $posts = str_replace("&quot;","\"",$posts);
-$posts = '<hr style="border: 2px solid white;"><br>' . $posts;
+$posts = $posts . '<hr style="border: 2px solid white;"><br>';
 ?>
 
 <div id="posts" class="green_neon">
