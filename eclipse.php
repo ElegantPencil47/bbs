@@ -3,6 +3,7 @@
   $file = str_replace(".php","",$file);
   $one = $file;
   $one = str_replace("/var/www/html/","",$one);
+  $one = "<h1>" . $one . "</h1>";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
   if(empty($name)){
@@ -71,6 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $posts = file_get_contents($file . '.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
+$one = str_replace("&lt;h1&gt","<h1>",$one);
+
 ?>
 <div class="neon">
 <?= $one ?>
