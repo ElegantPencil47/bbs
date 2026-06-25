@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <input type="submit" value="投稿">
 </form>
 <?php
-$posts = file_get_contents('posts.txt');
+$posts = file_get_contents($file . '.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
 <div id="posts" class="green_neon">
