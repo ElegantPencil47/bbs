@@ -9,7 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
   $post = $time . ' - ' . $name . ': ' . $comment . "\n";
-
+  $one = $file;
+  $one = str_replace("/var/www/html/","",$one);
   file_put_contents($file . '.txt', $post, FILE_APPEND);
   header('Location: ' . $_SERVER['REQUEST_URI']); 
   exit;
@@ -64,6 +65,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="neon_blue">
 <a href = "/">ホームに戻る</a>
 <h1 class="neon">投稿1</h1>
+
+<?php
+
+$posts = file_get_contents($file . '.txt');
+$posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
+?>
+<div class="neon">
+<?= $one ?>
+</div>
 <form action="" method="post">
   <label for="name" class="neon">名前:</label>
   <input type="text" name="name" id="name">
@@ -73,16 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <br>
   <input type="submit" value="投稿">
 </form>
-<?php
-
-$posts = file_get_contents($file . '.txt');
-$posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
-?>
-<div class="neon">
-<?= $file ?>
-</div>
 <div id="posts" class="green_neon">
-  <?= $posts ?>
+  <?= $one ?>
 </div>
 </body>
 </html>
