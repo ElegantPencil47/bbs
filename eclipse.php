@@ -67,16 +67,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .post{
+          position: relative;
+
+          margin: 10px;
+        }
+        .post::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
           border-bottom: 3px solid #fff;
           border-left: 3px solid #fff;
-          margin: 10px;
           filter:
             drop-shadow(-2px 2px 2px #37beb0)
             drop-shadow(-4px 4px 8px #37beb0)
             drop-shadow(-8px 8px 16px #37beb0)
             drop-shadow(-12px 12px 32px #37beb0);
+          }
            
-        }
+        
     </style>
 <body class="neon_blue">
 <a href = "/">ホームに戻る</a>
