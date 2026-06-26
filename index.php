@@ -3,7 +3,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
-  $post = 'TEST<a href="' . $comment . '.php"' . '>TEST<h2>' . $comment . 'TEST</h2>TEST</a>TEST<p class="hai">@user_testTEST</p>TEST<hr style="border: 2px solid #A9B2C3;">';
+  $post = 'TEST<div style="display: flex; align-items: baseline; gap: 10px;">TEST<a href="' . $comment . '.php"' . '>TEST<h2>' . $comment . 'TEST</h2>TEST</a>TEST<p class="hai">@user_testTEST</p>TEST</div>TEST<hr style="border: 2px solid #A9B2C3;">';
 
   file_put_contents('posts.txt', $post, FILE_APPEND);
   $title = $_POST['comment'] . '.php';
@@ -84,6 +84,8 @@ $posts = str_replace("TEST&lt;hr","<hr",$posts);
 $posts = str_replace("TEST&lt;/h2","</h2",$posts);
 $posts = str_replace("TEST&lt;/p","</p",$posts);
 $posts = str_replace("TEST&lt;p","<p",$posts);
+$posts = str_replace("TEST&lt;/div","</div",$posts);
+$posts = str_replace("TEST&lt;div","<div",$posts);
 $posts = str_replace("&gt;",">",$posts);
 $posts = str_replace("&quot;","\"",$posts);
 ?>

@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
-  $post = 'TEST<div style="display: flex; align-items: baseline; gap: 10px;">TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<p class="hai">' . $name . $time . 'TEST</p>'. "\n" . 'TEST</div>';
+  $post = 'TEST<div class="post" style="display: flex; align-items: baseline; gap: 10px;">TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<p class="hai">' . $name . $time . 'TEST</p>'. "\n" . 'TEST</div>';
 
   file_put_contents($file . '.txt', $post, FILE_APPEND);
   header('Location: ' . $_SERVER['REQUEST_URI']); 
@@ -66,7 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             0 0 100px #05ff05;
         }
 
-
+        .post{
+          border-bottom: 3px solid #00ffff;
+          border-left: 3px solid #00ffff;
+           
+        }
     </style>
 <body class="neon_blue">
 <a href = "/">ホームに戻る</a>
