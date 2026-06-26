@@ -67,8 +67,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .post{
-          border-bottom: 3px solid #00ffff;
-          border-left: 3px solid #00ffff;
+          border-bottom: 3px solid #fff;
+          border-left: 3px solid #fff;
+          margin: 10px;
+          box-shadow:
+            0 0 10px #00ffff,
+            0 0 20px #00ffff,
+            0 0 40px #00ffff,
+            0 0 80px #00ffff,
+            0 0 100px #00ffff;
            
         }
     </style>
