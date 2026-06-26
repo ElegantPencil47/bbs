@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
-  $post = 'TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<p class="hai">' $name . $time . </p> ."\n";
+  $post = 'TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<p class="hai">' $name . $time . '</p>' ."\n";
 
   file_put_contents($file . '.txt', $post, FILE_APPEND);
   header('Location: ' . $_SERVER['REQUEST_URI']); 
