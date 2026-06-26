@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>掲示板</title>
+  <title>投稿　LunarEclipse</title>
 </head>
     <style>
         body {
@@ -66,8 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 <body class="neon_blue">
 <a href = "/">ホームに戻る</a>
-<h1 class="neon">投稿1</h1>
-
 <?php
 
 $posts = file_get_contents($file . '.txt');
@@ -78,6 +76,7 @@ $one = str_replace("&lt;h1&gt","<h1>",$one);
 <div class="neon">
 <?= $one ?>
 </div>
+<h3 class = "neon_blue">返信する</h3>
 <form action="" method="post">
   <label for="name" class="neon">名前:</label>
   <input type="text" name="name" id="name">

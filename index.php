@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>掲示板</title>
+  <title>LunarEclipse</title>
 </head>
     <style>
          
@@ -59,7 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </style>
 <body>
-<h1 class="green_neon">LunarEclipse</h1>
+<h1 class="neon_blue">LunarEclipse</h1>
+<h3 class="neon">投稿する</h3>
 <form action="" method="post">
   <label for="name" class="neon">名前:</label>
   <input type="text" name="name" id="name">
