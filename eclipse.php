@@ -70,12 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           border-bottom: 3px solid #fff;
           border-left: 3px solid #fff;
           margin: 10px;
-          box-shadow:
-            -10px 10px 10px #00ffff,
-            -20px 20px 20px #00ffff,
-            -20px 20px 40px #00ffff,
-            -20px 20px 80px #00ffff,
-            -20px 20px 100px #00ffff;
+          filter:
+            drop-shadow(-2px 2px 2px #37beb0)
+            drop-shadow(-4px 4px 8px #37beb0)
+            drop-shadow(-8px 8px 16px #37beb0)
+            drop-shadow(-12px 12px 32px #37beb0);
            
         }
     </style>
