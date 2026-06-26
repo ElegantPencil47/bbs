@@ -68,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         .post{
           position: relative;
-
-          margin: 10px;
+          padding: 20px;
+          margin: 30px;
         }
         .post::before {
           content: "";
