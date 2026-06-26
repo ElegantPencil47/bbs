@@ -71,11 +71,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           border-left: 3px solid #fff;
           margin: 10px;
           box-shadow:
-            0 0 10px #00ffff,
-            0 0 20px #00ffff,
-            0 0 40px #00ffff,
-            0 0 80px #00ffff,
-            0 0 100px #00ffff;
+            -10px 10px 10px #00ffff,
+            -20px 20px 20px #00ffff,
+            -20px 20px 40px #00ffff,
+            -20px 20px 80px #00ffff,
+            -20px 20px 100px #00ffff;
            
         }
     </style>
