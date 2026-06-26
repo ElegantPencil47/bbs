@@ -79,6 +79,9 @@ $posts = str_replace("TEST&lt;/p","</p",$posts);
 $posts = str_replace("TEST&lt;p","<p",$posts);
 $posts = str_replace("TEST&lt;/h3","</h3",$posts);
 $posts = str_replace("TEST&lt;h3","<h3",$posts);
+$posts = str_replace("&quot;","\"",$posts);
+$posts = str_replace("&gt;",">",$posts);
+
 ?>
 <div class="neon">
 <?= $one ?>
