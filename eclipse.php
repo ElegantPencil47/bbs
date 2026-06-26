@@ -7,11 +7,11 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
   if(empty($name)){
-  $name = "名無し";
+  $name = "@名無し";
   }
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
-  $post = $time . ' - ' . $name . ': ' . $comment . "\n";
+  $post = 'TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<p class="hai">' $name . $time . </p> ."\n";
 
   file_put_contents($file . '.txt', $post, FILE_APPEND);
   header('Location: ' . $_SERVER['REQUEST_URI']); 
@@ -25,6 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>投稿　LunarEclipse</title>
 </head>
     <style>
+
+        .hai{
+          color: #A9B2C3;
+        }
         body {
           background-color: #000033;;
         }
@@ -71,7 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $posts = file_get_contents($file . '.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 $one = str_replace("&lt;h1&gt","<h1>",$one);
-
+$posts = str_replace("TEST&lt;/p","</p",$posts);
+$posts = str_replace("TEST&lt;p","<p",$posts);
+$posts = str_replace("TEST&lt;/h3","</h3",$posts);
+$posts = str_replace("TEST&lt;h3","<h3",$posts);
 ?>
 <div class="neon">
 <?= $one ?>
@@ -86,7 +93,7 @@ $one = str_replace("&lt;h1&gt","<h1>",$one);
   <br>
   <input type="submit" value="投稿">
 </form>
-<div id="posts" class="green_neon">
+<div id="posts">
   <?= $posts ?>
 </div>
 </body>

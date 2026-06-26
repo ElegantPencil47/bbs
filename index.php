@@ -73,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <br>
   <input type="submit" value="投稿">
 </form>
+<h2 class="neon_blue">投稿一覧</h2>
 <?php
 $posts = file_get_contents('posts.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
