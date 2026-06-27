@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>投稿　LunarEclipse</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
     <style>
         .HSN{
@@ -92,6 +93,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
     </style>
 <body class="neon_blue">
+
+<i class="fa-solid fa-envelope"></i>
+
 <a href = "/">ホームに戻る</a>
 <?php
 

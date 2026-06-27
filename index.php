@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>LunarEclipse</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
     <style>
         .hai{
@@ -62,6 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </style>
 <body>
+
+<i class="fa-solid fa-envelope"></i>
 <h1 class="neon_blue">LunarEclipse</h1>
 
 <div class="tuki">
