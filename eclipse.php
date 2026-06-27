@@ -25,7 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>投稿　LunarEclipse</title>
 </head>
     <style>
+        .HSN{
 
+        }
         .hai{
           color: #A9B2C3;
         }
@@ -68,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         .post{
           position: relative;
-          padding: 20px;
+          padding: 10px;
           margin: 30px;
         }
         .post::before {
@@ -117,7 +119,7 @@ $posts = str_replace("&gt;",">",$posts);
   <label for="comment" class="neon_blue">コメント:</label>
   <textarea name="comment" id="comment"></textarea>
   <br>
-  <input type="submit" value="投稿">
+  <input type="submit" value="返信する" class="HSN">
 </form>
 <div id="posts">
   <?= $posts ?>
