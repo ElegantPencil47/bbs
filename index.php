@@ -75,9 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </div>
 <h1 class="neon_blue">LunarEclipse</h1>
-
+<fieldset>
+  <legend><h3 class="neon">今日の月齢</h3></legend>
 <div class="tuki">
-<h3 class="neon">今日の月齢</h3>
+
 <div id="moon-age-result" class="green_neon">計算中...</div>
     <div id="moon-phase-message" class="green_neon"></div> 
     <img src="" width="50" id="target">
@@ -208,6 +209,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </script>
     
 </div>
+
+
+
+</fieldset>
 
 
 
