@@ -89,13 +89,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             drop-shadow(-8px 8px 16px #37beb0)
             drop-shadow(-12px 12px 32px #37beb0);
           }
+        .option{
+          position: fixed;
+          top: 50px;
+          right: 50px; 
+        }
            
         
     </style>
-<body class="neon_blue">
-
+<body class="neon_blue"><br>
+<div class="option">
 <i class="fa-solid fa-envelope"></i>
-
+</div>
 <a href = "/">ホームに戻る</a>
 <?php
 

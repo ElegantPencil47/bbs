@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             0 0 80px #00ffff,
             0 0 100px #00ffff;
         }
-                    .green_neon{
+        .green_neon{
           color: #fff;
           text-shadow:
             0 0 10px #05ff05,
@@ -60,11 +60,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             0 0 100px #05ff05;
         }
 
+        .option{
+          position: fixed;
+          top: 50px;
+          right: 50px; 
+        }
+
 
     </style>
-<body>
+<body class="neon_blue"><br>
+<div class="option">
 
 <i class="fa-solid fa-envelope"></i>
+
+</div>
 <h1 class="neon_blue">LunarEclipse</h1>
 
 <div class="tuki">
