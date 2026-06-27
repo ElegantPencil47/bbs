@@ -63,6 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 <body>
 <h1 class="neon_blue">LunarEclipse</h1>
+
+<div class="tuki">
+<h3>今日の月齢</h3>
 <div id="moon-age-result">計算中...</div>
     <div id="moon-phase-message"></div> <!-- ここに条件に応じたメッセージを表示 -->
     <img src="" width="50" id="target">
@@ -190,7 +193,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // ページ読み込み時に月齢を表示
         displayMoonAge();
-    </script></div>
+    </script>
+    
+</div>
+
+
 
 <h3 class="neon">投稿する</h3>
 <form action="" method="post">
