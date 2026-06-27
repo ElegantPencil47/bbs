@@ -71,13 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .waku{
           border-bottom: 3px solid #fff;
           border-left: 3px solid #fff;
-          box-shadow:
-            0 0 10px #00ffff,
-            0 0 20px #00ffff,
-            0 0 40px #00ffff,
-            0 0 80px #00ffff,
-            0 0 100px #00ffff;
-           
+          filter:
+            drop-shadow(0 0 2px #37beb0)
+            drop-shadow(0 0 8px #37beb0)
+            drop-shadow(0 0 16px #37beb0)
+            drop-shadow(0 0 32px #37beb0);
+            
         
         }
 
