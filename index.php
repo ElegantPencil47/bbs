@@ -65,14 +65,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <h1 class="neon_blue">LunarEclipse</h1>
 
 <div class="tuki">
-<h3>今日の月齢</h3>
-<div id="moon-age-result">計算中...</div>
-    <div id="moon-phase-message"></div> <!-- ここに条件に応じたメッセージを表示 -->
+<h3 class="neon">今日の月齢</h3>
+<div id="moon-age-result" class="green_neon">計算中...</div>
+    <div id="moon-phase-message" class="green_neon"></div> 
     <img src="" width="50" id="target">
   
 
     <script>
-        // 月齢を計算する関数 (変更なし)
+
         function calculateMoonAge(date = new Date()) {
             const knownNewMoon = new Date('1970-01-07T20:35:00Z');
             const lunarCycle = 29.530588853;
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 messageArea.textContent = "六日月";
                 target.src = "{{ url_for('static', filename='6.png') }}";
             } else if (currentMoonAgeValue > 6 && currentMoonAgeValue < 7) {
-                messageArea.textContent = "上限の月";
+                messageArea.textContent = "上弦の月";
                 target.src = "{{ url_for('static', filename='7.png') }}";
             } else if (currentMoonAgeValue > 7 && currentMoonAgeValue < 8) {
                 messageArea.textContent = "八日月";
