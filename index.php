@@ -67,6 +67,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
 
+
+        .waku{
+          border-bottom: 3px solid #fff;
+          border-left: 3px solid #fff;
+          box-shadow:
+            0 0 10px #00ffff,
+            0 0 20px #00ffff,
+            0 0 40px #00ffff,
+            0 0 80px #00ffff,
+            0 0 100px #00ffff;
+           
+        
+        }
+
     </style>
 <body class="neon_blue"><br>
 <div class="option">
@@ -75,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </div>
 <h1 class="neon_blue">LunarEclipse</h1>
-<fieldset>
+<fieldset class="waku">
   <legend><h3 class="neon">今日の月齢</h3></legend>
 <div class="tuki">
 
