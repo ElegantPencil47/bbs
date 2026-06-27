@@ -69,16 +69,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
         .waku{
-          border-bottom: 3px solid #fff;
-          border-left: 3px solid #fff;
+          position: relative;
+          padding: 10px;
+          margin: 30px;
+        }
+        .waku::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border:5px solid #fff;
           filter:
             drop-shadow(0 0 2px #37beb0)
             drop-shadow(0 0 8px #37beb0)
             drop-shadow(0 0 16px #37beb0)
             drop-shadow(0 0 32px #37beb0);
-            
-        
-        }
+          }
 
     </style>
 <body class="neon_blue"><br>
