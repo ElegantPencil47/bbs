@@ -76,8 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           filter:
             drop-shadow(0 0 2px #37beb0)
             drop-shadow(0 0 8px #37beb0)
-            drop-shadow(0 0 16px #37beb0)
-            drop-shadow(0 0 32px #37beb0);
+            drop-shadow(0 0 12px #37beb0)
+
         }
 
 
