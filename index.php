@@ -124,94 +124,94 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (currentMoonAgeValue > 0 && currentMoonAgeValue < 1) {
                 messageArea.textContent = "新月";
-                target.src = "{{ url_for('static', filename='1.png') }}";
+                target.src = "{{ url_for('static', filename='img/1.jpg') }}";
             } else if (currentMoonAgeValue > 1 && currentMoonAgeValue < 2) {
                 messageArea.textContent = "二日月";
-                target.src = "{{ url_for('static', filename='2.png') }}";
+                target.src = "{{ url_for('static', filename='img/2.jpg') }}";
             } else if (currentMoonAgeValue > 2 && currentMoonAgeValue < 3) {
                 messageArea.textContent = "三日月";
-                target.src = "{{ url_for('static', filename='3.png') }}";
+                target.src = "{{ url_for('static', filename='img/3.jpg') }}";
             } else if (currentMoonAgeValue > 3 && currentMoonAgeValue < 4) {
                 messageArea.textContent = "四日月";
-                target.src = "{{ url_for('static', filename='4.png') }}";
+                target.src = "{{ url_for('static', filename='img/4.jpg') }}";
             } else if (currentMoonAgeValue > 4 && currentMoonAgeValue < 5) {
                 messageArea.textContent = "五日月";
-                target.src = "{{ url_for('static', filename='5.png') }}";
+                target.src = "{{ url_for('static', filename='img/5.jpg') }}";
             } else if (currentMoonAgeValue > 5 && currentMoonAgeValue < 6) {
                 messageArea.textContent = "六日月";
-                target.src = "{{ url_for('static', filename='6.png') }}";
+                target.src = "{{ url_for('static', filename='img/6.jpg') }}";
             } else if (currentMoonAgeValue > 6 && currentMoonAgeValue < 7) {
                 messageArea.textContent = "上弦の月";
-                target.src = "{{ url_for('static', filename='7.png') }}";
+                target.src = "{{ url_for('static', filename='img/7.jpg') }}";
             } else if (currentMoonAgeValue > 7 && currentMoonAgeValue < 8) {
                 messageArea.textContent = "八日月";
-                target.src = "{{ url_for('static', filename='8.png') }}";
+                target.src = "{{ url_for('static', filename='img/8.jpg') }}";
             } else if (currentMoonAgeValue > 8 && currentMoonAgeValue < 9) {
                 messageArea.textContent = "九日月";
-                target.src = "{{ url_for('static', filename='9.png') }}";
+                target.src = "{{ url_for('static', filename='img/9.jpg') }}";
             } else if (currentMoonAgeValue > 9 && currentMoonAgeValue < 10) {
                 messageArea.textContent = "十日夜の月";
-                target.src = "{{ url_for('static', filename='10.png') }}";
+                target.src = "{{ url_for('static', filename='img/10jpg') }}";
             } else if (currentMoonAgeValue > 10 && currentMoonAgeValue < 11) {
                 messageArea.textContent = "十一日の月";
-                target.src = "{{ url_for('static', filename='11.png') }}";
+                target.src = "{{ url_for('static', filename='img/11.jpg') }}";
             } else if (currentMoonAgeValue > 11 && currentMoonAgeValue < 12) {
                 messageArea.textContent = "十二日の月";
-                target.src = "{{ url_for('static', filename='12.png') }}";
+                target.src = "{{ url_for('static', filename='img/12.jpg') }}";
             } else if (currentMoonAgeValue > 12 && currentMoonAgeValue < 13) {
                 messageArea.textContent = "十三夜";
-                target.src = "{{ url_for('static', filename='13.png') }}";
+                target.src = "{{ url_for('static', filename='img/13.jpg') }}";
             } else if (currentMoonAgeValue > 13 && currentMoonAgeValue < 14) {
                 messageArea.textContent = "小望月";
-                target.src = "{{ url_for('static', filename='14.png') }}";
+                target.src = "{{ url_for('static', filename='img/14.jpg') }}";
             } else if (currentMoonAgeValue > 14 && currentMoonAgeValue < 15) {
                 messageArea.textContent = "満月";
-                target.src = "{{ url_for('static', filename='15.png') }}";
+                target.src = "{{ url_for('static', filename='img/15.jpg') }}";
             } else if (currentMoonAgeValue > 15 && currentMoonAgeValue < 16) {
                 messageArea.textContent = "十六夜";
-                target.src = "{{ url_for('static', filename='16.png') }}";
+                target.src = "{{ url_for('static', filename='img/16.jpg') }}";
             } else if (currentMoonAgeValue > 16 && currentMoonAgeValue < 17) {
                 messageArea.textContent = "立待夜";
-                target.src = "{{ url_for('static', filename='17.png') }}";
+                target.src = "{{ url_for('static', filename='img/17.jpg') }}";
             } else if (currentMoonAgeValue > 17 && currentMoonAgeValue < 18) {
                 messageArea.textContent = "居待月";
-                target.src = "{{ url_for('static', filename='18.png') }}";
+                target.src = "{{ url_for('static', filename='img/18.jpg') }}";
             } else if (currentMoonAgeValue > 18 && currentMoonAgeValue < 19) {
                 messageArea.textContent = "臥待月";
-                target.src = "{{ url_for('static', filename='19.png') }}";
+                target.src = "{{ url_for('static', filename='img/19.jpg') }}";
             } else if (currentMoonAgeValue > 19 && currentMoonAgeValue < 20) {
                 messageArea.textContent = "更待月";
-                target.src = "{{ url_for('static', filename='20.png') }}";
+                target.src = "{{ url_for('static', filename='img/20.jpg') }}";
             } else if (currentMoonAgeValue > 20 && currentMoonAgeValue < 21) {
                 messageArea.textContent = "二十一夜";
-                target.src = "{{ url_for('static', filename='21.png') }}";
+                target.src = "{{ url_for('static', filename='img/21.jpg') }}";
             } else if (currentMoonAgeValue > 21 && currentMoonAgeValue < 22) {
                 messageArea.textContent = "二十二夜";
-                target.src = "{{ url_for('static', filename='22.png') }}";
+                target.src = "{{ url_for('static', filename='img/22.jpg') }}";
             } else if (currentMoonAgeValue > 22 && currentMoonAgeValue < 23) {
                 messageArea.textContent = "下弦の月";
-                target.src = "{{ url_for('static', filename='23.png') }}";
+                target.src = "{{ url_for('static', filename='img/23.jpg') }}";
             } else if (currentMoonAgeValue > 23 && currentMoonAgeValue < 24) {
                 messageArea.textContent = "二十四夜";
-                target.src = "{{ url_for('static', filename='24.png') }}";
+                target.src = "{{ url_for('static', filename='img/24.jpg') }}";
             } else if (currentMoonAgeValue > 24 && currentMoonAgeValue < 25) {
                 messageArea.textContent = "二十五夜";
-                target.src = "{{ url_for('static', filename='25.png') }}";
+                target.src = "{{ url_for('static', filename='img/25.jpg') }}";
             } else if (currentMoonAgeValue > 25 && currentMoonAgeValue < 26) {
                 messageArea.textContent = "二十六夜";
-                target.src = "{{ url_for('static', filename='26.png') }}";
+                target.src = "{{ url_for('static', filename='img/26.jpg') }}";
             } else if (currentMoonAgeValue > 26 && currentMoonAgeValue < 27) {
                 messageArea.textContent = "二十七夜";
-                target.src = "{{ url_for('static', filename='27.png') }}";
+                target.src = "{{ url_for('static', filename='img/27.jpg') }}";
             } else if (currentMoonAgeValue > 27 && currentMoonAgeValue < 28) {
                 messageArea.textContent = "有明の月";
-                target.src = "{{ url_for('static', filename='28.png') }}";
+                target.src = "{{ url_for('static', filename='img/28.jpg') }}";
             } else if (currentMoonAgeValue > 28 && currentMoonAgeValue < 29) {
                 messageArea.textContent = "二十九日月";
-                target.src = "{{ url_for('static', filename='29.png') }}";
+                target.src = "{{ url_for('static', filename='img/29.jpg') }}";
             } else if (currentMoonAgeValue > 29 && currentMoonAgeValue < 30) {
                 messageArea.textContent = "三十日月";
-                target.src = "{{ url_for('static', filename='30.png') }}";
+                target.src = "{{ url_for('static', filename='img/30.jpg') }}";
             }
 
  
