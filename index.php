@@ -88,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <i class="fa-solid fa-envelope"></i>
 
 </div>
+<h2 class="neon">静かで優しいSNS</h2>
 <h1 class="neon_blue">LunarEclipse</h1>
 <fieldset class="waku">
   <legend><h3 class="neon">今日の月齢</h3></legend>
