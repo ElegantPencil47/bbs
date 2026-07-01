@@ -84,8 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="neon_blue"><br>
 <div class="option">
 
-<i class="fa-solid fa-envelope fa-3x"></i>
-
+<i class="fa-solid fa-envelope  faa-bounce animated-hover fa-3x"></i>
+<i class="fas fa-cog  faa-bounce animated-hover fa-3x"></i>
+<i class="fas fa-spinner fa-pulse fa-3x"></i>
 </div>
 <h2 class="neon">静かで優しいSNS</h2>
 <h1 class="neon_blue">LunarEclipse</h1>
