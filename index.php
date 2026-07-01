@@ -64,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           position: fixed;
           top: 50px;
           right: 50px; 
+          width: 400px;
         }
 
 
