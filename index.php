@@ -64,9 +64,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           position: fixed;
           top: 50px;
           right: 50px; 
+        }
+        .fa-solid fa-envelope{
           width: 400px;
         }
-
 
 
         .waku{
