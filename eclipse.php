@@ -103,17 +103,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 <a href = "/">ホームに戻る</a>
 <?php
-$nowtime = date("Ymd");
-$posts = file_get_contents($file . '.txt');
 $kesu = "$file.txt";
 $kesu2 = "$file.php";
+$nowtime = date("Ymd");
+if(file_exists($file , '.txt')){
 
-$last = date("Ymd", filemtime($posts , '.txt'));
+$posts = file_get_contents($file , '.txt');
+
+
+$last = date("Ymd", filemtime($file , '.txt'));
 if($last == $nowtime){
 
 }else{
   unlink($kesu);
   unlink($kesu2);
+}
 }
 
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
@@ -128,6 +132,7 @@ $posts = str_replace("&quot;","\"",$posts);
 $posts = str_replace("&gt;",">",$posts);
 
 ?>
+
 <div class="neon">
 <?= $one ?>
 </div>
