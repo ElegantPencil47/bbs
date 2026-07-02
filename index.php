@@ -85,8 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="neon_blue"><br>
 <div class="option">
 
-<i class="fa-solid fa-envelope fa-3x faa-bounce animated-hover"></i>
-<i class="fas fa-cog fa-3x faa-bounce animated-hover"></i>
+<a href="m.php"><i class="fa-solid fa-envelope fa-3x faa-bounce animated-hover"></i></a>
+<a href="h.html"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a>
 <i class="fas fa-spinner fa-pulse fa-3x"></i>
 </div>
 <h2 class="neon">静かで優しいSNS</h2>
