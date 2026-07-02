@@ -103,15 +103,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 <a href = "/">ホームに戻る</a>
 <?php
+$posets = '';
 $kesu = "$file.txt";
 $kesu2 = "$file.php";
 $nowtime = date("Ymd");
-if(file_exists($file , '.txt')){
+if(file_exists($file . '.txt')){
 
-$posts = file_get_contents($file , '.txt');
+$posts = file_get_contents($file . '.txt');
 
 
-$last = date("Ymd", filemtime($file , '.txt'));
+$last = date("Ymd", filemtime($file . '.txt'));
 if($last == $nowtime){
 
 }else{
