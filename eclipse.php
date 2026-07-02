@@ -103,6 +103,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 <a href = "/">ホームに戻る</a>
 <?php
+$kesu = "$one.txt";
+$kesu2 = "$one.php";
+if(date("H") == "00" && date("i") == "00"){
+  unlink($kesu);
+  unlink($kesu2);
+}
 
 $posts = file_get_contents($file . '.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
