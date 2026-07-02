@@ -1,22 +1,28 @@
 <?php
-  $file = $_SERVER['SCRIPT_FILENAME'];
-  $file = str_replace(".php","",$file);
-  $one = $file;
-  $one = str_replace("/var/www/html/","",$one);
-  $one = "<h1>" . $one . "</h1>";
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $name = $_POST['name'];
-  if(empty($name)){
-  $name = "@名無し";
-  }
-  $comment = $_POST['comment'];
-  $time = date('Y-m-d H:i:s');
-  $post = 'TEST<div class="post" style="display: flex; align-items: baseline; gap: 10px;">TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<p class="hai">' . $name . $time . 'TEST</p>'. "\n" . 'TEST</div>';
+$nowtime = date("Ymd");
+$posts = file_get_contents($file . '.txt');
+$kesu = "$file.txt";
+$kesu2 = "$file.php";
 
-  file_put_contents($file . '.txt', $post, FILE_APPEND);
-  header('Location: ' . $_SERVER['REQUEST_URI']); 
-  exit;
+$last = date("Ymd", filemtime($posts , '.txt'));
+if($last == $nowtime){
+
+}else{
+  unlink($kesu);
+  unlink($kesu2);
 }
+
+$posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
+$one = str_replace("&lt;h1&gt","<h1>",$one);
+$posts = str_replace("TEST&lt;/p","</p",$posts);
+$posts = str_replace("TEST&lt;p","<p",$posts);
+$posts = str_replace("TEST&lt;/h3","</h3",$posts);
+$posts = str_replace("TEST&lt;h3","<h3",$posts);
+$posts = str_replace("TEST&lt;/div","</div",$posts);
+$posts = str_replace("TEST&lt;div","<div",$posts);
+$posts = str_replace("&quot;","\"",$posts);
+$posts = str_replace("&gt;",">",$posts);
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -103,14 +109,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 <a href = "/">ホームに戻る</a>
 <?php
-$kesu = "$one.txt";
-$kesu2 = "$one.php";
-if(date("H") == "00" && date("i") == "00"){
+$nowtime = date("Ymd");
+$posts = file_get_contents($file . '.txt');
+$kesu = "$posts.txt";
+$kesu2 = "$posts.php";
+
+$last = date("Ymd", filemtime($posts));
+if($last == $nowtime){
+
+}else{
   unlink($kesu);
   unlink($kesu2);
 }
 
-$posts = file_get_contents($file . '.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 $one = str_replace("&lt;h1&gt","<h1>",$one);
 $posts = str_replace("TEST&lt;/p","</p",$posts);
