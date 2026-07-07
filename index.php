@@ -129,28 +129,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 target.src = "https://lunareclipse.onrender.com/img/1.jpg";
             } else if (currentMoonAgeValue > 1 && currentMoonAgeValue < 2) {
                 messageArea.textContent = "二日月";
-                target.src = "https://lunareclipse.onrender.com/img/2.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/3.jpg";
             } else if (currentMoonAgeValue > 2 && currentMoonAgeValue < 3) {
                 messageArea.textContent = "三日月";
-                target.src = "https://lunareclipse.onrender.com/img/3.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/4.jpg";
             } else if (currentMoonAgeValue > 3 && currentMoonAgeValue < 4) {
                 messageArea.textContent = "四日月";
-                target.src = "https://lunareclipse.onrender.com/img/4.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/5.jpg";
             } else if (currentMoonAgeValue > 4 && currentMoonAgeValue < 5) {
                 messageArea.textContent = "五日月";
-                target.src = "https://lunareclipse.onrender.com/img/5.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/6.jpg";
             } else if (currentMoonAgeValue > 5 && currentMoonAgeValue < 6) {
                 messageArea.textContent = "六日月";
-                target.src = "https://lunareclipse.onrender.com/img/6.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/7.jpg";
             } else if (currentMoonAgeValue > 6 && currentMoonAgeValue < 7) {
                 messageArea.textContent = "上弦の月";
-                target.src = "https://lunareclipse.onrender.com/img/7.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/8.jpg";
             } else if (currentMoonAgeValue > 7 && currentMoonAgeValue < 8) {
                 messageArea.textContent = "八日月";
-                target.src = "https://lunareclipse.onrender.com/img/8.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/9.jpg";
             } else if (currentMoonAgeValue > 8 && currentMoonAgeValue < 9) {
                 messageArea.textContent = "九日月";
-                target.src = "https://lunareclipse.onrender.com/img/9.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/10.jpg";
             } else if (currentMoonAgeValue > 9 && currentMoonAgeValue < 10) {
                 messageArea.textContent = "十日夜の月";
                 target.src = "https://lunareclipse.onrender.com/img/10.jpg";
@@ -171,49 +171,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 target.src = "https://lunareclipse.onrender.com/img/15.jpg";
             } else if (currentMoonAgeValue > 15 && currentMoonAgeValue < 16) {
                 messageArea.textContent = "十六夜";
-                target.src = "https://lunareclipse.onrender.com/img/16.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/15.jpg";
             } else if (currentMoonAgeValue > 16 && currentMoonAgeValue < 17) {
                 messageArea.textContent = "立待夜";
-                target.src = "https://lunareclipse.onrender.com/img/17.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/16.jpg";
             } else if (currentMoonAgeValue > 17 && currentMoonAgeValue < 18) {
                 messageArea.textContent = "居待月";
-                target.src = "https://lunareclipse.onrender.com/img/18.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/16.jpg";
             } else if (currentMoonAgeValue > 18 && currentMoonAgeValue < 19) {
                 messageArea.textContent = "臥待月";
-                target.src = "https://lunareclipse.onrender.com/img/19.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/17.jpg";
             } else if (currentMoonAgeValue > 19 && currentMoonAgeValue < 20) {
                 messageArea.textContent = "更待月";
-                target.src = "https://lunareclipse.onrender.com/img/20.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/18.jpg";
             } else if (currentMoonAgeValue > 20 && currentMoonAgeValue < 21) {
                 messageArea.textContent = "二十一夜";
-                target.src = "https://lunareclipse.onrender.com/img/21.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/19.jpg";
             } else if (currentMoonAgeValue > 21 && currentMoonAgeValue < 22) {
                 messageArea.textContent = "二十二夜";
-                target.src = "https://lunareclipse.onrender.com/img/22.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/20.jpg";
             } else if (currentMoonAgeValue > 22 && currentMoonAgeValue < 23) {
                 messageArea.textContent = "下弦の月";
-                target.src = "https://lunareclipse.onrender.com/img/23.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/21.jpg";
             } else if (currentMoonAgeValue > 23 && currentMoonAgeValue < 24) {
                 messageArea.textContent = "二十四夜";
-                target.src = "https://lunareclipse.onrender.com/img/24.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/22.jpg";
             } else if (currentMoonAgeValue > 24 && currentMoonAgeValue < 25) {
                 messageArea.textContent = "二十五夜";
-                target.src = "https://lunareclipse.onrender.com/img/25.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/23.jpg";
             } else if (currentMoonAgeValue > 25 && currentMoonAgeValue < 26) {
                 messageArea.textContent = "二十六夜";
                 target.src = "https://lunareclipse.onrender.com/img/26.jpg";
             } else if (currentMoonAgeValue > 26 && currentMoonAgeValue < 27) {
                 messageArea.textContent = "二十七夜";
-                target.src = "https://lunareclipse.onrender.com/img/27.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/26.jpg";
             } else if (currentMoonAgeValue > 27 && currentMoonAgeValue < 28) {
                 messageArea.textContent = "有明の月";
-                target.src = "https://lunareclipse.onrender.com/img/28.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/27.jpg";
             } else if (currentMoonAgeValue > 28 && currentMoonAgeValue < 29) {
                 messageArea.textContent = "二十九日月";
-                target.src = "https://lunareclipse.onrender.com/img/29.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/28.jpg";
             } else if (currentMoonAgeValue > 29 && currentMoonAgeValue < 30) {
                 messageArea.textContent = "三十日月";
-                target.src = "https://lunareclipse.onrender.com/img/30.jpg";
+                target.src = "https://lunareclipse.onrender.com/img/29.jpg";
             }
 
  
