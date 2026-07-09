@@ -257,6 +257,16 @@ $posts = str_replace("TEST&lt;/div","</div",$posts);
 $posts = str_replace("TEST&lt;div","<div",$posts);
 $posts = str_replace("&gt;",">",$posts);
 $posts = str_replace("&quot;","\"",$posts);
+
+$nowtime = date("Ymd");
+$last = date("Ymd", filemtime('posts.txt'));
+if($last == $nowtime){
+
+}else{
+file_put_contents('posts.txt','');
+}
+
+
 ?>
 
 <div id="posts" class="green_neon">
