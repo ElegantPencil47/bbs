@@ -134,7 +134,7 @@ if($last == $nowtime){
 $posts = str_replace('https://m.youtube.com/watch?v=','https://www.youtube.com/watch?v=',$posts);
 $youtube = str_replace('https://www.youtube.com/watch?v=','<iframe width="560" height="315" src="https://www.youtube.com/embed/',$posts);
 $kazu = strpos($youtube, 'bed/');
-$id = mb_substr($youtube, $kazu - 8, 11);
+$id = mb_substr($youtube, $kazu, 11);
 
 $youtube = insertStr2('<iframe width="560" height="315" src="https://www.youtube.com/embed/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', $id, 68);
 $posts = $posts . $youtube;
