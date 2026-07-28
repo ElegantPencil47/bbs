@@ -133,14 +133,13 @@ $posts = str_replace("&quot;","\"",$posts);
 $posts = str_replace("&gt;",">",$posts);
 
 
-$posts = str_replace('https://m.youtube.com/watch?v=','<iframe width="560" height="315" src="https://www.youtube.com/embed/',$posts);
-$posts = str_replace('https://www.youtube.com/watch?v=','    <iframe width="560" height="315" src="https://www.youtube.com/embed/',$posts);
-$posts = $posts . '" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen>
-    </iframe>'
+$posts = str_replace('https://m.youtube.com/watch?v=','https://www.youtube.com/watch?v=',$posts);
+$youtube = str_replace('https://www.youtube.com/watch?v=','<iframe width="560" height="315" src="https://www.youtube.com/embed/',$posts);
+$kazu = strpos($youtube, '<iframe width="560" height="315" src="https://www.youtube.com/embed/');
+$id = mb_substr($youtube, $kazu + 68, 11);
+
+$youtube = insertStr2('<iframe width="560" height="315" src="https://www.youtube.com/embed/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', $id, 68);
+$posts = $posts . $youtube;
 ?>
 
 <div class="neon">
