@@ -97,12 +97,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
            
         
     </style>
+
+
 <body class="neon_blue"><br>
 <div class="option">
 <i class="fa-solid fa-envelope"></i>
 </div>
 <a href = "/">ホームに戻る</a>
 <?php
+
+
+function insertStr2($text, $insert, $num){
+    return preg_replace("/^.{0,$num}+\K/us", $insert, $text);
+}
+
 $posets = '';
 $kesu = "$file.txt";
 $kesu2 = "$file.php";
@@ -121,7 +129,7 @@ if($last == $nowtime){
 }
 }
 
-$posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
+
 $one = str_replace("&lt;h1&gt","<h1>",$one);
 $posts = str_replace("TEST&lt;/p","</p",$posts);
 $posts = str_replace("TEST&lt;p","<p",$posts);
@@ -140,6 +148,8 @@ $id = mb_substr($youtube, $kazu + 68, 11);
 
 $youtube = insertStr2('<iframe width="560" height="315" src="https://www.youtube.com/embed/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', $id, 68);
 $posts = $posts . $youtube;
+
+$posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
 
 <div class="neon">
