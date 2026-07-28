@@ -119,7 +119,7 @@ if(file_exists($file . '.txt')){
 
 $posts = file_get_contents($file . '.txt');
 
-
+$youtube = '';
 $last = date("Ymd", filemtime($file . '.txt'));
 if($last == $nowtime){
 
