@@ -133,8 +133,8 @@ if($last == $nowtime){
 
 $posts = str_replace('https://m.youtube.com/watch?v=','https://www.youtube.com/watch?v=',$posts);
 $youtube = str_replace('https://www.youtube.com/watch?v=','<iframe width="560" height="315" src="https://www.youtube.com/embed/',$posts);
-$kazu = strpos($youtube, '<iframe width="560" height="315" src="https://www.youtube.com/embed/');
-$id = mb_substr($youtube, $kazu + 68, 11);
+$kazu = strpos($youtube, 'v=');
+$id = mb_substr($youtube, $kazu + 2, 11);
 
 $youtube = insertStr2('<iframe width="560" height="315" src="https://www.youtube.com/embed/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', $id, 68);
 $posts = $posts . $youtube;
@@ -144,6 +144,8 @@ $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 
 $one = str_replace("&lt;h1&gt","<h1>",$one);
 $posts = str_replace("TEST&lt;/p","</p",$posts);
+$posts = str_replace("&lt;iframe","< iframe",$posts);
+$posts = str_replace("&lt;/iframe","</iframe",$posts);
 $posts = str_replace("TEST&lt;p","<p",$posts);
 $posts = str_replace("TEST&lt;/h3","</h3",$posts);
 $posts = str_replace("TEST&lt;h3","<h3",$posts);
