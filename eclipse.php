@@ -133,10 +133,8 @@ $posts = str_replace("&quot;","\"",$posts);
 $posts = str_replace("&gt;",">",$posts);
 
 
-$posts = str_replace("https://m.youtube.com/watch?v=","    <iframe width="560" height="315" 
-            src="https://www.youtube.com/embed/",$posts);
-$posts = str_replace("https://www.youtube.com/watch?v=","    <iframe width="560" height="315" 
-            src="https://www.youtube.com/embed/",$posts);
+$posts = str_replace('https://m.youtube.com/watch?v=','<iframe width="560" height="315" src="https://www.youtube.com/embed/',$posts);
+$posts = str_replace('https://www.youtube.com/watch?v=','    <iframe width="560" height="315" src="https://www.youtube.com/embed/',$posts);
 $posts = $posts . '" 
             title="YouTube video player" 
             frameborder="0" 
