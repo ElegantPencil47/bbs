@@ -121,7 +121,7 @@ function insertStr2($text, $insert, $num){
     return preg_replace("/^.{0,$num}+\K/us", $insert, $text);
 }
 
-$posets = '';
+$posts = '';
 $kesu = "$file.txt";
 $kesu2 = "$file.php";
 $nowtime = date("Ymd");
@@ -130,12 +130,13 @@ if(file_exists($file . '.txt')){
 $posts = file_get_contents($file . '.txt');
 
 $youtube = '';
-$last = date("Ymd", filemtime($file . '.txt'));
+$last = date("Ym", filemtime($file . '.txt'));
 if($last == $nowtime){
 
 }else{
   unlink($kesu);
   unlink($kesu2);
+  $posts = '';
 }
 }
 
