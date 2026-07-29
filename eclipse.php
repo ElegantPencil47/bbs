@@ -84,6 +84,13 @@ $post = $post . $youtube;
           position: relative;
           padding: 10px;
           margin: 30px;
+          color: #ffa500;
+          text-shadow:
+            0 0 10px #ff0000,
+            0 0 20px #ff0000,
+            0 0 40px #ff0000,
+            0 0 80px #ff0000,
+            0 0 100px #ff0000;
         }
         .fai::before {
           content: "";
@@ -141,9 +148,13 @@ $post = $post . $youtube;
 <div class="option">
 <i class="fa-solid fa-envelope"></i>
 </div>
+
+
+<a href = "/">
 <div class="fai">
-<a href = "/">ホームに戻る</a>
+ホームに戻る
 </div>
+</a>
 <?php
 
 
@@ -191,10 +202,8 @@ $posts = str_replace("&gt;",">",$posts);
 ?>
 
 
-<br>
-<br>
-<br>
-<br>
+
+
 <br>
 <br>
 <div class="neon">
@@ -207,18 +216,9 @@ $posts = str_replace("&gt;",">",$posts);
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
+
+
 
 
 <h3 class = "neon_blue">返信する</h3>
