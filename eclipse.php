@@ -141,7 +141,9 @@ $post = $post . $youtube;
 <div class="option">
 <i class="fa-solid fa-envelope"></i>
 </div>
-<a href = "/" class="fai">ホームに戻る</a>
+<div class="fai">
+<a href = "/">ホームに戻る</a>
+</div>
 <?php
 
 
@@ -188,9 +190,37 @@ $posts = str_replace("&quot;","\"",$posts);
 $posts = str_replace("&gt;",">",$posts);
 ?>
 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <div class="neon">
 <?= $one ?>
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
 <h3 class = "neon_blue">返信する</h3>
 <form action="" method="post">
   <label for="name" class="neon">名前:</label>
