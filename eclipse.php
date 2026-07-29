@@ -141,7 +141,7 @@ $post = $post . $youtube;
 <div class="option">
 <i class="fa-solid fa-envelope"></i>
 </div>
-<a href = "/">ホームに戻る</a>
+<a href = "/" class="fai">ホームに戻る</a>
 <?php
 
 
@@ -152,7 +152,7 @@ function insertStr2($text, $insert, $num){
 $posts = '';
 $kesu = "$file.txt";
 $kesu2 = "$file.php";
-$nowtime = date("Ymd");
+$nowtime = date("Ym");
 if(file_exists($file . '.txt')){
 
 $posts = file_get_contents($file . '.txt');
