@@ -20,7 +20,12 @@ $kazu = strpos($youtube, 'bed/');
 $id = mb_substr($youtube, $kazu + 4, 11);
 
 $youtube = insertStr2('<iframe width="560" height="315" src="https://www.youtube.com/embed/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', $id, 68);
-$post = $post . $youtube;
+
+if (str_contains($post, "https://www.youtube.com/watch?v=")) {
+    $post = $post . $youtube;
+} else {
+    echo "含まれていません";
+}
 
 
   file_put_contents($file . '.txt', $post, FILE_APPEND);

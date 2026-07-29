@@ -108,11 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <a href="h.html"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a>
 <i class="fas fa-spinner fa-pulse fa-3x"></i>
 </div>
-<fieldset class="fais">
-  <legend><h3 class="fai"><a href="https://version2.wuaze.com/?">こっちのほうがクオリティ高いよ</a></h3></legend>
-  <h3 class="neon"><a href="https://version2.wuaze.com/?">シン・2ちゃんねる</a></h3>
 
-</fieldset>
 
 <h2 class="neon">静かで優しいSNS</h2>
 <h1 class="neon_blue">LunarEclipse</h1>
@@ -297,5 +293,11 @@ file_put_contents('posts.txt','');
 <div id="posts" class="green_neon">
   <?= $posts ?>
 </div>
+<fieldset class="fais">
+  <legend><h3 class="fai"><a href="https://version2.wuaze.com/?">こっちのほうがクオリティ高いよ</a></h3></legend>
+  <h3 class="neon"><a href="https://version2.wuaze.com/?">シン・2ちゃんねる</a></h3>
+
+</fieldset>
+
 </body>
 </html>
