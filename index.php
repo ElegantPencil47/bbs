@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <a href="h.html"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a>
 <i class="fas fa-spinner fa-pulse fa-3x"></i>
 </div>
-<fieldset class="waku">
+<fieldset class="fais">
   <legend><h3 class="fai"><a href="https://version2.wuaze.com/?">こっちのほうがクオリティ高いよ</a></h3></legend>
   <h3 class="neon"><a href="https://version2.wuaze.com/?">シン・2ちゃんねる</a></h3>
 
