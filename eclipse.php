@@ -13,6 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $time = date('Y-m-d H:i:s');
   $post = 'TEST<div class="post" style="display: flex; align-items: baseline; gap: 10px;">TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<p class="hai">' . $name . $time . 'TEST</p>'. "\n" . 'TEST</div>';
 
+
+$post = str_replace('https://m.youtube.com/watch?v=','https://www.youtube.com/watch?v=',$post);
+$youtube = str_replace('https://www.youtube.com/watch?v=','<iframe width="560" height="315" src="https://www.youtube.com/embed/',$post);
+$kazu = strpos($youtube, 'bed/');
+$id = mb_substr($youtube, $kazu + 4, 11);
+
+$youtube = insertStr2('<iframe width="560" height="315" src="https://www.youtube.com/embed/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', $id, 68);
+$post = $post . $youtube;
+
+
   file_put_contents($file . '.txt', $post, FILE_APPEND);
   header('Location: ' . $_SERVER['REQUEST_URI']); 
   exit;
@@ -131,13 +141,7 @@ if($last == $nowtime){
 
 
 
-$posts = str_replace('https://m.youtube.com/watch?v=','https://www.youtube.com/watch?v=',$posts);
-$youtube = str_replace('https://www.youtube.com/watch?v=','<iframe width="560" height="315" src="https://www.youtube.com/embed/',$posts);
-$kazu = strpos($youtube, 'bed/');
-$id = mb_substr($youtube, $kazu + 4, 11);
 
-$youtube = insertStr2('<iframe width="560" height="315" src="https://www.youtube.com/embed/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', $id, 68);
-$posts = $posts . $youtube;
 
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 
