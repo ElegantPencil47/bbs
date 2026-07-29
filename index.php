@@ -67,7 +67,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           right: 50px; 
         }
 
-
+        .fai{
+          color: #ffa500;
+          text-shadow:
+            0 0 10px #ff0000,
+            0 0 20px #ff0000,
+            0 0 40px #ff0000,
+            0 0 80px #ff0000,
+            0 0 100px #ff0000;
+        }
         .waku{
           position: relative;
           padding: 20px;
@@ -89,7 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <a href="h.html"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a>
 <i class="fas fa-spinner fa-pulse fa-3x"></i>
 </div>
-<h3 class="green_neon"><a href="https://version2.wuaze.com/?">こっちのほうがクオリティ高いよ</a></h3>
+<fieldset class="waku">
+  <legend><h3 class="fai"><a href="https://version2.wuaze.com/?">こっちのほうがクオリティ高いよ</a></h3></legend>
+</fieldset>
+
 <h2 class="neon">静かで優しいSNS</h2>
 <h1 class="neon_blue">LunarEclipse</h1>
 <fieldset class="waku">

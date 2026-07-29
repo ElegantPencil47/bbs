@@ -69,7 +69,7 @@ $post = $post . $youtube;
             0 0 80px #00ffff,
             0 0 100px #00ffff;
         }
-                    .green_neon{
+        .green_neon{
           color: #fff;
           text-shadow:
             0 0 10px #05ff05,
@@ -78,6 +78,34 @@ $post = $post . $youtube;
             0 0 80px #05ff05,
             0 0 100px #05ff05;
         }
+
+
+        .fai{
+          position: relative;
+          padding: 10px;
+          margin: 30px;
+        }
+        .fai::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border-bottom: 3px solid #ffa500;
+          border-left: 3px solid #ffa500;
+          filter:
+            drop-shadow(-2px 2px 2px #ff0000)
+            drop-shadow(-4px 4px 8px #ff0000)
+            drop-shadow(-8px 8px 16px #ff0000)
+            drop-shadow(-12px 12px 32px #ff0000);
+          }
+        .option{
+          position: fixed;
+          top: 50px;
+          right: 50px; 
+        }
+
 
         .post{
           position: relative;
