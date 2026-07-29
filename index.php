@@ -3,10 +3,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
-  $post = 'TEST<div style="display: flex; align-items: baseline; gap: 10px;">TEST<a href="' . $comment . '-' . $name . '.php"' . '>TEST<h2>' . $comment . $name . 'TEST</h2>TEST</a>TEST<p class="hai">TEST</p>TEST</div>TEST<hr style="border: 2px solid #A9B2C3;">';
+  $post = 'TEST<div style="display: flex; align-items: baseline; gap: 10px;">TEST<a href="' . $comment . '-' . $name . '.php"' . '>TEST<h2>' . $comment . TEST</h2>TEST<h3> . $name . 'TEST</h3>TEST</a>TEST<p class="hai">TEST</p>TEST</div>TEST<hr style="border: 2px solid #A9B2C3;">';
 
   file_put_contents('posts.txt', $post, FILE_APPEND);
-  $title = $_POST['comment'] . $_POST['name'] . '.php';
+  $title = $_POST['comment'] . '-' . $_POST['name'] . '.php';
   copy('eclipse.php', $title); 
   header('Location: ' . $_SERVER['REQUEST_URI']);
  
