@@ -87,6 +87,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             drop-shadow(0 0 12px #37beb0)
 
         }
+        .fais{
+          position: relative;
+          padding: 20px;
+          margin: 30px;
+          border:5px solid #ffa500;
+          filter:
+            drop-shadow(0 0 2px #ff0000)
+            drop-shadow(0 0 8px #ff0000)
+            drop-shadow(0 0 12px #ff0000)
+
+        }
 
 
     </style>
@@ -99,6 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 <fieldset class="waku">
   <legend><h3 class="fai"><a href="https://version2.wuaze.com/?">こっちのほうがクオリティ高いよ</a></h3></legend>
+  <h3 class="neon"><a href="https://version2.wuaze.com/?">シン・2ちゃんねる</a></h3>
+
 </fieldset>
 
 <h2 class="neon">静かで優しいSNS</h2>
