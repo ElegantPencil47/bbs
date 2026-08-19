@@ -106,7 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		padding: 10px 20px;
 		}
 	.sample_menu_parent {
-		background-color: white;
 		cursor: pointer;
 		}
 	.sample_menu_parent::before {
@@ -119,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		transform: rotate(0deg);
 		}
 	.sample_menu_child {
-		background-color: darkgrey;
+
 		height: 0;
 		opacity: 0;
 		visibility: hidden;
