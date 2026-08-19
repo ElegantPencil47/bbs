@@ -99,10 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
 	.sample_menu_outer {
-		margin: 4rem auto;
+		margin: 5rem auto;
 		}
 	.sample_menu {
-		width: 300px;
+		width: 500px;
 		padding: 10px 20px;
 		}
 	.sample_menu_parent {
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		content: '▼';
 		display: inline-block;
 		transform: rotate(-360deg);
-		transition: .4s;
+		transition: .9s;
 		}
 	.sample_menu_parent.active::before {
 		transform: rotate(0deg);
@@ -286,7 +286,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<div class="sample_menu_outer">
 		<ul>
 			<h3 class="sample_menu sample_menu_parent">LunarEclipseの独自機能について</h3>
-			<p class="sample_menu sample_menu_child">メニュー1</p>
+			<p class="sample_menu sample_menu_child">月齢表示機能、現在の月齢を確認できる</p>
+　　　　　　　　　　　　<p class="sample_menu sample_menu_child">その他、これから追加予定</p>
 		</ul>
 	</div>
 
