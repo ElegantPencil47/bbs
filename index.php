@@ -120,7 +120,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		}
 	.sample_menu_child {
 		background-color: darkgrey;
-		color: white;
 		height: 0;
 		opacity: 0;
 		visibility: hidden;
@@ -287,8 +286,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	<div class="sample_menu_outer">
 		<ul>
-			<li class="sample_menu sample_menu_parent">LunarEclipseの独自機能について</li>
-			<li class="sample_menu sample_menu_child">メニュー1</li>
+			<h3 class="sample_menu sample_menu_parent">LunarEclipseの独自機能について</h3>
+			<p class="sample_menu sample_menu_child">メニュー1</p>
 		</ul>
 	</div>
 
