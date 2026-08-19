@@ -285,9 +285,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	<div class="sample_menu_outer">
 		<ul>
-			<h3 class="sample_menu sample_menu_parent">LunarEclipseの独自機能について</h3>
+			<h3 class="sample_menu sample_menu_parent" class="neon">LunarEclipseの独自機能について</h3>
 			<p class="sample_menu sample_menu_child">月齢表示機能、現在の月齢を確認できる</p>
-　　　　　　　　　　　　<p class="sample_menu sample_menu_child">その他、これから追加予定</p>
+		</ul>
+	</div>
+<br>
+	<div class="sample_menu_outer">
+		<ul>
+			<h3 class="sample_menu sample_menu_parent" class="neon">簡易的な利用規約について</h3>
+			<p class="sample_menu sample_menu_child">荒らし以外大抵OK、まあ荒らしが来たらリセットすればいいだけやけどね</p>
 		</ul>
 	</div>
 
