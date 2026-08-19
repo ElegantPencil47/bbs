@@ -98,9 +98,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             drop-shadow(0 0 12px #ff0000)
 
         }
-
+	.sample_menu_outer {
+		margin: 4rem auto;
+		}
+	.sample_menu {
+		width: 300px;
+		padding: 10px 20px;
+		}
+	.sample_menu_parent {
+		background-color: white;
+		cursor: pointer;
+		}
+	.sample_menu_parent::before {
+		content: '▼';
+		display: inline-block;
+		transform: rotate(-360deg);
+		transition: .4s;
+		}
+	.sample_menu_parent.active::before {
+		transform: rotate(0deg);
+		}
+	.sample_menu_child {
+		background-color: darkgrey;
+		color: white;
+		height: 0;
+		opacity: 0;
+		visibility: hidden;
+		transition: .4s;
+		}
+	.sample_menu_child.active {
+		height: 2rem;
+		opacity: 1;
+		visibility: visible;
+		}
 
     </style>
+
 <body class="neon_blue"><br>
 <div class="option">
 
@@ -252,8 +285,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </fieldset>
 
 
+	<div class="sample_menu_outer">
+		<ul>
+			<li class="sample_menu sample_menu_parent">LunarEclipseの独自機能について</li>
+			<li class="sample_menu sample_menu_child">メニュー1</li>
+		</ul>
+	</div>
+
 
 <h3 class="neon">投稿する</h3>
+
+	<script>
+		{
+			const sampleMenuP = document.querySelector('.sample_menu_parent');
+			const sampleMenuC = document.querySelector('.sample_menu_child');
+
+				sampleMenuP.addEventListener('click', () => {
+				sampleMenuC.classList.toggle('active');
+  				sampleMenuP.classList.toggle('active');
+			});
+
+		}
+	</script>
+
 <form action="" method="post">
   <label for="name" class="neon">名前:</label>
   <input type="text" name="name" id="name">
