@@ -1,13 +1,23 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
+  if($name == ""){
+  $name = "名無し";
+  $_POST['name'] = "名無し";
+  }
+  
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
   $post = 'TEST<div style="display: flex; align-items: baseline; gap: 10px;">TEST<a href="' . $comment . '-' . $name . '.php"' . '>TEST<h2>' . $comment . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name . 'TEST</p>TEST</div>TEST<hr style="border: 2px solid #A9B2C3;">';
 
   file_put_contents('posts.txt', $post, FILE_APPEND);
+
   $title = $_POST['comment'] . '-' . $_POST['name'] . '.php';
+ 
+  if($title == ""){
+}else{
   copy('eclipse.php', $title); 
+}
   header('Location: ' . $_SERVER['REQUEST_URI']);
  
   exit;
@@ -162,18 +172,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (moonAge < 0) {
                 moonAge += lunarCycle;
             }
-            return moonAge; // toFixed(2)を外し、数値（小数点付き）として返すように変更
+            return moonAge; 
         }
 
-        // 結果をウェブサイトに表示し、条件分岐を行う関数
+
         function displayMoonAge() {
-            const currentMoonAgeValue = calculateMoonAge(); // 数値として取得
-            const currentMoonAgeFormatted = currentMoonAgeValue.toFixed(2); // 表示用に整形
+            const currentMoonAgeValue = calculateMoonAge();
+            const currentMoonAgeFormatted = currentMoonAgeValue.toFixed(2); 
             let target = document.querySelector("#target");
             
             document.getElementById('moon-age-result').textContent = `${currentMoonAgeFormatted} 日`;
 
-            // *** ここからがご質問の条件分岐です ***
+
             const messageArea = document.getElementById('moon-phase-message');
 
             if (currentMoonAgeValue > 0 && currentMoonAgeValue < 1) {
@@ -272,7 +282,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      
         }
 
-        // ページ読み込み時に月齢を表示
         displayMoonAge();
     </script>
     
@@ -286,16 +295,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<div class="sample_menu_outer">
 		<ul>
 			<h3 class="sample_menu sample_menu_parent" class="neon">LunarEclipseの独自機能について</h3>
-			<p class="sample_menu sample_menu_child">月齢表示機能、現在の月齢を確認できる</p>
+			<p class="sample_menu sample_menu_child">月齢表示機能、現在の月齢を確認できる<br>その他まだ未実装、乞うご期待</p>
 		</ul>
 	</div>
-<br>
-	<div class="sample_menu_outer">
-		<ul>
-			<h3 class="sample_menu sample_menu_parent" class="neon">簡易的な利用規約について</h3>
-			<p class="sample_menu sample_menu_child">荒らし以外大抵OK、まあ荒らしが来たらリセットすればいいだけやけどね</p>
-		</ul>
-	</div>
+
 
 
 <h3 class="neon">投稿する</h3>
@@ -353,8 +356,10 @@ file_put_contents('posts.txt','');
   <?= $posts ?>
 </div>
 <fieldset class="fais">
-  <legend><h3 class="fai"><a href="https://version2.wuaze.com/?">こっちのほうがクオリティ高いよ</a></h3></legend>
-  <h3 class="neon"><a href="https://version2.wuaze.com/?">シン・2ちゃんねる</a></h3>
+  <legend><h3 class="fai">こっちのほうがクオリティ高いよ</h3></legend>
+  <h3 class="neon"><a href="https://version2.wuaze.com/?">きゅうちゃんねる</a></h3>
+  <h3 class="neon"><a href="https://enjbbs.pages.dev/">えんｊ（エンジョイ実況J）</a></h3>
+  <h3 class="neon"><a href="https://openlive.pages.dev/">なんＬ</a></h3>
 
 </fieldset>
 

@@ -23,7 +23,7 @@ $youtube = insertStr2('<iframe width="560" height="315" src="https://www.youtube
 
 if (str_contains($post, "https://www.youtube.com/watch?v=")) {
     $post = $post . $youtube;
-}
+} 
 
 
   file_put_contents($file . '.txt', $post, FILE_APPEND);
