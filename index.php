@@ -17,8 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
   if($_POST['comment'] == ""){
 header('Location: ' . $_SERVER['REQUEST_URI']);
+  exit;
 }elseif (strlen($_POST['comment']) > 20){
 header('Location: ' . $_SERVER['REQUEST_URI']);
+  exit;
 }else{
   copy('eclipse.php', $title); 
 }
