@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $title = $_POST['comment'] . '-' . $_POST['name'] . '.php';
  
   if($_POST['comment'] == ""){
-
+header('Location: ' . $_SERVER['REQUEST_URI']);
 }elseif (strlen($_POST['comment']) > 20){
-
+header('Location: ' . $_SERVER['REQUEST_URI']);
 }else{
   copy('eclipse.php', $title); 
 }
