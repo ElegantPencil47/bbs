@@ -1,4 +1,6 @@
 <?php
+$alert = "<script type='text/javascript'>alert('本文書け');</script>";
+$alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'];
   if($name == ""){
@@ -14,7 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $title = $_POST['comment'] . '-' . $_POST['name'] . '.php';
  
-  if($title == ""){
+  if($_POST['comment'] == ""){
+echo $alert;
+}elseif (strlen($_POST['comment']) > 20){
+echo $alert2;
 }else{
   copy('eclipse.php', $title); 
 }
