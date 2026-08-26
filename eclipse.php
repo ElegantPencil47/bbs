@@ -1,10 +1,17 @@
 <?php
+$alert = "<script type='text/javascript'>alert('本文書け');</script>";
+$alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
   $file = $_SERVER['SCRIPT_FILENAME'];
   $file = str_replace(".php","",$file);
   $one = $file;
   $one = str_replace("/var/www/html/","",$one);
   $one = "<h1>" . $one . "</h1>";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if($_POST['comment'] == ""){
+echo $alert;
+}elseif (strlen($_POST['comment']) > 50){
+echo $alert2;
+}else{
   $name = $_POST['name'];
   if(empty($name)){
   $name = "@名無し";
@@ -29,7 +36,7 @@ if (str_contains($post, "https://www.youtube.com/watch?v=")) {
   file_put_contents($file . '.txt', $post, FILE_APPEND);
   header('Location: ' . $_SERVER['REQUEST_URI']); 
   exit;
-}
+}}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
