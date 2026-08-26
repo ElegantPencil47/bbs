@@ -1,7 +1,14 @@
 <?php
+$alert = "<script type='text/javascript'>alert('本文書け');</script>";
+$alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-if($_POST['comment'] !== ""){
+if($_POST['comment'] == ""){
+echo $alert;
+}elseif (strlen($_POST['comment']) > 50){
+echo $alert2;
+}else{
   $name = $_POST['name'];
   if($name == ""){
   $name = "名無し";
@@ -19,7 +26,7 @@ if($_POST['comment'] !== ""){
   if($_POST['comment'] == ""){
 header('Location: ' . $_SERVER['REQUEST_URI']);
   exit;
-}elseif (strlen($_POST['comment']) > 20){
+}elseif (strlen($_POST['comment']) > 50){
 header('Location: ' . $_SERVER['REQUEST_URI']);
   exit;
 }else{
