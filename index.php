@@ -1,6 +1,7 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if($_POST['comment'] !== ""){
   $name = $_POST['name'];
   if($name == ""){
   $name = "名無し";
@@ -27,7 +28,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
   header('Location: ' . $_SERVER['REQUEST_URI']);
  
   exit;
-}
+}}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
