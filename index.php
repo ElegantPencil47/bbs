@@ -20,8 +20,7 @@ echo $alert2;
   $post = 'TEST<div style="display: flex; align-items: baseline; gap: 10px;">TEST<a href="' . $comment . '-' . $name . '.php"' . '>TEST<h2>' . $comment . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name . 'TEST</p>TEST</div>TEST<hr style="border: 2px solid #A9B2C3;">';
 
   file_put_contents('posts.txt', $post, FILE_APPEND);
-
-  $title = 'date('YmdHis')' . '.php';
+  $title = date('YmdHis') . '.php';
  
   if($_POST['comment'] == ""){
 header('Location: ' . $_SERVER['REQUEST_URI']);
