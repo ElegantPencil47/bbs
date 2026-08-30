@@ -9,7 +9,7 @@ $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if($_POST['comment'] == ""){
 echo $alert;
-}elseif (strlen($_POST['comment']) > 50){
+}elseif (strlen($_POST['comment']) > 350){
 echo $alert2;
 }else{
   $name = $_POST['name'];

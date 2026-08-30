@@ -21,7 +21,7 @@ echo $alert2;
 
   file_put_contents('posts.txt', $post, FILE_APPEND);
 
-  $title = $_POST['comment'] . '-' . $_POST['name'] . '.php';
+  $title = 'date('YmdHis')' . '.php';
  
   if($_POST['comment'] == ""){
 header('Location: ' . $_SERVER['REQUEST_URI']);
