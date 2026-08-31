@@ -17,10 +17,10 @@ echo $alert2;
   $title = date('YmdHis') . '.php';
   
   $comment = $_POST['comment'];
-  $log = $comment . $name;
+  $log = $comment . $name . "\n";
   $time = date('Y-m-d H:i:s');
   $post = 'TEST<div style="display: flex; align-items: baseline; gap: 10px;">TEST<a href="' . $title . '">TEST<h2>' . $comment . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name . 'TEST</p>TEST</div>TEST<hr style="border: 2px solid #A9B2C3;">' . "\n";
-
+  file_put_contents('posts.txt', pack("C*", 0xEF, 0xBB, 0xBF));
   file_put_contents('posts.txt', $post, FILE_APPEND);
   file_put_contents('log.txt', $log, FILE_APPEND);
   
