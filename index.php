@@ -14,7 +14,8 @@ echo $alert2;
   $name = "名無し";
   $_POST['name'] = "名無し";
   }
-  $title = date('YmdHis') . '.php';
+  $jikan = date('YmdHis');
+  $title = $jikan . '.php';
   
   $comment = $_POST['comment'];
   $log = $comment . $name . "\n";
@@ -23,11 +24,18 @@ echo $alert2;
   if (!file_exists('posts.txt')) {
   file_put_contents('posts.txt', pack("C*", 0xEF, 0xBB, 0xBF));
   }
+  if (!file_exists($jikan . '.txt')) {
+  file_put_contents($jikan . '.txt', pack("C*", 0xEF, 0xBB, 0xBF));
+  }
   if (!file_exists('log.txt')) {
   file_put_contents('log.txt', pack("C*", 0xEF, 0xBB, 0xBF));
   }
+
+
+
   file_put_contents('posts.txt', $post, FILE_APPEND);
   file_put_contents('log.txt', $log, FILE_APPEND);
+  file_put_contents($jikan . '.txt', $jikan, FILE_APPEND);
   
  
   if($_POST['comment'] == ""){
