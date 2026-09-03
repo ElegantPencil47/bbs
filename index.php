@@ -39,7 +39,7 @@ if ( isset( $_POST[ 'g-recaptcha-response' ] ) ) {
   } else { // トークンが無効な場合
     return false;
   }
-}
+}}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if($_POST['comment'] == ""){
