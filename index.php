@@ -1,7 +1,45 @@
 <?php
 $alert = "<script type='text/javascript'>alert('本文書け');</script>";
 $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
+	function checkRechaptha() {
 
+// reCAPTCHA サイトキー
+$siteKey = 6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN;
+// reCAPTCHA シークレットキー
+$secretKey = 6LexhKYtAAAAADLlzUr46NQJEhwnDhLeVF3z0Fli;
+ 
+$result_status = '';  // 結果を表示する文字列を初期化
+// トークンが送信されたら
+if ( isset( $_POST[ 'g-recaptcha-response' ] ) ) {
+ 
+  //API Request URL（リクエストを送る API の URL）
+  $url = 'https://www.google.com/recaptcha/api/siteverify';
+  //パラメータを指定
+  $data = array(
+    'secret' => $secretKey, //シークレットキー
+    'response' =>  $_POST[ 'g-recaptcha-response' ]
+  );
+  //POST メソッドを使用
+  $context = array(
+    'http' => array(
+      'method'  => 'POST',
+      'header'  => implode("\r\n", array('Content-Type: application/x-www-form-urlencoded',)),
+      'content' => http_build_query($data)
+    )
+  );
+  //上記パラメータを指定して file_get_contents で API Response を取得
+  $api_response = file_get_contents($url, false, stream_context_create($context));
+  
+  // JSON をデコード
+  $result = json_decode( $api_response );
+  // トークンが有効な場合
+  if ( $result->success ) {
+    return true;
+    // 成功した場合の処理（メールの送信など）を実行（または結果を変数に入れて、その変数を使って処理を分岐するなど）
+  } else { // トークンが無効な場合
+    return false;
+  }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if($_POST['comment'] == ""){
@@ -35,7 +73,7 @@ echo $alert2;
 
   file_put_contents('posts.txt', $post, FILE_APPEND);
   file_put_contents('log.txt', $log, FILE_APPEND);
-  file_put_contents($jikan . '.txt', $jikan, FILE_APPEND);
+  file_put_contents($jikan . '.txt', $post, FILE_APPEND);
   
  
   if($_POST['comment'] == ""){
@@ -59,6 +97,29 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
   <title>LunarEclipse</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css" type="text/css" media="all" />
+
+
+  <!-- *** google reCAPTHA *** -->
+  <script>
+  //.g-recaptcha タグの data-callback 属性で指定したコールバック関数の定義
+  var myAlert = function(response) {
+    alert("チェックボックスがチェックされました！");
+  };
+
+  var verifyCallback = function(response) { //コールバック関数の定義
+    //#warning の p 要素のテキストを空にf
+    document.getElementById("warning").textContent = '';
+    //#send の button 要素の disabled 属性を解除
+    document.getElementById("send").disabled = false;
+  };
+  var expiredCallback = function() { //コールバック関数の定義
+    //#warning の p 要素のテキストに文字列を設定
+    document.getElementById("warning").textContent = '送信するにはチェックを入れてください。';
+    //#send の button 要素に disabled 属性を設定
+    document.getElementById("send").disabled = true;
+  };
+  </script>
+
 </head>
     <style>
         .hai{
@@ -350,6 +411,15 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
   <input type="text" name="name" id="name">
   <br>
   <label for="comment" class="neon_blue">コメント:</label>
+
+<!-- google reCAPTHA -->
+<div class="g-recaptcha" data-sitekey="6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN" data-callback="myAlert"></div>   
+<p id="warning"></p>
+<?php if ($error['re_captha'] === 'failed'):?>※認証に失敗しました。<?php endif; ?>
+<div class="wrap_btn">
+  <button id="send" class="btn_st arrow bg_yellow">確認する</button>
+</div>
+
   <textarea name="comment" id="comment"></textarea>
   <br>
   <input type="submit" value="投稿">
@@ -391,6 +461,7 @@ file_put_contents('posts.txt','');
   <h3 class="neon"><a href="https://openlive.pages.dev/">なんＬ</a></h3>
 
 </fieldset>
-
+<!-- google reCAPTHA -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script><!-- API の読み込み -->
 </body>
 </html>
