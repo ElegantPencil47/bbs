@@ -4,9 +4,9 @@ $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
 	function checkRechaptha() {
 
 // reCAPTCHA サイトキー
-$siteKey = 6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN;
+$siteKey = "6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN";
 // reCAPTCHA シークレットキー
-$secretKey = 6LexhKYtAAAAADLlzUr46NQJEhwnDhLeVF3z0Fli;
+$secretKey = "6LexhKYtAAAAADLlzUr46NQJEhwnDhLeVF3z0Fli";
  
 $result_status = '';  // 結果を表示する文字列を初期化
 // トークンが送信されたら
