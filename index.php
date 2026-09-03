@@ -411,6 +411,9 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
   <input type="text" name="name" id="name">
   <br>
   <label for="comment" class="neon_blue">コメント:</label>
+  <textarea name="comment" id="comment"></textarea>
+
+
 
 <!-- google reCAPTHA -->
 <div class="g-recaptcha" data-sitekey="6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN" data-callback="myAlert"></div>   
@@ -420,7 +423,8 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
   <button id="send" class="btn_st arrow bg_yellow">確認する</button>
 </div>
 
-  <textarea name="comment" id="comment"></textarea>
+
+
   <br>
   <input type="submit" value="投稿">
 </form>
