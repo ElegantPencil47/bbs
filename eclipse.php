@@ -223,7 +223,7 @@ $posts = str_replace("&gt;",">",$posts);
 <br>
 <br>
 <div class="neon">
-<?= $line ?>
+<?= $file ?>
 </div>
 
 <br>
