@@ -223,9 +223,7 @@ $posts = str_replace("&gt;",">",$posts);
 <br>
 <br>
 <h1>
-<div class="neon">
-<?= $file ?>
-</div>
+てすと
 </h1>
 
 <br>
@@ -249,8 +247,6 @@ $posts = str_replace("&gt;",">",$posts);
   <br>
   <input type="submit" value="返信する" class="HSN">
 </form>
-<div id="posts">
-  <?= $posts ?>
-</div>
+
 </body>
 </html>
