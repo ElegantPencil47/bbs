@@ -429,7 +429,7 @@ $error = array();
 
 
   <br>
-  <input type="submit" value="投稿">
+  <!--  <input type="submit" value="投稿">   -->
 </form>
 <h2 class="neon_blue">投稿一覧</h2>
 <?php
