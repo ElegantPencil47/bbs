@@ -45,11 +45,12 @@ if ( isset( $_POST[ 'g-recaptcha-response' ] ) ) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if($_POST['comment'] == ""){
-echo $alert;
+echo $alert; 
 }elseif (strlen($_POST['comment']) > 50){
 echo $alert2;
-}elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }elseif ( !isset($_POST['g-recaptcha-response']) || $_POST['g-recaptcha-response'] === '' ) {
+echo $alert3;
+}else{
 
 
 
@@ -96,8 +97,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
   header('Location: ' . $_SERVER['REQUEST_URI']);
  
   exit;
-}else{
-echo $alert3;
+
 }
 
 }
