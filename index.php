@@ -420,7 +420,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 <p id="warning"></p>
 <?php
 
-$error = "";
+$error = array();
  if ($error['re_captha'] === 'failed'):?>※認証に失敗しました。<?php endif; ?>
 <div class="wrap_btn">
   <button id="send" class="btn_st arrow bg_yellow">確認する</button>
