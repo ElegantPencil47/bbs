@@ -1,6 +1,8 @@
 <?php
 $alert = "<script type='text/javascript'>alert('本文書け');</script>";
 $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
+$alert3 = "<script type='text/javascript'>alert('ロボットチェックしろや');</script>";
+
 	function checkRechaptha() {
 
 // reCAPTCHA サイトキー
@@ -46,7 +48,13 @@ if($_POST['comment'] == ""){
 echo $alert;
 }elseif (strlen($_POST['comment']) > 50){
 echo $alert2;
-}else{
+}elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+}elseif ( !isset($_POST['g-recaptcha-response']) || $_POST['g-recaptcha-response'] === '' ) {
+
+
+
+
+
   $name = $_POST['name'];
   if($name == ""){
   $name = "名無し";
@@ -88,7 +96,9 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
   header('Location: ' . $_SERVER['REQUEST_URI']);
  
   exit;
-}}
+}}else{
+echo $alert3;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
