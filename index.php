@@ -5,23 +5,22 @@ $alert3 = "<script type='text/javascript'>alert('ロボットチェックしろ�
 
 	function checkRechaptha() {
 
-// reCAPTCHA サイトキー
 $siteKey = "6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN";
-// reCAPTCHA シークレットキー
+
 $secretKey = "6LexhKYtAAAAADLlzUr46NQJEhwnDhLeVF3z0Fli";
  
-$result_status = '';  // 結果を表示する文字列を初期化
-// トークンが送信されたら
+$result_status = '';  
+
 if ( isset( $_POST[ 'g-recaptcha-response' ] ) ) {
  
-  //API Request URL（リクエストを送る API の URL）
+
   $url = 'https://www.google.com/recaptcha/api/siteverify';
-  //パラメータを指定
+
   $data = array(
-    'secret' => $secretKey, //シークレットキー
+    'secret' => $secretKey,
     'response' =>  $_POST[ 'g-recaptcha-response' ]
   );
-  //POST メソッドを使用
+
   $context = array(
     'http' => array(
       'method'  => 'POST',
@@ -29,16 +28,15 @@ if ( isset( $_POST[ 'g-recaptcha-response' ] ) ) {
       'content' => http_build_query($data)
     )
   );
-  //上記パラメータを指定して file_get_contents で API Response を取得
+
   $api_response = file_get_contents($url, false, stream_context_create($context));
-  
-  // JSON をデコード
+
   $result = json_decode( $api_response );
-  // トークンが有効な場合
+
   if ( $result->success ) {
     return true;
-    // 成功した場合の処理（メールの送信など）を実行（または結果を変数に入れて、その変数を使って処理を分岐するなど）
-  } else { // トークンが無効な場合
+
+  } else { 
     return false;
   }
 }}
@@ -82,7 +80,7 @@ echo $alert3;
 
   file_put_contents('posts.txt', $post, FILE_APPEND);
   file_put_contents('log.txt', $log, FILE_APPEND);
-  file_put_contents($jikan . '.txt', $post, FILE_APPEND);
+  file_put_contents($jikan . '.txt', $comment, FILE_APPEND);
   
  
   if($_POST['comment'] == ""){
