@@ -418,7 +418,10 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 <!-- google reCAPTHA -->
 <div class="g-recaptcha" data-sitekey="6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN" data-callback="myAlert"></div>   
 <p id="warning"></p>
-<?php if ($error['re_captha'] === 'failed'):?>※認証に失敗しました。<?php endif; ?>
+<?php
+
+$error = "";
+ if ($error['re_captha'] === 'failed'):?>※認証に失敗しました。<?php endif; ?>
 <div class="wrap_btn">
   <button id="send" class="btn_st arrow bg_yellow">確認する</button>
 </div>
