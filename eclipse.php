@@ -5,13 +5,13 @@ $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
   $file = $_SERVER['SCRIPT_FILENAME'];
   $file = str_replace(".php","",$file);
   $one = $file;
-  //$filename = fopen($file . ".txt", "r");
+  $filename = fopen($file . ".txt", "r");
   $one = str_replace("/var/www/html/","",$one);
   $one = "<h1>" . $one . "</h1>";
-//if (($line = fgets($filename)) !== false) {
-  //  echo $line;
-//}
-//fclose($filename);
+if (($line = fgets($filename)) !== false) {
+    echo $line;
+}
+fclose($filename);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if($_POST['comment'] == ""){
 echo $alert;
@@ -222,9 +222,11 @@ $posts = str_replace("&gt;",">",$posts);
 
 <br>
 <br>
+<h1>
 <div class="neon">
 <?= $file ?>
 </div>
+</h1>
 
 <br>
 <br>
