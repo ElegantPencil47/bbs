@@ -8,9 +8,10 @@ $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
   $filename = fopen($file . ".txt", "r");
   $one = str_replace("/var/www/html/","",$one);
   $one = "<h1>" . $one . "</h1>";
-if (($line = fgets($file)) !== false) {
+if (($line = fgets($filename)) !== false) {
     echo $line;
 }
+fclose($filename);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if($_POST['comment'] == ""){
 echo $alert;
