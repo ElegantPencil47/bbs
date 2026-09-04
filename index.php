@@ -80,7 +80,7 @@ echo $alert3;
 
   file_put_contents('posts.txt', $post, FILE_APPEND);
   file_put_contents('log.txt', $log, FILE_APPEND);
-  file_put_contents($jikan . '.txt', '<h1>' . $comment . </h1>, FILE_APPEND);
+  file_put_contents($jikan . '.txt', '<h1>' . $comment . '</h1>', FILE_APPEND);
   
  
   if($_POST['comment'] == ""){
