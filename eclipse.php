@@ -39,7 +39,7 @@ if (str_contains($post, "https://www.youtube.com/watch?v=")) {
 } 
 
 
-  file_put_contents($file . '.txt', $post, FILE_APPEND);
+  file_put_contents($file . '.txt', $post . "\n", FILE_APPEND);
   header('Location: ' . $_SERVER['REQUEST_URI']); 
   exit;
 }}
@@ -247,6 +247,26 @@ $posts = str_replace("&gt;",">",$posts);
   <br>
   <input type="submit" value="返信する" class="HSN">
 </form>
+
+
+
+
+
+
+
+
+
+<div id="posts" class="green_neon">
+  <?= $posts ?>
+</div>
+
+
+
+
+
+
+
+
 
 </body>
 </html>

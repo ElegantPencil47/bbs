@@ -132,12 +132,16 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 
 </head>
     <style>
+        .bana{
+          color: #fff;
+        }
+
         .hai{
           color: #A9B2C3;
         }
          
         a {
-          color: #fff;;
+          color: #fff;
         }
 
         body {
@@ -478,6 +482,16 @@ file_put_contents('posts.txt','');
   <h3 class="neon"><a href="https://openlive.pages.dev/">なんＬ</a></h3>
 
 </fieldset>
+
+
+
+
+
+
+<div class="bana"></div>
+
+
+
 <!-- google reCAPTHA -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script><!-- API の読み込み -->
 </body>
