@@ -96,8 +96,10 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
   header('Location: ' . $_SERVER['REQUEST_URI']);
  
   exit;
-}}else{
+}else{
 echo $alert3;
+}
+
 }
 ?>
 <!DOCTYPE html>
