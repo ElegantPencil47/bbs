@@ -9,7 +9,7 @@ $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
   $one = str_replace("/var/www/html/","",$one);
   $one = "<h1>" . $one . "</h1>";
 if (($line = fgets($filename)) !== false) {
-    echo $line;
+  $title = $line;
 }
 fclose($filename);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
