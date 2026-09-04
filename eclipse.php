@@ -67,6 +67,13 @@ if (str_contains($post, "https://www.youtube.com/watch?v=")) {
         body {
           background-color: #000033;;
         }
+
+
+        .option{
+          position: fixed;
+          bottom: 50px;
+          left: 50px; 
+        }
         .neon{
           color: #fff;
           text-shadow:
@@ -236,7 +243,7 @@ $posts = str_replace("&gt;",">",$posts);
 
 
 
-
+<div class="option">
 <h3 class = "neon_blue">返信する</h3>
 <form action="" method="post">
   <label for="name" class="neon">名前:</label>
@@ -247,7 +254,7 @@ $posts = str_replace("&gt;",">",$posts);
   <br>
   <input type="submit" value="返信する" class="HSN">
 </form>
-
+</div>
 
 
 
