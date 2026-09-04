@@ -1,11 +1,16 @@
 <?php
+
 $alert = "<script type='text/javascript'>alert('本文書け');</script>";
 $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
   $file = $_SERVER['SCRIPT_FILENAME'];
   $file = str_replace(".php","",$file);
   $one = $file;
+  $filename = fopen($file . ".txt", "r");
   $one = str_replace("/var/www/html/","",$one);
   $one = "<h1>" . $one . "</h1>";
+if (($line = fgets($file)) !== false) {
+    echo $line;
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if($_POST['comment'] == ""){
 echo $alert;
@@ -217,7 +222,7 @@ $posts = str_replace("&gt;",">",$posts);
 <br>
 <br>
 <div class="neon">
-<?= $one ?>
+<?= $line ?>
 </div>
 
 <br>
