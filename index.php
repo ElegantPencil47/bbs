@@ -133,7 +133,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 </head>
     <style>
         .bana{
-          color: #fff;
+          background-color: #fff;
         }
 
         .hai{
