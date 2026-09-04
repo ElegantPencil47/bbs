@@ -80,7 +80,7 @@ echo $alert3;
 
   file_put_contents('posts.txt', $post, FILE_APPEND);
   file_put_contents('log.txt', $log, FILE_APPEND);
-  file_put_contents($jikan . '.txt', '<h1>' . $comment . '</h1>', FILE_APPEND);
+  file_put_contents($jikan . '.txt', "\n" . '<h1>' . $comment . '</h1>', FILE_APPEND);
   
  
   if($_POST['comment'] == ""){
@@ -133,7 +133,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 </head>
     <style>
         .bana{
-          background-color: #fff;
+          background-color: #404040;
         }
 
         .hai{
@@ -488,7 +488,7 @@ file_put_contents('posts.txt','');
 
 
 
-<div class="bana"><p>てすてす</p><br><br><br></div>
+<div class="bana"><br><br><p>てすてす</p><br><br><br></div>
 
 
 

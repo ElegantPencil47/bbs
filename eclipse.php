@@ -152,11 +152,7 @@ if (str_contains($post, "https://www.youtube.com/watch?v=")) {
             drop-shadow(-8px 8px 16px #37beb0)
             drop-shadow(-12px 12px 32px #37beb0);
           }
-        .option{
-          position: fixed;
-          top: 50px;
-          right: 50px; 
-        }
+        
            
         
     </style>
