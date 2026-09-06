@@ -77,7 +77,7 @@ echo $alert3;
   }
 
 
-
+ 
   file_put_contents('posts.txt', $post, FILE_APPEND);
   file_put_contents('log.txt', $log, FILE_APPEND);
   file_put_contents($jikan . '.txt', "\n" . '<h1>' . $comment . '</h1>', FILE_APPEND);
@@ -114,6 +114,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 
   var myAlert = function(response) {
     alert("誇れ、お前は人間だ");
+    
   };
 
   var verifyCallback = function(response) { 
@@ -409,6 +410,12 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 
 	<script>
 		{
+form.addEventListener('submit', function() {
+　　　　　　　　　　　　  this.disabled = true;
+}
+
+
+　　　
 			const sampleMenuP = document.querySelector('.sample_menu_parent');
 			const sampleMenuC = document.querySelector('.sample_menu_child');
 
@@ -437,7 +444,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 $error = array();
  if (isset($erroe['re_captcha']) && $error['re_captha'] === 'failed'):?>※認証に失敗しました。<?php endif; ?>
 <div class="wrap_btn">
-  <button id="send" class="btn_st arrow bg_yellow">確認する</button>
+  <button id="send" class="btn_st arrow bg_yellow">投稿する</button>
 </div>
 
 
