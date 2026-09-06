@@ -41,6 +41,42 @@ if ( isset( $_POST[ 'g-recaptcha-response' ] ) ) {
   }
 }}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+session_start();
+
+$now = microtime(true);
+
+if (
+    isset($_SESSION['last_post_time']) &&
+    ($now - $_SESSION['last_post_time']) < 3
+) {
+    exit('連続投稿は少し待ってください。');
+}
+
+$_SESSION['last_post_time'] = $now;
+
+
+
+
+
+
+
+
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if($_POST['comment'] == ""){
 echo $alert; 
@@ -447,7 +483,7 @@ $error = array();
 		{
 const btn = document.getElementById("send");
 const form = document.getElementById("form");
-btn.addEventListener('submit', function() {
+form.addEventListener('submit', function() {
 
 btn.disabled = true;
 btn.textContent = "送信中...";
