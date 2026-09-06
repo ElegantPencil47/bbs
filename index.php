@@ -106,7 +106,7 @@ echo $alert3;
  
   file_put_contents('posts.txt', $post, FILE_APPEND);
   file_put_contents('log.txt', $log, FILE_APPEND);
-  file_put_contents($jikan . '.txt', "\n" . '<h1>' . $comment . '</h1>' . '<h3 class = "neon">' . $name . '</h3><p class="green_neon">' . $time . </p>, FILE_APPEND);
+  file_put_contents($jikan . '.txt', "\n" . '<h1>' . $comment . '</h1>' . '<h3 class = "neon">' . $name . '</h3><p class="green_neon">' . $time . '</p>', FILE_APPEND);
   
  
   if($_POST['comment'] == ""){
