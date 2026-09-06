@@ -211,8 +211,7 @@ $posts = str_replace("TEST&lt;/h3","</h3",$posts);
 $posts = str_replace("TEST&lt;h3","<h3",$posts);
 $posts = str_replace("TEST&lt;/h1","</h1",$posts);
 $posts = str_replace("TEST&lt;h1","<h1",$posts);
-$posts = str_replace("&lt;/h1","</h1",$posts);
-$posts = str_replace("&lt;h1","<h1",$posts);
+
 $posts = str_replace("TEST&lt;/div","</div",$posts);
 $posts = str_replace("TEST&lt;div","<div",$posts);
 $posts = str_replace("&quot;","\"",$posts);
