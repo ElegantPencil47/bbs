@@ -411,8 +411,12 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 	<script>
 		{
 form.addEventListener('submit', function() {
-　　　　　　　　　　　　  this.disabled = true;
-}
+　
+　　　　　　　　　　　  btn.disabled = true;
+
+const btn = document.getElementById("btn");
+const form = document.getElementById("form");
+});
 
 
 　　　
@@ -427,7 +431,7 @@ form.addEventListener('submit', function() {
 		}
 	</script>
 
-<form action="" method="post">
+<form action="" method="post" id="form">
   <label for="name" class="neon">名前:</label>
   <input type="text" name="name" id="name">
   <br>
@@ -450,7 +454,7 @@ $error = array();
 
 
   <br>
-  <!--  <input type="submit" value="投稿">   -->
+  <!--  <input type="submit" value="投稿" id="send">   -->
 </form>
 <h2 class="neon_blue">投稿一覧</h2>
 <?php
