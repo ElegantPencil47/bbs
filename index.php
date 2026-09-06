@@ -49,7 +49,7 @@ if ( isset( $_POST[ 'g-recaptcha-response' ] ) ) {
 
 
 
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
@@ -60,7 +60,7 @@ $now = microtime(true);
 
 if (
     isset($_SESSION['last_post_time']) &&
-    ($now - $_SESSION['last_post_time']) < 12
+    ($now - $_SESSION['last_post_time']) < 5
 ) {
     exit('連投ヤメロ');
 }
@@ -68,16 +68,6 @@ if (
 $_SESSION['last_post_time'] = $now;
 
 
-
-
-
-
-
-
-
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if($_POST['comment'] == ""){
 echo $alert; 
 }elseif (strlen($_POST['comment']) > 50){
