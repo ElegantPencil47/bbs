@@ -413,7 +413,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 
 const btn = document.getElementById("send");
 const form = document.getElementById("form");
-form.addEventListener('click', function() {
+btn.addEventListener('click', function() {
 　setTimeout(() => {
 　　　　　　　　　　　  btn.disabled = true;
 },0);
