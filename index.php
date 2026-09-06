@@ -410,12 +410,13 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 
 	<script>
 		{
+
+const btn = document.getElementById("send");
+const form = document.getElementById("form");
 form.addEventListener('submit', function() {
 　
 　　　　　　　　　　　  btn.disabled = true;
 
-const btn = document.getElementById("btn");
-const form = document.getElementById("form");
 });
 
 
