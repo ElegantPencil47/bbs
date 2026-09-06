@@ -413,9 +413,10 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 
 const btn = document.getElementById("send");
 const form = document.getElementById("form");
-form.addEventListener('submit', function() {
-　
+form.addEventListener('click', function() {
+　setTimeout(() => {
 　　　　　　　　　　　  btn.disabled = true;
+},0);
 
 });
 
@@ -455,7 +456,7 @@ $error = array();
 
 
   <br>
-  <!--  <input type="submit" value="投稿" id="send">   -->
+  <!--  <input type="click" value="投稿" id="send">   -->
 </form>
 <h2 class="neon_blue">投稿一覧</h2>
 <?php
