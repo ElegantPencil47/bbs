@@ -427,7 +427,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 $error = array();
  if (isset($erroe['re_captcha']) && $error['re_captha'] === 'failed'):?>※認証に失敗しました。<?php endif; ?>
 <div class="wrap_btn">
-  <button id="send" class="btn_st arrow bg_yellow">投稿する</button>
+  <button type="submit" id="send" class="btn_st arrow bg_yellow">投稿する</button>
 </div>
 
 
