@@ -408,30 +408,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 
 <h3 class="neon">投稿する</h3>
 
-	<script>
-		{
-const btn = document.getElementById("send");
-const form = document.getElementById("form");
-btn.addEventListener('click', function() {
- setTimeout(() => {
-btn.disabled = true;
-btn.textContent = "送信中...";
-},0);
 
-});
-
-
-　　　
-			const sampleMenuP = document.querySelector('.sample_menu_parent');
-			const sampleMenuC = document.querySelector('.sample_menu_child');
-
-				sampleMenuP.addEventListener('click', () => {
-				sampleMenuC.classList.toggle('active');
-  				sampleMenuP.classList.toggle('active');
-			});
-
-		}
-	</script>
 
 <form action="" method="post" id="form">
   <label for="name" class="neon">名前:</label>
@@ -456,8 +433,44 @@ $error = array();
 
 
   <br>
-  <!--  <input type="click" value="投稿" id="send">   -->
+  <!--  <input type='submit' value="投稿" id="send">   -->
 </form>
+
+
+
+
+
+
+
+
+	<script>
+		{
+const btn = document.getElementById("send");
+const form = document.getElementById("form");
+btn.addEventListener('submit', function() {
+
+btn.disabled = true;
+btn.textContent = "送信中...";
+
+
+});
+
+
+　　　
+			const sampleMenuP = document.querySelector('.sample_menu_parent');
+			const sampleMenuC = document.querySelector('.sample_menu_child');
+
+				sampleMenuP.addEventListener('click', () => {
+				sampleMenuC.classList.toggle('active');
+  				sampleMenuP.classList.toggle('active');
+			});
+
+		}
+	</script>
+
+
+
+
 <h2 class="neon_blue">投稿一覧</h2>
 <?php
 $posts = file_get_contents('posts.txt');
