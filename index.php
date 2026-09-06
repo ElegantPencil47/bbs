@@ -111,21 +111,21 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 
   <!-- *** google reCAPTHA *** -->
   <script>
-  //.g-recaptcha タグの data-callback 属性で指定したコールバック関数の定義
+
   var myAlert = function(response) {
-    alert("チェックボックスがチェックされました！");
+    alert("誇れ、お前は人間だ");
   };
 
-  var verifyCallback = function(response) { //コールバック関数の定義
-    //#warning の p 要素のテキストを空にf
+  var verifyCallback = function(response) { 
+
     document.getElementById("warning").textContent = '';
-    //#send の button 要素の disabled 属性を解除
+
     document.getElementById("send").disabled = false;
   };
-  var expiredCallback = function() { //コールバック関数の定義
-    //#warning の p 要素のテキストに文字列を設定
+  var expiredCallback = function() { 
+
     document.getElementById("warning").textContent = '送信するにはチェックを入れてください。';
-    //#send の button 要素に disabled 属性を設定
+
     document.getElementById("send").disabled = true;
   };
   </script>
@@ -488,7 +488,7 @@ file_put_contents('posts.txt','');
 
 
 
-<div class="bana"><br><br><p>てすてす</p><br><br><br></div>
+<div class="bana"><br><a href="https://lunareclipse.onrender.com/admin.html"><p>管理人のプロフィール</p></a><br><br><br></div>
 
 
 
