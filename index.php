@@ -410,12 +410,12 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 
 	<script>
 		{
-
 const btn = document.getElementById("send");
 const form = document.getElementById("form");
 btn.addEventListener('click', function() {
-　setTimeout(() => {
-　　　　　　　　　　　  btn.disabled = true;
+ setTimeout(() => {
+btn.disabled = true;
+btn.textContent = "送信中...";
 },0);
 
 });
