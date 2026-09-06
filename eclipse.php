@@ -7,7 +7,7 @@ $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
   $one = $file;
   $filename = fopen($file . ".txt", "r");
   $one = str_replace("/var/www/html/","",$one);
-  $one = "<h1>" . $one . "</h1>";
+  $one = "TEST<h1>" . $one . "TEST</h1>";
 if (($line = fgets($filename)) !== false) {
   $title = $line;
 }
@@ -224,12 +224,6 @@ $posts = str_replace("&gt;",">",$posts);
 てすと
 </h1>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 
 

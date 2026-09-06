@@ -60,9 +60,9 @@ $now = microtime(true);
 
 if (
     isset($_SESSION['last_post_time']) &&
-    ($now - $_SESSION['last_post_time']) < 3
+    ($now - $_SESSION['last_post_time']) < 12
 ) {
-    exit('連続投稿は少し待ってください。');
+    exit('連投ヤメロ');
 }
 
 $_SESSION['last_post_time'] = $now;
