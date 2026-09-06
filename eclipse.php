@@ -222,11 +222,7 @@ $posts = str_replace("&gt;",">",$posts);
 
 
 
-<br>
-<br>
-<h1>
-てすと
-</h1>
+
 
 
 
@@ -260,7 +256,17 @@ $posts = str_replace("&gt;",">",$posts);
 
 
 
+<br><br>
 
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
 
 
 
