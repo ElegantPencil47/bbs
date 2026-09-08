@@ -13,6 +13,27 @@ if (($line = fgets($filename)) !== false) {
 }
 fclose($filename);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+
+
+
+session_start();
+
+$now = microtime(true);
+
+if (
+    isset($_SESSION['last_post_time']) &&
+    ($now - $_SESSION['last_post_time']) < 5
+) {
+    exit('連投ヤメロ');
+}
+
+$_SESSION['last_post_time'] = $now;
+
+
+
+
+
 if($_POST['comment'] == ""){
 echo $alert;
 }elseif (strlen($_POST['comment']) > 350){
