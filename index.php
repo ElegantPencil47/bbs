@@ -540,7 +540,7 @@ file_put_contents('posts.txt','');
 
 
 
-<div class="bana"><br><a href="https://lunareclipse.onrender.com"><p>トップに戻る</p></a><br><a href="https://lunareclipse.onrender.com/admin.html"><p>管理人のプロフィール</p></a><br><a href=""><p>お問い合わせ</p></a><br><a href=""><p>LunarEclipseについて</p></a></div>
+<div class="bana" class="fai"><a href="https://lunareclipse.onrender.com"><p>トップに戻る</p></a><a href="https://lunareclipse.onrender.com/admin.html"><p>管理人のプロフィール</p></a><a href=""><p>お問い合わせ</p></a><a href=""><p>LunarEclipseについて</p></a></div>
 
 
 
