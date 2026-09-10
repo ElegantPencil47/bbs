@@ -91,7 +91,7 @@ echo $alert3;
   $comment = $_POST['comment'];
   $log = $comment . $name . "\n";
   $time = date('Y-m-d H:i:s');
-  $post = 'TEST<div style="display: flex; align-items: baseline; gap: 10px;">TEST<a href="' . $title . '">TEST<h2>' . $comment . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name . 'TEST</p>TEST</div>' . "\n" . 'TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST<hr style="border: 2px solid #A9B2C3;">' . "\n";
+  $post = 'TEST<div style="display: flex; align-items: baseline; gap: 10px;">TEST<a href="' . $title . '">TEST<h2>' . $comment . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name . 'TEST</p>TEST</div>TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST<hr style="border: 2px solid #A9B2C3;">' . "\n";
   if (!file_exists('posts.txt')) {
   file_put_contents('posts.txt', pack("C*", 0xEF, 0xBB, 0xBF));
   }
@@ -285,7 +285,7 @@ border-radius: 5px;
 		visibility: visible;
 		}
         .hd{
-                
+                display: flex;
          }
 
     </style>
@@ -298,7 +298,7 @@ border-radius: 5px;
 <a href="" class="neon_blue"><i class="fas fa-spinner fa-pulse fa-3x"></i></a>
 </div>
 <div class="hd">
-<a href=""><p class="green_neon">ログイン</p></a><a href=""><p class="green_neon">アカウント申請</p></a>
+<a href=""><p class="green_neon"><b><i class="fa-solid fa-right-to-bracket"></i>ログイン</b></p></a><a href=""><p class="green_neon"><b><i class="fa-regular fa-circle-user"></i>アカウント申請</b></p></a>
 </div>
 
 <h2 class="neon">静かで優しいSNS</h2>
