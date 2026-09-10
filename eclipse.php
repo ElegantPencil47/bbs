@@ -94,6 +94,7 @@ if (str_contains($post, "https://www.youtube.com/watch?v=")) {
           position: fixed;
           bottom: 50px;
           left: 50px; 
+z-index: 9999; 
         }
         .neon{
           color: #fff;

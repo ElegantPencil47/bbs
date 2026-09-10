@@ -219,6 +219,7 @@ border-radius: 5px;
           position: fixed;
           top: 50px;
           right: 50px; 
+          z-index: 9999; 
         }
 
         .fai{
@@ -289,9 +290,9 @@ border-radius: 5px;
 <body><br>
 <div class="option">
 
-<a href="m.php"><i class="fa-solid fa-envelope fa-3x faa-bounce animated-hover"></i></a>
-<a href="h.html"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a>
-<i class="fas fa-spinner fa-pulse fa-3x"></i>
+<a href="m.php" class="neon_blue"><i class="fa-solid fa-envelope fa-3x faa-bounce animated-hover"></i></a>
+<a href="h.html" class="neon_blue"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a>
+<a href="" class="neon_blue"><i class="fas fa-spinner fa-pulse fa-3x"></i></a>
 </div>
 
 
