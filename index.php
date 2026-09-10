@@ -108,7 +108,7 @@ echo $alert3;
   file_put_contents('log.txt', $log, FILE_APPEND);
   file_put_contents($jikan . '.txt', "\n" . 'TEST<h1 class="neon_blue">' . $comment . 'TEST</h1>' . 'TEST<h3 class = "neon">' . $name . 'TEST</h3>TEST<p class="green_neon">' . $time . 'TEST</p>', FILE_APPEND);
   
- $post = $post . "TEST<br>" . "TEST<i class="fa-solid fa-thumbs-up">TEST</i>" . "TEST<i class="fa-solid fa-download">TEST</i>" . "TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>";
+ $post = $post . "TEST<br>" . 'TEST<i class="fa-solid fa-thumbs-up">TEST</i>' . 'TEST<i class="fa-solid fa-download">TEST</i>' . 'TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>';
   if($_POST['comment'] == ""){
 header('Location: ' . $_SERVER['REQUEST_URI']);
   exit;
