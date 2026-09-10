@@ -286,6 +286,7 @@ border-radius: 5px;
 		}
         .hd{
                 display: flex;
+text-align:right
          }
 
     </style>
@@ -298,7 +299,7 @@ border-radius: 5px;
 <a href="" class="neon_blue"><i class="fas fa-spinner fa-pulse fa-3x"></i></a>
 </div>
 <div class="hd">
-<a href=""><p class="green_neon"><b><i class="fa-solid fa-right-to-bracket"></i>ログイン</b></p></a><a href=""><p class="green_neon"><b><i class="fa-regular fa-circle-user"></i>アカウント申請</b></p></a>
+<a href=""><h3 class="green_neon"><i class="fa-solid fa-right-to-bracket"></i>ログイン</h3></a><a href=""><h3 class="green_neon"><i class="fa-regular fa-circle-user"></i>アカウント申請</h3></a>
 </div>
 
 <h2 class="neon">静かで優しいSNS</h2>
