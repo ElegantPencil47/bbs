@@ -218,7 +218,7 @@ border-radius: 5px;
 
         .option{
           position: fixed;
-          top: 50px;
+          top: 150px;
           right: 50px; 
           z-index: 9999; 
         }
@@ -285,6 +285,9 @@ border-radius: 5px;
 		opacity: 1;
 		visibility: visible;
 		}
+        .hd{
+                
+         }
 
     </style>
 
@@ -295,7 +298,9 @@ border-radius: 5px;
 <a href="h.html" class="neon_blue"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a>
 <a href="" class="neon_blue"><i class="fas fa-spinner fa-pulse fa-3x"></i></a>
 </div>
-
+<div class="hd">
+<a href=""><p class="green_neon">ログイン</p></a><a href=""><p class="green_neon">アカウント申請</p></a>
+</div>
 
 <h2 class="neon">静かで優しいSNS</h2>
 <h1 class="neon_blue">LunarEclipse</h1>
