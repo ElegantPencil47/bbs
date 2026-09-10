@@ -546,7 +546,7 @@ file_put_contents('posts.txt','');
   <h3 class="neon"><a href="https://enjbbs.pages.dev/">えんｊ（エンジョイ実況J）</a></h3>
   <h3 class="neon"><a href="https://openlive.pages.dev/">なんＬ</a></h3>
 
-</fieldset>
+</fieldset><>
 
 
 
