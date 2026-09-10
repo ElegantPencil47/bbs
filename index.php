@@ -286,16 +286,20 @@ border-radius: 5px;
 		}
         .hd{
                 display: flex;
-                text-align:right
+               background-color: #000000;
          }
+        .migi{
+
+text-align:right
+}
 
     </style>
 
 <body><br>
 <div class="option">
 
-<a href="m.php" class="neon_blue"><i class="fa-solid fa-envelope fa-3x faa-bounce animated-hover"></i></a>
-<a href="h.html" class="neon_blue"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a>
+<div class="migi"><a href="m.php" class="neon_blue"><i class="fa-solid fa-envelope fa-3x faa-bounce animated-hover"></i></a></div>
+<div class="migi"><a href="h.html" class="neon_blue"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a></div>
 <a href="" class="neon_blue"><i class="fas fa-spinner fa-pulse fa-3x"></i></a>
 </div>
 <div class="hd">
