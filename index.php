@@ -202,6 +202,14 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
             0 0 100px #05ff05;
         }
 
+        .nico{
+  position: relative;
+  top: 3px;
+border-radius: 5px;
+  width: 35px; 
+  height: 35px;
+}
+
         .option{
           position: fixed;
           top: 50px;
@@ -540,7 +548,12 @@ file_put_contents('posts.txt','');
 
 
 
-<div class="bana"><a href="https://lunareclipse.onrender.com"><p>トップに戻る</p></a><a href="https://lunareclipse.onrender.com/admin.html"><p>管理人のプロフィール</p></a><a href=""><p>お問い合わせ</p></a><a href=""><p>LunarEclipseについて</p></a></div>
+<div class="bana"><br><a href="https://lunareclipse.onrender.com"><p>トップに戻る</p></a><a href="https://lunareclipse.onrender.com/admin.html"><p>管理人のプロフィール</p></a><a href=""><p>お問い合わせ</p></a><a href=""><p>LunarEclipseについて</p></a><div class="sns">
+<a href = "https://x.com/ElegantPencil47"><i class="fa-brands fa-square-x-twitter" width="18" height="19"></i></a>
+<a href = ""><i class="fa-brands fa-square-instagram" width="18" height="19"></i></a>
+<a href = "https://www.youtube.com/@%E6%A2%85%E3%81%AE%E3%83%AC%E3%83%A2%E3%83%B3%E6%BC%AC%E3%81%91"><i class="fa-brands fa-square-youtube" width="18" height="19"></i></a>
+<a href = "https://www.nicovideo.jp/user/139548104?ref=thumb_nicopedia&transit_from=blogparts_user"><img src = "nico_icon.png" width="14" height="15" class="nico"></a>
+</div><br><p style="text-align:center">©Probably around 2026. lunareclipse.onrender.com Unauthorized reproduction is permitted.</p></div>
 
 
 
