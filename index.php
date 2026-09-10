@@ -91,7 +91,7 @@ echo $alert3;
   $comment = $_POST['comment'];
   $log = $comment . $name . "\n";
   $time = date('Y-m-d H:i:s');
-  $post = 'TEST<div style="display: flex; align-items: baseline; gap: 10px;">TEST<a href="' . $title . '">TEST<h2>' . $comment . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name . $ip. 'TEST</p>TEST</div>TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<p> TEST</p>TEST<i class="fa-solid fa-download">TEST</i>TEST<p> TEST</p>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST<p> TEST</p>TEST<hr style="border: 2px solid #A9B2C3;">' . "\n";
+  $post = 'TEST<div style="display: flex; align-items: baseline; gap: 10px;">TEST<a href="' . $title . '">TEST<h2>' . $comment . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name . $ip. 'TEST<div style="display: flex;">TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<p> TEST</p>TEST<i class="fa-solid fa-download">TEST</i>TEST<p> TEST</p>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST<p> TEST</p>TEST</div>TEST<hr style="border: 2px solid #A9B2C3;">' . "\n";
   if (!file_exists('posts.txt')) {
   file_put_contents('posts.txt', pack("C*", 0xEF, 0xBB, 0xBF));
   }
@@ -298,12 +298,12 @@ text-align:right
 <body><br>
 <div class="option">
 
-<div class="migi"><a href="m.php" class="neon_blue"><i class="fa-solid fa-envelope fa-3x faa-bounce animated-hover"></i></a></div>
-<div class="migi"><a href="h.html" class="neon_blue"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a></div>
+<div><a href="m.php" class="neon_blue"><i class="fa-solid fa-envelope fa-3x faa-bounce animated-hover"></i></a></div>
+<div><a href="h.html" class="neon_blue"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a></div>
 <a href="" class="neon_blue"><i class="fas fa-spinner fa-pulse fa-3x"></i></a>
 </div>
 <div class="hd">
-<a href=""><h3 class="green_neon"><i class="fa-solid fa-right-to-bracket"></i>ログイン</h3></a><a href=""><h3 class="green_neon"><i class="fa-regular fa-circle-user"></i>アカウント申請</h3></a>
+<a href="" class="migi"><h3 class="green_neon"><i class="fa-solid fa-right-to-bracket"></i>ログイン</h3></a><a href="" class="migi"><h3 class="green_neon"><i class="fa-regular fa-circle-user"></i>アカウント申請</h3></a>
 </div>
 
 <h2 class="neon">静かで優しいSNS</h2>
