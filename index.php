@@ -563,13 +563,7 @@ file_put_contents('posts.txt','');
 <div id="posts" class="green_neon">
   <?= $posts ?>
 </div>
-<fieldset class="fais">
-  <legend><h3 class="fai">こっちのほうがクオリティ高いよ</h3></legend>
-  <h3 class="neon"><a href="https://version2.wuaze.com/?">きゅうちゃんねる</a></h3>
-  <h3 class="neon"><a href="https://enjbbs.pages.dev/">えんｊ（エンジョイ実況J）</a></h3>
-  <h3 class="neon"><a href="https://openlive.pages.dev/">なんＬ</a></h3>
 
-</fieldset><>
 
 
 
