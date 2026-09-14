@@ -138,6 +138,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
   <title>LunarEclipse</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css" type="text/css" media="all" />
+<meta name="google-site-verification" content="E1-qGHs4Av0Gu3_r49O5U0dyXC-FKoR5FCZuzXtwx24" />
 
 
   <!-- *** google reCAPTHA *** -->
