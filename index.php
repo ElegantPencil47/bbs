@@ -108,8 +108,35 @@ echo $alert3;
   }
 
 
- 
+	  
+
+
   file_put_contents('posts.txt', $post, FILE_APPEND);
+
+	　if($_POST['janru'] == "kaga"){ 
+  file_put_contents('Practical Chemistry.txt', $post, FILE_APPEND);
+  }
+		　if($_POST['janru'] == "toku"){ 
+  file_put_contents('tokusatsu.txt', $post, FILE_APPEND);
+  }
+			　if($_POST['janru'] == "cosm"){ 
+  file_put_contents('space.txt', $post, FILE_APPEND);
+  }
+				　if($_POST['janru'] == "over"){ 
+  file_put_contents('overdose.txt', $post, FILE_APPEND);
+  }
+				　if($_POST['janru'] == "game"){ 
+  file_put_contents('game.txt', $post, FILE_APPEND);
+  }
+					　if($_POST['janru'] == "taba"){ 
+  file_put_contents('cigarette.txt', $post, FILE_APPEND);
+  }
+						　if($_POST['janru'] == "penn"){ 
+  file_put_contents('pen.txt', $post, FILE_APPEND);
+  }
+
+
+	
   file_put_contents('log.txt', $log, FILE_APPEND);
   file_put_contents($jikan . '.txt', "\n" . 'TEST<h1 class="neon_blue">' . $comment . 'TEST</h1>' . 'TEST<h3 class = "neon">' . $name . 'TEST</h3>TEST<p class="green_neon">' . $time . 'TEST</p>', FILE_APPEND);
   
@@ -473,7 +500,17 @@ text-align:right
 <form action="" method="post" id="form">
   <label for="name" class="neon">名前:</label>
   <input type="text" name="name" id="name">
-  <br>
+  
+	<select name="janru">
+  <option value="sogo">総合</option>
+  <option value="kaga">実用化学</option>
+  <option value="toku">特撮</option>
+  <option value="cosm">宇宙・天文</option>
+  <option value="over">OD(オーバードーズ)</option>
+  <option value="game">ゲーム開発</option>
+  <option value="taba">喫煙</option>
+  <option value="penn">筆記用具</option>
+</select><br>
   <label for="comment" class="neon_blue">コメント:</label>
   <textarea name="comment" id="comment"></textarea>
 
