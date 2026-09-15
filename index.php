@@ -111,29 +111,28 @@ echo $alert3;
 	  
 
 
-  file_put_contents('posts.txt', $post, FILE_APPEND);
-
-	　if($_POST['janru'] == "kaga"){ 
+file_put_contents('posts.txt', $post, FILE_APPEND);
+	if($_POST['janru'] == "kaga"){ 
   file_put_contents('Practical Chemistry.txt', $post, FILE_APPEND);
-  }
-		　if($_POST['janru'] == "toku"){ 
-  file_put_contents('tokusatsu.txt', $post, FILE_APPEND);
-  }
-			　if($_POST['janru'] == "cosm"){ 
-  file_put_contents('space.txt', $post, FILE_APPEND);
-  }
-				　if($_POST['janru'] == "over"){ 
-  file_put_contents('overdose.txt', $post, FILE_APPEND);
-  }
-				　if($_POST['janru'] == "game"){ 
-  file_put_contents('game.txt', $post, FILE_APPEND);
-  }
-					　if($_POST['janru'] == "taba"){ 
-  file_put_contents('cigarette.txt', $post, FILE_APPEND);
-  }
-						　if($_POST['janru'] == "penn"){ 
-  file_put_contents('pen.txt', $post, FILE_APPEND);
-  }
+}
+if($_POST['janru'] == "toku"){ 
+file_put_contents('tokusatsu.txt', $post, FILE_APPEND);
+}
+if($_POST['janru'] == "cosm"){ 
+file_put_contents('space.txt', $post, FILE_APPEND);
+}
+if($_POST['janru'] == "over"){ 
+file_put_contents('overdose.txt', $post, FILE_APPEND);
+}
+if($_POST['janru'] == "game"){ 
+	file_put_contents('game.txt', $post, FILE_APPEND);
+}
+if($_POST['janru'] == "taba"){ 
+	file_put_contents('cigarette.txt', $post, FILE_APPEND);
+}
+if($_POST['janru'] == "penn"){ 
+file_put_contents('pen.txt', $post, FILE_APPEND);
+}
 
 
 	
