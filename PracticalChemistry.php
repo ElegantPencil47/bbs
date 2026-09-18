@@ -152,7 +152,7 @@ text-align:right
 
 <a href="https://lunareclipse.onrender.com"><h3 class="fai">戻る</h3></a><br><br>
 <h1 class="neon_blue">トピック:実用化学</h1>
-<h2 class="green_neon">合言葉　実用第一、エタノールは消毒液で</h2>
+<h2 class="green_neon">合言葉　実用第一、炭素は木炭から、エタノールは消毒液で</h2>
 <?php
 $posts = file_get_contents('PracticalChemistry.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
@@ -175,7 +175,7 @@ $posts = str_replace("&gt;",">",$posts);
 $posts = str_replace("&quot;","\"",$posts);
 ?>
 
-<div id="posts" class="neon">
+<div id="posts" class="neon_blue">
   <?= $posts ?>
 </div>
 </body>
