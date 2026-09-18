@@ -113,7 +113,7 @@ echo $alert3;
 
 file_put_contents('posts.txt', $post, FILE_APPEND);
 	if($_POST['janru'] == "kaga"){ 
-  file_put_contents('Practical Chemistry.txt', $post, FILE_APPEND);
+  file_put_contents('PracticalChemistry.txt', $post, FILE_APPEND);
 }
 if($_POST['janru'] == "toku"){ 
 file_put_contents('tokusatsu.txt', $post, FILE_APPEND);
