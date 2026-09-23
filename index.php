@@ -2,12 +2,17 @@
 $alert = "<script type='text/javascript'>alert('本文書け');</script>";
 $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
 $alert3 = "<script type='text/javascript'>alert('ロボットチェックしろや');</script>";
-$ip = $_SERVER['REMOTE_ADDR'];
-if($ip == "::1"){
-$ip = "admin";
 
+if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 
+    $ip_list = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+    $ip = trim($ip_list[0]);
+} else {
+    $ip = $_SERVER['REMOTE_ADDR'];
 }
+
+echo "取得したIP: " . $ip;
+
 	function checkRechaptha() {
 
 $siteKey = "6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN";
