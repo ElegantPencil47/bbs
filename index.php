@@ -10,13 +10,8 @@ if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 } else {
     $ip = $_SERVER['REMOTE_ADDR'];
 }
-
-echo "取得したIP: " . $ip;
-
-	function checkRechaptha() {
-
+function checkRechaptha() {
 $siteKey = "6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN";
-
 $secretKey = "6LexhKYtAAAAADLlzUr46NQJEhwnDhLeVF3z0Fli";
  
 $result_status = '';  
@@ -106,8 +101,9 @@ echo $alert3;
 		  if (is_uploaded_file($_FILES['image']['tmp_name'])) {
     $image_path = 'images/' . $_FILES['image']['name'];
     move_uploaded_file($_FILES['image']['tmp_name'], $image_path);
+	if (!$image_path == ''){
     $post = 'TEST<div class="user">TEST<a href="' . $title . '">TEST<h2>' . $comment . ' <img src="' . $image_path . '">' . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name .'TEST</p>TEST<p class="neon">' . $ip . 'TEST</div>' . "\n" . 'TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST</p>TEST<hr style="border: 2px solid #A9B2C3;">' . "\n";
-  }
+  }}
   if (!file_exists('posts.txt')) {
   file_put_contents('posts.txt', pack("C*", 0xEF, 0xBB, 0xBF));
   }
