@@ -156,9 +156,6 @@ text-align:right
 <?php
 $posts = file_get_contents('PracticalChemistry.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
-
-
-$posts = file_get_contents('posts.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 $posts = str_replace("TEST&lt;a","<a",$posts);
 $posts = str_replace("TEST&lt;/a","</a",$posts);
