@@ -128,7 +128,7 @@ border-radius: 5px;
 <h1 class="neon_blue">トピック:喫煙関連</h1>
 <h2 class="green_neon">立ち上る煙は儚い夢</h2>
 <?php
-$posts = file_get_contents('PracticalChemistry.txt');
+$posts = file_get_contents('cigarette.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
 
