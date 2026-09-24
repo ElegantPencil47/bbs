@@ -174,5 +174,14 @@ $posts = str_replace("&quot;","\"",$posts);
 <div id="posts" class="neon_blue">
   <?= $posts ?>
 </div>
+
+
+		<div class="bana"><br><a href="https://lunareclipse.onrender.com"><p class="neon_blue">トップに戻る</p></a><a href="https://lunareclipse.onrender.com/admin.html"><p class="neon_blue">管理人のプロフィール</p></a><a href=""><p class="neon_blue">お問い合わせ</p></a><a href=""><p class="neon_blue">LunarEclipseについて</p></a><div>
+<a href = "https://x.com/ElegantPencil47" class="sns"><i class="fa-brands fa-square-x-twitter" width="18" height="19"></i></a>
+<a href = "" class="sns"><i class="fa-brands fa-square-instagram" width="18" height="19"></i></a>
+<a href = "https://www.youtube.com/@%E6%A2%85%E3%81%AE%E3%83%AC%E3%83%A2%E3%83%B3%E6%BC%AC%E3%81%91" class="sns"><i class="fa-brands fa-square-youtube" width="18" height="19"></i></a>
+<a href = "https://www.nicovideo.jp/user/139548104?ref=thumb_nicopedia&transit_from=blogparts_user"><img src = "nico_icon.png" width="14" height="15" class="nico"></a>
+</div><br><p class="neon_blue" style="text-align:center">©Probably around 2026. lunareclipse.onrender.com Unauthorized reproduction is permitted.</p></div>
+
 </body>
 </html>
