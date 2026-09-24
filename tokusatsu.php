@@ -128,7 +128,7 @@ border-radius: 5px;
 <h1 class="neon_blue">トピック:特撮（主に玩具の技術開発）</h1>
 <h2 class="green_neon">合言葉　技術開発、我らでやろう</h2>
 <?php
-$posts = file_get_contents('PracticalChemistry.txt');
+$posts = file_get_contents('tokusatsu.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
 
