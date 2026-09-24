@@ -336,7 +336,7 @@ display: flex;
 
 text-align:right
 }
-.marquee{
+marquee{
   display: flex;      
   gap: 20px;           
   align-items: center;
