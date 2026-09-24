@@ -336,7 +336,11 @@ display: flex;
 
 text-align:right
 }
-
+.marquee{
+  display: flex;      
+  gap: 20px;           
+  align-items: center;
+}
     </style>
 
 <body><br>
@@ -578,6 +582,7 @@ btn.textContent = "送信中...";
 
 <h2 class="neon_blue">投稿一覧</h2>
 <h3 class="green_neon">ジャンルごとに閲覧する</h3>
+	<marquee>
 <h3 class="neon"><a href="https://lunareclipse.onrender.com/PracticalChemistry.php">実用化学</a></h3>
 <h3 class="neon"><a href="https://lunareclipse.onrender.com/tokusatsu.php">特撮</a></h3>
 <h3 class="neon"><a href="https://lunareclipse.onrender.com/space.php">宇宙・天文</a></h3>
@@ -585,6 +590,7 @@ btn.textContent = "送信中...";
 <h3 class="neon"><a href="https://lunareclipse.onrender.com/game.php">ゲーム開発</a></h3>
 <h3 class="neon"><a href="https://lunareclipse.onrender.com/cigarette.php">喫煙</a></h3>
 <h3 class="neon"><a href="https://lunareclipse.onrender.com/pen.php">文房具</a></h3>
+</marquee>
 <?php
 $posts = file_get_contents('posts.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
