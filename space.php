@@ -128,7 +128,7 @@ border-radius: 5px;
 <h1 class="neon_blue">トピック:宇宙・天文</h1>
 <h2 class="green_neon">合言葉　138億年の浪漫、暗黒と幻想が織りなす世界</h2>
 <?php
-$posts = file_get_contents('PracticalChemistry.txt');
+$posts = file_get_contents('space.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
 
