@@ -129,7 +129,7 @@ border-radius: 5px;
 <h2 class="green_neon">合言葉　合法的に飛ぼう</h2>
 <h2 class="neon">⚠当SNSを使用しての薬物の売買等は禁止です</h2>
 <?php
-$posts = file_get_contents('PracticalChemistry.txt');
+$posts = file_get_contents('overdose.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
 
