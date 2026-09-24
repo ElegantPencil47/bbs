@@ -157,6 +157,20 @@ text-align:right
 <?php
 $posts = file_get_contents('overdose.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
+
+$posts = str_replace("TEST&lt;a","<a",$posts);
+$posts = str_replace("TEST&lt;/a","</a",$posts);
+$posts = str_replace("TEST&lt;h2","<h2",$posts);
+$posts = str_replace("TEST&lt;hr","<hr",$posts);
+$posts = str_replace("TEST&lt;/h2","</h2",$posts);
+$posts = str_replace("TEST&lt;/p","</p",$posts);
+$posts = str_replace("TEST&lt;p","<p",$posts);
+$posts = str_replace("TEST&lt;/div","</div",$posts);
+$posts = str_replace("TEST&lt;div","<div",$posts);
+$posts = str_replace("TEST&lt;/i","</i",$posts);
+$posts = str_replace("TEST&lt;i","<i",$posts);
+$posts = str_replace("&gt;",">",$posts);
+$posts = str_replace("&quot;","\"",$posts);
 ?>
 
 <div id="posts" class="neon_blue">
