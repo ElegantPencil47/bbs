@@ -582,7 +582,7 @@ btn.textContent = "送信中...";
 
 <h2 class="neon_blue">投稿一覧</h2>
 <h3 class="green_neon">ジャンルごとに閲覧する</h3>
-	<marquee><div class="janrugotoninaraberuyatu">
+	<marquee behavior="alternate"><div class="janrugotoninaraberuyatu">
 <h1 class="neon"><a href="https://lunareclipse.onrender.com/PracticalChemistry.php">実用化学</a></h1>
 <h1 class="neon"><a href="https://lunareclipse.onrender.com/tokusatsu.php">特撮</a></h1>
 <h1 class="neon"><a href="https://lunareclipse.onrender.com/space.php">宇宙・天文</a></h1>
