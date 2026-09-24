@@ -128,7 +128,7 @@ border-radius: 5px;
 <h1 class="neon_blue">トピック:文房具</h1>
 <h2 class="green_neon">合言葉　繋いだ文字は次の時代に</h2>
 <?php
-$posts = file_get_contents('PracticalChemistry.txt');
+$posts = file_get_contents('pen.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
 
