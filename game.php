@@ -128,7 +128,7 @@ border-radius: 5px;
 <h1 class="neon_blue">トピック:ゲーム開発</h1>
 <h2 class="green_neon">合言葉　インディーとか同人とか</h2>
 <?php
-$posts = file_get_contents('PracticalChemistry.txt');
+$posts = file_get_contents('game.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
 ?>
 
