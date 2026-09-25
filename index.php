@@ -120,27 +120,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
 
 
 file_put_contents('posts.txt', $post, FILE_APPEND);
-	if($_POST['janru'] == "kaga"){ 
-  file_put_contents('PracticalChemistry.txt', $post, FILE_APPEND);
-}
-if($_POST['janru'] == "toku"){ 
-file_put_contents('tokusatsu.txt', $post, FILE_APPEND);
-}
-if($_POST['janru'] == "cosm"){ 
-file_put_contents('space.txt', $post, FILE_APPEND);
-}
-if($_POST['janru'] == "over"){ 
-file_put_contents('overdose.txt', $post, FILE_APPEND);
-}
-if($_POST['janru'] == "game"){ 
-	file_put_contents('game.txt', $post, FILE_APPEND);
-}
-if($_POST['janru'] == "taba"){ 
-	file_put_contents('cigarette.txt', $post, FILE_APPEND);
-}
-if($_POST['janru'] == "penn"){ 
-file_put_contents('pen.txt', $post, FILE_APPEND);
-}
+
 
 
 	
@@ -512,16 +492,7 @@ text-align:right
   <label for="name" class="neon">名前:</label>
   <input type="text" name="name" id="name">
   
-	<select name="janru">
-  <option value="sogo">総合</option>
-  <option value="kaga">実用化学</option>
-  <option value="toku">特撮</option>
-  <option value="cosm">宇宙・天文</option>
-  <option value="over">OD(オーバードーズ)</option>
-  <option value="game">ゲーム開発</option>
-  <option value="taba">喫煙</option>
-  <option value="penn">筆記用具</option>
-</select><br>
+
   <label for="comment" class="neon_blue">コメント:</label>
   <textarea name="comment" id="comment"></textarea>
 
@@ -581,17 +552,7 @@ btn.textContent = "送信中...";
 
 
 
-<h3 class="green_neon">ジャンルごとに閲覧する</h3>
-	<marquee behavior="alternate"><div class="janrugotoninaraberuyatu">
-<h3 class="neon"><a href="https://lunareclipse.onrender.com/PracticalChemistry.php">実用化学</a></h3>
-<h3 class="neon"><a href="https://lunareclipse.onrender.com/tokusatsu.php">特撮</a></h3>
-<h3 class="neon"><a href="https://lunareclipse.onrender.com/space.php">宇宙・天文</a></h3>
-<h3 class="neon"><a href="https://lunareclipse.onrender.com/overdose.php">OD(オーバードーズ)</a></h3>
-<h3 class="neon"><a href="https://lunareclipse.onrender.com/game.php">ゲーム開発</a></h3>
-<h3 class="neon"><a href="https://lunareclipse.onrender.com/cigarette.php">喫煙</a></h3>
-<h3 class="neon"><a href="https://lunareclipse.onrender.com/pen.php">文房具</a></h3>
-	</div>
-</marquee>
+
 
 
 	<h2 class="neon_blue">投稿一覧</h2>
