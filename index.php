@@ -303,7 +303,7 @@ text-align:right
 <a href="" class="neon_blue"><i class="fas fa-spinner fa-pulse fa-3x"></i></a>
 </div>
 <div class="hd">
-<a href="lunareclipse.onrender.com/account.html" class="migi"><h3 class="green_neon"><i class="fa-solid fa-right-to-bracket"></i>ログイン</h3></a><a href="lunareclipse.onrender.com/account.html" class="migi"><h3 class="green_neon"><i class="fa-regular fa-circle-user"></i>アカウント申請</h3></a>
+<a href="lunareclipse.onrender.com/account.html" class="migi"><h3><i class="fa-solid fa-right-to-bracket"></i>ログイン</h3></a><a href="lunareclipse.onrender.com/account.html" class="migi"><h3><i class="fa-regular fa-circle-user"></i>アカウント申請</h3></a>
 </div>
 
 <h2 class="neon">静かで優しいSNS</h2>
