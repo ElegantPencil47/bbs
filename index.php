@@ -192,34 +192,17 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
         }
 
         body {
-          background-color: #000033;;
+          background-color: #fff;
         }
         .neon{
-          color: #fff;
-          text-shadow:
-            0 0 10px #ff5bff,
-            0 0 20px #ff5bff,
-            0 0 40px #ff5bff,
-            0 0 80px #ff5bff,
-            0 0 100px #ff5bff;
+          color: black;
         }
               .neon_blue{
-          color: #fff;
-          text-shadow:
-            0 0 10px #00ffff,
-            0 0 20px #00ffff,
-            0 0 40px #00ffff,
-            0 0 80px #00ffff,
-            0 0 100px #00ffff;
-        }
+          color: black;
+			  }
         .green_neon{
-          color: #fff;
-          text-shadow:
-            0 0 10px #05ff05,
-            0 0 20px #05ff05,
-            0 0 40px #05ff05,
-            0 0 80px #05ff05,
-            0 0 100px #05ff05;
+          color: black;
+
         }
         .sns{
 
@@ -247,23 +230,15 @@ display: flex;
 
 }
         .fai{
-          color: #ffa500;
-          text-shadow:
-            0 0 10px #ff0000,
-            0 0 20px #ff0000,
-            0 0 40px #ff0000,
-            0 0 80px #ff0000,
-            0 0 100px #ff0000;
+          color: black;
+
         }
         .waku{
           position: relative;
           padding: 20px;
           margin: 30px;
           border:5px solid #fff;
-          filter:
-            drop-shadow(0 0 2px #37beb0)
-            drop-shadow(0 0 8px #37beb0)
-            drop-shadow(0 0 12px #37beb0)
+
 
         }
         .fais{
@@ -271,10 +246,7 @@ display: flex;
           padding: 20px;
           margin: 30px;
           border:5px solid #ffa500;
-          filter:
-            drop-shadow(0 0 2px #ff0000)
-            drop-shadow(0 0 8px #ff0000)
-            drop-shadow(0 0 12px #ff0000)
+
 
         }
 	.sample_menu_outer {
