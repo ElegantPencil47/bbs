@@ -180,7 +180,8 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 </head>
     <style>
         .bana{
-          background-color: #fff;
+          background-color: black;
+			color: #fff;
         }
 
         .hai{
@@ -207,7 +208,6 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
         .sns{
 
 font-size:39px; 
-color: black;
 }
 
         .nico{
