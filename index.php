@@ -207,7 +207,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
         .sns{
 
 font-size:39px; 
-
+color: black;
 }
 
         .nico{
