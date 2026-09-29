@@ -195,16 +195,10 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
         body {
           background-color: #fff;
         }
-        .neon{
+        .moji{
           color: black;
         }
-              .neon_blue{
-          color: black;
-			  }
-        .green_neon{
-          color: black;
 
-        }
 		.siro{
 color: #fff;
 			
