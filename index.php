@@ -103,7 +103,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
     $image_path = 'images/' . $_FILES['image']['name'];
     move_uploaded_file($_FILES['image']['tmp_name'], $image_path);
 	if (!$image_path == ''){
-    $post = 'TEST<div class="user">TEST<a href="' . $title . '">TEST<h2>' . $comment . ' <img src="' . $image_path . '">' . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name .'TEST</p>TEST<p class="neon">' . $ip . 'TEST</div>' . "\n" . 'TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST</p>TEST<hr style="border: 2px solid #A9B2C3;">' . "\n";
+    $post = 'TEST<div class="user">TEST<a href="' . $title . '">TEST<h2>' . $comment . ' <img src="' . $image_path . '">' . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name .'TEST</p>TEST<p class="moji">' . $ip . 'TEST</div>' . "\n" . 'TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST</p>TEST<hr style="border: 2px solid #A9B2C3;">' . "\n";
   }}}
   if (!file_exists('posts.txt')) {
   file_put_contents('posts.txt', pack("C*", 0xEF, 0xBB, 0xBF));
@@ -125,7 +125,7 @@ file_put_contents('posts.txt', $post, FILE_APPEND);
 
 	
   file_put_contents('log.txt', $log, FILE_APPEND);
-  file_put_contents($jikan . '.txt', "\n" . 'TEST<h1 class="neon_blue">' . $comment . 'TEST</h1>' . 'TEST<h3 class = "neon">' . $name . 'TEST</h3>TEST<p class="green_neon">' . $time . 'TEST</p>', FILE_APPEND);
+  file_put_contents($jikan . '.txt', "\n" . 'TEST<h1 class="moji">' . $comment . 'TEST</h1>' . 'TEST<h3 class = "moji">' . $name . 'TEST</h3>TEST<p class="moji">' . $time . 'TEST</p>', FILE_APPEND);
   
 
   if($_POST['comment'] == ""){
