@@ -463,11 +463,11 @@ text-align:right
 <form action="" method="post" id="form">
   <label for="name" class="neon">名前:</label>
   <input type="text" name="name" id="name">
-  
+  <br>
 
   <label for="comment" class="neon_blue">コメント:</label>
   <textarea name="comment" id="comment"></textarea>
-
+ <br>
   <label for="image" class="ggreen_neon">画像:</label>
   <input type="file" name="image" id="image">
 
