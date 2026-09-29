@@ -73,121 +73,129 @@ if (str_contains($post, "https://www.youtube.com/watch?v=")) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
     <style>
-        .HSN{
-
+        .bana{
+          background-color: black;
+			color: #fff;
         }
+
         .hai{
           color: #A9B2C3;
         }
-        body {
-          background-color: #000033;;
-        }
-        a{
+         
+        a {
           color: #fff;
         }
+
         body {
-          background-color: #000033;;
+          background-color: #fff;
+        }
+        .moji{
+          color: black;
         }
 
+		.siro{
+color: #fff;
+			
+		}
+        .sns{
+
+font-size:39px; 
+}
+
+        .nico{
+  position: relative;
+  top: 3px;
+border-radius: 5px;
+  width: 35px; 
+  height: 35px;
+}
 
         .option{
+          display: flex;
           position: fixed;
-          bottom: 50px;
-          left: 50px; 
-z-index: 9999; 
+          top: 50px;
+          right: 50px; 
+          z-index: 9999; 
         }
-        .neon{
-          color: #fff;
-          text-shadow:
-            0 0 10px #ff5bff,
-            0 0 20px #ff5bff,
-            0 0 40px #ff5bff,
-            0 0 80px #ff5bff,
-            0 0 100px #ff5bff;
-        }
-              .neon_blue{
-          color: #fff;
-          text-shadow:
-            0 0 10px #00ffff,
-            0 0 20px #00ffff,
-            0 0 40px #00ffff,
-            0 0 80px #00ffff,
-            0 0 100px #00ffff;
-        }
-        .green_neon{
-          color: #fff;
-          text-shadow:
-            0 0 10px #05ff05,
-            0 0 20px #05ff05,
-            0 0 40px #05ff05,
-            0 0 80px #05ff05,
-            0 0 100px #05ff05;
-        }
+        .user{
+display: flex;
 
-
+}
         .fai{
-          position: relative;
-          padding: 10px;
-          margin: 30px;
-          color: #ffa500;
-          text-shadow:
-            0 0 10px #ff0000,
-            0 0 20px #ff0000,
-            0 0 40px #ff0000,
-            0 0 80px #ff0000,
-            0 0 100px #ff0000;
+          color: black;
+
         }
-        .fai::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          border-bottom: 3px solid #ffa500;
-          border-left: 3px solid #ffa500;
-          filter:
-            drop-shadow(-2px 2px 2px #ff0000)
-            drop-shadow(-4px 4px 8px #ff0000)
-            drop-shadow(-8px 8px 16px #ff0000)
-            drop-shadow(-12px 12px 32px #ff0000);
-          }
+        .waku{
+          position: relative;
+          padding: 20px;
+          margin: 30px;
+          border:5px solid black;
 
 
-        .post{
-          position: relative;
-          padding: 10px;
-          margin: 30px;
         }
-        .post::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          border-bottom: 3px solid #fff;
-          border-left: 3px solid #fff;
-          filter:
-            drop-shadow(-2px 2px 2px #37beb0)
-            drop-shadow(-4px 4px 8px #37beb0)
-            drop-shadow(-8px 8px 16px #37beb0)
-            drop-shadow(-12px 12px 32px #37beb0);
-          }
-        
-           
-        
+        .fais{
+          position: relative;
+          padding: 20px;
+          margin: 30px;
+          border:5px solid #ffa500;
+
+
+        }
+	.sample_menu_outer {
+		margin: 5rem auto;
+		}
+	.sample_menu {
+		width: 500px;
+		padding: 10px 20px;
+		}
+	.sample_menu_parent {
+		cursor: pointer;
+		}
+	.sample_menu_parent::before {
+		content: '▼';
+		display: inline-block;
+		transform: rotate(-360deg);
+		transition: .9s;
+		}
+	.sample_menu_parent.active::before {
+		transform: rotate(0deg);
+		}
+	.sample_menu_child {
+
+		height: 0;
+		opacity: 0;
+		visibility: hidden;
+		transition: .4s;
+		}
+	.sample_menu_child.active {
+		height: 2rem;
+		opacity: 1;
+		visibility: visible;
+		}
+        .hd{
+                display: flex;
+               background-color: #000000;
+         }
+        .migi{
+
+text-align:right
+}
+.janrugotoninaraberuyatu{
+  display: flex;      
+  gap: 20px;           
+  align-items: center;
+}
     </style>
 
 
-<body class="neon_blue"><br>
+<body><br>
 <div class="option">
 <i class="fa-solid fa-envelope"></i>
 </div>
 
 
 <a href = "/">
-<div class="fai">
+<div>
 ホームに戻る
 </div>
 </a>
@@ -250,12 +258,12 @@ $posts = str_replace("&gt;",">",$posts);
 
 
 <div class="option">
-<h3 class = "neon_blue">返信する</h3>
+<h3>返信する</h3>
 <form action="" method="post">
-  <label for="name" class="neon">名前:</label>
+  <label for="name">名前:</label>
   <input type="text" name="name" id="name">
   <br>
-  <label for="comment" class="neon_blue">コメント:</label>
+  <label for="comment">コメント:</label>
   <textarea name="comment" id="comment"></textarea>
   <br>
   <input type="submit" value="返信する" class="HSN">
@@ -269,7 +277,7 @@ $posts = str_replace("&gt;",">",$posts);
 
 
 
-<div id="posts" class="green_neon">
+<div id="posts">
   <?= $posts ?>
 </div>
 
