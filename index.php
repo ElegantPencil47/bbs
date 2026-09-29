@@ -205,6 +205,10 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
           color: black;
 
         }
+		.siro{
+color: #fff;
+			
+		}
         .sns{
 
 font-size:39px; 
@@ -566,7 +570,7 @@ file_put_contents('posts.txt','');
 
 
 
-<div class="bana" class="waku"><br><a href="https://lunareclipse.onrender.com"><p class="neon_blue">トップに戻る</p></a><a href="https://lunareclipse.onrender.com/admin.html"><p class="neon_blue">管理人のプロフィール</p></a><a href=""><p class="neon_blue">お問い合わせ</p></a><a href=""><p class="neon_blue">LunarEclipseについて</p></a><div>
+<div class="bana" class="waku"><br><a href="https://lunareclipse.onrender.com"><p class="siro">トップに戻る</p></a><a href="https://lunareclipse.onrender.com/admin.html"><p class="siro">管理人のプロフィール</p></a><a href=""><p class="siro">お問い合わせ</p></a><a href=""><p class="siro">LunarEclipseについて</p></a><div>
 <a href = "https://x.com/ElegantPencil47" class="sns"><i class="fa-brands fa-square-x-twitter" width="18" height="19"></i></a>
 <a href = "" class="sns"><i class="fa-brands fa-square-instagram" width="18" height="19"></i></a>
 <a href = "https://www.youtube.com/@%E6%A2%85%E3%81%AE%E3%83%AC%E3%83%A2%E3%83%B3%E6%BC%AC%E3%81%91" class="sns"><i class="fa-brands fa-square-youtube" width="18" height="19"></i></a>
