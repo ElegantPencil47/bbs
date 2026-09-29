@@ -180,7 +180,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 </head>
     <style>
         .bana{
-          background-color: #000000;
+          background-color: #fff;
         }
 
         .hai{
@@ -237,7 +237,7 @@ display: flex;
           position: relative;
           padding: 20px;
           margin: 30px;
-          border:5px solid #fff;
+          border:5px solid black;
 
 
         }
@@ -298,18 +298,18 @@ text-align:right
 <body><br>
 <div class="option">
 
-<div><a href="m.php" class="neon_blue"><i class="fa-solid fa-envelope fa-3x faa-bounce animated-hover"></i></a></div>
-<div><a href="h.html" class="neon_blue"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a></div>
+<div><a href="m.php"><i class="fa-solid fa-envelope fa-3x faa-bounce animated-hover"></i></a></div>
+<div><a href="h.html"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a></div>
 <a href="" class="neon_blue"><i class="fas fa-spinner fa-pulse fa-3x"></i></a>
 </div>
 <div class="hd">
 <a href="lunareclipse.onrender.com/account.html" class="migi"><h3><i class="fa-solid fa-right-to-bracket"></i>ログイン</h3></a><a href="lunareclipse.onrender.com/account.html" class="migi"><h3><i class="fa-regular fa-circle-user"></i>アカウント申請</h3></a>
 </div>
 
-<h2 class="neon">静かで優しいSNS</h2>
-<h1 class="neon_blue">LunarEclipse</h1>
+<h2>静かで優しいSNS</h2>
+<h1>LunarEclipse</h1>
 <fieldset class="waku">
-  <legend><h3 class="neon">今日の月齢</h3></legend>
+  <legend><h3>今日の月齢</h3></legend>
 <div class="tuki">
 
 <div id="moon-age-result" class="green_neon">計算中...</div>
@@ -448,27 +448,27 @@ text-align:right
 
 
 	<div class="sample_menu_outer">
-		<ul class="neon_blue">
-			<h3 class="sample_menu sample_menu_parent" class="neon">LunarEclipseの独自機能について</h3>
+		<ul>
+			<h3 class="sample_menu sample_menu_parent">LunarEclipseの独自機能について</h3>
 			<p class="sample_menu sample_menu_child">月齢表示機能、現在の月齢を確認できる<br>その他まだ未実装、乞うご期待</p>
 		</ul>
 	</div>
 
 
-
-<h3 class="neon">投稿する</h3>
+<div class="waku">
+<h3>投稿する</h3>
 
 
 
 <form action="" method="post" id="form">
-  <label for="name" class="neon">名前:</label>
+  <label for="name">名前:</label>
   <input type="text" name="name" id="name">
   <br>
 
-  <label for="comment" class="neon_blue">コメント:</label>
+  <label for="comment">コメント:</label>
   <textarea name="comment" id="comment"></textarea>
  <br>
-  <label for="image" class="ggreen_neon">画像:</label>
+  <label for="image">画像:</label>
   <input type="file" name="image" id="image">
 
 <!-- google reCAPTHA -->
@@ -525,9 +525,9 @@ btn.textContent = "送信中...";
 
 
 
+</div>
 
-
-	<h2 class="neon_blue">投稿一覧</h2>
+	<h2>投稿一覧</h2>
 <?php
 $posts = file_get_contents('posts.txt');
 $posts = nl2br(htmlspecialchars($posts, ENT_QUOTES, 'UTF-8'));
@@ -556,7 +556,7 @@ file_put_contents('posts.txt','');
 
 ?>
 
-<div id="posts" class="green_neon">
+<div id="posts">
   <?= $posts ?>
 </div>
 
@@ -566,7 +566,7 @@ file_put_contents('posts.txt','');
 
 
 
-<div class="bana"><br><a href="https://lunareclipse.onrender.com"><p class="neon_blue">トップに戻る</p></a><a href="https://lunareclipse.onrender.com/admin.html"><p class="neon_blue">管理人のプロフィール</p></a><a href=""><p class="neon_blue">お問い合わせ</p></a><a href=""><p class="neon_blue">LunarEclipseについて</p></a><div>
+<div class="bana" class="waku"><br><a href="https://lunareclipse.onrender.com"><p class="neon_blue">トップに戻る</p></a><a href="https://lunareclipse.onrender.com/admin.html"><p class="neon_blue">管理人のプロフィール</p></a><a href=""><p class="neon_blue">お問い合わせ</p></a><a href=""><p class="neon_blue">LunarEclipseについて</p></a><div>
 <a href = "https://x.com/ElegantPencil47" class="sns"><i class="fa-brands fa-square-x-twitter" width="18" height="19"></i></a>
 <a href = "" class="sns"><i class="fa-brands fa-square-instagram" width="18" height="19"></i></a>
 <a href = "https://www.youtube.com/@%E6%A2%85%E3%81%AE%E3%83%AC%E3%83%A2%E3%83%B3%E6%BC%AC%E3%81%91" class="sns"><i class="fa-brands fa-square-youtube" width="18" height="19"></i></a>
