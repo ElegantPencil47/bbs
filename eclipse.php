@@ -69,7 +69,7 @@ if (str_contains($post, "https://www.youtube.com/watch?v=")) {
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title><?= $title ?></title>
+  <title><?= $one ?></title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
     <style>
