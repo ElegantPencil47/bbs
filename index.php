@@ -197,7 +197,6 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
           bottom: 50px;
           left: 50px; 
           z-index: 9999; 
-			          position: relative;
           padding: 20px;
           margin: 30px;
           border:5px solid black;
