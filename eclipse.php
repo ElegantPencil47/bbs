@@ -113,8 +113,8 @@ border-radius: 5px;
         .option{
           display: flex;
           position: fixed;
-          top: 50px;
-          right: 50px; 
+          bottom: 50px;
+          left: 50px; 
           z-index: 9999; 
         }
         .user{
@@ -195,7 +195,7 @@ text-align:right
 
 
 <a href = "/">
-<div>
+<div class="moji">
 ホームに戻る
 </div>
 </a>
