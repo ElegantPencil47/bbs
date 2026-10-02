@@ -192,10 +192,10 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
           color: #fff;
         }
         .fomu{
+		  background-color: white;
           display: flex;
           position: fixed;
-          bottom: 50px;
-          left: 50px; 
+          bottom: 30px; 
           z-index: 9999; 
           padding: 20px;
           margin: 30px;
