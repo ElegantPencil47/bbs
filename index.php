@@ -191,7 +191,19 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
         a {
           color: #fff;
         }
+        .fomu{
+          display: flex;
+          position: fixed;
+          bottom: 50px;
+          left: 50px; 
+          z-index: 9999; 
+			          position: relative;
+          padding: 20px;
+          margin: 30px;
+          border:5px solid black;
 
+
+        }
         body {
           background-color: #fff;
         }
@@ -232,11 +244,6 @@ display: flex;
 
         }
         .waku{
-          position: relative;
-          padding: 20px;
-          margin: 30px;
-          border:5px solid black;
-
 
         }
         .fais{
@@ -453,7 +460,7 @@ text-align:right
 	</div>
 
 
-<div class="waku">
+<div class="fomu">
 <h3>投稿する</h3>
 
 
@@ -517,7 +524,6 @@ btn.textContent = "送信中...";
 
 		}
 	</script>
-
 
 
 
