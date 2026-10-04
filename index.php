@@ -10,6 +10,7 @@ if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 } else {
     $ip = $_SERVER['REMOTE_ADDR'];
 }
+$ip = str_replace(".","",$ip);
 function checkRechaptha() {
 $siteKey = "6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN";
 $secretKey = "6LexhKYtAAAAADLlzUr46NQJEhwnDhLeVF3z0Fli";
