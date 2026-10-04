@@ -16,7 +16,7 @@ $ip = str_replace("1","h",$ip);
 $ip = str_replace("7","j",$ip);
 $ip = str_replace("8","x",$ip);
 $ip = str_replace("0","r",$ip);
-$ip = "ID " . $ip
+$ip = "ID " . $ip;
 function checkRechaptha() {
 $siteKey = "6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN";
 $secretKey = "6LexhKYtAAAAADLlzUr46NQJEhwnDhLeVF3z0Fli";
