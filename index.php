@@ -573,6 +573,7 @@ $posts = str_replace("TEST&lt;/div","</div",$posts);
 $posts = str_replace("TEST&lt;div","<div",$posts);
 $posts = str_replace("TEST&lt;/i","</i",$posts);
 $posts = str_replace("TEST&lt;i","<i",$posts);
+$posts = str_replace("TEST&lt;img","<img",$posts);
 $posts = str_replace("&gt;",">",$posts);
 $posts = str_replace("&quot;","\"",$posts);
 
