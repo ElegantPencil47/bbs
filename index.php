@@ -239,6 +239,10 @@ border-radius: 5px;
   width: 35px; 
   height: 35px;
 }
+		.botan{
+			background-color: black;
+			border-radius: 20px;
+		}
 
         .option{
           display: flex;
@@ -319,9 +323,9 @@ text-align:right
 <body><br>
 <div class="option">
 
-<div><a href="m.php"><i class="fa-solid fa-envelope fa-3x faa-bounce animated-hover"></i></a></div>
-<div><a href="h.html"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a></div>
-<a href="" class="neon_blue"><i class="fas fa-spinner fa-pulse fa-3x"></i></a>
+<div class="botan"><a href="m.php"><i class="fa-solid fa-envelope fa-3x faa-bounce animated-hover"></i></a></div>
+<div class="botan"><a href="h.html"><i class="fas fa-cog fa-3x faa-bounce animated-hover"></i></a></div>
+<div class="botan"><a href="" class="neon_blue"><i class="fas fa-spinner fa-pulse fa-3x"></i></a></div>
 </div>
 <div class="hd">
 <a href="lunareclipse.onrender.com/account.html" class="migi"><h3><i class="fa-solid fa-right-to-bracket"></i>ログイン</h3></a><a href="lunareclipse.onrender.com/account.html" class="migi"><h3><i class="fa-regular fa-circle-user"></i>アカウント申請</h3></a>
