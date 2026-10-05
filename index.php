@@ -241,7 +241,9 @@ border-radius: 5px;
 }
 		.botan{
 			background-color: black;
-			border-radius: 20px;
+			border-radius: 5px;
+			          padding: 5px;
+          margin: 5px;
 		}
 
         .option{
