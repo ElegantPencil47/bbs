@@ -246,6 +246,7 @@ border-radius: 5px;
           top: 150px;
           right: 50px; 
           z-index: 9999; 
+			color: black;
         }
         .user{
 display: flex;
