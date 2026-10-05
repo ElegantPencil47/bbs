@@ -207,6 +207,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
           padding: 20px;
           margin: 30px;
           border:5px solid black;
+			width: 100%;
 
 
         }
@@ -240,7 +241,6 @@ border-radius: 5px;
           top: 150px;
           right: 50px; 
           z-index: 9999; 
-	display: block;
         }
         .user{
 display: flex;
