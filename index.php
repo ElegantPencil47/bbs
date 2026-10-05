@@ -478,6 +478,7 @@ text-align:right
 
 
 <form action="" method="post" id="form">
+	<div>
   <label for="name">名前:</label>
   <input type="text" name="name" id="name">
   <br>
@@ -490,6 +491,7 @@ text-align:right
 <div class="wrap_btn">
   <button type="submit" id="send" class="btn_st arrow bg_yellow"><i class="fa-regular fa-paper-plane"></i>投稿する</button>
 </div>
+	</div>
 <!-- google reCAPTHA -->
 <div class="g-recaptcha" data-sitekey="6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN" data-callback="myAlert"></div>   
 <p id="warning"></p>
