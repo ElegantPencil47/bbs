@@ -16,7 +16,7 @@ $ip = str_replace("1","h",$ip);
 $ip = str_replace("7","j",$ip);
 $ip = str_replace("8","x",$ip);
 $ip = str_replace("0","r",$ip);
-$ip = "ID " . $ip;
+$ip = "ID : " . $ip;
 function checkRechaptha() {
 $siteKey = "6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN";
 $secretKey = "6LexhKYtAAAAADLlzUr46NQJEhwnDhLeVF3z0Fli";
@@ -202,7 +202,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 		  background-color: white;
           display: flex;
           position: fixed;
-          bottom: 30px; 
+          bottom: 10px; 
           z-index: 9999; 
           padding: 20px;
           margin: 30px;
@@ -240,6 +240,7 @@ border-radius: 5px;
           top: 150px;
           right: 50px; 
           z-index: 9999; 
+	display: block;
         }
         .user{
 display: flex;
