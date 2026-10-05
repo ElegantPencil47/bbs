@@ -202,12 +202,13 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 		  background-color: white;
           display: flex;
           position: fixed;
-          bottom: 10px; 
+          bottom: 4px; 
+		  left: 4px; 
           z-index: 9999; 
           padding: 20px;
           margin: 30px;
           border:5px solid black;
-			width: 100%;
+			width: 80%;
 
 
         }
