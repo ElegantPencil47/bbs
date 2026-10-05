@@ -100,7 +100,8 @@ echo $alert3;
 
   $jikan = date('YmdHis');
   $title = $jikan . '.php';
-  
+  ini_set('display_errors', 1);
+error_reporting(E_ALL);
   $comment = $_POST['comment'];
   $log = $comment . $name . "\n";
   $time = date('Y-m-d H:i:s');
