@@ -266,6 +266,9 @@ display: flex;
 
 
         }
+		.yoko{
+			display: flex;
+		}
 	.sample_menu_outer {
 		margin: 5rem auto;
 		}
@@ -477,7 +480,7 @@ text-align:right
 
 
 
-<form action="" method="post" id="form">
+<form action="" method="post" id="form" class="yoko">
 	<div>
   <label for="name">名前:</label>
   <input type="text" name="name" id="name">
