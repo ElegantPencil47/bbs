@@ -212,6 +212,9 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 height: 135px;
 
         }
+		.g-recaptcha{
+			float:left;
+		}
         body {
           background-color: #fff;
         }
