@@ -209,7 +209,7 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
           margin: 30px;
           border:5px solid black;
 			width: 90%;
-
+height: 135px;
 
         }
         body {
