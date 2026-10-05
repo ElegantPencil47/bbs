@@ -214,6 +214,7 @@ height: 135px;
         }
 		.g-recaptcha{
 			float:left;
+			display: inline-block;
 		}
         body {
           background-color: #fff;
