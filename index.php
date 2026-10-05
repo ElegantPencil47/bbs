@@ -483,7 +483,9 @@ text-align:right
  <br>
   <label for="image">画像:</label>
   <input type="file" name="image" id="image">
-
+<div class="wrap_btn">
+  <button type="submit" id="send" class="btn_st arrow bg_yellow"><i class="fa-regular fa-paper-plane"></i>投稿する</button>
+</div><br>
 <!-- google reCAPTHA -->
 <div class="g-recaptcha" data-sitekey="6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN" data-callback="myAlert"></div>   
 <p id="warning"></p>
@@ -491,9 +493,7 @@ text-align:right
 
 $error = array();
  if (isset($erroe['re_captcha']) && $error['re_captha'] === 'failed'):?>※認証に失敗しました。<?php endif; ?>
-<div class="wrap_btn">
-  <button type="submit" id="send" class="btn_st arrow bg_yellow"><i class="fa-regular fa-paper-plane"></i>投稿する</button>
-</div>
+
 
 
 
