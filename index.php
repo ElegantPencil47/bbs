@@ -485,7 +485,7 @@ text-align:right
   <input type="file" name="image" id="image">
 <div class="wrap_btn">
   <button type="submit" id="send" class="btn_st arrow bg_yellow"><i class="fa-regular fa-paper-plane"></i>投稿する</button>
-</div><br>
+</div>
 <!-- google reCAPTHA -->
 <div class="g-recaptcha" data-sitekey="6LexhKYtAAAAAO-YGOX8EV8Spk7YGKWLgcp-DpUN" data-callback="myAlert"></div>   
 <p id="warning"></p>
@@ -497,7 +497,6 @@ $error = array();
 
 
 
-  <br>
   <!--  <input type='submit' value="投稿" id="send">   -->
 </form>
 
@@ -583,7 +582,8 @@ file_put_contents('posts.txt','');
 <a href = "" class="sns"><i class="fa-brands fa-square-instagram" width="18" height="19"></i></a>
 <a href = "https://www.youtube.com/@%E6%A2%85%E3%81%AE%E3%83%AC%E3%83%A2%E3%83%B3%E6%BC%AC%E3%81%91" class="sns"><i class="fa-brands fa-square-youtube" width="18" height="19"></i></a>
 <a href = "https://www.nicovideo.jp/user/139548104?ref=thumb_nicopedia&transit_from=blogparts_user"><img src = "nico_icon.png" width="14" height="15" class="nico"></a>
-</div><br><p class="neon_blue" style="text-align:center">©Probably around 2026. lunareclipse.onrender.com Unauthorized reproduction is permitted.</p></div>
+</div><br><p class="neon_blue" style="text-align:center">©Probably around 2026. lunareclipse.onrender.com Unauthorized reproduction is permitted.</p>
+<br><br><br><br><br><br><br></div>
 
 
 
