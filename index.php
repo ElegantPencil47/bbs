@@ -609,7 +609,9 @@ file_put_contents('posts.txt','');
 <br><br><br><br><br><br><br></div>
 
 
-
+	
+<!-- google reCAPTHA -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script><!-- API の読み込み -->
 
 	
 <?php
@@ -655,8 +657,6 @@ echo "</pre>";
 
 
 
-	
-<!-- google reCAPTHA -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script><!-- API の読み込み -->
+
 </body>
 </html>
