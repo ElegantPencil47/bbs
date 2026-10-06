@@ -235,7 +235,7 @@ if (move_uploaded_file($_FILES['image']['tmp_name'], $image_path)) {
     echo "失敗: move_uploaded_file が失敗しました。";
 }
 echo "</pre>";
-
+?>
 
 
 
