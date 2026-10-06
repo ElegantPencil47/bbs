@@ -491,7 +491,8 @@ text-align:right
 
 
 
-<form action="" method="post" id="form" class="yoko">
+	<form action="" method="post" enctype="multipart/form-data" id="form" class="yoko">
+ 
 	<div>
   <label for="name">名前:</label>
   <input type="text" name="name" id="name">
