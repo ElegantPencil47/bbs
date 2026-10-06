@@ -189,6 +189,72 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
   </script>
 
 </head>
+
+
+
+
+
+
+
+
+
+<?php
+// エラーを画面に表示させる設定
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+echo "<pre>";
+echo "--- デバッグ情報 ---\n";
+
+// 1. そもそもファイルが届いているか確認
+if (!isset($_FILES['image'])) {
+    die("エラー: HTMLの 'name=\"image\"' が一致していないか、enctype属性がありません。");
+}
+
+// 2. エラーコードの検証
+$error_code = $_FILES['image']['error'];
+if ($error_code !== UPLOAD_ERR_OK) {
+    switch ($error_code) {
+        case UPLOAD_ERR_INI_SIZE:
+        case UPLOAD_ERR_FORM_SIZE:
+            die("エラー: 画像のファイルサイズが大きすぎます（PHPの上限を超えています）。");
+        case UPLOAD_ERR_NO_FILE:
+            die("エラー: ファイルが選択されていません。");
+        default:
+            die("アップロード失敗。エラーコード: " . $error_code);
+    }
+}
+
+// 3. /tmp/ への保存テスト
+$image_path = '/tmp/' . basename($_FILES['image']['name']);
+
+if (move_uploaded_file($_FILES['image']['tmp_name'], $image_path)) {
+    echo "成功: /tmp/ に正常に保存されました！\n";
+    echo "保存先パス: " . $image_path;
+} else {
+    echo "失敗: move_uploaded_file が失敗しました。";
+}
+echo "</pre>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
     <style>
         .bana{
           background-color: black;
