@@ -557,7 +557,7 @@ text-align:right
 
 
 
-	<form action="" method="post" enctype="multipart/form-data" id="form" class="yoko">
+	<form action="" method="post" enctype="multipart/form-data" id="form" class="yoko" enctype="multipart/form-data">
  
 	<div>
   <label for="name">名前:</label>
