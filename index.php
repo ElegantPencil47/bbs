@@ -156,6 +156,48 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 
 }
 ?>
+
+<?php
+// エラーを画面に表示させる設定
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+echo "<pre>";
+echo "--- デバッグ情報 ---\n";
+
+// 1. そもそもファイルが届いているか確認
+if (!isset($_FILES['image'])) {
+    die("エラー: HTMLの 'name=\"image\"' が一致していないか、enctype属性がありません。");
+}
+
+// 2. エラーコードの検証
+$error_code = $_FILES['image']['error'];
+if ($error_code !== UPLOAD_ERR_OK) {
+    switch ($error_code) {
+        case UPLOAD_ERR_INI_SIZE:
+        case UPLOAD_ERR_FORM_SIZE:
+            die("エラー: 画像のファイルサイズが大きすぎます（PHPの上限を超えています）。");
+        case UPLOAD_ERR_NO_FILE:
+            die("エラー: ファイルが選択されていません。");
+        default:
+            die("アップロード失敗。エラーコード: " . $error_code);
+    }
+}
+
+// 3. /tmp/ への保存テスト
+$image_path = '/tmp/' . basename($_FILES['image']['name']);
+
+if (move_uploaded_file($_FILES['image']['tmp_name'], $image_path)) {
+    echo "成功: /tmp/ に正常に保存されました！\n";
+    echo "保存先パス: " . $image_path;
+} else {
+    echo "失敗: move_uploaded_file が失敗しました。";
+}
+echo "</pre>";
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -492,7 +534,7 @@ text-align:right
 
 
 
-	<form action="" method="post" enctype="multipart/form-data" id="form" class="yoko" enctype="multipart/form-data">
+	<form action="" method="post" enctype="multipart/form-data" id="form" class="yoko">
  
 	<div>
   <label for="name">名前:</label>
@@ -606,7 +648,7 @@ file_put_contents('posts.txt','');
 <a href = "https://www.youtube.com/@%E6%A2%85%E3%81%AE%E3%83%AC%E3%83%A2%E3%83%B3%E6%BC%AC%E3%81%91" class="sns"><i class="fa-brands fa-square-youtube" width="18" height="19"></i></a>
 <a href = "https://www.nicovideo.jp/user/139548104?ref=thumb_nicopedia&transit_from=blogparts_user"><img src = "nico_icon.png" width="14" height="15" class="nico"></a>
 </div><br><p class="neon_blue" style="text-align:center">©Probably around 2026. lunareclipse.onrender.com Unauthorized reproduction is permitted.</p>
-<br><br><br><br><br><br><br></div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
 
 
 	
@@ -614,44 +656,7 @@ file_put_contents('posts.txt','');
 <script src="https://www.google.com/recaptcha/api.js" async defer></script><!-- API の読み込み -->
 
 	
-<?php
-// エラーを画面に表示させる設定
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 
-echo "<pre>";
-echo "--- デバッグ情報 ---\n";
-
-// 1. そもそもファイルが届いているか確認
-if (!isset($_FILES['image'])) {
-    die("エラー: HTMLの 'name=\"image\"' が一致していないか、enctype属性がありません。");
-}
-
-// 2. エラーコードの検証
-$error_code = $_FILES['image']['error'];
-if ($error_code !== UPLOAD_ERR_OK) {
-    switch ($error_code) {
-        case UPLOAD_ERR_INI_SIZE:
-        case UPLOAD_ERR_FORM_SIZE:
-            die("エラー: 画像のファイルサイズが大きすぎます（PHPの上限を超えています）。");
-        case UPLOAD_ERR_NO_FILE:
-            die("エラー: ファイルが選択されていません。");
-        default:
-            die("アップロード失敗。エラーコード: " . $error_code);
-    }
-}
-
-// 3. /tmp/ への保存テスト
-$image_path = '/tmp/' . basename($_FILES['image']['name']);
-
-if (move_uploaded_file($_FILES['image']['tmp_name'], $image_path)) {
-    echo "成功: /tmp/ に正常に保存されました！\n";
-    echo "保存先パス: " . $image_path;
-} else {
-    echo "失敗: move_uploaded_file が失敗しました。";
-}
-echo "</pre>";
-?>
 
 
 
