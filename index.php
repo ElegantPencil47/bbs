@@ -232,7 +232,7 @@ height: 135px;
           background-color: #fff;
         }
 		.gazou{
-			height: 80px;
+			height: 280px;
 		}
         .moji{
           color: black;
