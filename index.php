@@ -157,44 +157,80 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 }
 ?>
 
+
+
 <?php
-// エラーを画面に表示させる設定
+// 1. エラー表示の設定（開発中のみ）
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-echo "<pre>";
-echo "--- デバッグ情報 ---\n";
+// 🚨 【重要】投稿ボタンが押された（POST送信された）時だけ動かす条件を追加
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    echo "<pre>";
+    echo "--- デバッグ情報 ---\n";
 
-// 1. そもそもファイルが届いているか確認
-if (!isset($_FILES['image'])) {
-    die("エラー: HTMLの 'name=\"image\"' が一致していないか、enctype属性がありません。");
-}
-
-// 2. エラーコードの検証
-$error_code = $_FILES['image']['error'];
-if ($error_code !== UPLOAD_ERR_OK) {
-    switch ($error_code) {
-        case UPLOAD_ERR_INI_SIZE:
-        case UPLOAD_ERR_FORM_SIZE:
-            die("エラー: 画像のファイルサイズが大きすぎます（PHPの上限を超えています）。");
-        case UPLOAD_ERR_NO_FILE:
-            die("エラー: ファイルが選択されていません。");
-        default:
-            die("アップロード失敗。エラーコード: " . $error_code);
+    // ファイルが届いているか確認
+    if (!isset($_FILES['image'])) {
+        die("エラー: HTMLの 'name=\"image\"' が一致していないか、enctype属性がありません。");
     }
-}
 
-// 3. /tmp/ への保存テスト
-$image_path = '/tmp/' . basename($_FILES['image']['name']);
+    // エラーコードの検証
+    $error_code = $_FILES['image']['error'];
+    if ($error_code !== UPLOAD_ERR_OK) {
+        switch ($error_code) {
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                die("エラー: 画像のファイルサイズが大きすぎます（PHPの上限を超えています）。");
+            case UPLOAD_ERR_NO_FILE:
+                die("エラー: ファイルが選択されていません。");
+            default:
+                die("アップロード失敗。エラーコード: " . $error_code);
+        }
+    }
 
-if (move_uploaded_file($_FILES['image']['tmp_name'], $image_path)) {
-    echo "成功: /tmp/ に正常に保存されました！\n";
-    echo "保存先パス: " . $image_path;
-} else {
-    echo "失敗: move_uploaded_file が失敗しました。";
+    // 保存テスト（Render環境用の暫定保存先）
+    $image_path = '/tmp/' . basename($_FILES['image']['name']);
+
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $image_path)) {
+        echo "成功: /tmp/ に正常に保存されました！\n";
+        echo "保存先パス: " . $image_path;
+    } else {
+        echo "失敗: move_uploaded_file が失敗しました。";
+    }
+    echo "</pre>";
+    
+    // デバッグ時はここで一旦処理を止めて結果を見せる
+    exit; 
 }
-echo "</pre>";
 ?>
+
+<!-- 2. ここから下にHTMLを書く -->
+<h3>投稿する</h3>
+
+<form action="" method="post" enctype="multipart/form-data" id="form" class="yoko">
+  <div>
+    <label for="name">名前:</label>
+    <input type="text" name="name" id="name">
+    <br>
+
+    <label for="comment">コメント:</label>
+    <textarea name="comment" id="comment"></textarea>
+    <br>
+    
+    <label for="image">画像:</label>
+    <input type="file" name="image" id="image">
+
+    <div class="wrap_btn">
+      <button type="submit" id="send" class="btn_st arrow bg_yellow">
+        <i class="fa-regular fa-paper-plane"></i>投稿する
+      </button>
+    </div>
+  </div>
+</form>
+
+
+
 
 
 
