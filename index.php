@@ -114,7 +114,7 @@ error_reporting(E_ALL);
  }}
 
 
-	    $post = 'TEST<div class="user">TEST<p class="hai">' . $name .'TEST</p>TEST<p class="moji">' . $ip . 'TEST</div>TEST<br>TEST<a href="' . $title . '">TEST<h2 class="moji">' . $comment . 'TEST</h2>TEST</a>TEST<br>' . "\n" . ' TEST<img class="gazou "src="' . $image_path . '">' . "\n" . 'TEST<br>TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST</p>TEST<br>TEST<hr style="border: 2px solid #A9B2C3;">TEST<br>';
+	    $post = 'TEST<div class="user">TEST<p class="hai">' . $name .'TEST</p>TEST<p class="moji">' . $ip . 'TEST</div>TEST<a href="' . $title . '">TEST<h3 class="moji">' . $comment . 'TEST</h3>TEST</a>TEST<img class="gazou "src="' . $image_path . '">' . "\n" . 'TEST<br>TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST</p>TEST<br>TEST<hr style="border: 2px solid #A9B2C3;">TEST<br>';
  
   if (!file_exists('posts.txt')) {
   file_put_contents('posts.txt', pack("C*", 0xEF, 0xBB, 0xBF));
