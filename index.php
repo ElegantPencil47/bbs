@@ -114,7 +114,7 @@ error_reporting(E_ALL);
  }}
 
 
-	    $post = 'TEST<div class="user">TEST<a href="' . $title . '">TEST<h2 class="moji">' . $comment . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name .'TEST</p>TEST<p class="moji">' . $ip . 'TEST</div>' . "\n" . ' TEST<img src="' . $image_path . '">' . "\n" . 'TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST</p>TEST<hr style="border: 2px solid #A9B2C3;">' . "\n";
+	    $post = 'TEST<div class="user">TEST<a href="' . $title . '">TEST<h2 class="moji">' . $comment . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name .'TEST</p>TEST<p class="moji">' . $ip . 'TEST</div>' . "\n" . ' TEST<img class="gazou "src="' . $image_path . '">' . "\n" . 'TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST</p>TEST<hr style="border: 2px solid #A9B2C3;">' . "\n";
  
   if (!file_exists('posts.txt')) {
   file_put_contents('posts.txt', pack("C*", 0xEF, 0xBB, 0xBF));
@@ -159,77 +159,6 @@ header('Location: ' . $_SERVER['REQUEST_URI']);
 
 
 
-<?php
-// 1. エラー表示の設定（開発中のみ）
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-// 🚨 【重要】投稿ボタンが押された（POST送信された）時だけ動かす条件を追加
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-    echo "<pre>";
-    echo "--- デバッグ情報 ---\n";
-
-    // ファイルが届いているか確認
-    if (!isset($_FILES['image'])) {
-        die("エラー: HTMLの 'name=\"image\"' が一致していないか、enctype属性がありません。");
-    }
-
-    // エラーコードの検証
-    $error_code = $_FILES['image']['error'];
-    if ($error_code !== UPLOAD_ERR_OK) {
-        switch ($error_code) {
-            case UPLOAD_ERR_INI_SIZE:
-            case UPLOAD_ERR_FORM_SIZE:
-                die("エラー: 画像のファイルサイズが大きすぎます（PHPの上限を超えています）。");
-            case UPLOAD_ERR_NO_FILE:
-                die("エラー: ファイルが選択されていません。");
-            default:
-                die("アップロード失敗。エラーコード: " . $error_code);
-        }
-    }
-
-    // 保存テスト（Render環境用の暫定保存先）
-    $image_path = '/tmp/' . basename($_FILES['image']['name']);
-
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $image_path)) {
-        echo "成功: /tmp/ に正常に保存されました！\n";
-        echo "保存先パス: " . $image_path;
-    } else {
-        echo "失敗: move_uploaded_file が失敗しました。";
-    }
-    echo "</pre>";
-    
-    // デバッグ時はここで一旦処理を止めて結果を見せる
-    exit; 
-}
-?>
-
-<!-- 2. ここから下にHTMLを書く -->
-<h3>投稿する</h3>
-
-<form action="" method="post" enctype="multipart/form-data" id="form" class="yoko">
-  <div>
-    <label for="name">名前:</label>
-    <input type="text" name="name" id="name">
-    <br>
-
-    <label for="comment">コメント:</label>
-    <textarea name="comment" id="comment"></textarea>
-    <br>
-    
-    <label for="image">画像:</label>
-    <input type="file" name="image" id="image">
-
-    <div class="wrap_btn">
-      <button type="submit" id="send" class="btn_st arrow bg_yellow">
-        <i class="fa-regular fa-paper-plane"></i>投稿する
-      </button>
-    </div>
-  </div>
-</form>
-
-
 
 
 
@@ -242,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css" type="text/css" media="all" />
 <meta name="google-site-verification" content="E1-qGHs4Av0Gu3_r49O5U0dyXC-FKoR5FCZuzXtwx24" />
-<meta name="description" content="小規模SNS　LunarEclipse(ルナエクリプス)、学問の議論からアングラな話題まで。誰得の月齢確認機能も搭載"/>
+<meta name="description" content="小規模SNS、ネット掲示板　LunarEclipse(ルナエクリプス)、学問の議論からアングラな話題まで。誰得の月齢確認機能も搭載"/>
 
   <!-- *** google reCAPTHA *** -->
   <script>
@@ -302,6 +231,9 @@ height: 135px;
         body {
           background-color: #fff;
         }
+		.gazou{
+			height: 80px;
+		}
         .moji{
           color: black;
         }
