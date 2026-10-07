@@ -82,7 +82,7 @@ $_SESSION['last_post_time'] = $now;
 
 if($_POST['comment'] == ""){
 echo $alert; 
-}elseif (strlen($_POST['comment']) > 50){
+}elseif (strlen($_POST['comment']) > 1050){
 echo $alert2;
 }elseif ( !isset($_POST['g-recaptcha-response']) || $_POST['g-recaptcha-response'] === '' ) {
 echo $alert3;
