@@ -114,7 +114,7 @@ error_reporting(E_ALL);
  }}
 
 
-	    $post = 'TEST<div class="user">TEST<a href="' . $title . '">TEST<h2 class="moji">' . $comment . 'TEST</h2>TEST</a>TEST<p class="hai">' . $name .'TEST</p>TEST<p class="moji">' . $ip . 'TEST</div>' . "\n" . ' TEST<img class="gazou "src="' . $image_path . '">' . "\n" . 'TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST</p>TEST<hr style="border: 2px solid #A9B2C3;">' . "\n";
+	    $post = 'TEST<p class="hai">' . $name .'TEST</p>TEST<p class="moji">' . $ip . 'TEST</div>TEST<br>TEST<div class="user">TEST<a href="' . $title . '">TEST<h2 class="moji">' . $comment . 'TEST</h2>TEST</a>' . "\n" . ' TEST<img class="gazou "src="' . $image_path . '">' . "\n" . 'TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST</p>TEST<hr style="border: 2px solid #A9B2C3;">' . "\n";
  
   if (!file_exists('posts.txt')) {
   file_put_contents('posts.txt', pack("C*", 0xEF, 0xBB, 0xBF));
@@ -580,6 +580,7 @@ $posts = str_replace("TEST&lt;h2","<h2",$posts);
 $posts = str_replace("TEST&lt;hr","<hr",$posts);
 $posts = str_replace("TEST&lt;/h2","</h2",$posts);
 $posts = str_replace("TEST&lt;/p","</p",$posts);
+$posts = str_replace("TEST&lt;br","<br",$posts);
 $posts = str_replace("TEST&lt;p","<p",$posts);
 $posts = str_replace("TEST&lt;/div","</div",$posts);
 $posts = str_replace("TEST&lt;div","<div",$posts);
