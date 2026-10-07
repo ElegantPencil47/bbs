@@ -82,7 +82,7 @@ $_SESSION['last_post_time'] = $now;
 
 if($_POST['comment'] == ""){
 echo $alert; 
-}elseif (strlen($_POST['comment']) > 750){
+}elseif (strlen($_POST['comment']) > 1750){
 echo $alert2;
 }elseif ( !isset($_POST['g-recaptcha-response']) || $_POST['g-recaptcha-response'] === '' ) {
 echo $alert3;
@@ -142,7 +142,7 @@ file_put_contents('posts.txt', $post, FILE_APPEND);
   if($_POST['comment'] == ""){
 header('Location: ' . $_SERVER['REQUEST_URI']);
   exit;
-}elseif (strlen($_POST['comment']) > 750){
+}elseif (strlen($_POST['comment']) > 1750){
 header('Location: ' . $_SERVER['REQUEST_URI']);
   exit;
 }else{
