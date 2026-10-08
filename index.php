@@ -137,7 +137,7 @@ file_put_contents('posts.txt', $post, FILE_APPEND);
 
 	
   file_put_contents('log.txt', $log, FILE_APPEND);
-  file_put_contents($jikan . '.txt', "\n" . 'TEST<h3 class = "moji">' . $ip . $name . 'TEST</h3>TEST<h3 class="moji">' . $comment . 'TEST</h3>' . 'TEST<p class="moji">' . $time . 'TEST</p>TEST<img class="gazou "src="' . $image_path . '">', FILE_APPEND);
+  file_put_contents($jikan . '.txt', "\n" . 'TEST<p class = "hai">' . $name . 'TEST</p>TEST<p class = "moji">' . $ip . 'TEST</p>TEST<h3 class="moji">' . $comment . 'TEST</h3>' . 'TEST<p class="moji">' . $time . 'TEST</p>TEST<img class="gazou "src="' . $image_path . '">', FILE_APPEND);
   
 
   if($_POST['comment'] == ""){
