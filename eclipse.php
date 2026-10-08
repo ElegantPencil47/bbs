@@ -60,7 +60,7 @@ echo $alert2;
   }
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
-  $post = 'TEST<div class="post" style="display: flex; align-items: baseline; gap: 10px;">TEST<p>' . $name . $ip . 'TEST</p>TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<p class="hai">' . $time . 'TEST</p>'. "\n" . 'TEST</div>';
+  $post = 'TEST<div class="post" style="display: flex; align-items: baseline; gap: 10px;">TEST<p class="hai">' . $name . 'TEST</p>TEST<p>' . $ip . 'TEST</p>TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<p class="hai">' . $time . 'TEST</p>'. "\n" . 'TEST</div>';
 
 
 $post = str_replace('https://m.youtube.com/watch?v=','https://www.youtube.com/watch?v=',$post);
@@ -128,9 +128,15 @@ border-radius: 5px;
         .option{
           display: flex;
           position: fixed;
-          bottom: 50px;
-          left: 50px; 
+          bottom: 30px;
           z-index: 9999; 
+
+					  background-color: white;
+
+          z-index: 9999; 
+          padding: 20px;
+          margin: 30px;
+          border:5px solid black;
         }
         .user{
 display: flex;
@@ -172,6 +178,7 @@ display: flex;
 		transform: rotate(-360deg);
 		transition: .9s;
 		}
+		
 	.sample_menu_parent.active::before {
 		transform: rotate(0deg);
 		}
@@ -300,17 +307,13 @@ $posts = str_replace("&gt;",">",$posts);
 
 
 
-<br><br>
-
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<br>
+<div class="bana" class="waku"><br><a href="https://lunareclipse.onrender.com"><p class="siro">トップに戻る</p></a><a href="https://lunareclipse.onrender.com/admin.html"><p class="siro">管理人のプロフィール</p></a><a href=""><p class="siro">お問い合わせ</p></a><a href=""><p class="siro">LunarEclipseについて</p></a><div>
+<a href = "https://x.com/ElegantPencil47" class="sns"><i class="fa-brands fa-square-x-twitter" width="18" height="19"></i></a>
+<a href = "" class="sns"><i class="fa-brands fa-square-instagram" width="18" height="19"></i></a>
+<a href = "https://www.youtube.com/@%E6%A2%85%E3%81%AE%E3%83%AC%E3%83%A2%E3%83%B3%E6%BC%AC%E3%81%91" class="sns"><i class="fa-brands fa-square-youtube" width="18" height="19"></i></a>
+<a href = "https://www.nicovideo.jp/user/139548104?ref=thumb_nicopedia&transit_from=blogparts_user"><img src = "nico_icon.png" width="14" height="15" class="nico"></a>
+</div><br><p class="neon_blue" style="text-align:center">©Probably around 2026. lunareclipse.onrender.com Unauthorized reproduction is permitted.</p>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
 
 
 
