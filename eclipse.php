@@ -73,7 +73,16 @@ $youtube = insertStr2('<iframe width="560" height="315" src="https://www.youtube
 if (str_contains($post, "https://www.youtube.com/watch?v=")) {
     $post = $post . $youtube;
 } 
+  if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+  if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+    $image_path = 'images/' . $_FILES['image']['name'];
+    move_uploaded_file($_FILES['image']['tmp_name'], $image_path);
+	
+ }}
 
+
+	    $post = 'TEST<div class="user">TEST<p class="hai">' . $name .'TEST</p>TEST<p class="moji">' . $ip . 'TEST</div>TEST<a href="' . $title . '">TEST<h3 class="moji">' . $comment . 'TEST</h3>TEST</a>TEST<br>TEST<img class="gazou "src="' . $image_path . '">' . "\n" . 'TEST<br>TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST</p>TEST<br>TEST<hr style="border: 2px solid #A9B2C3;">TEST<br>';
+ 
 
   file_put_contents($file . '.txt', $post . "\n", FILE_APPEND);
   header('Location: ' . $_SERVER['REQUEST_URI']); 
@@ -281,13 +290,16 @@ $posts = str_replace("&gt;",">",$posts);
 
 <div class="option">
 <h3>返信する</h3>
-<form action="" method="post">
+
+	<form action="" method="post" enctype="multipart/form-data" id="form" class="yoko">
   <label for="name">名前:</label>
   <input type="text" name="name" id="name">
   <br>
   <label for="comment">コメント:</label>
-  <textarea name="comment" id="comment"></textarea>
-  <br>
+  <textarea name="comment" id="comment"></textarea><br>
+    <label for="image">画像:</label>
+  <input type="file" name="image" id="image">
+		<br>
   <input type="submit" value="返信する" class="HSN">
 </form>
 </div>
