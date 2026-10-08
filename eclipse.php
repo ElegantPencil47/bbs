@@ -51,7 +51,7 @@ $_SESSION['last_post_time'] = $now;
 
 if($_POST['comment'] == ""){
 echo $alert;
-}elseif (strlen($_POST['comment']) > 350){
+}elseif (strlen($_POST['comment']) > 6750){
 echo $alert2;
 }else{
   $name = $_POST['name'];
@@ -84,7 +84,7 @@ if (str_contains($post, "https://www.youtube.com/watch?v=")) {
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title><?= $one ?></title>
+  <title>投稿 LunarEclipse</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
     <style>
