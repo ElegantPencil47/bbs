@@ -5,6 +5,21 @@ $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
   $file = $_SERVER['SCRIPT_FILENAME'];
   $file = str_replace(".php","",$file);
   $one = $file;
+if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+
+    $ip_list = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+    $ip = trim($ip_list[0]);
+} else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+$ip = str_replace(".","",$ip);
+$ip = $ip + 6219476234;
+$ip = str_replace("3","a",$ip);
+$ip = str_replace("1","h",$ip);
+$ip = str_replace("7","j",$ip);
+$ip = str_replace("8","x",$ip);
+$ip = str_replace("0","r",$ip);
+$ip = "ID : " . $ip;
   $filename = fopen($file . ".txt", "r");
   $one = str_replace("/var/www/html/","",$one);
   $one = "TEST<h1>" . $one . "TEST</h1>";
@@ -45,7 +60,7 @@ echo $alert2;
   }
   $comment = $_POST['comment'];
   $time = date('Y-m-d H:i:s');
-  $post = 'TEST<div class="post" style="display: flex; align-items: baseline; gap: 10px;">TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<p class="hai">' . $name . $time . 'TEST</p>'. "\n" . 'TEST</div>';
+  $post = 'TEST<div class="post" style="display: flex; align-items: baseline; gap: 10px;">TEST<p>' . $name . $ip . 'TEST</p>TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<p class="hai">' . $time . 'TEST</p>'. "\n" . 'TEST</div>';
 
 
 $post = str_replace('https://m.youtube.com/watch?v=','https://www.youtube.com/watch?v=',$post);
