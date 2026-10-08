@@ -80,8 +80,7 @@ if (str_contains($post, "https://www.youtube.com/watch?v=")) {
 	
  }}
 
-
-	    $post = 'TEST<div class="user">TEST<p class="hai">' . $name .'TEST</p>TEST<p class="moji">' . $ip . 'TEST</div>TEST<a href="' . $title . '">TEST<h3 class="moji">' . $comment . 'TEST</h3>TEST</a>TEST<br>TEST<img class="gazou "src="' . $image_path . '">' . "\n" . 'TEST<br>TEST<i class="fa-solid fa-thumbs-up">TEST</i>TEST<i class="fa-solid fa-download">TEST</i>TEST<i class="fa-solid fa-arrow-up-from-bracket">TEST</i>TEST</p>TEST<br>TEST<hr style="border: 2px solid #A9B2C3;">TEST<br>';
+$post = 'TEST<div class="post" style="display: flex; align-items: baseline; gap: 10px;">TEST<p class="hai">' . $name . 'TEST</p>TEST<p>' . $ip . 'TEST</p>TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<img class="gazou "src="' . $image_path . '">TEST<p class="hai">' . $time . 'TEST</p>'. "\n" . 'TEST</div>';
  
 
   file_put_contents($file . '.txt', $post . "\n", FILE_APPEND);
