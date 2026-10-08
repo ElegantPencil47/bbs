@@ -11,6 +11,7 @@ if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
     $ip = $_SERVER['REMOTE_ADDR'];
 }
 $ip = str_replace(".","",$ip);
+$ip = $ip + 6219476234;
 $ip = str_replace("3","a",$ip);
 $ip = str_replace("1","h",$ip);
 $ip = str_replace("7","j",$ip);
