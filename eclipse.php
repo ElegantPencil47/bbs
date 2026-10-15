@@ -73,14 +73,20 @@ $youtube = insertStr2('<iframe width="560" height="315" src="https://www.youtube
 if (str_contains($post, "https://www.youtube.com/watch?v=")) {
     $post = $post . $youtube;
 } 
+
+
+$post = 'TEST<div class="post" style="display: flex; align-items: baseline; gap: 10px;">TEST<p class="hai">' . $name . 'TEST</p>TEST<p>' . $ip . 'TEST</p>TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<br>TEST<p class="hai">' . $time . 'TEST</p>TEST</div>';
+
+	
   if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
   if (is_uploaded_file($_FILES['image']['tmp_name'])) {
     $image_path = 'images/' . $_FILES['image']['name'];
     move_uploaded_file($_FILES['image']['tmp_name'], $image_path);
+	  $post = 'TEST<div class="post" style="display: flex; align-items: baseline; gap: 10px;">TEST<p class="hai">' . $name . 'TEST</p>TEST<p>' . $ip . 'TEST</p>TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<br>TEST<img class="gazou "src="' . $image_path . '">TEST<p class="hai">' . $time . 'TEST</p>TEST</div>';
 	
  }}
 
-$post = 'TEST<div class="post" style="display: flex; align-items: baseline; gap: 10px;">TEST<p class="hai">' . $name . 'TEST</p>TEST<p>' . $ip . 'TEST</p>TEST<h3 class="green_neon">' . $comment . 'TEST</h3>TEST<br>TEST<img class="gazou "src="' . $image_path . '">TEST<p class="hai">' . $time . 'TEST</p>TEST</div>';
+
  
 
   file_put_contents($file . '.txt', $post . "\n", FILE_APPEND);
