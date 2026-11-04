@@ -615,8 +615,9 @@ function fetchPosts() {
     fetch('posts.txt')
         .then(response => response.text())
         .then(data => {
-
-            document.getElementById('posts').innerHTML = data;
+　　　　　　 let kakiko =date;
+			kakiko = kakiko.replaceAll("TEST", "");
+            document.getElementById('posts').innerHTML = kakiko;
         })
         .catch(error => console.error('エラーが発生しました:', error));
 }
