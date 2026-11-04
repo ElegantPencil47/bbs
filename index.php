@@ -609,7 +609,24 @@ file_put_contents('posts.txt','');
 </div>
 
 
+<script>
+function fetchPosts() {
 
+    fetch('posts.txt')
+        .then(response => response.text())
+        .then(data => {
+
+            document.getElementById('posts').innerHTML = data;
+        })
+        .catch(error => console.error('エラーが発生しました:', error));
+}
+
+
+fetchPosts();
+
+
+setInterval(fetchPosts, 1000);
+</script>
 
 
 
