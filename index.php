@@ -615,7 +615,7 @@ function fetchPosts() {
     fetch('posts.txt')
         .then(response => response.text())
         .then(data => {
-　　　　　　 let kakiko =date;
+　　　　　　 let kakiko =data;
 			kakiko = kakiko.replaceAll("TEST", "");
             document.getElementById('posts').innerHTML = kakiko;
         })
