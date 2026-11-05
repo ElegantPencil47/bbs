@@ -609,7 +609,25 @@ file_put_contents('posts.txt','');
 </div>
 
 
+<script>
+function fetchPosts() {
 
+    fetch('posts.txt')
+        .then(response => response.text())
+        .then(data => {
+　　　　　　 let kakiko =data;
+			kakiko = kakiko.replaceAll("TEST", "");
+            document.getElementById('posts').innerHTML = kakiko;
+        })
+        .catch(error => console.error('エラーが発生しました:', error));
+}
+
+
+fetchPosts();
+
+
+setInterval(fetchPosts, 5000);
+</script>
 
 <div class="bana" class="waku"><br><a href="https://lunareclipse.onrender.com"><p class="siro">トップに戻る</p></a><a href="https://lunareclipse.onrender.com/admin.html"><p class="siro">管理人のプロフィール</p></a><a href=""><p class="siro">お問い合わせ</p></a><a href=""><p class="siro">LunarEclipseについて</p></a><div>
 <a href = "https://x.com/ElegantPencil47" class="sns"><i class="fa-brands fa-square-x-twitter" width="18" height="19"></i></a>
