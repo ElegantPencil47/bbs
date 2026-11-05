@@ -626,7 +626,7 @@ function fetchPosts() {
 fetchPosts();
 
 
-setInterval(fetchPosts, 5000);
+setInterval(fetchPosts, 500);
 </script>
 
 <div class="bana" class="waku"><br><a href="https://lunareclipse.onrender.com"><p class="siro">トップに戻る</p></a><a href="https://lunareclipse.onrender.com/admin.html"><p class="siro">管理人のプロフィール</p></a><a href=""><p class="siro">お問い合わせ</p></a><a href=""><p class="siro">LunarEclipseについて</p></a><div>
