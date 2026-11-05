@@ -598,7 +598,7 @@ $last = date("Ymdh", filemtime('posts.txt'));
 if($last == $nowtime){
 
 }else{
-file_put_contents('posts.txt','');
+
 }
 
 
