@@ -593,12 +593,10 @@ $posts = str_replace("TEST&lt;img","<img",$posts);
 $posts = str_replace("&gt;",">",$posts);
 $posts = str_replace("&quot;","\"",$posts);
 
-$nowtime = date("Ymdh");
-$last = date("Ymdh", filemtime('posts.txt'));
-if($last == $nowtime){
-
-}else{
-
+$nowtime = date("YmdH");
+$last = date("YmdH", filemtime('posts.txt'));
+if($last !== $nowtime){
+file_put_contents('posts.txt','');
 }
 
 
