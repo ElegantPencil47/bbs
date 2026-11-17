@@ -596,7 +596,7 @@ $posts = str_replace("&quot;","\"",$posts);
 $nowtime = date("YmdH");
 $last = date("YmdH", filemtime('posts.txt'));
 if($last !== $nowtime){
-file_put_contents('posts.txt','');
+
 }
 
 
