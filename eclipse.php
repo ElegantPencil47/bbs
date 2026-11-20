@@ -3,6 +3,7 @@
 $alert = "<script type='text/javascript'>alert('本文書け');</script>";
 $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
   $file = $_SERVER['SCRIPT_FILENAME'];
+  $aut = $file
   $file = str_replace(".php","",$file);
   $one = $file;
 if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -332,7 +333,26 @@ $posts = str_replace("&gt;",">",$posts);
 </div>
 
 
+<script>
+const jidou = <?php echo json_encode($aut, JSON_UNESCAPED_UNICODE); ?>;
+function fetchPosts() {
 
+    fetch(jidou + '.txt')
+        .then(response => response.text())
+        .then(data => {
+			let kakiko =data;
+			kakiko = kakiko.replaceAll("TEST", "");
+            document.getElementById('posts').innerHTML = kakiko;
+        })
+        .catch(error => console.error('エラーが発生しました:', error));
+}
+
+
+fetchPosts();
+
+
+setInterval(fetchPosts, 500);
+</script>
 
 
 <div class="bana" class="waku"><br><a href="https://lunareclipse.onrender.com"><p class="siro">トップに戻る</p></a><a href="https://lunareclipse.onrender.com/admin.html"><p class="siro">管理人のプロフィール</p></a><a href=""><p class="siro">お問い合わせ</p></a><a href=""><p class="siro">LunarEclipseについて</p></a><div>
