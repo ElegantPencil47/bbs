@@ -3,7 +3,7 @@
 $alert = "<script type='text/javascript'>alert('本文書け');</script>";
 $alert2 = "<script type='text/javascript'>alert('本文長すぎ');</script>";
   $file = $_SERVER['SCRIPT_FILENAME'];
-  $aut = $file
+  $aut = $file;
   $file = str_replace(".php","",$file);
   $one = $file;
 if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
